@@ -57,8 +57,7 @@ public class OrdenCompraService {
         }
     }
 
-    // Intenta rescatar el mensaje de error real que devolvio inventario-service (por ejemplo,
-    // "el precio quedaria por debajo del costo") en vez de mostrar solo la excepcion generica.
+
     private String mensajeInventario(Exception e) {
         if (e instanceof RestClientResponseException rce) {
             String body = rce.getResponseBodyAsString();
@@ -68,7 +67,6 @@ public class OrdenCompraService {
                             new com.fasterxml.jackson.databind.ObjectMapper().readTree(body);
                     if (node.hasNonNull("error")) return node.get("error").asText();
                 } catch (Exception ignored) {
-                    // el body no era JSON valido; caemos al texto crudo mas abajo
                 }
                 return body;
             }

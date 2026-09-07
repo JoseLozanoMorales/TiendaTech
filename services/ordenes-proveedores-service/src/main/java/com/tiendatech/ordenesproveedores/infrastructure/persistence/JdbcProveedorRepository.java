@@ -9,11 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Adaptador JDBC (patron Repository) del puerto domain.ProveedorRepository.
- * Toda la logica SQL se mantiene identica a la version previa: este refactor
- * es puramente estructural, no cambia comportamiento.
- */
+
 @Repository
 public class JdbcProveedorRepository implements ProveedorRepository {
     private final JdbcTemplate jdbcTemplate;

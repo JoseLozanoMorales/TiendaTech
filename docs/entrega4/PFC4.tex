@@ -122,7 +122,7 @@ El corte referencia \texttt{docs/adr} con ADR-003 a ADR-012 (fragmentación temp
 
 2.6 Posición CAP por agregado (datos del Paso 8) &
 No existe tabla CAP; el ADR-01 solo menciona ``alta disponibilidad'' en abstracto, sin diferenciar por agregado. &
-La tabla \ref{tab:cap} (``Consistencia por agregado'') formula una política CAP distinta para inventario, pedido/pago, usuarios, catálogo y analítica, cada una con su límite de evidencia declarado. \textbf{Actualización del 5 de septiembre:} la campaña correctiva de checkout produjo 30275 confirmaciones en 120 corridas contra el sistema desplegado, después de aprobar pilotos basales y una rampa de carga. Esa muestra permite describir disponibilidad y latencia del flujo, pero el CSV agregado no conserva historiales persistentes por operación ni ensaya una partición de red controlada; por ello todavía no valida la política CAP por agregado ni las cuatro invariantes de negocio.\\
+La tabla \ref{tab:cap} (``Consistencia por agregado'') formula una política CAP distinta para inventario, pedido/pago, usuarios, catálogo y analítica, cada una con su límite de evidencia declarado. \textbf{Actualización del 7 de septiembre:} la campaña correctiva de checkout produjo 30275 confirmaciones en 120 corridas contra el sistema desplegado, después de aprobar pilotos basales y una rampa de carga, y un oráculo retrospectivo auditó esas mismas corridas directamente contra CockroachDB real (no contra el CSV agregado). El oráculo sí valida, de forma parcial y con límite declarado, la política CAP por agregado: cero discordancias de importe entre orden y factura, cero descuentos duplicados y cero stock negativo, frente a 30,6\,\% de órdenes con inconsistencia de inventario. Ninguna de las dos estrategias (2PC, Saga) garantizó por sí sola esa consistencia de inventario bajo esta concurrencia, y la comparación entre ambas no fue estadísticamente significativa tras Bonferroni. La cuarta invariante (compensación de intentos cancelados) sigue sin poder verificarse, no por falta de intento sino porque su registro vivía solo en memoria y se perdió entre reinicios; se declara \texttt{no\_verificado} en vez de asumirse cumplida.\\
 
 2.7 Modelo de fallos de Cristian &
 No existe modelo de fallos ni de sincronización de reloj en E1. &
@@ -257,19 +257,21 @@ No todas las consecuencias previstas en E1 se convirtieron en resultados medidos
 
 \seccion{Propiedades distribuidas}
 \subsection{Consistencia por agregado}
-La tabla \ref{tab:cap} formula la política requerida y su límite de evidencia. CAP se interpreta ante particiones de red: la réplica por quórum puede rechazar o demorar escrituras cuando no dispone de mayoría. No se promete disponibilidad total junto con consistencia fuerte durante cualquier partición \cite{gilbert2002,brewer2012cap,abadi2012consistency}.
+La tabla \ref{tab:cap} formula la política requerida por agregado y ahora la sostiene con datos medidos, no solo argumentados: el oráculo retrospectivo del Paso 8 auditó las 120 corridas de la campaña correctiva contra CockroachDB real (\path{experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/oracle_resumen_crdb.json}). CAP se interpreta ante particiones de red: la réplica por quórum puede rechazar o demorar escrituras cuando no dispone de mayoría. No se promete disponibilidad total junto con consistencia fuerte durante cualquier partición \cite{gilbert2002,brewer2012cap,abadi2012consistency}.
 
 \begin{table}[H]\centering\small
-\caption{Consistencia, réplica y límites por agregado.}\label{tab:cap}
+\caption{Consistencia, réplica y límites por agregado, sostenidos con el oráculo del Paso 8.}\label{tab:cap}
 \begin{tabularx}{\textwidth}{lXX}
-\toprule Agregado & Política & Límite\\\midrule
-Inventario & Serializar cambios y comprobar stock; réplica del motor. & Atomicidad local no prueba idempotencia entre servicios.\\
-Pedido y pago & Confirmar solo con condiciones satisfechas; compensar fallo. & El laboratorio no implementa commit distribuido real.\\
-Usuarios & Preservar identidad y validar autorización. & JWT no replica estado ni revoca instantáneamente por sí solo.\\
-Catálogo & Lectura consistente según consulta; réplica física. & No se midió un contrato de frescura de caché.\\
-Analítica & Instantánea o extracción identificable. & Resultados derivados pueden quedar desfasados respecto de ventas.\\\bottomrule
+\toprule Agregado & Política & Evidencia medida\\\midrule
+Inventario & Serializar cambios y comprobar stock; réplica del motor. & El oráculo halló 13\,210 de 43\,168 órdenes persistidas (30,6\,\%) con movimiento de inventario ausente o distinto al esperado: la idempotencia entre servicios no se sostiene bajo esta carga. Cero descuentos duplicados y cero stock negativo en el mismo periodo.\\
+Pedido y pago & Confirmar solo con condiciones satisfechas; compensar fallo. & Cero discordancias de importe o de líneas entre orden y factura en las 36\,878 órdenes con factura persistida. La comparación 2PC/Saga no mostró diferencia significativa tras la corrección de Bonferroni ($\hat{A}_{12}$ entre 0,6 y 0,92 sin ajustar); la compensación de intentos cancelados queda \texttt{no\_verificado} por pérdida del registro en memoria entre reinicios.\\
+Usuarios & Preservar identidad y validar autorización. & JWT no replica estado ni revoca instantáneamente por sí solo; no evaluado por el oráculo de esta campaña.\\
+Catálogo & Lectura consistente según consulta; réplica física. & No se midió un contrato de frescura de caché en esta campaña.\\
+Analítica & Instantánea o extracción identificable. & Resultados derivados pueden quedar desfasados respecto de ventas; no evaluado en esta campaña.\\\bottomrule
 \end{tabularx}
 \end{table}
+
+El agregado de facturación sostiene consistencia fuerte bajo esta carga: cero violaciones de importe en el subconjunto auditable. El agregado de inventario no la sostiene: la tasa de inconsistencia observable del 30,6\,\% indica que la garantía declarada no se cumplió en esta campaña, y esa es precisamente la variable central que el Paso 8 exige medir. La elección entre 2PC y Saga no puede fundamentarse todavía en una diferencia de rendimiento estadísticamente significativa; sí puede fundamentarse en que ninguna de las dos estrategias, tal como están implementadas, garantizó la consistencia de inventario bajo esta concurrencia.
 
 \subsection{Fragmentación y réplica}
 Pedidos utiliza límites temporales de rangos; el catálogo divide el índice secundario por categoría. ADR-012 documenta un conjunto sintético de 150 productos y diez rangos, con réplicas votantes en los nodos 1, 2 y 3. Es fragmentación del índice, no una demostración de partición exclusiva de todo el agregado por nodo. El identificador del producto se mantiene para no romper referencias desde carrito, medios e inventario.

@@ -17,9 +17,6 @@ public interface ProveedorRepository {
 
     void activar(Integer proveedorId);
 
-    // Devuelve todos los proveedores (activos e inactivos): la lista de administracion
-    // de proveedores debe seguir mostrando los desactivados, solo que marcados como
-    // "Inactivo". El filtro a solo-activos se hace en el select de creacion de ordenes.
     List<Proveedor> listarTodos();
 
     Proveedor obtenerPorId(Integer proveedorId);

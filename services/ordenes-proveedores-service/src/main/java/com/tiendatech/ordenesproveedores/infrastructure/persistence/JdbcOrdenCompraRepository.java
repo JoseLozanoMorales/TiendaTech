@@ -16,11 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Adaptador JDBC (patron Repository) del puerto domain.OrdenCompraRepository.
- * Toda la logica SQL y las reglas de transaccion/aislamiento se mantienen
- * identicas a la version previa: este refactor es puramente estructural.
- */
+
 @Repository
 public class JdbcOrdenCompraRepository implements OrdenCompraRepository {
     private static final BigDecimal IVA = new BigDecimal("15.00");
