@@ -30,11 +30,11 @@ Estado vigente al 7 de septiembre de 2026. Este registro diferencia el cierre ac
 
 ## Pendientes reales del cierre documental
 
-1. Obtener la lectura y aprobación de los autores restantes para sus conclusiones individuales y declaraciones de IA; Andy actualizó ambas entradas en los commits `8b0093d` y `161bf2c`.
+1. Obtener la lectura y aprobación de Jhinson y Jeremy para sus conclusiones individuales y declaraciones de IA; José y Andy ya revisaron sus entradas.
 2. Ejecutar la comprobación institucional de similitud; no declarar un porcentaje antes de recibirla.
 3. Verificar acceso al repositorio, comprobar el PDF exacto y cargarlo en el SGA conservando el comprobante.
 
 Los enlaces permanentes de las respuestas a duplicados están en `cierre/respuestas-issues-duplicados.md`. Los controles que dependen de integrantes o de sistemas externos están en `cierre/lista-cierre-externo.md`. La revisión de deuda, la trazabilidad vigente y la publicación de imágenes ya disponen de evidencia; el PDF debe regenerarse una vez después de integrar las últimas revisiones personales.
 Cada afirmación final debe corresponder a un archivo versionado y a la misma unidad experimental. Implementación, ejecución y conclusión se registran por separado. El documentalista puede cerrar la integración y la reproducción del PDF; las firmas, la similitud institucional y cualquier repetición técnica adicional requieren la intervención indicada.
 
-La comprobación final queda registrada en `cierre/verificacion-final-20260904.json`: 54 páginas, 23 referencias, 27 rangos históricos válidos, 120 filas de campaña y cero errores LaTeX, referencias indefinidas o desbordamientos. El PDF tiene SHA-256 `1A3612183EE1549E8D64D25A91E17EE2A25EA11693516A099A8D9D6B6ECD5A7A`.
+La comprobación final queda registrada en `cierre/verificacion-final-20260904.json`: 57 páginas, 23 referencias, 27 rangos históricos válidos, 120 filas de campaña y cero errores LaTeX, referencias indefinidas o desbordamientos. El PDF tiene SHA-256 `8C73C55BF507C5E455B2D9DA3C23FF503485F806514BBBA80D116C7488D51A0C`.

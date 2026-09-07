@@ -1,7 +1,7 @@
 {
   "fecha": "2026-09-07",
-  "commit_fuente": "62f0b15736926dffce5ead70acc55a89ec75f9ad y analisis documental derivado",
-  "pdf_paginas": 54,
+  "commit_fuente": "c5dca588ea9662cab56732c97fe644b9a929854b y cierre documental local",
+  "pdf_paginas": 57,
   "referencias_compiladas": 23,
   "trazabilidad_rangos": 27,
   "campana_filas": 120,
@@ -14,6 +14,13 @@
   },
   "comparaciones_p95": 12,
   "comparaciones_significativas_bonferroni": 0,
+  "oraculo_retrospectivo": {
+    "ordenes_persistidas": 43168,
+    "ordenes_sin_factura": 6290,
+    "ordenes_inconsistencia_inventario": 13210,
+    "corridas_con_violacion_observable": 104,
+    "compensacion_cancelada": "no_verificado"
+  },
   "iso_filas": 6,
   "latex_errores_referencias_indefinidas_o_desbordamientos": 0,
   "piloto_verificado": true,
@@ -21,6 +28,6 @@
   "ci_estado": "success",
   "quality_gate_estado": "success",
   "publicacion_imagenes_estado": "in_progress",
-  "pdf_sha256": "1A3612183EE1549E8D64D25A91E17EE2A25EA11693516A099A8D9D6B6ECD5A7A",
+  "pdf_sha256": "8C73C55BF507C5E455B2D9DA3C23FF503485F806514BBBA80D116C7488D51A0C",
   "publicacion_imagenes_run": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/33933854013"
 }
