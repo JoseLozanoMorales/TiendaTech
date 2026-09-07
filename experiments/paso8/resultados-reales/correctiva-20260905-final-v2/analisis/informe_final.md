@@ -1,58 +1,115 @@
-# Paso 8 — informe de ejecución correctiva
+# Paso 8 — informe final de la campaña correctiva
 
-## Protocolo ejecutado
+## Evidencia principal
 
-- 24 condiciones: 2 estrategias (`2pc`, `saga`) × 4 niveles de concurrencia
-  (50, 100, 200, 400) × 3 modos de fallo (`none`, `omission`, `timing`).
-- 5 repeticiones por condición: 120 corridas.
-- Cada corrida usó 60 segundos de calentamiento descartado y 300 segundos de
-  medición, con `delay-seconds=5` y probabilidad de fallo 0,10 cuando aplicaba.
-- La carga recorrió el flujo real
-  `Gateway -> Pedidos -> Ventas/Inventario -> CockroachDB`.
-- Se emplearon 400 compradores sintéticos y 29 productos con stock repuesto
-  entre fases para evitar una fila caliente artificial.
-- Antes de la matriz se aprobaron los pilotos basales de 2PC y Saga y la rampa
-  sin fallos de 1, 5, 10, 25 y 50 usuarios para ambas estrategias.
-- La campaña se completó en una única ejecución de 22,54 horas.
+La evidencia canónica de C2, C3 y C6 es esta campaña:
+`resultados-reales/correctiva-20260905-final-v2/`. Se ejecutaron 120 corridas
+reales —2 estrategias × 4 concurrencias × 3 modos de fallo × 5 repeticiones—
+contra `Gateway -> Pedidos -> Ventas/Inventario -> CockroachDB`, después de un
+piloto basal y una rampa sin fallos. Cada corrida descartó 60 segundos de
+calentamiento y midió durante 300 segundos.
 
-## Validación estructural
+El CSV de Locust registra 208 003 solicitudes y 49 786 intentos de checkout:
+30 275 confirmados y 19 511 fallidos. Saga confirmó 16 220 de 25 576 intentos
+(63,4 %) y 2PC confirmó 14 055 de 24 210 (58,1 %). Estas cifras describen las
+respuestas HTTP; no se equiparan retrospectivamente con los registros de base
+de datos.
 
-- 120 filas y 120 claves de corrida únicas.
-- 24 condiciones, todas con exactamente 5 repeticiones.
-- Ninguna corrida con cero solicitudes.
-- Todas las corridas alcanzaron la concurrencia objetivo declarada por Locust.
-- Las 120 filas registran los mismos parámetros: calentamiento de 60 segundos,
-  medición de 300 segundos y temporización de 5 segundos.
-- Ninguna corrida quedó con cero checkouts confirmados y no se detectaron
-  advertencias de generación de carga de Locust.
+## Reconstrucción desde CockroachDB real
 
-El archivo `validacion.json` registra el resultado `valido: true`. El CSV
-`resumen_por_condicion.csv` conserva las medianas de las métricas para cada una
-de las 24 condiciones.
+El oráculo retrospectivo se ejecutó en modo de solo lectura sobre CockroachDB
+real. Para evitar que el procesador de outbox reiniciado después de la campaña
+cambiara la evidencia durante la consulta, todas las lecturas usan la misma
+instantánea MVCC:
+`AS OF SYSTEM TIME '2026-09-07T20:10:24.380904Z'`.
 
-## Resultado global
+Las órdenes se asignaron a una corrida cuando `pedidos.orden.creado_en` cayó
+dentro de su ventana oficial de medición. Los 13 321 registros de usuarios
+sintéticos que quedaron fuera de esas ventanas corresponden a calentamientos
+o intervalos entre corridas y no se mezclaron con la matriz medida.
 
-La campaña procesó 208 003 solicitudes. De 49 786 intentos de checkout,
-30 275 terminaron confirmados y 19 511 fallaron. Esto corrige la limitación de
-la campaña anterior, que solo produjo tres confirmaciones y no permitía una
-comparación útil.
+| Comprobación persistente | Resultado en las 120 ventanas |
+| --- | ---: |
+| Órdenes persistidas | 43 168 |
+| Órdenes sin factura | 6 290 |
+| Facturas con importe distinto de la orden | 0 |
+| Facturas cuyas líneas no coinciden con la orden | 0 |
+| Órdenes con descuento de inventario ausente o distinto | 13 210 |
+| Órdenes con descuento duplicado | 0 |
+| Eventos de stock negativo en kardex/reservas | 0 |
+| Productos con stock actual negativo | 0 |
 
-En el agregado descriptivo, Saga confirmó 16 220 de 25 576 checkouts (63,4 %)
-y 2PC confirmó 14 055 de 24 210 (58,1 %). Estas proporciones globales no
-sustituyen la comparación por condición y repetición, pero muestran que ambas
-estrategias produjeron una muestra abundante de compras reales.
+Por tanto, 36 878 órdenes tienen factura persistida con importe y líneas
+exactos, y 29 958 órdenes tienen un único movimiento de inventario con la
+cantidad esperada. Se observaron 13 210 órdenes inconsistentes distintas entre
+43 168 órdenes persistidas (30,6014 %). En 104 corridas hubo al menos una
+violación observable. Las otras 16 se etiquetan `no_verificado`, no `true`,
+porque faltan invariantes que la persistencia disponible no permite demostrar.
 
-La degradación aumenta con la concurrencia. La tasa agregada de confirmación
-fue 94,1 % con 50 usuarios, 92,1 % con 100, 42,3 % con 200 y 10,8 % con 400.
-Los errores HTTP 0, 500, 503, circuit breakers y timeouts observados bajo 200 y
-400 usuarios forman parte del comportamiento medido durante saturación e
-inyección de fallos; no representan corridas ausentes ni una falla del
-generador de carga.
+Para Saga, 12 159 outbox de facturas de las ventanas medidas estaban procesados
+y 6 995 seguían pendientes o fallidos en la instantánea. Fue posible obtener
+una mediana numérica de convergencia en 37 de las 60 corridas Saga y en al
+menos una repetición de las 12 condiciones Saga. Las medianas por corrida
+observadas van de 784 369,067 ms a 35 554 122,710 ms, con mediana global de
+20 602 253,014 ms. Este valor es
+`ventas.factura_outbox.procesado_en - creado_en`: mide la convergencia durable
+factura–inventario y refleja también la acumulación del backlog; no prueba una
+compensación de checkout cancelado.
 
-## Trazabilidad y seguridad de la evidencia
+## Límites explícitos del oráculo
 
-El repositorio publica el CSV crudo, la validación, el resumen por condición,
-los resultados consolidados de piloto y rampa, y este informe. Los bancos de
-usuarios, las contraseñas sintéticas, los JWT, las cachés y los logs detallados
-permanecen fuera de Git. Esos archivos se conservan localmente para auditoría,
-pero no son necesarios para recalcular el resumen publicado.
+- No existe un ledger independiente de capturas de pago. Se verificó la factura
+  y su importe exacto contra la orden, pero eso no puede presentarse como prueba
+  de un cobro bancario real.
+- Los resultados `COMPLETADA`/`FALLIDA` de los intentos de checkout se guardaban
+  en `TransactionObservationStore`, un buffer en memoria limitado a 200
+  entradas. Los reinicios entre corridas eliminaron esa historia. Por ello no
+  es posible reconstruir con certeza si cada intento cancelado o compensado
+  devolvió el stock y no dejó cobro pendiente.
+- Ese cuarto invariante queda expresamente como `no_verificado` en las 120
+  filas. No se rellenó ningún cero ni `oracle_pass=true` sin evidencia.
+- Una orden “confirmada” se operacionaliza aquí como una fila persistida en
+  `pedidos.orden`: el servicio confirma ese commit antes de invocar
+  facturación. Es una definición verificable, distinta de la respuesta HTTP
+  observada por Locust.
+
+## Análisis estadístico
+
+Se calculó por condición la mediana y un IC95 % bootstrap percentil de 20 000
+remuestreos para latencia p95, throughput, tasas de confirmación y aborto,
+errores, inconsistencia y convergencia Saga. Las proporciones agregadas de
+confirmación y aborto incluyen IC95 % de Wilson. Las 72 comparaciones 2PC–Saga
+incluyen U de Mann–Whitney bilateral y el tamaño del efecto A12 de
+Vargha–Delaney; se informa el umbral sin ajustar y la corrección de Bonferroni
+por familia de 12 comparaciones (`alpha=0,0041667`).
+
+Doce comparaciones tienen `p < 0,05` sin ajustar, pero ninguna conserva
+significancia tras Bonferroni. Con solo cinco repeticiones por condición, las
+medianas, los intervalos y A12 son más informativos que proclamar una estrategia
+ganadora. Los diagramas publicados son boxplots construidos con las cinco
+repeticiones de cada condición, no gráficos de barras.
+
+## Archivos auditables
+
+- `experimento_real_crudo.csv`: mediciones originales de Locust.
+- `analisis/oracle_por_corrida_crdb.csv`: invariantes persistentes por corrida.
+- `analisis/experimento_real_crudo_enriquecido.csv`: medición y oráculo unidos.
+- `analisis/usuarios_sinteticos_ids.csv`: IDs no secretos usados para delimitar
+  la carga, sin contraseñas ni JWT.
+- `analisis/oracle_resumen_crdb.json`: consulta, instantánea, totales y hashes.
+- `analisis/resumen_estadistico_ic95.csv`: medianas e IC95 % por condición.
+- `analisis/proporciones_binomiales_ic95.csv`: tasas e IC95 % de Wilson.
+- `analisis/comparaciones_mann_whitney.csv`: U, p y A12.
+- `analisis/boxplot_*.svg`: cinco diagramas de caja.
+- `analisis/analisis_estadistico_metodologia.json`: método y parámetros.
+- `analisis/validacion.json`: integridad estructural de las 120 corridas.
+
+## Conclusión defendible
+
+La campaña correctiva sí constituye evidencia distribuida real y ofrece una
+muestra amplia y completa por condición. La reconstrucción demuestra ausencia
+de importes de factura discordantes, descuentos duplicados y stock negativo en
+la persistencia disponible; también descubre pérdidas de continuidad entre
+orden, factura e inventario que no deben ocultarse. No demuestra captura
+bancaria ni compensación completa de intentos cancelados, porque esos datos no
+fueron persistidos. Esos límites quedan declarados en vez de inventar éxito.

@@ -1,0 +1,48 @@
+{
+  "fuente": "CockroachDB real configurado por CRDB_DATASOURCE_URL",
+  "database": "tiendatech",
+  "database_version": "CockroachDB CCL v23.2.4 (aarch64-unknown-linux-gnu, built 2024/04/08 21:56:38, go1.21.8 X:nocoverageredesign)",
+  "audit_timestamp_utc": "2026-09-07T20:10:24.380904+00:00",
+  "as_of_system_time": "2026-09-07T20:10:24.380904Z",
+  "campaign_start_utc": "2026-09-06T07:30:47.073000+00:00",
+  "campaign_end_utc": "2026-09-07T06:00:33.813000+00:00",
+  "synthetic_users_count": 400,
+  "assignment": "pedidos.orden.creado_en dentro de [inicio_epoch, inicio_epoch + duracion_segundos]",
+  "confirmed_order_operationalization": "orden persistida en pedidos.orden; OrdenService confirma el commit antes de invocar facturacion",
+  "charge_limitation": "no existe ledger de cobros; se verifico factura e importe, no una captura bancaria independiente",
+  "cancel_compensation_limitation": "no_verificado: los estados COMPLETADA/FALLIDA vivieron en TransactionObservationStore, buffer en memoria de 200 entradas, y se perdieron en los reinicios entre corridas",
+  "saga_convergence_definition": "ventas.factura_outbox.procesado_en - creado_en; mide convergencia factura-inventario del outbox, no reconstruye una compensacion de checkout cancelado",
+  "raw_counts": {
+    "orders": 56489,
+    "order_lines": 56489,
+    "invoice_lines": 49224,
+    "inventory_movements": 40081,
+    "negative_kardex_rows": 0,
+    "negative_reservation_rows": 0,
+    "unassigned_orders": 13321
+  },
+  "totals": {
+    "corridas": 120,
+    "corridas_con_ordenes": 120,
+    "corridas_con_violaciones_verificadas": 104,
+    "ordenes_persistidas": 43168,
+    "ordenes_sin_factura": 6290,
+    "facturas_importe_distinto": 0,
+    "orden_factura_lineas_distintas": 0,
+    "ordenes_stock_ausente_o_distinto": 13210,
+    "ordenes_descuento_duplicado": 0,
+    "eventos_stock_negativo": 0,
+    "current_negative_stock": 0
+  },
+  "outputs": {
+    "usuarios_sinteticos_ids": "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/usuarios_sinteticos_ids.csv",
+    "oracle_por_corrida": "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/oracle_por_corrida_crdb.csv",
+    "experimento_enriquecido": "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/experimento_real_crudo_enriquecido.csv"
+  },
+  "sha256": {
+    "experimento_real_crudo.csv": "a68ae62614e684c4b45e9f3e3717f0b91b0df4e4990cb84b6c541a84479e1e91",
+    "usuarios_sinteticos_ids.csv": "4cf1b942fe97fac58e865c5fc437f25a6bbccba90ba577c8130971953d03988d",
+    "oracle_por_corrida_crdb.csv": "07e526a82180a8e1722903fa643f593b35d655de3e3be186964b40c6664c51ec",
+    "experimento_real_crudo_enriquecido.csv": "f93c9bf4909ec0d35eee07437737eee3e0de69920adcdb40fd30ed284b469d2d"
+  }
+}

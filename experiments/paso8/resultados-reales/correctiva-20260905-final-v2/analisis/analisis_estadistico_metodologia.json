@@ -1,0 +1,31 @@
+{
+  "input": "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/experimento_real_crudo_enriquecido.csv",
+  "rows": 120,
+  "conditions": 24,
+  "bootstrap_samples": 20000,
+  "median_ci": "bootstrap percentil 95%, semilla determinista por condicion y metrica",
+  "proportion_ci": "Wilson score 95% sobre conteos agregados de cinco repeticiones",
+  "mann_whitney": "bilateral; p exacto sin empates y aproximacion normal cuando hay empates",
+  "effect_size": "A12 de Vargha-Delaney; probabilidad de que 2PC sea mayor que Saga",
+  "multiplicity": "Bonferroni por metrica: 12 comparaciones, alfa 0.05/12",
+  "outputs": [
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/resumen_estadistico_ic95.csv",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/proporciones_binomiales_ic95.csv",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/comparaciones_mann_whitney.csv",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/boxplot_latencia_p95_ms.svg",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/boxplot_throughput_rps.svg",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/boxplot_tasa_confirmacion_checkout.svg",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/boxplot_tasa_abortos_checkout.svg",
+    "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/boxplot_tasa_inconsistencia.svg"
+  ],
+  "sha256": {
+    "resumen_estadistico_ic95.csv": "3cd476ef13826773ef1e909a19633d3049a7e1b014743acd85dde942b23ad316",
+    "proporciones_binomiales_ic95.csv": "c9331bf6b385dcb6de1f731db622e3c251046e751b84f82b389ebc4af4e27a05",
+    "comparaciones_mann_whitney.csv": "64eab8fcb7749856198d50a5a6e3f1b610676d3db91270a301cb44549b1b7406",
+    "boxplot_latencia_p95_ms.svg": "d5284957bb3651138fe8da53b28a7e6b1965ec19787dda1b29f6a816f07baa61",
+    "boxplot_throughput_rps.svg": "c40e76da78695cfad5e45a1801df23b2704035645c2396edfea323a63468a443",
+    "boxplot_tasa_confirmacion_checkout.svg": "ae854e6338f050fed02164a09b279393bc063c9bcac85eff4f96abeb3554c8dc",
+    "boxplot_tasa_abortos_checkout.svg": "a9ba78d1a227600a29a76fc9d1b36ff7bc3dc6fe2b5102aec3ffe52ac7025528",
+    "boxplot_tasa_inconsistencia.svg": "735aac778a748a272fd705a3d09a532711f6f21cc1d1a95468bcd9091861eb8b"
+  }
+}

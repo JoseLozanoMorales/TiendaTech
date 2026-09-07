@@ -7,9 +7,6 @@
 > actuales. `run_paso8.py` y `coordination_lab.py` usan SQLite y se conservan
 > únicamente para reproducibilidad; no sustentan C2, C3 ni C6.
 
-La campaña anterior ejecutó 120 corridas (24 condiciones × 5 repeticiones),
-con 60 segundos de calentamiento y 90 de medición. Su informe y sus límites
-están en `resultados-reales/oficial-v4-20260904/analisis/informe_final.md`.
 La repetición correctiva completó 120 corridas con 60 segundos de
 calentamiento y 300 segundos de medición, después de aprobar un piloto basal
 de dos minutos con un usuario para cada estrategia y una rampa previa sin
@@ -106,24 +103,42 @@ segundos: evita reenvíos de una salida idempotente mientras CockroachDB resuelv
 la contención. Los demás clientes de Pedidos conservan el límite general.
 El mecanismo permanece desactivado por defecto.
 
-La campaña oficial ya conservada comprende 120 corridas y valida que todas las
-condiciones y concurrencias se ejecutaron. Registró saturación extrema y solo
-tres checkouts confirmados; por ello demuestra ejecución distribuida real, pero
-no permite afirmar superioridad de 2PC o Saga ni invariantes con potencia suficiente.
+## Resultados vigentes de la campaña correctiva
 
-## Resultados de la corrida inicial invalidada
+La matriz produjo 208 003 solicitudes y 49 786 intentos de checkout, con
+30 275 confirmados. La reconstrucción retrospectiva de las ventanas oficiales
+consultó CockroachDB real en una instantánea MVCC fija y encontró 43 168
+órdenes persistidas: 6 290 sin factura y 13 210 sin exactamente el movimiento
+de inventario esperado. No encontró importes de factura distintos, descuentos
+duplicados ni stock negativo.
 
-- El oraculo de consistencia pasó en las 120 corridas iniciales: no se observaron pagos
-  incompletos, descuentos dobles, stock negativo ni compensaciones incompletas.
-- La tasa de inconsistencia observable fue `0.0` en todas las condiciones, pero
-  ese valor no es una conclusión vigente porque el candado global impedía medirla.
-- Con fallo `omission` y `timing`, la tasa de abortos se mantuvo cerca de la
-  probabilidad de fallo configurada (`0.10`), con variacion esperada por semilla.
-- En todas las comparaciones de latencia p95, `2pc` tuvo menor latencia que
-  `saga` en esta implementacion local del banco (`p_aprox=0.009023`,
-  `A12=0.0` para 2PC mayor que Saga).
-- En el banco de compatibilidad se evaluaron 120 casos: 120 aciertos, 0 falsos
-  positivos y 0 falsos negativos; IC95% binomial de exactitud `[0.968981, 1.0]`.
+El sistema no conserva un ledger independiente de cobros y los intentos
+cancelados/fallidos estaban en un buffer de memoria que se perdió con los
+reinicios. Esos invariantes quedan `no_verificado`, no se presentan como cero ni
+como éxito. La convergencia Saga recuperable mide el outbox durable entre
+factura e inventario.
 
-Estos valores se conservan solamente como trazabilidad. La conclusión final se
-redactará después de generar y analizar las 288 corridas corregidas.
+Archivos principales dentro de
+`resultados-reales/correctiva-20260905-final-v2/analisis/`:
+
+- `oracle_por_corrida_crdb.csv` y `experimento_real_crudo_enriquecido.csv`.
+- `usuarios_sinteticos_ids.csv`, lista reproducible sin credenciales ni JWT.
+- `oracle_resumen_crdb.json`, con instantánea, límites, totales y hashes.
+- `resumen_estadistico_ic95.csv` y `proporciones_binomiales_ic95.csv`.
+- `comparaciones_mann_whitney.csv`, con U bilateral y A12.
+- `boxplot_*.svg`, diagramas de caja de las cinco repeticiones.
+- `informe_final.md`, interpretación completa y límites de inferencia.
+
+Para recalcular el oráculo se configuran las variables `CRDB_DATASOURCE_URL`,
+`CRDB_DATASOURCE_USERNAME` y `CRDB_DATASOURCE_PASSWORD` del clúster real y se
+ejecuta:
+
+```powershell
+python experiments/paso8/reconstruct_real_oracle.py `
+  --as-of 2026-09-07T20:10:24.380904Z
+python experiments/paso8/analyze_corrective_results.py
+```
+
+La instantánea histórica evita que el reprocesamiento posterior del outbox
+cambie los resultados. Los CSV y sus hashes permanecen como evidencia aun
+cuando CockroachDB deje de retener esa versión MVCC.
