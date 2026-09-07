@@ -16,7 +16,7 @@ Estado vigente al 7 de septiembre de 2026. Este registro diferencia el cierre ac
 | Residuo `commits.txt` | Eliminado y publicado en Git. |
 | Observabilidad | Panel bajo carga, trazas OpenTelemetry y propagación por TCP documentados en `docs/evidencias/paso10-*`. |
 | Calidad | Carga, disponibilidad de una hora, cobertura, complejidad y seguridad consolidadas en `docs/experimentos/resultados/iso25010.csv`. |
-| Campaña 2PC/Saga | Campaña correctiva con 120 corridas, preflight, pilotos, rampa y cinco minutos de medición en `experiments/paso8/resultados-reales/correctiva-20260905-final-v2/`. Se confirmaron 30 275 checkouts; la comparación es descriptiva y ninguna prueba p95 supera Bonferroni. |
+| Campaña 2PC/Saga | Campaña correctiva con 120 corridas, preflight, pilotos, rampa y cinco minutos de medición en `experiments/paso8/resultados-reales/correctiva-20260905-final-v2/`. Se confirmaron 30 275 checkouts; el oráculo retrospectivo detectó 13 210 inconsistencias de inventario entre 43 168 órdenes persistidas, y ninguna comparación conserva significación tras Bonferroni. |
 | Contratos y E2E | Suites Pact y Playwright versionadas en `tests/contract/` y `tests/e2e-web/`, incluidas en CI. |
 | Arranque, P3 | Evidencia de volúmenes limpios y estado del fix publicado en `docs/evidencias/arranque-limpio-paso15.md`. |
 
@@ -24,7 +24,7 @@ Estado vigente al 7 de septiembre de 2026. Este registro diferencia el cierre ac
 
 - Las 120 corridas de `experiments/paso8/resultados/` pertenecen al banco SQLite histórico y no sustentan una garantía distribuida.
 - El piloto de `cierre/actualizacion-20260903/` contiene 240 operaciones y detecta una discordancia de stock en E-Saga local.
-- La campaña correctiva registra 208 003 solicitudes, 49 786 intentos de checkout, 19 511 fallos y 30 275 confirmaciones. Acredita flujo basal y degradación con carga; no acredita invariantes por operación.
+- La campaña correctiva registra 208 003 solicitudes, 49 786 intentos de checkout, 19 511 fallos y 30 275 confirmaciones. Acredita flujo basal y degradación con carga; el oráculo retrospectivo acredita parcialmente invariantes persistentes y descubre inconsistencias de inventario, sin reconstruir cobro ni compensación cancelada.
 - La carga ISO estable registra 2112 solicitudes, cero fallos y p95 de 610 ms. Es una corrida distinta con cincuenta usuarios y un límite operativo ajustado.
 - La disponibilidad registra 3588/3588 sondeos exitosos durante una ventana de una hora. No se extrapola a producción.
 

@@ -123,7 +123,7 @@ El script solo lee los CSV incluidos. No genera mediciones, no cambia sus valore
 - Tolerancia: `docs/evidencias/resultados-tolerancia-e4/mediciones.csv` y `tiempo-reintegracion.csv` en el mismo commit.
 - Calidad: `docs/evidencias/cobertura/` y `docs/experimentos/resultados/iso25010/complejidad/summary.csv` del mismo commit.
 
-Las cifras de cobertura son del alcance instrumentado, no de la totalidad de cada servicio. El banco SQLite es un piloto histórico. La campaña correctiva completó 120 corridas y confirmó 30275 checkouts; permite una comparación descriptiva, pero no acredita invariantes porque no conserva historiales persistentes por operación. La disponibilidad de una hora y la carga oficial tienen evidencia; la comparación con RAG, las firmas personales y la similitud inferior al 15 % no se acreditan.
+Las cifras de cobertura son del alcance instrumentado, no de la totalidad de cada servicio. El banco SQLite es un piloto histórico. La campaña correctiva completó 120 corridas y confirmó 30275 checkouts. El oráculo retrospectivo sobre CockroachDB detectó 13210 órdenes con movimiento de inventario ausente o distinto; no encontró importes discordantes, descuentos duplicados ni stock negativo. La captura bancaria y la compensación cancelada siguen no verificables. La disponibilidad de una hora y la carga oficial tienen evidencia; la comparación con RAG, las firmas personales y la similitud inferior al 15 % no se acreditan.
 
 Las conclusiones individuales proceden de los textos anteriores y se actualizaron; cada autor debe revisarlas antes de entregarlas como declaración personal. La memoria registra los pendientes, no los convierte en funcionalidades terminadas.
 
