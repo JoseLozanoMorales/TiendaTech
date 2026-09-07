@@ -1,0 +1,11 @@
+{
+  "csv_fuente": "experiments/paso8/resultados-reales/correctiva-20260905-final-v2/experimento_real_crudo.csv",
+  "filas": 120,
+  "checkouts": 49786,
+  "confirmados": 30275,
+  "fallidos": 19511,
+  "confirmacion_pct": 60.81,
+  "comparaciones_p95": 12,
+  "alpha_bonferroni": 0.004166666666666667,
+  "comparaciones_significativas": 0
+}

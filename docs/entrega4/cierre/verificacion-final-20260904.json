@@ -1,18 +1,19 @@
 {
-  "fecha": "2026-09-04",
-  "commit_fuente": "integracion local de 2c226f8c4b59ac4e6aac8cd07b09c5b91404a357 y 161bf2cc252f9a65d00ccb3767f8ea702a0423e0",
-  "pdf_paginas": 55,
+  "fecha": "2026-09-07",
+  "commit_fuente": "62f0b15736926dffce5ead70acc55a89ec75f9ad y analisis documental derivado",
+  "pdf_paginas": 54,
   "referencias_compiladas": 23,
   "trazabilidad_rangos": 27,
   "campana_filas": 120,
   "campana_condiciones": 24,
   "totales_campana": {
-    "requests_total": 76022,
-    "requests_fail": 56353,
-    "checkout_total": 401,
-    "checkout_fail": 398,
-    "checkout_confirmadas": 3
+    "requests_total": 208003,
+    "checkout_total": 49786,
+    "checkout_fail": 19511,
+    "checkout_confirmadas": 30275
   },
+  "comparaciones_p95": 12,
+  "comparaciones_significativas_bonferroni": 0,
   "iso_filas": 6,
   "latex_errores_referencias_indefinidas_o_desbordamientos": 0,
   "piloto_verificado": true,
@@ -20,6 +21,6 @@
   "ci_estado": "success",
   "quality_gate_estado": "success",
   "publicacion_imagenes_estado": "in_progress",
-  "pdf_sha256": "5FE9676C9773964809B1EFBC6288C8FC522F2B5AB85BEB6135F3704FD76F19C9",
+  "pdf_sha256": "1A3612183EE1549E8D64D25A91E17EE2A25EA11693516A099A8D9D6B6ECD5A7A",
   "publicacion_imagenes_run": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/33933854013"
 }

@@ -2,7 +2,7 @@
 
 El estado de las correcciones y los paquetes pendientes por recibir se detalla en
 [Cierre documental de las observaciones](CIERRE-DOCUMENTAL-OBSERVACIONES.md),
-actualizado el 4 de septiembre de 2026. `CIERRE-PASO13.md` conserva el corte histórico.
+actualizado el 7 de septiembre de 2026. `CIERRE-PASO13.md` conserva el corte histórico.
 
 La versión de cierre es `PFC4.tex` y su salida `PFC4.pdf`. El contenido de cierre se
 integró en los nombres originales. Las localizaciones de código y evidencia se
@@ -65,8 +65,10 @@ Push-Location experiments/paso7
 ..\..\.venv-repro\Scripts\python -m unittest -v test_coordination_lab.py
 Pop-Location
 
-# Validación reproducible de la campaña desplegada ya publicada
-.\.venv-repro\Scripts\python experiments/paso8/analyze_real_results.py experiments/paso8/resultados-reales/oficial-v4-20260904/experimento_real_crudo.csv --output experiments/paso8/resultados-reales/oficial-v4-20260904/analisis-reproducido
+# Validación reproducible de la campaña correctiva publicada
+.\.venv-repro\Scripts\python experiments/paso8/analyze_real_results.py experiments/paso8/resultados-reales/correctiva-20260905-final-v2/experimento_real_crudo.csv --output experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis-reproducido
+.\.venv-repro\Scripts\python experiments/paso8/analyze_corrective_comparison.py experiments/paso8/resultados-reales/correctiva-20260905-final-v2/experimento_real_crudo.csv --output experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis
+.\.venv-repro\Scripts\python experiments/paso8/plot_corrective_results.py experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis
 
 # Cuaderno de análisis y figuras del PDF
 .\.venv-repro\Scripts\python experiments/paso8/execute_notebook.py
@@ -80,7 +82,7 @@ pdflatex -interaction=nonstopmode -halt-on-error PFC4.tex
 pdflatex -interaction=nonstopmode -halt-on-error PFC4.tex
 ```
 
-La campaña desplegada ya se ejecutó: 120 corridas, 24 condiciones y cinco repeticiones, con 60 segundos de calentamiento y 90 segundos de medición. El comando anterior reproduce su análisis; la ejecución completa requiere el stack y el banco de peticiones descritos en `experiments/paso8/README-experimento-real.md`. El tiempo histórico inferior a quince minutos corresponde al banco SQLite anterior del commit `96a350b` y no se atribuye a esta campaña.
+La campaña correctiva ya se ejecutó: 120 corridas, 24 condiciones y cinco repeticiones, con 60 segundos de calentamiento y 300 segundos de medición. Los comandos anteriores regeneran la validación, las comparaciones y la gráfica desde el CSV crudo; la ejecución completa requiere el stack y el banco descritos en `experiments/paso8/README-experimento-real.md`.
 
 La duración se mide desde el primer `python -m unittest` hasta la última pasada de
 pdfLaTeX. La descarga inicial de dependencias no se incluye porque depende de la red;
@@ -115,13 +117,13 @@ El script solo lee los CSV incluidos. No genera mediciones, no cambia sus valore
 - `cierre/issues-corte.json`: estado y última respuesta de los issues 16–78; 63 registros, 50 cerrados y 13 abiertos. Tres abiertos son duplicados aparentes.
 - `cierre/doi-verificados.json`: metadatos consultados en Crossref de las quince fuentes académicas seleccionadas. Se contrastaron título, autores y DOI; las normas y el código ético se citan mediante URL institucional.
 - `cierre/bibliografia-2pc-saga.json`: metadatos y alcance de lectura de las cinco fuentes adicionales. La consulta de Daraghmi et al. se limita al resumen de autores; no se trasladan cifras del artículo.
-- `experiments/paso8/resultados-reales/oficial-v4-20260904/`: campaña desplegada, CSV crudo, resumen, informe y validación estructural.
+- `experiments/paso8/resultados-reales/correctiva-20260905-final-v2/`: campaña correctiva, preflight, pilotos, rampa, CSV crudo, resúmenes, comparación y validación estructural.
 - `docs/experimentos/resultados/iso25010/2026-09-04T08-44-12/`: carga estable, trazas y disponibilidad de una hora.
 - Planes SQL: `docs/evidencias/resultados-planes-e4/comparativa-planes.csv` en el commit de corte.
 - Tolerancia: `docs/evidencias/resultados-tolerancia-e4/mediciones.csv` y `tiempo-reintegracion.csv` en el mismo commit.
 - Calidad: `docs/evidencias/cobertura/` y `docs/experimentos/resultados/iso25010/complejidad/summary.csv` del mismo commit.
 
-Las cifras de cobertura son del alcance instrumentado, no de la totalidad de cada servicio. El banco SQLite es un piloto histórico; el candado global de Python fue retirado y el piloto posterior detectó una discordancia de stock en E-Saga. La campaña desplegada completó 120 corridas, pero solo confirmó tres checkouts y no permite comparar con solidez las estrategias. La disponibilidad de una hora y la carga oficial tienen evidencia; la comparación con RAG, las firmas personales y la similitud inferior al 15 % no se acreditan.
+Las cifras de cobertura son del alcance instrumentado, no de la totalidad de cada servicio. El banco SQLite es un piloto histórico. La campaña correctiva completó 120 corridas y confirmó 30275 checkouts; permite una comparación descriptiva, pero no acredita invariantes porque no conserva historiales persistentes por operación. La disponibilidad de una hora y la carga oficial tienen evidencia; la comparación con RAG, las firmas personales y la similitud inferior al 15 % no se acreditan.
 
 Las conclusiones individuales proceden de los textos anteriores y se actualizaron; cada autor debe revisarlas antes de entregarlas como declaración personal. La memoria registra los pendientes, no los convierte en funcionalidades terminadas.
 

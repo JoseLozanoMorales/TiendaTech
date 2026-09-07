@@ -1,10 +1,10 @@
 # Lista de cierre documental externo
 
-Estado al 4 de septiembre de 2026. Esta lista reúne comprobaciones que no pueden darse por satisfechas únicamente con archivos del repositorio.
+Estado al 7 de septiembre de 2026. Esta lista reúne comprobaciones que no pueden darse por satisfechas únicamente con archivos del repositorio.
 
 | Control | Estado | Evidencia o acción de cierre |
 |---|---|---|
-| PDF regenerado desde la fuente final | Completo | `docs/entrega4/PFC4.pdf`; 55 páginas, 23 referencias y SHA-256 `5FE9676C9773964809B1EFBC6288C8FC522F2B5AB85BEB6135F3704FD76F19C9`. |
+| PDF regenerado desde la fuente final | Completo | `docs/entrega4/PFC4.pdf`; 54 páginas, 23 referencias y SHA-256 `1A3612183EE1549E8D64D25A91E17EE2A25EA11693516A099A8D9D6B6ECD5A7A`. |
 | Compilación desde un árbol limpio | Completo | TeX Live 2026 y Biber finalizaron sin errores LaTeX, referencias indefinidas ni desbordamientos. |
 | URL del repositorio en la carátula | Completo en fuente | `PFC4.tex` presenta la URL en una línea. Comprobar visualmente la copia exacta que se cargará al SGA. |
 | Repositorio accesible para evaluación | Requiere comprobación externa | Abrir la URL con la cuenta o mecanismo que utilizará el docente y confirmar permisos antes de cargar la entrega. |

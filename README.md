@@ -159,7 +159,7 @@ El paquete experimental está formado por:
 
 - `experiments/paso8/run_real_experiment.py`: experimento principal contra
   `Gateway -> microservicios -> CockroachDB`, con calentamiento, fallos y carga Locust.
-- `experiments/paso8/resultados-reales/oficial-v4-20260904/`: campaña principal
+- `experiments/paso8/resultados-reales/correctiva-20260905-final-v2/`: campaña correctiva principal
   auditada de 120 corridas y su validación estructural.
 - `experiments/paso7/coordination_lab.py`: piloto local didáctico en SQLite; no
   constituye evidencia de concurrencia distribuida ni sustenta C2, C3 o C6.
@@ -209,7 +209,7 @@ Ver `docs/entrega4/PFC4.tex` §"Trazabilidad E1-E4" para la tabla completa de ci
 
 - Falta ampliar la cobertura de `ordenes-proveedores-service` y `ventas-service`; ambos ya contienen pruebas unitarias.
 - Los contratos Pact cubren dos interacciones y los E2E web dos recorridos; ampliar casos si cambian esos contratos o rutas.
-- La campaña distribuida completó 120 corridas, pero solo tres checkouts fueron confirmados; no permite elegir entre 2PC y Saga.
+- La campaña correctiva completó 120 corridas y 30 275 checkouts confirmados. Saga mostró mejores valores descriptivos en varias condiciones, pero ninguna comparación p95 fue significativa tras Bonferroni y todavía falta un oráculo persistente de invariantes.
 - La carga ISO obtuvo p95 de 610 ms frente al objetivo menor a 500 ms; requiere optimización y repeticiones para estimar un intervalo del p95.
 - No se ejecutó una comparación del asistente basado en reglas frente a RAG sobre un conjunto independiente.
 - Para producción deben sustituirse todos los valores de ejemplo y montarse los certificados del clúster administrado; el Compose local es autocontenido y no requiere sobrescribir `CRDB_DATASOURCE_URL`.

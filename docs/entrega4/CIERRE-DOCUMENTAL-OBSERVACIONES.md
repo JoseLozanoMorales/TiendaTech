@@ -1,6 +1,6 @@
 # Cierre documental de las observaciones
 
-Estado vigente al 4 de septiembre de 2026. Este registro diferencia el cierre actual de los cortes históricos conservados en `CIERRE-PASO13.md`, `cierre/issues-corte.json` y `cierre/actualizacion-20260903/`. No certifica aprobación docente, firmas personales ni similitud institucional.
+Estado vigente al 7 de septiembre de 2026. Este registro diferencia el cierre actual de los cortes históricos conservados en `CIERRE-PASO13.md`, `cierre/issues-corte.json` y `cierre/actualizacion-20260903/`. No certifica aprobación docente, firmas personales ni similitud institucional.
 
 ## Correcciones documentales cerradas
 
@@ -16,7 +16,7 @@ Estado vigente al 4 de septiembre de 2026. Este registro diferencia el cierre ac
 | Residuo `commits.txt` | Eliminado y publicado en Git. |
 | Observabilidad | Panel bajo carga, trazas OpenTelemetry y propagación por TCP documentados en `docs/evidencias/paso10-*`. |
 | Calidad | Carga, disponibilidad de una hora, cobertura, complejidad y seguridad consolidadas en `docs/experimentos/resultados/iso25010.csv`. |
-| Campaña 2PC/Saga | 120 corridas desplegadas, 24 condiciones y cinco repeticiones en `experiments/paso8/resultados-reales/oficial-v4-20260904/`. Solo tres checkouts fueron confirmados; la comparación permanece inconclusa. |
+| Campaña 2PC/Saga | Campaña correctiva con 120 corridas, preflight, pilotos, rampa y cinco minutos de medición en `experiments/paso8/resultados-reales/correctiva-20260905-final-v2/`. Se confirmaron 30 275 checkouts; la comparación es descriptiva y ninguna prueba p95 supera Bonferroni. |
 | Contratos y E2E | Suites Pact y Playwright versionadas en `tests/contract/` y `tests/e2e-web/`, incluidas en CI. |
 | Arranque, P3 | Evidencia de volúmenes limpios y estado del fix publicado en `docs/evidencias/arranque-limpio-paso15.md`. |
 
@@ -24,7 +24,7 @@ Estado vigente al 4 de septiembre de 2026. Este registro diferencia el cierre ac
 
 - Las 120 corridas de `experiments/paso8/resultados/` pertenecen al banco SQLite histórico y no sustentan una garantía distribuida.
 - El piloto de `cierre/actualizacion-20260903/` contiene 240 operaciones y detecta una discordancia de stock en E-Saga local.
-- La campaña desplegada registra 76 022 solicitudes, 401 intentos de checkout, 398 fallos y tres confirmaciones. Acredita ejecución y saturación, pero no una comparación robusta.
+- La campaña correctiva registra 208 003 solicitudes, 49 786 intentos de checkout, 19 511 fallos y 30 275 confirmaciones. Acredita flujo basal y degradación con carga; no acredita invariantes por operación.
 - La carga ISO estable registra 2112 solicitudes, cero fallos y p95 de 610 ms. Es una corrida distinta con cincuenta usuarios y un límite operativo ajustado.
 - La disponibilidad registra 3588/3588 sondeos exitosos durante una ventana de una hora. No se extrapola a producción.
 
@@ -37,4 +37,4 @@ Estado vigente al 4 de septiembre de 2026. Este registro diferencia el cierre ac
 Los enlaces permanentes de las respuestas a duplicados están en `cierre/respuestas-issues-duplicados.md`. Los controles que dependen de integrantes o de sistemas externos están en `cierre/lista-cierre-externo.md`. La revisión de deuda, la trazabilidad vigente y la publicación de imágenes ya disponen de evidencia; el PDF debe regenerarse una vez después de integrar las últimas revisiones personales.
 Cada afirmación final debe corresponder a un archivo versionado y a la misma unidad experimental. Implementación, ejecución y conclusión se registran por separado. El documentalista puede cerrar la integración y la reproducción del PDF; las firmas, la similitud institucional y cualquier repetición técnica adicional requieren la intervención indicada.
 
-La comprobación final queda registrada en `cierre/verificacion-final-20260904.json`: 55 páginas, 23 referencias, 27 rangos históricos válidos, 120 filas de campaña y cero errores LaTeX, referencias indefinidas o desbordamientos. El PDF tiene SHA-256 `5FE9676C9773964809B1EFBC6288C8FC522F2B5AB85BEB6135F3704FD76F19C9`.
+La comprobación final queda registrada en `cierre/verificacion-final-20260904.json`: 54 páginas, 23 referencias, 27 rangos históricos válidos, 120 filas de campaña y cero errores LaTeX, referencias indefinidas o desbordamientos. El PDF tiene SHA-256 `1A3612183EE1549E8D64D25A91E17EE2A25EA11693516A099A8D9D6B6ECD5A7A`.
