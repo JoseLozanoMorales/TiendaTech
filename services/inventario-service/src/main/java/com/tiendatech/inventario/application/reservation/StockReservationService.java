@@ -3,37 +3,55 @@ package com.tiendatech.inventario.application.reservation;
 import com.tiendatech.inventario.domain.reservation.ReservationCommand;
 import com.tiendatech.inventario.domain.reservation.ReservationResult;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class StockReservationService {
     private final JdbcTemplate jdbc;
     private final LamportClock clock;
+    private final CrdbTransactionRetryExecutor retryExecutor;
 
-    public StockReservationService(JdbcTemplate jdbc, LamportClock clock) {
+    @Autowired
+    public StockReservationService(JdbcTemplate jdbc, LamportClock clock,
+                                   CrdbTransactionRetryExecutor retryExecutor) {
         this.jdbc = jdbc;
         this.clock = clock;
+        this.retryExecutor = retryExecutor;
     }
 
-    @Transactional
+    StockReservationService(JdbcTemplate jdbc, LamportClock clock) {
+        this(jdbc, clock, null);
+    }
+
     public ReservationResult reconcile(ReservationCommand command) {
         validate(command);
-        UUID operationId = UUID.fromString(command.operationId());
-        List<ReservationResult> replay = jdbc.query("""
-                SELECT aceptada, mensaje, cantidad_reservada, stock_disponible, lamport, dispositivo_ganador
-                  FROM inventario.operacion_reserva WHERE operacion_id = ?
-                """, (rs, row) -> new ReservationResult(rs.getBoolean(1), rs.getString(2),
-                rs.getInt(3), rs.getInt(4), rs.getLong(5), rs.getString(6), true), operationId);
-        if (!replay.isEmpty()) return replay.getFirst();
+        // Prechequeo fuera de la transaccion: una repeticion ya resuelta no debe
+        // competir por el lock del producto. reconcileOnce vuelve a comprobarlo
+        // dentro de la transaccion para cerrar la carrera entre ambas consultas.
+        Optional<ReservationResult> replay = findReplay(command);
+        if (replay.isPresent()) return replay.get();
+        return retryExecutor == null
+                ? reconcileOnce(command)
+                : retryExecutor.execute(() -> reconcileOnce(command));
+    }
 
+    private ReservationResult reconcileOnce(ReservationCommand command) {
+        // Debe ser la PRIMERA sentencia de la transaccion. Si otro request ya
+        // posee el lock, CockroachDB espera/reintenta esta sentencia sin dejar
+        // que el resto de la transaccion trabaje con un snapshot envejecido.
         Map<String, Object> product = jdbc.queryForMap(
                 "SELECT stock FROM inventario.inventario_producto WHERE producto_id = ? AND habilitado FOR UPDATE",
                 command.productId());
+        Optional<ReservationResult> replay = findReplay(command);
+        if (replay.isPresent()) return replay.get();
+
+        UUID operationId = UUID.fromString(command.operationId());
         int physicalStock = ((Number) product.get("stock")).intValue();
         List<State> states = jdbc.query("""
                 SELECT cantidad, lamport, dispositivo_id FROM inventario.reserva_stock
@@ -81,6 +99,16 @@ public class StockReservationService {
                 result.reservedQuantity(), result.availableStock(), result.lamportTimestamp(),
                 result.winningDeviceId(), result.message());
         return result;
+    }
+
+    private Optional<ReservationResult> findReplay(ReservationCommand command) {
+        UUID operationId = UUID.fromString(command.operationId());
+        List<ReservationResult> replay = jdbc.query("""
+                SELECT aceptada, mensaje, cantidad_reservada, stock_disponible, lamport, dispositivo_ganador
+                  FROM inventario.operacion_reserva WHERE operacion_id = ?
+                """, (rs, row) -> new ReservationResult(rs.getBoolean(1), rs.getString(2),
+                rs.getInt(3), rs.getInt(4), rs.getLong(5), rs.getString(6), true), operationId);
+        return replay.stream().findFirst();
     }
 
     private static void validate(ReservationCommand command) {

@@ -120,6 +120,7 @@ public class JdbcInventarioRepository implements InventarioRepository {
             throw new IllegalArgumentException("El cuerpo de la solicitud no contiene JSON valido", ex);
         }
         List<MovimientoInventarioRequest> items = normalizarItems(body);
+        bloquearProductos(items);
         if (idempotencyGuard.isReplay(idempotencyKey, items)) {
             return true;
         }
@@ -127,6 +128,27 @@ public class JdbcInventarioRepository implements InventarioRepository {
             registrarItem(item);
         }
         return false;
+    }
+
+    /**
+     * Primera operacion SQL de la transaccion de movimiento. Tomar todos los
+     * locks en orden de producto evita interbloqueos y hace que CockroachDB
+     * resuelva la espera antes de crear la fila idempotente o el kardex.
+     */
+    private void bloquearProductos(List<MovimientoInventarioRequest> items) {
+        List<Integer> productoIds = items.stream()
+                .map(MovimientoInventarioRequest::getProductoId)
+                .distinct()
+                .sorted()
+                .toList();
+        String placeholders = String.join(",", productoIds.stream().map(id -> "?").toList());
+        jdbc.queryForList("""
+                SELECT producto_id
+                  FROM inventario.inventario_producto
+                 WHERE producto_id IN (%s)
+                 ORDER BY producto_id
+                 FOR UPDATE
+                """.formatted(placeholders), productoIds.toArray());
     }
 
     private void registrarItem(MovimientoInventarioRequest item) {

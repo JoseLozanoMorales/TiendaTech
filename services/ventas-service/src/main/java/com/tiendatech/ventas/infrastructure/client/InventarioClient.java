@@ -9,7 +9,6 @@ import io.github.resilience4j.retry.annotation.Retry;
 
 import com.tiendatech.ventas.domain.FacturaDetalle;
 import com.tiendatech.ventas.domain.InventarioPort;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -62,7 +61,6 @@ public class InventarioClient implements InventarioPort {
                         "producto_id", d.getProductoId(),
                         "subtipo_id", SUBTIPO_VENTA,
                         "cantidad", d.getCantidad(),
-                        "fecha", LocalDate.now().toString(),
                         "referencia", "FAC-" + facturaId
                 ))
                 .toList();
@@ -72,6 +70,9 @@ public class InventarioClient implements InventarioPort {
                         .path("/api/sp/movimiento-inventario")
                         .queryParamIfPresent("usuario", Optional.ofNullable(usuario))
                         .build())
+                // Outbox y barrera sincrona pueden competir o reintentar. La
+                // clave estable por factura impide descontar stock dos veces.
+                .header("Idempotency-Key", "factura-inventario-" + facturaId)
                 .body(items)
                 .retrieve()
                 .toBodilessEntity();

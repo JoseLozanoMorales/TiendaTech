@@ -8,7 +8,6 @@ import com.tiendatech.pedidos.infrastructure.observability.TraceContext;
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.Tracer;
 import io.micrometer.tracing.propagation.Propagator;
-import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -40,10 +39,6 @@ public class LengthPrefixedTcpReservationClient implements ReservationPort {
     private final ObjectMapper mapper;
     private final Tracer tracer;
     private final Propagator propagator;
-    private Socket socket;
-    private DataInputStream input;
-    private DataOutputStream output;
-
     public LengthPrefixedTcpReservationClient(@Value("${reservation.tcp.host:localhost}") String host,
             @Value("${reservation.tcp.port:9091}") int port,
             @Value("${reservation.tcp.connect-timeout-ms:2000}") int connectTimeoutMs,
@@ -55,7 +50,7 @@ public class LengthPrefixedTcpReservationClient implements ReservationPort {
     }
 
     @Override
-    public synchronized ReservationResult reconcile(ReservationCommand command) {
+    public ReservationResult reconcile(ReservationCommand command) {
         Span span = tracer.spanBuilder().name("reservation.tcp.reconcile").kind(Span.Kind.CLIENT).start();
         span.tag("net.transport", "tcp");
         span.tag("net.peer.name", host);
@@ -66,7 +61,6 @@ public class LengthPrefixedTcpReservationClient implements ReservationPort {
             try {
                 return exchange(command, span);
             } catch (IOException firstFailure) {
-                close();
                 try {
                     return exchange(command, span);
                 } catch (IOException retryFailure) {
@@ -80,35 +74,30 @@ public class LengthPrefixedTcpReservationClient implements ReservationPort {
     }
 
     private ReservationResult exchange(ReservationCommand command, Span span) throws IOException {
-        ensureConnected();
         Map<String, String> carrier = new HashMap<>();
         propagator.inject(span.context(), carrier, Map::put);
         byte[] payload = mapper.writeValueAsBytes(
                 new WireEnvelope(command, carrier.get("traceparent"), TraceContext.traceId()));
-        output.writeInt(payload.length);
-        output.write(payload);
-        output.flush();
-        int length = input.readInt();
-        if (length <= 0 || length > MAX_MESSAGE_BYTES) throw new IOException("Respuesta TCP inválida: " + length);
-        byte[] response = new byte[length];
-        input.readFully(response);
-        return mapper.readValue(response, ReservationResult.class);
-    }
-
-    private void ensureConnected() throws IOException {
-        if (socket != null && socket.isConnected() && !socket.isClosed()) return;
-        socket = new Socket();
-        socket.connect(new InetSocketAddress(host, port), connectTimeoutMs);
-        socket.setSoTimeout(readTimeoutMs);
-        socket.setKeepAlive(true);
-        input = new DataInputStream(socket.getInputStream());
-        output = new DataOutputStream(socket.getOutputStream());
-    }
-
-    @PreDestroy
-    public synchronized void close() {
-        try { if (socket != null) socket.close(); } catch (IOException ignored) {}
-        socket = null; input = null; output = null;
+        // Cada llamada usa su propia conexion. El servidor atiende conexiones
+        // con virtual threads, así que no existe motivo para serializar todos
+        // los carritos detrás de un único socket/monitor del cliente.
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress(host, port), connectTimeoutMs);
+            socket.setSoTimeout(readTimeoutMs);
+            socket.setKeepAlive(true);
+            try (DataInputStream input = new DataInputStream(socket.getInputStream());
+                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())) {
+                output.writeInt(payload.length);
+                output.write(payload);
+                output.flush();
+                int length = input.readInt();
+                if (length <= 0 || length > MAX_MESSAGE_BYTES)
+                    throw new IOException("Respuesta TCP inválida: " + length);
+                byte[] response = new byte[length];
+                input.readFully(response);
+                return mapper.readValue(response, ReservationResult.class);
+            }
+        }
     }
 
     /**

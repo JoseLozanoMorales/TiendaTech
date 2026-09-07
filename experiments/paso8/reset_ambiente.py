@@ -17,8 +17,10 @@ from __future__ import annotations
 
 import argparse
 import os
+import random
 import re
 import sys
+import time
 
 import psycopg
 
@@ -80,6 +82,71 @@ def topar_stock(producto_ids: list[int], valor: int) -> None:
     if afectados_inventario == 0:
         print("ADVERTENCIA: 0 filas en inventario.inventario_producto para estos IDs -- "
               "si esa tabla es la que gatilla el rechazo de reserva, el tope no esta surtiendo efecto ahi")
+
+
+def limpiar_carritos_experimento(usuario_ids: list[int], max_intentos: int = 8) -> dict[str, int]:
+    """Deja vacios los carritos del banco antes de una fase de carga.
+
+    Los relojes Lamport de los servicios viven en memoria, pero el ultimo
+    estado reconciliado vive en CockroachDB. Tras reiniciar los contenedores,
+    ese desfase puede rechazar como antiguo el primer evento de un carrito.
+    Tambien es normal que Locust termine un calentamiento justo despues de
+    reservar y antes del checkout. Limpiar *solo* los usuarios sinteticos
+    elimina ambos residuos sin tocar ordenes ni facturas ya producidas.
+    """
+    ids = sorted({int(usuario_id) for usuario_id in usuario_ids})
+    if not ids or any(usuario_id <= 0 for usuario_id in ids):
+        raise ValueError("usuario_ids debe contener identificadores positivos")
+
+    for intento in range(1, max_intentos + 1):
+        try:
+            with conectar() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT carrito_id
+                          FROM pedidos.carrito_de_compra
+                         WHERE usuario_id = ANY(%s) AND habilitado = true
+                        """,
+                        (ids,),
+                    )
+                    carrito_ids = [int(fila[0]) for fila in cur.fetchall()]
+                    if not carrito_ids:
+                        raise RuntimeError("ningun usuario sintetico tiene carrito activo")
+
+                    cur.execute(
+                        "DELETE FROM inventario.reserva_stock WHERE carrito_id = ANY(%s)",
+                        (carrito_ids,),
+                    )
+                    reservas = cur.rowcount
+                    cur.execute(
+                        "DELETE FROM pedidos.carrito_detalle WHERE carrito_id = ANY(%s)",
+                        (carrito_ids,),
+                    )
+                    detalles = cur.rowcount
+                conn.commit()
+            break
+        except psycopg.Error as error:
+            if error.sqlstate != "40001" or intento >= max_intentos:
+                raise
+            # CockroachDB exige repetir la transaccion completa. El jitter
+            # evita que la limpieza vuelva a chocar con el mismo lote.
+            base = min(2.0, 0.1 * (2 ** (intento - 1)))
+            time.sleep(base + random.uniform(0, base / 2))
+
+    resultado = {
+        "usuarios": len(ids),
+        "carritos": len(carrito_ids),
+        "reservas_eliminadas": reservas,
+        "detalles_eliminados": detalles,
+        "intentos": intento,
+    }
+    print(
+        "carritos sinteticos preparados: "
+        f"{resultado['usuarios']} usuarios, {resultado['carritos']} carritos, "
+        f"{reservas} reservas y {detalles} detalles residuales eliminados"
+    )
+    return resultado
 
 
 def main() -> int:

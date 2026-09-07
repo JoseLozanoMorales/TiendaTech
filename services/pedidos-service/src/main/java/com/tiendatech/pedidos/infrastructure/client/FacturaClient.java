@@ -5,10 +5,13 @@ import com.tiendatech.pedidos.domain.DetalleOrden;
 import com.tiendatech.pedidos.domain.Orden;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.List;
 import java.util.function.Supplier;
@@ -18,15 +21,47 @@ public class FacturaClient implements FacturaPort {
 
     private final RestClient restClient;
     private final CircuitBreaker circuitBreaker;
+    private final String coordination;
 
+    @Autowired
     public FacturaClient(RestClient.Builder restClientBuilder,
                          @Value("${ventas.service.base-url}") String ventasBaseUrl,
+                         @Value("${coordination.strategy:${COORD:2pc}}") String coordination,
                          CircuitBreakerRegistry circuitBreakerRegistry,
-                         InboundAuthorizationInterceptor authorizationInterceptor) {
+                         InboundAuthorizationInterceptor authorizationInterceptor,
+                         @Value("${pedidos.factura-client.connect-timeout-ms:2000}") long connectTimeoutMs,
+                         @Value("${pedidos.factura-client.read-timeout-ms:30000}") long readTimeoutMs) {
+        this(configurarTimeoutDeFacturacion(restClientBuilder, connectTimeoutMs, readTimeoutMs),
+                ventasBaseUrl, coordination, circuitBreakerRegistry, authorizationInterceptor);
+    }
+
+    // Constructor conservado para pruebas con MockRestServiceServer. En produccion
+    // Spring usa el constructor @Autowired de arriba y aplica el timeout dedicado.
+    FacturaClient(RestClient.Builder restClientBuilder,
+                  String ventasBaseUrl,
+                  String coordination,
+                  CircuitBreakerRegistry circuitBreakerRegistry,
+                  InboundAuthorizationInterceptor authorizationInterceptor) {
+        this.coordination = "saga".equalsIgnoreCase(coordination == null ? "" : coordination.trim())
+                ? "saga" : "2pc";
         this.restClient = restClientBuilder.baseUrl(ventasBaseUrl)
                 .requestInterceptor(authorizationInterceptor)
                 .build();
         this.circuitBreaker = circuitBreakerRegistry.circuitBreaker("facturaClient");
+    }
+
+    private static RestClient.Builder configurarTimeoutDeFacturacion(RestClient.Builder builder,
+                                                                      long connectTimeoutMs,
+                                                                      long readTimeoutMs) {
+        if (connectTimeoutMs <= 0 || readTimeoutMs <= 0) {
+            throw new IllegalArgumentException("Los timeouts de facturacion deben ser positivos");
+        }
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(Duration.ofMillis(connectTimeoutMs));
+        factory.setReadTimeout(Duration.ofMillis(readTimeoutMs));
+        // El Builder es prototype: reemplazar su factory solo afecta a este
+        // cliente. ProductoClient y UsuarioClient conservan el limite general.
+        return builder.requestFactory(factory);
     }
 
     // Escritura (crea una factura en ventas-service): solo circuit breaker, SIN
@@ -47,6 +82,7 @@ public class FacturaClient implements FacturaPort {
                 "total", orden.getTotal(), "lineas", lineas);
         Supplier<Map> llamada = () -> restClient.post()
                 .uri("/api/facturas")
+                .header("X-Coordination-Strategy", coordination)
                 .body(snapshot)
                 .retrieve()
                 .body(Map.class);
@@ -54,6 +90,10 @@ public class FacturaClient implements FacturaPort {
         Map data = resp != null && resp.get("data") instanceof Map envelopeData ? envelopeData : resp;
         if (data == null || !(data.get("facturaId") instanceof Number facturaId)) {
             throw new IllegalStateException("ventas-service no devolvió el identificador de la factura");
+        }
+        if (!coordination.equalsIgnoreCase(String.valueOf(data.get("coordination")))) {
+            throw new IllegalStateException(
+                    "ventas-service no confirmó la estrategia de coordinación " + coordination);
         }
         return facturaId.intValue();
     }

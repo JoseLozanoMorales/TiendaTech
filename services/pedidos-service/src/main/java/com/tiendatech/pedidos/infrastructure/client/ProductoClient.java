@@ -11,10 +11,10 @@ import io.github.resilience4j.retry.RetryRegistry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.function.Supplier;
 
 @Component
@@ -37,39 +37,34 @@ public class ProductoClient implements ProductoPort {
     }
 
     /**
-     * Combina GET /api/productos (precio + iva_id) con GET /api/sp/ivas (iva_id -> porcentaje)
-     * para devolver precio y porcentaje de IVA de un producto.
+     * GET /api/productos/{id}: una sola consulta puntual por clave primaria.
+     * detalleSql() ya hace JOIN con productos.iva, asi que precio e IVA llegan
+     * juntos -- no hace falta una segunda llamada a /api/sp/ivas.
+     *
+     * Antes esto traia hasta 1000 productos completos (?size=1000) para
+     * quedarse con uno via filtro en memoria: el mismo antipatron que ya se
+     * habia corregido en la paginacion de ordenes, aqui sin corregir todavia.
+     * Contra el CockroachDB de AWS (--max-sql-memory bajo) esa consulta
+     * agotaba el presupuesto de memoria SQL con una sola peticion, sin
+     * necesitar ninguna concurrencia.
      */
     @Override
     public ProductoInfo obtenerPrecioEIva(Integer productoId) {
-        ApiEnvelope<List<ProductoListItem>> productosResponse = lectura(() -> restClient.get()
-                .uri("/api/productos?page=0&size=1000")
-                .retrieve()
-                .body(new ParameterizedTypeReference<ApiEnvelope<List<ProductoListItem>>>() {
-                }));
-        List<ProductoListItem> productos = productosResponse == null ? List.of() : productosResponse.data();
-
-        ProductoListItem producto = (productos == null ? List.<ProductoListItem>of() : productos).stream()
-                .filter(p -> productoId.equals(p.productoId()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Producto " + productoId + " no encontrado en productos-service"));
-
-        ApiEnvelope<List<IvaListItem>> ivasResponse = lectura(() -> restClient.get()
-                .uri("/api/sp/ivas")
-                .retrieve()
-                .body(new ParameterizedTypeReference<ApiEnvelope<List<IvaListItem>>>() {
-                }));
-        List<IvaListItem> ivas = ivasResponse == null ? List.of() : ivasResponse.data();
-
-        BigDecimal porcentajeIva = (ivas == null ? List.<IvaListItem>of() : ivas).stream()
-                .filter(i -> producto.ivaId().equals(i.ivaId()))
-                .map(IvaListItem::porcentaje)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "IVA " + producto.ivaId() + " no encontrado en productos-service"));
-
-        return new ProductoInfo(producto.productoId(), producto.precioUnitario(), producto.ivaId(), porcentajeIva);
+        ApiEnvelope<ProductoDetalleItem> respuesta;
+        try {
+            respuesta = lectura(() -> restClient.get()
+                    .uri("/api/productos/{id}", productoId)
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<ApiEnvelope<ProductoDetalleItem>>() {
+                    }));
+        } catch (HttpClientErrorException.NotFound notFound) {
+            throw new IllegalArgumentException("Producto " + productoId + " no encontrado en productos-service");
+        }
+        ProductoDetalleItem detalle = respuesta == null ? null : respuesta.data();
+        if (detalle == null) {
+            throw new IllegalArgumentException("Producto " + productoId + " no encontrado en productos-service");
+        }
+        return new ProductoInfo(detalle.productoId(), detalle.precioUnitario(), detalle.ivaId(), detalle.porcentajeIva());
     }
 
     // Lectura (GET), idempotente por naturaleza: circuit breaker + reintento.
@@ -83,16 +78,11 @@ public class ProductoClient implements ProductoPort {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private record ProductoListItem(
+    private record ProductoDetalleItem(
             @JsonProperty("producto_id") Integer productoId,
             @JsonProperty("preciounitario") BigDecimal precioUnitario,
-            @JsonProperty("iva_id") Integer ivaId) {
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private record IvaListItem(
             @JsonProperty("iva_id") Integer ivaId,
-            @JsonProperty("porcentaje") BigDecimal porcentaje) {
+            @JsonProperty("iva") BigDecimal porcentajeIva) {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

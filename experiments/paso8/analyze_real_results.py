@@ -60,7 +60,7 @@ def main() -> int:
         and validation["condiciones_con_5_repeticiones"] == 24
         and validation["requests_total_cero"] == 0
         and validation["concurrencia_no_alcanzada"] == 0
-        and validation["parametros"] == [("60.0", "90.0", "5.0")]
+        and validation["parametros"] == [("60.0", "300.0", "5.0")]
     )
 
     args.output.mkdir(parents=True, exist_ok=True)

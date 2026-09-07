@@ -1,12 +1,15 @@
 package com.tiendatech.inventario.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tiendatech.inventario.application.reservation.CrdbTransactionRetryExecutor;
 import com.tiendatech.inventario.domain.InventarioRepository;
 import com.tiendatech.inventario.domain.StockProducto;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class InventarioServiceTest {
@@ -37,5 +40,22 @@ class InventarioServiceTest {
     @Test void aceptaMovimientoSinBody() {
         service.registrarMovimiento(null, "sistema", null);
         verify(repository).registrarMovimiento(null, "sistema", null);
+    }
+
+    @Test void envuelveElMovimientoCompletoEnElEjecutorDeReintentos() throws Exception {
+        CrdbTransactionRetryExecutor retry = mock(CrdbTransactionRetryExecutor.class);
+        InventarioService productionService = new InventarioService(repository, retry);
+        var body = new ObjectMapper().readTree("{\"productoId\":10,\"cantidad\":2}");
+        when(retry.execute(any())).thenAnswer(invocation -> {
+            @SuppressWarnings("unchecked")
+            Supplier<Boolean> operation = invocation.getArgument(0);
+            return operation.get();
+        });
+        when(repository.registrarMovimiento(body.toString(), "2pc", "factura-1")).thenReturn(true);
+
+        assertTrue(productionService.registrarMovimiento(body, "2pc", "factura-1"));
+
+        verify(retry).execute(any());
+        verify(repository).registrarMovimiento(body.toString(), "2pc", "factura-1");
     }
 }

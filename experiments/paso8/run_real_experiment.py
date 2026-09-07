@@ -14,10 +14,16 @@ Diseno:
   potencia estadistica), nunca condiciones enteras en cero -- en particular
   'timing' (el modo que nunca se midio antes por el bug del delay) se cubre ya
   en la primera repeticion, no se deja para el final.
+- Piloto basal obligatorio: antes de la matriz, cada estrategia debe completar
+  dos minutos con un usuario, al menos un checkout confirmado y cero errores.
+  Si falla, la campana se detiene antes de gastar horas de maquina.
+- Rampa de readiness obligatoria: despues del piloto, cada estrategia escala
+  por 1, 5, 10, 25 y 50 usuarios sin inyeccion de fallos. Su evidencia vive en
+  un directorio separado y nunca se escribe en el CSV de las 120 corridas.
 - Reanudable: antes de cada corrida se consulta el CSV crudo ya escrito y se
   saltan las condiciones ya hechas. Cada corrida se escribe (append + flush) al
   terminar, nunca al final del experimento completo. La granularidad de perdida
-  ante un corte es de una sola corrida (<=150s), no del experimento completo.
+  ante un corte es de una sola corrida (<=360s), no del experimento completo.
 - CPU/memoria del PROCESO de Locust (no de los contenedores) se muestrea cada
   ~2s con psutil mientras la corrida esta activa.
 - Se capturan los avisos propios de Locust sobre saturacion del generador
@@ -30,6 +36,7 @@ from __future__ import annotations
 import argparse
 import base64
 import csv
+import hashlib
 import json
 import os
 import subprocess
@@ -93,9 +100,48 @@ AVISOS_SATURACION = (
     "not reaching",
 )
 
+CAMPOS_ESTABLES_BANCO = (
+    "caseId",
+    "usuario",
+    "usuarioId",
+    "direccionId",
+    "metodopagoId",
+    "productoId",
+)
+READINESS_COORDS = ("2pc", "saga")
+READINESS_CONCURRENCIAS = (1, 5, 10, 25, 50)
+READINESS_PILOT_WARMUP_SECONDS = 10.0
+READINESS_PILOT_SECONDS = 120.0
+READINESS_RAMP_WARMUP_SECONDS = 10.0
+READINESS_RAMP_SECONDS = 60.0
+
 
 def locust_timespan(seconds: float) -> str:
     return f"{int(seconds)}s" if float(seconds).is_integer() else f"{seconds}s"
+
+
+def huella_banco_estable(banco_path: Path) -> tuple[str, int]:
+    """Identifica el banco sin incluir contrasenas ni JWT renovables."""
+    casos = json.loads(banco_path.read_text(encoding="utf-8"))
+    if not isinstance(casos, list) or not casos:
+        raise RuntimeError(f"el banco {banco_path} no contiene una lista no vacia")
+
+    estables = []
+    for indice, caso in enumerate(casos, start=1):
+        faltantes = [campo for campo in CAMPOS_ESTABLES_BANCO if campo not in caso]
+        if faltantes:
+            raise RuntimeError(
+                f"caso {indice} de {banco_path} sin campos estables: {', '.join(faltantes)}"
+            )
+        estables.append({campo: caso[campo] for campo in CAMPOS_ESTABLES_BANCO})
+
+    canonico = json.dumps(
+        estables,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(canonico).hexdigest(), len(estables)
 
 
 def leer_condiciones_hechas(csv_path: Path) -> set[tuple[str, str, int, int]]:
@@ -189,6 +235,45 @@ def verificar_rate_limit_elevado(minimo: int = 5000) -> None:
     print(f"[preflight] GATEWAY_RATE_LIMIT_REQUESTS={valor} (>= {minimo}) confirmado en tiendatech-gateway")
 
 
+def verificar_crdb_sql() -> dict:
+    """Comprueba la BD exacta de la campana sin depender de una sonda HTTP local."""
+    from reset_ambiente import conectar
+    with conectar() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1")
+            if cur.fetchone() != (1,):
+                raise SystemExit("preflight fallo: CockroachDB no devolvio SELECT 1")
+    print("[preflight] CockroachDB de la campana confirmado con SELECT 1")
+    return {"status": "UP", "source": "CRDB_DATASOURCE_URL", "probe": "SELECT 1"}
+
+
+def preflight_directo() -> dict:
+    """Preflight sin credenciales: salud Docker + SQL directo a la BD de campana."""
+    contenedores = [
+        "tiendatech-gateway", "tiendatech-usuarios", "tiendatech-productos",
+        "tiendatech-inventario", "tiendatech-ventas", "tiendatech-pedidos",
+    ]
+    estados = []
+    for nombre in contenedores:
+        result = subprocess.run(
+            ["docker", "inspect", "--format",
+             "{{.State.Status}}|{{if .State.Health}}{{.State.Health.Status}}{{end}}", nombre],
+            capture_output=True, text=True, cwd=ROOT,
+        )
+        estado, _, salud = result.stdout.strip().partition("|")
+        ok = result.returncode == 0 and estado == "running" and (not salud or salud == "healthy")
+        estados.append({"service": nombre, "status": "UP" if ok else "DOWN",
+                        "containerState": estado, "health": salud})
+    down = [s["service"] for s in estados if s["status"] != "UP"]
+    if down:
+        raise SystemExit(f"preflight fallo: contenedores caidos: {', '.join(down)}")
+    crdb = verificar_crdb_sql()
+    verificar_fault_injection_habilitado()
+    verificar_rate_limit_elevado()
+    return {"mode": "directo-sin-credenciales", "services": estados,
+            "cockroachdbSqlDirecto": crdb}
+
+
 def preflight(gateway: str, admin_token: str) -> dict:
     """Verifica que el gateway y los seis componentes reporten UP, que la inyeccion
     de fallos este realmente encendida y que el rate-limiter no vaya a contaminar
@@ -203,9 +288,22 @@ def preflight(gateway: str, admin_token: str) -> dict:
     except (urllib.error.URLError, urllib.error.HTTPError) as error:
         raise SystemExit(f"preflight fallo: no se pudo contactar {gateway}: {error}") from error
     payload = data.get("data", data)
-    down = [s["service"] for s in payload.get("services", []) if s.get("status") != "UP"]
+    services = payload.get("services", [])
+    esperados = {"gateway", "usuarios", "pedidos", "inventario", "facturacion", "cockroachdb"}
+    presentes = {s.get("service") for s in services}
+    faltantes = sorted(esperados - presentes)
+    if faltantes:
+        raise SystemExit(f"preflight fallo: el panel no reporto: {', '.join(faltantes)}")
+
+    # El panel historico apunta su sonda HTTP de CockroachDB al contenedor
+    # local. En la campana AWS esa URL no representa la BD de los servicios.
+    # Los cinco componentes HTTP si deben estar UP; CockroachDB se comprueba
+    # debajo con SELECT 1 usando exactamente el JDBC de la campana.
+    down = [s["service"] for s in services
+            if s.get("service") != "cockroachdb" and s.get("status") != "UP"]
     if down:
         raise SystemExit(f"preflight fallo: servicios caidos: {', '.join(down)}")
+    payload["cockroachdbSqlDirecto"] = verificar_crdb_sql()
     verificar_fault_injection_habilitado()
     verificar_rate_limit_elevado()
     return payload
@@ -331,6 +429,13 @@ def lanzar_locust(gateway: str, users: int, spawn_rate: float, run_time_s: float
         "--host", gateway, "--headless",
         "--users", str(users), "--spawn-rate", str(spawn_rate),
         "--run-time", locust_timespan(run_time_s),
+        # Locust no mata una tarea a mitad de reserva/checkout al vencer la
+        # ventana. Espera su cierre (hasta el timeout HTTP de la tarea), para
+        # que el saneamiento siguiente no compita con trabajo aun en vuelo.
+        # 95s = margen sobre los 90s de timeout HTTP de checkout_locustfile.py
+        # (ver ese archivo: c=50 con E-2PC ya mostro checkouts que tardan hasta
+        # 64.6s en el servidor y terminan en 201, no en error).
+        "--stop-timeout", "95",
         "--csv", str(csv_prefix), "--csv-full-history",
         "--logfile", str(log_path), "--loglevel", "INFO",
         "--only-summary",
@@ -380,6 +485,172 @@ def escanear_avisos_saturacion(log_path: Path) -> tuple[bool, str]:
     texto = log_path.read_text(encoding="utf-8", errors="replace").lower()
     encontrados = [aviso for aviso in AVISOS_SATURACION if aviso in texto]
     return bool(encontrados), "; ".join(encontrados)
+
+
+def validar_flujo_saludable(fila: dict, contexto: str) -> None:
+    """Rechaza una prueba sin evidencia de que el flujo de compra funciona.
+
+    El modo ``none`` es el control negativo de la inyeccion de fallos. En una
+    prueba basal con un usuario no son aceptables errores de transporte, 5xx ni
+    checkouts abortados: cualquiera de ellos indica que el sistema bajo prueba
+    no esta sano y que lanzar la matriz completa produciria evidencia inutil.
+    """
+    confirmadas = int(fila.get("checkout_confirmadas", 0) or 0)
+    fallos = int(fila.get("requests_fail", 0) or 0)
+    if confirmadas < 1 or fallos > 0:
+        raise RuntimeError(
+            f"{contexto} no supero el criterio de salud: "
+            f"checkouts_confirmados={confirmadas}, requests_fail={fallos}, "
+            f"codigos_http={fila.get('codigos_http_json', '{}')}. "
+            "La matriz oficial NO se iniciara; corrige el flujo basal y repite el piloto."
+        )
+
+
+def validar_readiness_previa(args: argparse.Namespace) -> None:
+    """Impide que ``--skip-pilot`` omita la evidencia que dice reutilizar."""
+    huella_actual, casos_actuales = huella_banco_estable(args.request_bank)
+
+    for coord in READINESS_COORDS:
+        evidencia_path = args.output / "piloto-basal" / f"piloto-{coord}.json"
+        if not evidencia_path.exists():
+            raise RuntimeError(f"falta el piloto basal requerido: {evidencia_path}")
+        fila = json.loads(evidencia_path.read_text(encoding="utf-8"))
+        if fila.get("coord") != coord or fila.get("fallo") != "none" or int(fila.get("concurrencia", 0)) != 1:
+            raise RuntimeError(f"piloto basal inconsistente para COORD={coord}: {evidencia_path}")
+        if float(fila.get("warmup_seconds", 0)) < READINESS_PILOT_WARMUP_SECONDS:
+            raise RuntimeError(f"piloto basal COORD={coord} no completo el calentamiento requerido")
+        if float(fila.get("measure_seconds", 0)) < READINESS_PILOT_SECONDS:
+            raise RuntimeError(f"piloto basal COORD={coord} no completo los 120s requeridos")
+        validar_flujo_saludable(fila, f"piloto basal previo COORD={coord}")
+
+    resumen_path = args.output / "rampa-readiness" / "rampa-readiness.json"
+    if not resumen_path.exists():
+        raise RuntimeError(f"falta la rampa de readiness requerida: {resumen_path}")
+    resumen = json.loads(resumen_path.read_text(encoding="utf-8"))
+    if resumen.get("estado") != "APROBADA":
+        raise RuntimeError(f"la rampa previa no esta APROBADA: {resumen_path}")
+    if resumen.get("request_bank_fingerprint") != huella_actual:
+        raise RuntimeError(
+            "el banco actual no es el mismo que aprobo la readiness; "
+            "repite pilotos y rampa sin --skip-pilot"
+        )
+    if int(resumen.get("request_bank_cases", 0)) != casos_actuales:
+        raise RuntimeError(
+            f"la readiness cubrio un banco de {resumen.get('request_bank_cases')} casos, "
+            f"pero el actual contiene {casos_actuales}"
+        )
+
+    esperadas = {(coord, c) for coord in READINESS_COORDS for c in READINESS_CONCURRENCIAS}
+    encontradas: dict[tuple[str, int], dict] = {}
+    for fila in resumen.get("corridas", []):
+        clave = (str(fila.get("coord")), int(fila.get("concurrencia", 0)))
+        if clave in encontradas:
+            raise RuntimeError(f"rampa duplicada para COORD={clave[0]}, c={clave[1]}")
+        encontradas[clave] = fila
+
+    faltantes = sorted(esperadas - set(encontradas))
+    if faltantes:
+        detalle = ", ".join(f"{coord}/c{c}" for coord, c in faltantes)
+        raise RuntimeError(f"faltan escalones obligatorios de readiness: {detalle}")
+
+    for coord, concurrencia in sorted(esperadas):
+        fila = encontradas[(coord, concurrencia)]
+        if fila.get("fallo") != "none":
+            raise RuntimeError(f"rampa {coord}/c{concurrencia} no es un control sin fallos")
+        if float(fila.get("warmup_seconds", 0)) < READINESS_RAMP_WARMUP_SECONDS:
+            raise RuntimeError(f"rampa {coord}/c{concurrencia} sin calentamiento suficiente")
+        if float(fila.get("measure_seconds", 0)) < READINESS_RAMP_SECONDS:
+            raise RuntimeError(f"rampa {coord}/c{concurrencia} no completo los 60s requeridos")
+        validar_flujo_saludable(fila, f"rampa previa COORD={coord}, c={concurrencia}")
+
+    print(
+        f"[readiness] evidencia previa verificada: 2 pilotos, 10 escalones y "
+        f"banco de {casos_actuales} casos (sha256={huella_actual[:12]}...)"
+    )
+
+
+def ejecutar_pilotos_basales(args: argparse.Namespace) -> None:
+    """Prueba ambas estrategias con un usuario antes de iniciar la matriz."""
+    piloto_args = argparse.Namespace(**vars(args))
+    piloto_args.output = args.output / "piloto-basal"
+    piloto_args.warmup_seconds = args.pilot_warmup_seconds
+    piloto_args.measure_seconds = args.pilot_seconds
+
+    for coord in args.coords:
+        print(
+            f"[piloto] validando COORD={coord} con 1 usuario, "
+            f"{piloto_args.warmup_seconds:.0f}s de calentamiento y "
+            f"{piloto_args.measure_seconds:.0f}s de medicion"
+        )
+        set_coord(coord)
+        reiniciar_entorno()
+        if args.producto_ids:
+            from reset_ambiente import topar_stock
+            topar_stock(args.producto_ids, args.stock_tope)
+        fila = ejecutar_corrida(piloto_args, "none", coord, 1, 0)
+        validar_flujo_saludable(fila, f"piloto basal COORD={coord}")
+        evidencia_path = piloto_args.output / f"piloto-{coord}.json"
+        evidencia_path.write_text(
+            json.dumps(fila, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(
+            f"[piloto] COORD={coord} saludable: "
+            f"{fila['checkout_confirmadas']} checkouts confirmados, 0 errores; "
+            f"evidencia={evidencia_path}"
+        )
+
+
+def ejecutar_rampa_readiness(args: argparse.Namespace) -> None:
+    """Escala gradualmente ambas estrategias sin contaminar la matriz oficial."""
+    rampa_args = argparse.Namespace(**vars(args))
+    rampa_args.output = args.output / "rampa-readiness"
+    rampa_args.warmup_seconds = args.ramp_warmup_seconds
+    rampa_args.measure_seconds = args.ramp_seconds
+    filas: list[dict] = []
+
+    for coord in args.coords:
+        print(f"[rampa] preparando COORD={coord}")
+        set_coord(coord)
+        for nivel, concurrencia in enumerate(args.ramp_concurrencias, start=1):
+            print(
+                f"[rampa] COORD={coord}, nivel {nivel}/{len(args.ramp_concurrencias)}: "
+                f"{concurrencia} usuario(s)"
+            )
+            reiniciar_entorno()
+            if args.producto_ids:
+                from reset_ambiente import topar_stock
+                topar_stock(args.producto_ids, args.stock_tope)
+            fila = ejecutar_corrida(rampa_args, "none", coord, concurrencia, 0)
+            validar_flujo_saludable(fila, f"rampa COORD={coord}, c={concurrencia}")
+            filas.append(fila)
+            evidencia_path = rampa_args.output / f"rampa-{coord}-c{concurrencia}.json"
+            evidencia_path.parent.mkdir(parents=True, exist_ok=True)
+            evidencia_path.write_text(
+                json.dumps(fila, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(
+                f"[rampa] COORD={coord}, c={concurrencia} saludable: "
+                f"{fila['checkout_confirmadas']} checkouts confirmados, 0 errores"
+            )
+
+    resumen_path = rampa_args.output / "rampa-readiness.json"
+    huella_banco, cantidad_casos = huella_banco_estable(args.request_bank)
+    resumen_path.write_text(
+        json.dumps(
+            {
+                "estado": "APROBADA",
+                "request_bank_fingerprint": huella_banco,
+                "request_bank_cases": cantidad_casos,
+                "corridas": filas,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+    print(f"[rampa] aprobada; evidencia={resumen_path}")
 
 
 def preparar_banco_autenticado(gateway: str, banco_path: Path, cantidad: int,
@@ -477,6 +748,14 @@ def ejecutar_corrida(args: argparse.Namespace, fallo: str, coord: str, concurren
     env["REQUEST_BANK_PATH"] = str(banco_fresco)
     env["FALLO_ACTIVO"] = fallo
     env["FAULT_PROBABILITY"] = str(args.fault_probability)
+    casos = json.loads(banco_fresco.read_text(encoding="utf-8"))
+    usuario_ids = [int(caso["usuarioId"]) for caso in casos]
+    from reset_ambiente import limpiar_carritos_experimento
+
+    # El reinicio entre corridas borra los relojes Lamport en memoria, pero no
+    # el estado reconciliado persistido. Partir de carritos limpios evita que
+    # el primer evento sea rechazado por un reloj de una corrida anterior.
+    reset_antes = limpiar_carritos_experimento(usuario_ids)
     # Evita que el login de todos los usuarios ocurra en el mismo segundo. El
     # gateway/usuarios soporta la carga sostenida, pero una estampida de 100-400
     # hashes BCrypt simultaneos agota el timeout antes de empezar a medir.
@@ -497,6 +776,16 @@ def ejecutar_corrida(args: argparse.Namespace, fallo: str, coord: str, concurren
             f"Locust fallo durante warmup de {fallo}/{coord}/c{concurrencia}/r{repeticion}: "
             f"exit code {warmup_rc}; ver {salida_dir / 'warmup.log'}"
         )
+
+    # Locust puede terminar el calentamiento entre la reserva y el checkout.
+    # La medicion debe comenzar desde el mismo estado vacio en todas las
+    # condiciones, sin heredar cantidades ni relojes persistidos del warmup.
+    reset_despues = limpiar_carritos_experimento(usuario_ids)
+    (salida_dir / "reset-fases.json").write_text(
+        json.dumps({"antes_warmup": reset_antes, "antes_medicion": reset_despues},
+                   ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     # Fase 2: medicion oficial de la corrida.
     inicio_epoch = time.time()
@@ -582,7 +871,7 @@ def parser() -> argparse.ArgumentParser:
     cli = argparse.ArgumentParser()
     cli.add_argument("--gateway", default="http://localhost:8180")
     cli.add_argument("--admin-token", default=os.environ.get("ADMIN_JWT"),
-                      required=os.environ.get("ADMIN_JWT") is None)
+                     help="opcional: si se aporta, el preflight tambien valida /api/admin/system")
     cli.add_argument("--request-bank", type=Path, required=True,
                       help="JSON generado por generate_request_bank.py")
     cli.add_argument("--output", type=Path, default=ROOT / "experiments" / "paso8" / "resultados-reales")
@@ -593,7 +882,24 @@ def parser() -> argparse.ArgumentParser:
     cli.add_argument("--fallos", choices=FALLOS_PRIORIDAD, nargs="+", default=FALLOS_PRIORIDAD,
                      help="subconjunto para smoke tests; por defecto ejecuta los tres modos")
     cli.add_argument("--warmup-seconds", type=float, default=60.0)
-    cli.add_argument("--measure-seconds", type=float, default=90.0)
+    cli.add_argument("--measure-seconds", type=float, default=300.0,
+                     help="ventana oficial medida; la guia exige 300 segundos")
+    cli.add_argument("--pilot-seconds", type=float, default=120.0,
+                     help="duracion medida del piloto basal obligatorio con un usuario")
+    cli.add_argument("--pilot-warmup-seconds", type=float, default=10.0,
+                     help="calentamiento descartado del piloto basal")
+    cli.add_argument("--skip-pilot", action="store_true",
+                     help="solo para reanudar una campana cuyo piloto-basal ya fue auditado")
+    cli.add_argument("--pilot-only", action="store_true",
+                     help="ejecuta y valida los pilotos basales, pero no inicia la matriz")
+    cli.add_argument("--readiness-only", action="store_true",
+                     help="ejecuta preflight, pilotos y rampa, pero nunca inicia la matriz oficial")
+    cli.add_argument("--ramp-concurrencias", type=int, nargs="+", default=[1, 5, 10, 25, 50],
+                     help="escalones obligatorios previos a la matriz oficial")
+    cli.add_argument("--ramp-seconds", type=float, default=60.0,
+                     help="duracion medida de cada escalon de readiness")
+    cli.add_argument("--ramp-warmup-seconds", type=float, default=10.0,
+                     help="calentamiento descartado de cada escalon de readiness")
     cli.add_argument("--fault-probability", type=float, default=0.10)
     cli.add_argument("--delay-seconds", type=float, default=5.0)
     cli.add_argument("--seed", type=int, default=2026)
@@ -606,7 +912,16 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
-    args = parser().parse_args()
+    cli = parser()
+    args = cli.parse_args()
+    if args.pilot_only and args.skip_pilot:
+        cli.error("--pilot-only y --skip-pilot son incompatibles")
+    if args.pilot_only and args.readiness_only:
+        cli.error("--pilot-only y --readiness-only son incompatibles")
+    if args.readiness_only and args.skip_pilot:
+        cli.error("--readiness-only y --skip-pilot son incompatibles")
+    if any(c < 1 for c in args.ramp_concurrencias):
+        cli.error("--ramp-concurrencias solo admite enteros positivos")
     crudo_path = args.output / "experimento_real_crudo.csv"
     hechas = leer_condiciones_hechas(crudo_path)
     pendientes = [c for c in condiciones_en_orden(
@@ -616,17 +931,42 @@ def main() -> int:
           f"{len(pendientes)} pendientes de {len(hechas) + len(pendientes)} totales")
 
     if not args.skip_preflight:
-        preflight(args.gateway, args.admin_token)
-        print("[preflight] gateway y seis componentes reportan UP")
+        preflight_payload = (preflight(args.gateway, args.admin_token)
+                             if args.admin_token else preflight_directo())
+        args.output.mkdir(parents=True, exist_ok=True)
+        (args.output / "preflight.json").write_text(
+            json.dumps(preflight_payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print("[preflight] gateway, servicios y CockroachDB de la campana verificados")
 
-    if not pendientes:
+    if not pendientes and not args.pilot_only and not args.readiness_only:
         print("nada pendiente, experimento ya completo")
         return 0
+
+    if args.skip_pilot:
+        validar_readiness_previa(args)
 
     if args.producto_ids:
         from reset_ambiente import topar_stock
         topar_stock(args.producto_ids, args.stock_tope)
         print(f"[reset] stock inicial repuesto a {args.stock_tope} para {args.producto_ids}")
+
+    if not args.skip_pilot:
+        ejecutar_pilotos_basales(args)
+        print("[piloto] ambas estrategias superaron el flujo basal; se habilita la matriz oficial")
+
+    if args.pilot_only:
+        print("[piloto] validacion terminada; --pilot-only impide iniciar la matriz oficial")
+        return 0
+
+    if not args.skip_pilot:
+        ejecutar_rampa_readiness(args)
+        print("[rampa] ambas estrategias superaron la escalada; se habilita la matriz oficial")
+
+    if args.readiness_only:
+        print("[readiness] validacion terminada; --readiness-only impide iniciar la matriz oficial")
+        return 0
 
     coord_activo: str | None = None
     inicio_experimento = time.time()
@@ -644,6 +984,14 @@ def main() -> int:
 
         t0 = time.time()
         fila = ejecutar_corrida(args, fallo, coord, concurrencia, repeticion)
+        # El control sin fallos a la concurrencia minima debe producir compras
+        # reales. De lo contrario se detiene antes de las condiciones costosas.
+        if fallo == "none" and concurrencia == min(args.concurrencias):
+            if int(fila.get("checkout_confirmadas", 0) or 0) < 1:
+                raise RuntimeError(
+                    f"control sano {coord}/c{concurrencia}/r{repeticion} sin compras confirmadas. "
+                    "Se detiene la matriz y no se escribe checkpoint."
+                )
         escribir_fila(crudo_path, fila)
         transcurrido = time.time() - inicio_experimento
         print(f"[{i}/{len(pendientes)}] fallo={fallo} coord={coord} c={concurrencia} r={repeticion} "

@@ -1,14 +1,20 @@
 # Paso 8 - ejecución y análisis del experimento
 
-> **Alcance vigente:** la evidencia principal del Paso 8 es la campaña contra
-> microservicios y CockroachDB conservada en
-> `resultados-reales/oficial-v4-20260904/`. Este documento describe además el
-> piloto local histórico. `run_paso8.py` y `coordination_lab.py` usan SQLite y
-> se conservan únicamente para reproducibilidad; no sustentan C2, C3 ni C6.
+> **Alcance vigente:** `resultados-reales/correctiva-20260905-final-v2/`
+> contiene la campaña correctiva oficial completada y validada. La ejecución
+> anterior de `resultados-reales/oficial-v4-20260904/` se conserva como
+> antecedente de la observación docente, pero no sustenta las conclusiones
+> actuales. `run_paso8.py` y `coordination_lab.py` usan SQLite y se conservan
+> únicamente para reproducibilidad; no sustentan C2, C3 ni C6.
 
-La campaña real ejecutó 120 corridas (24 condiciones × 5 repeticiones), con
-60 segundos de calentamiento y 90 de medición. Su informe y sus límites están
-en `resultados-reales/oficial-v4-20260904/analisis/informe_final.md`.
+La campaña anterior ejecutó 120 corridas (24 condiciones × 5 repeticiones),
+con 60 segundos de calentamiento y 90 de medición. Su informe y sus límites
+están en `resultados-reales/oficial-v4-20260904/analisis/informe_final.md`.
+La repetición correctiva completó 120 corridas con 60 segundos de
+calentamiento y 300 segundos de medición, después de aprobar un piloto basal
+de dos minutos con un usuario para cada estrategia y una rampa previa sin
+fallos de 1/5/10/25/50 usuarios. La validación, el resumen y las conclusiones
+están en `resultados-reales/correctiva-20260905-final-v2/analisis/`.
 
 El piloto local ejecuta el experimento propio de TiendaTech sobre el banco construido
 en `experiments/paso7`: confirmacion en dos fases (`2pc`) frente a saga con
@@ -68,10 +74,20 @@ py experiments/paso8/run_paso8.py `
 
 `run_real_experiment.py` ejecuta compradores sintéticos contra
 `Gateway -> Pedidos -> Ventas/Inventario -> CockroachDB`. Antes de medir comprueba
-que los seis componentes estén disponibles y realiza 60 segundos de calentamiento
-de conectividad descartado. El banco JSON no se versiona porque contiene JWT efímeros; cada
+que los seis componentes estén disponibles, valida el checkout con un piloto
+basal, ejecuta una rampa gradual separada del CSV oficial y realiza 60 segundos
+de calentamiento descartado en cada corrida. Antes del calentamiento y antes de
+la medición vacía únicamente los carritos y reservas de los usuarios sintéticos,
+para que un reinicio no deje relojes Lamport o cantidades de otra fase. El
+banco JSON no se versiona porque contiene JWT efímeros; cada
 caso requiere `caseId`, `token`, `direccionId` y `metodopagoId`, y debe corresponder
 a un usuario sintético con carrito preparado.
+
+En el stack real, E-2PC y Saga ya no son solo una etiqueta de observabilidad.
+E-2PC espera sincrónicamente la aceptación de Inventario antes de confirmar el
+checkout; Saga confirma factura/outbox localmente y deja el movimiento de
+Inventario al procesador asíncrono. Ambas rutas comparten una clave idempotente
+por factura. E-2PC es una coordinación experimental, no XA distribuido.
 
 ```bash
 python3 experiments/paso8/run_microservices.py \
@@ -82,8 +98,13 @@ python3 experiments/paso8/run_microservices.py \
 
 Para habilitar los fallos controlados, el stack experimental se levanta con
 `EXPERIMENT_FAULT_INJECTION_ENABLED=true`. `timing` retrasa la respuesta cinco
-segundos; `omission` excede el timeout de siete segundos del cliente y no devuelve
-una respuesta útil. El mecanismo permanece desactivado por defecto.
+segundos; `omission` espera nueve segundos y devuelve de forma determinista un
+`504 Gateway Timeout`. El cliente de facturación tiene un timeout independiente
+de treinta segundos para no confundir una respuesta normal lenta bajo carga con
+un fallo experimental. La llamada Ventas→Inventario también espera treinta
+segundos: evita reenvíos de una salida idempotente mientras CockroachDB resuelve
+la contención. Los demás clientes de Pedidos conservan el límite general.
+El mecanismo permanece desactivado por defecto.
 
 La campaña oficial ya conservada comprende 120 corridas y valida que todas las
 condiciones y concurrencias se ejecutaron. Registró saturación extrema y solo

@@ -1,0 +1,46 @@
+{
+  "mode": "directo-sin-credenciales",
+  "services": [
+    {
+      "service": "tiendatech-gateway",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tiendatech-usuarios",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tiendatech-productos",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tiendatech-inventario",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tiendatech-ventas",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tiendatech-pedidos",
+      "status": "UP",
+      "containerState": "running",
+      "health": "healthy"
+    }
+  ],
+  "cockroachdbSqlDirecto": {
+    "status": "UP",
+    "source": "CRDB_DATASOURCE_URL",
+    "probe": "SELECT 1"
+  }
+}

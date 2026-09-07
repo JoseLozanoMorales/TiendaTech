@@ -5,6 +5,7 @@ import com.tiendatech.ventas.presentation.dto.FacturaResponse;
 import com.tiendatech.ventas.presentation.dto.GenerarFacturaRequest;
 import com.tiendatech.ventas.domain.Factura;
 import com.tiendatech.ventas.application.FacturaService;
+import com.tiendatech.ventas.application.CoordinationStrategy;
 import com.tiendatech.ventas.infrastructure.experiment.ExperimentFaultInjector;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,16 @@ public class FacturaController {
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> generarDesdeOrden(@Valid @RequestBody GenerarFacturaRequest request,
-            @RequestHeader(value = "X-Failure-Mode", defaultValue = "none") String failureMode) {
+            @RequestHeader(value = "X-Failure-Mode", defaultValue = "none") String failureMode,
+            @RequestHeader(value = "X-Coordination-Strategy", defaultValue = "2pc") String coordinationHeader) {
         faultInjector.apply(failureMode);
-        Integer facturaId = facturaService.generar(request.toDomain());
+        CoordinationStrategy coordination = CoordinationStrategy.fromWire(coordinationHeader);
+        Integer facturaId = facturaService.generar(request.toDomain(), coordination);
         Factura factura = facturaService.obtenerPorId(facturaId);
         return ResponseEntity.created(URI.create("/api/facturas/" + facturaId))
-                .body(Map.of("facturaId", facturaId, "numero", factura.getNumero(), "total", factura.getTotal()));
+                .header("X-Coordination-Strategy", coordination.wireValue())
+                .body(Map.of("facturaId", facturaId, "numero", factura.getNumero(),
+                        "total", factura.getTotal(), "coordination", coordination.wireValue()));
     }
 
     @GetMapping

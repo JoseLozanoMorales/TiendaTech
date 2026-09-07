@@ -5,6 +5,7 @@
 .idea/*
 !.idea/TiendaTech.iml
 .vscode/
+docker-compose.override.yml
 
 .venv/
 .venv-*/
@@ -27,3 +28,21 @@ tests/load/results/
 tests/e2e-web/playwright-report/
 tests/e2e-web/test-results/
 __pycache__/
+
+# Paso 8: los bancos y artefactos detallados contienen credenciales/JWT
+# sintéticos o archivos voluminosos de trabajo. Solo se versiona la evidencia
+# consolidada y sanitizada de la campaña correctiva oficial.
+experiments/paso8/resultados-reales/**
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/
+experiments/paso8/resultados-reales/correctiva-20260905-final-v2/**
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/experimento_real_crudo.csv
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/preflight.json
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/
+experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/**
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/piloto-2pc.json
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/piloto-saga.json
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness/
+experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness/**
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness/rampa-readiness.json
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/**

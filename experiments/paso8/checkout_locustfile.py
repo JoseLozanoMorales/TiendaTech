@@ -4,7 +4,7 @@ Cada usuario virtual de Locust toma UN caso distinto del banco (usuario ya
 registrado, con direccion y metodo de pago) y en bucle: agrega un item al
 carrito y hace checkout. El checkout consume el carrito, por eso se vuelve a
 agregar en cada iteracion -- no es un descuido, es necesario para sostener
-throughput durante los 90s (o los que sean) de medicion.
+throughput durante los 300s de medicion exigidos por la guia.
 
 El modo de fallo (X-Failure-Mode) se sortea EN EL CLIENTE con la probabilidad
 configurada: el servidor (ExperimentFaultInjector.java) aplica el fallo al
@@ -46,6 +46,17 @@ _indice_lock = threading.Lock()
 _indice = itertools.count()
 _codigos = Counter()
 _codigos_lock = threading.Lock()
+
+
+def _detalle_error(resp) -> str:
+    try:
+        body = resp.json()
+        data = body.get("data", body) if isinstance(body, dict) else body
+        if isinstance(data, dict):
+            return str(data.get("message") or data.get("mensaje") or body.get("message") or "").strip()
+    except (ValueError, TypeError):
+        pass
+    return (resp.text or "").strip()[:200]
 
 
 def _siguiente_caso() -> dict:
@@ -99,7 +110,12 @@ class CheckoutUser(HttpUser):
                 json={"usuario": self.caso["usuario"], "contrasena": self.caso["contrasena"]},
                 name="POST /api/login (reauth inesperada)",
                 catch_response=True,
-                timeout=60,
+                # 90s: a c=50 con E-2PC ya se observaron checkouts que
+                # completan con 201 en el servidor a los 62-65s (contencion
+                # legitima bajo la barrera sincrona, no un cuelgue). Un
+                # timeout de cliente mas corto los reclasifica como "HTTP 0"
+                # aunque el servidor si respondio correctamente.
+                timeout=90,
         ) as resp:
             if resp.status_code == 200:
                 body = resp.json()
@@ -134,7 +150,12 @@ class CheckoutUser(HttpUser):
                 headers=headers,
                 name="POST /api/carrito/[carritoId]/agregar",
                 catch_response=True,
-                timeout=60,
+                # 90s: a c=50 con E-2PC ya se observaron checkouts que
+                # completan con 201 en el servidor a los 62-65s (contencion
+                # legitima bajo la barrera sincrona, no un cuelgue). Un
+                # timeout de cliente mas corto los reclasifica como "HTTP 0"
+                # aunque el servidor si respondio correctamente.
+                timeout=90,
         ) as agregar:
             self.lamport += 1
             if agregar.status_code == 401 and self._reautenticar():
@@ -147,14 +168,27 @@ class CheckoutUser(HttpUser):
                         headers=headers,
                         name="POST /api/carrito/[carritoId]/agregar",
                         catch_response=True,
-                        timeout=60,
+                        # 90s: a c=50 con E-2PC ya se observaron checkouts que
+                # completan con 201 en el servidor a los 62-65s (contencion
+                # legitima bajo la barrera sincrona, no un cuelgue). Un
+                # timeout de cliente mas corto los reclasifica como "HTTP 0"
+                # aunque el servidor si respondio correctamente.
+                timeout=90,
                 ) as agregar_retry:
                     self.lamport += 1
                     if agregar_retry.status_code not in (200, 201):
-                        agregar_retry.failure(f"agregar carrito HTTP {agregar_retry.status_code}")
+                        detalle = _detalle_error(agregar_retry)
+                        agregar_retry.failure(
+                            f"agregar carrito HTTP {agregar_retry.status_code}"
+                            + (f": {detalle}" if detalle else "")
+                        )
                         return
             elif agregar.status_code not in (200, 201):
-                agregar.failure(f"agregar carrito HTTP {agregar.status_code}")
+                detalle = _detalle_error(agregar)
+                agregar.failure(
+                    f"agregar carrito HTTP {agregar.status_code}"
+                    + (f": {detalle}" if detalle else "")
+                )
                 return
 
         with self.client.post(
@@ -163,7 +197,12 @@ class CheckoutUser(HttpUser):
                 headers=headers,
                 name=f"POST /api/ordenes/checkout [fallo={FALLO_ACTIVO}]",
                 catch_response=True,
-                timeout=60,
+                # 90s: a c=50 con E-2PC ya se observaron checkouts que
+                # completan con 201 en el servidor a los 62-65s (contencion
+                # legitima bajo la barrera sincrona, no un cuelgue). Un
+                # timeout de cliente mas corto los reclasifica como "HTTP 0"
+                # aunque el servidor si respondio correctamente.
+                timeout=90,
         ) as checkout:
             if checkout.status_code == 401 and self._reautenticar():
                 headers = self._headers(modo_fallo)
@@ -173,12 +212,22 @@ class CheckoutUser(HttpUser):
                         headers=headers,
                         name=f"POST /api/ordenes/checkout [fallo={FALLO_ACTIVO}]",
                         catch_response=True,
-                        timeout=60,
+                        # 90s: a c=50 con E-2PC ya se observaron checkouts que
+                # completan con 201 en el servidor a los 62-65s (contencion
+                # legitima bajo la barrera sincrona, no un cuelgue). Un
+                # timeout de cliente mas corto los reclasifica como "HTTP 0"
+                # aunque el servidor si respondio correctamente.
+                timeout=90,
                 ) as checkout_retry:
                     if checkout_retry.status_code // 100 != 2:
-                        checkout_retry.failure(f"checkout HTTP {checkout_retry.status_code}")
+                        checkout_retry.failure(
+                            f"checkout HTTP {checkout_retry.status_code}: "
+                            f"{_detalle_error(checkout_retry)}"
+                        )
             elif checkout.status_code // 100 != 2:
-                checkout.failure(f"checkout HTTP {checkout.status_code}")
+                checkout.failure(
+                    f"checkout HTTP {checkout.status_code}: {_detalle_error(checkout)}"
+                )
 
 
 @events.quitting.add_listener

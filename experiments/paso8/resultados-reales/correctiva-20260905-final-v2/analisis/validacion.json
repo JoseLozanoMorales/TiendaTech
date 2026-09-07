@@ -1,0 +1,16 @@
+{
+  "filas": 120,
+  "claves_unicas": 120,
+  "condiciones": 24,
+  "condiciones_con_5_repeticiones": 24,
+  "requests_total_cero": 0,
+  "concurrencia_no_alcanzada": 0,
+  "parametros": [
+    [
+      "60.0",
+      "300.0",
+      "5.0"
+    ]
+  ],
+  "valido": true
+}

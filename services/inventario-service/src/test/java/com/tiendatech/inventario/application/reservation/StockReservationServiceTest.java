@@ -3,6 +3,7 @@ package com.tiendatech.inventario.application.reservation;
 import com.tiendatech.inventario.domain.reservation.ReservationCommand;
 import com.tiendatech.inventario.domain.reservation.ReservationResult;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -72,6 +73,10 @@ class StockReservationServiceTest {
         assertEquals(99L, result.lamportTimestamp());
         assertEquals("dev-1", result.winningDeviceId());
         assertFalse(result.replayed());
+        InOrder order = inOrder(jdbc);
+        order.verify(jdbc).query(anyString(), any(RowMapper.class), eq(UUID.fromString(opId)));
+        order.verify(jdbc).queryForMap(contains("FOR UPDATE"), eq(10L));
+        order.verify(jdbc).query(anyString(), any(RowMapper.class), eq(UUID.fromString(opId)));
     }
 
     @Test

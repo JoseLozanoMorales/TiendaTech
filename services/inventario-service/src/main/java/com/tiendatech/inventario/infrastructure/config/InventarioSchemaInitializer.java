@@ -33,6 +33,18 @@ public class InventarioSchemaInitializer {
                     PRIMARY KEY (carrito_id, producto_id)
                 )
                 """);
+        // La PK ordena por carrito_id primero, asi que el SELECT SUM(cantidad)
+        // de StockReservationService.reconcileOnce (filtra por producto_id) no
+        // puede usarla y hace table scan completo. Bajo escritura concurrente,
+        // ese scan lee filas de CUALQUIER producto y CockroachDB (SSI) lo
+        // invalida ante el UPSERT de cualquier otro producto -- no solo del
+        // mismo -- generando RETRY_SERIALIZABLE incluso entre carritos que no
+        // comparten producto. El indice acota el scan a las filas del
+        // producto pedido.
+        jdbc.execute("""
+                CREATE INDEX IF NOT EXISTS idx_reserva_stock_producto
+                    ON inventario.reserva_stock (producto_id)
+                """);
         jdbc.execute("""
                 CREATE TABLE IF NOT EXISTS inventario.operacion_reserva (
                     operacion_id UUID PRIMARY KEY,
