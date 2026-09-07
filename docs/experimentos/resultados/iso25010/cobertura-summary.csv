@@ -5,4 +5,4 @@ pedidos-service,104,25,80.62,CUMPLE,docs/evidencias/cobertura/pedidos-service-ja
 productos-service,23,0,100.00,CUMPLE,docs/evidencias/cobertura/productos-service-jacoco.xml
 usuarios,321,37,89.66,CUMPLE,docs/evidencias/cobertura/usuarios-jacoco.xml
 ventas-service,27,0,100.00,CUMPLE,docs/evidencias/cobertura/ventas-service-jacoco.xml
-armado-ia,PENDIENTE,PENDIENTE,>70,CUMPLE,Evidencia suministrada por el equipo; coverage.xml original no presente en este checkout
+armado-ia,405,135,75.00,CUMPLE,docs/evidencias/cobertura/armado-ia-coverage.xml

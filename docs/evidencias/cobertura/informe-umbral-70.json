@@ -1,0 +1,70 @@
+{
+  "metrica": "cobertura de líneas en la capa de lógica de negocio instrumentada",
+  "umbral_porcentaje": 70.0,
+  "servicios": [
+    {
+      "servicio": "armado-ia",
+      "reporte": "docs/evidencias/cobertura/armado-ia-coverage.xml",
+      "lineas_cubiertas": 405,
+      "lineas_totales": 540,
+      "cobertura_porcentaje": 75.0,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "inventario-service",
+      "reporte": "docs/evidencias/cobertura/inventario-service-jacoco.xml",
+      "lineas_cubiertas": 8,
+      "lineas_totales": 8,
+      "cobertura_porcentaje": 100.0,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "ordenes-proveedores-service",
+      "reporte": "docs/evidencias/cobertura/ordenes-proveedores-service-jacoco.xml",
+      "lineas_cubiertas": 47,
+      "lineas_totales": 51,
+      "cobertura_porcentaje": 92.16,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "pedidos-service",
+      "reporte": "docs/evidencias/cobertura/pedidos-service-jacoco.xml",
+      "lineas_cubiertas": 104,
+      "lineas_totales": 129,
+      "cobertura_porcentaje": 80.62,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "productos-service",
+      "reporte": "docs/evidencias/cobertura/productos-service-jacoco.xml",
+      "lineas_cubiertas": 23,
+      "lineas_totales": 23,
+      "cobertura_porcentaje": 100.0,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "usuarios",
+      "reporte": "docs/evidencias/cobertura/usuarios-jacoco.xml",
+      "lineas_cubiertas": 321,
+      "lineas_totales": 358,
+      "cobertura_porcentaje": 89.66,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    },
+    {
+      "servicio": "ventas-service",
+      "reporte": "docs/evidencias/cobertura/ventas-service-jacoco.xml",
+      "lineas_cubiertas": 27,
+      "lineas_totales": 27,
+      "cobertura_porcentaje": 100.0,
+      "umbral_porcentaje": 70.0,
+      "cumple": true
+    }
+  ],
+  "todos_cumplen": true
+}
