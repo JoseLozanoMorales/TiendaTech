@@ -116,7 +116,20 @@ class ProductoClient:
         if response.status_code >= 500:
             raise _ServerError(f"{path} -> {response.status_code}")
         response.raise_for_status()
-        return response.json()
+        return self._desenvolver_respuesta(response.json())
+
+    @staticmethod
+    def _desenvolver_respuesta(payload):
+        """Acepta tanto el contrato comun del servicio como el payload legado.
+
+        productos-service envuelve sus respuestas JSON en
+        ``{status, data, message, timestamp}``. El cliente anterior entregaba
+        ese objeto completo a ``_mapear`` y terminaba evaluando
+        ``int(None)`` porque los campos del producto viven dentro de ``data``.
+        """
+        if isinstance(payload, dict) and {"status", "data", "message", "timestamp"} <= payload.keys():
+            return payload["data"]
+        return payload
 
     def _mapear(self, fila: dict) -> ProductoCatalogo:
         precio_raw = fila.get("precio", fila.get("preciounitario"))
@@ -140,13 +153,22 @@ class ProductoClient:
         if not atributos_raw:
             return {}
         if isinstance(atributos_raw, dict):
-            valor = atributos_raw.get("value")
-            if isinstance(valor, str):
+            atributos = atributos_raw
+            # En catalogos que ya fueron migrados mas de una vez puede llegar
+            # un PGobject JSONB dentro de otro PGobject JSONB. Se desenvuelven
+            # todas las capas conocidas para recuperar el objeto tecnico real.
+            for _ in range(8):
+                valor = atributos.get("value")
+                if not isinstance(valor, str) or atributos.get("type") != "jsonb":
+                    return atributos
                 try:
-                    return json.loads(valor)
+                    decodificado = json.loads(valor)
                 except (TypeError, ValueError):
                     return {}
-            return atributos_raw
+                if not isinstance(decodificado, dict):
+                    return {}
+                atributos = decodificado
+            return atributos
         return {}
 
 

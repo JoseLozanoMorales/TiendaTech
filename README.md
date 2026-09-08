@@ -101,6 +101,9 @@ docker compose exec tiendatech-crdb-1 cockroach node status --insecure --host=lo
 python3 scripts/audit_paso4.py
 ```
 
+Evidencia del arranque con un solo comando en el equipo de Jeremy:
+[construcción, estado de los contenedores y salud del gateway](docs/evidencias/arranque-un-comando/README.md).
+
 ---
 
 ## 4. Arquitectura
