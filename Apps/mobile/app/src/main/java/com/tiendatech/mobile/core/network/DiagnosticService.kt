@@ -10,5 +10,5 @@ interface DiagnosticService {
     suspend fun testConnection(
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 1
-    ): Response<List<JsonObject>>
+    ): Response<ApiEnvelope<List<JsonObject>>>
 }

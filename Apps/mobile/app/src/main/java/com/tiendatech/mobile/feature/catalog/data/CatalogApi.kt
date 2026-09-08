@@ -1,5 +1,6 @@
 package com.tiendatech.mobile.feature.catalog.data
 
+import com.tiendatech.mobile.core.network.ApiEnvelope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import retrofit2.Response
@@ -9,23 +10,23 @@ import retrofit2.http.Query
 
 interface CatalogApi {
     @GET("api/productos")
-    suspend fun products(@Query("page") page: Int = 0, @Query("size") size: Int = 5): Response<List<ProductDto>>
+    suspend fun products(@Query("page") page: Int = 0, @Query("size") size: Int = 5): Response<ApiEnvelope<List<ProductDto>>>
 
     @GET("api/categorias")
-    suspend fun categories(): Response<List<CategoryDto>>
+    suspend fun categories(): Response<ApiEnvelope<List<CategoryDto>>>
 
     @GET("api/productos/por-categoria")
     suspend fun productsByCategory(
         @Query("categoriaId") categoryId: Long,
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 5
-    ): Response<List<ProductDto>>
+    ): Response<ApiEnvelope<List<ProductDto>>>
 
     @GET("api/productos/{id}")
-    suspend fun product(@Path("id") id: Long): Response<ProductDto>
+    suspend fun product(@Path("id") id: Long): Response<ApiEnvelope<ProductDto>>
 
     @GET("api/galeria_v2/producto/{id}")
-    suspend fun gallery(@Path("id") id: Long, @Query("scope") scope: String = "galeria"): Response<List<GalleryDto>>
+    suspend fun gallery(@Path("id") id: Long, @Query("scope") scope: String = "galeria"): Response<ApiEnvelope<List<GalleryDto>>>
 }
 
 @Serializable

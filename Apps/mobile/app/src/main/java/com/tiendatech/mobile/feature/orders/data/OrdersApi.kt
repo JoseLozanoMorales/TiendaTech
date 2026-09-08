@@ -1,5 +1,6 @@
 package com.tiendatech.mobile.feature.orders.data
 
+import com.tiendatech.mobile.core.network.ApiEnvelope
 import kotlinx.serialization.Serializable
 import retrofit2.Response
 import retrofit2.http.GET
@@ -7,11 +8,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface OrdersApi {
-    @GET("api/ordenes/usuario/{userId}") suspend fun orders(@Path("userId") userId: Long, @Query("page") page: Int, @Query("size") size: Int = 20): Response<OrderPageDto>
-    @GET("api/ordenes/{orderId}") suspend fun order(@Path("orderId") orderId: Long): Response<OrderDto>
-    @GET("api/ordenes/{orderId}/detalle") suspend fun orderLines(@Path("orderId") orderId: Long, @Query("page") page: Int = 0, @Query("size") size: Int = 100): Response<OrderLinePageDto>
-    @GET("api/facturas") suspend fun invoices(@Query("usuarioId") userId: Long): Response<List<InvoiceDto>>
-    @GET("api/facturas/{invoiceId}/detalle") suspend fun invoiceLines(@Path("invoiceId") invoiceId: Long): Response<List<InvoiceLineDto>>
+    @GET("api/ordenes/usuario/{userId}") suspend fun orders(@Path("userId") userId: Long, @Query("page") page: Int, @Query("size") size: Int = 20): Response<ApiEnvelope<OrderPageDto>>
+    @GET("api/ordenes/{orderId}") suspend fun order(@Path("orderId") orderId: Long): Response<ApiEnvelope<OrderDto>>
+    @GET("api/ordenes/{orderId}/detalle") suspend fun orderLines(@Path("orderId") orderId: Long, @Query("page") page: Int = 0, @Query("size") size: Int = 100): Response<ApiEnvelope<OrderLinePageDto>>
+    @GET("api/facturas") suspend fun invoices(@Query("usuarioId") userId: Long): Response<ApiEnvelope<List<InvoiceDto>>>
+    @GET("api/facturas/{invoiceId}/detalle") suspend fun invoiceLines(@Path("invoiceId") invoiceId: Long): Response<ApiEnvelope<List<InvoiceLineDto>>>
 }
 
 @Serializable data class OrderDto(val ordenId: Long, val usuarioId: Long, val direccionId: Long, val metodopagoId: Long, val subtotal: Double, val total: Double, val fecha: String)

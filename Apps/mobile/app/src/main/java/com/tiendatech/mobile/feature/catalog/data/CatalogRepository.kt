@@ -40,8 +40,8 @@ class CatalogRepository @Inject constructor(
             val categoriesResponse = categoriesCall.await()
             if (!productsResponse.isSuccessful) return@coroutineScope failure(productsResponse.code())
             if (!categoriesResponse.isSuccessful) return@coroutineScope failure(categoriesResponse.code())
-            val products = productsResponse.body().orEmpty().mapNotNull(CatalogMapper::product)
-            val categories = categoriesResponse.body().orEmpty().mapNotNull(CatalogMapper::category)
+            val products = productsResponse.body()?.data.orEmpty().mapNotNull(CatalogMapper::product)
+            val categories = categoriesResponse.body()?.data.orEmpty().mapNotNull(CatalogMapper::category)
             productDao.clear()
             productDao.upsertAll(products)
             categoryDao.clear()
@@ -54,7 +54,7 @@ class CatalogRepository @Inject constructor(
         val response = if (categoryId == null) api.products(page, PAGE_SIZE)
         else api.productsByCategory(categoryId, page, PAGE_SIZE)
         if (!response.isSuccessful) return@request failure(response.code())
-        val body = response.body().orEmpty()
+        val body = response.body()?.data.orEmpty()
         val category = categoryId?.let { id ->
             categoryDao.findById(id)?.let(CatalogMapper::domain)
         }
@@ -65,13 +65,13 @@ class CatalogRepository @Inject constructor(
     suspend fun product(id: Long): CatalogResult<Product> = request {
         val response = api.product(id)
         if (response.isSuccessful) {
-            val entity = response.body()?.let(CatalogMapper::product)
+            val entity = response.body()?.data?.let(CatalogMapper::product)
                 ?: productDao.findById(id)
                 ?: return@request CatalogResult.Failure("Producto no encontrado")
             productDao.upsertAll(listOf(entity))
             val galleryResponse = api.gallery(id)
             val galleryIds = if (galleryResponse.isSuccessful) {
-                galleryResponse.body().orEmpty().filter { it.habilitado != false }
+                galleryResponse.body()?.data.orEmpty().filter { it.habilitado != false }
                     .mapNotNull { it.id ?: it.galeriaId ?: it.galleryIdSnake }
             } else emptyList()
             CatalogResult.Success(CatalogMapper.domain(entity, galleryIds))

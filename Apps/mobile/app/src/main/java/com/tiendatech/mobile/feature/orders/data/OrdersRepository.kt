@@ -22,9 +22,9 @@ class OrdersRepository @Inject constructor(private val api: OrdersApi, private v
             val invoicesCall = async { runCatching { api.invoices(userId) }.getOrNull() }
             val orders = ordersCall.await(); val invoices = invoicesCall.await()
             if (!orders.isSuccessful) return@coroutineScope failure(orders.code())
-            val invoiceByOrder = invoices?.takeIf { it.isSuccessful }?.body().orEmpty()
+            val invoiceByOrder = invoices?.takeIf { it.isSuccessful }?.body()?.data.orEmpty()
                 .filter { it.usuarioId == userId }.associateBy(InvoiceDto::ordenId)
-            val body = orders.body() ?: return@coroutineScope OrdersResult.Failure("La respuesta de pedidos está vacía")
+            val body = orders.body()?.data ?: return@coroutineScope OrdersResult.Failure("La respuesta de pedidos está vacía")
             OrdersResult.Success(OrdersPage(body.content.map { it.summary(invoiceByOrder[it.ordenId]) }, body.page, body.totalPages))
         }
     }
@@ -37,16 +37,16 @@ class OrdersRepository @Inject constructor(private val api: OrdersApi, private v
             val orderResponse = orderCall.await(); val linesResponse = linesCall.await(); val invoicesResponse = invoicesCall.await()
             if (!orderResponse.isSuccessful) return@coroutineScope failure(orderResponse.code())
             if (!linesResponse.isSuccessful) return@coroutineScope failure(linesResponse.code())
-            val order = orderResponse.body() ?: return@coroutineScope OrdersResult.Failure("Pedido no encontrado")
+            val order = orderResponse.body()?.data ?: return@coroutineScope OrdersResult.Failure("Pedido no encontrado")
             if (order.usuarioId != userId) return@coroutineScope OrdersResult.Failure("Pedido no encontrado")
-            val ownedInvoice = invoicesResponse?.takeIf { it.isSuccessful }?.body().orEmpty()
+            val ownedInvoice = invoicesResponse?.takeIf { it.isSuccessful }?.body()?.data.orEmpty()
                 .firstOrNull { it.usuarioId == userId && it.ordenId == orderId }
             val invoiceLines = if (ownedInvoice != null) {
                 val response = runCatching { api.invoiceLines(ownedInvoice.facturaId) }.getOrNull()
-                if (response?.isSuccessful == true) response.body().orEmpty() else emptyList()
+                if (response?.isSuccessful == true) response.body()?.data.orEmpty() else emptyList()
             } else emptyList()
             val names = invoiceLines.associate { it.productoId to it.nombreProducto }
-            val lines = linesResponse.body()?.content.orEmpty().map { line ->
+            val lines = linesResponse.body()?.data?.content.orEmpty().map { line ->
                 val cachedName = catalog.cachedProduct(line.productoId)?.name
                 OrderLine(line.productoId, names[line.productoId] ?: cachedName, line.cantidad, line.precioUnitario, line.subtotal, line.iva, line.total)
             }

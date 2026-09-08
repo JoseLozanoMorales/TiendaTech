@@ -1,5 +1,6 @@
 package com.tiendatech.mobile.feature.cart.data
 
+import com.tiendatech.mobile.core.network.ApiEnvelope
 import kotlinx.serialization.Serializable
 import retrofit2.Response
 import retrofit2.http.Body
@@ -12,14 +13,14 @@ import retrofit2.http.Query
 
 interface CartApi {
     @GET("api/carrito/{userId}")
-    suspend fun current(@Path("userId") userId: Long): Response<CartDto>
+    suspend fun current(@Path("userId") userId: Long): Response<ApiEnvelope<CartDto>>
 
     @GET("api/carrito/{cartId}/detalle")
     suspend fun lines(
         @Path("cartId") cartId: Long,
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 200
-    ): Response<CartPageDto>
+    ): Response<ApiEnvelope<CartPageDto>>
 
     @POST("api/carrito/{cartId}/agregar")
     suspend fun add(@Path("cartId") cartId: Long, @Body request: CartQuantityRequest): Response<Unit>

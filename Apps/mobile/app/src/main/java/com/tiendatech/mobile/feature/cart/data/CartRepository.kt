@@ -17,10 +17,10 @@ class CartRepository @Inject constructor(
     suspend fun load(userId: Long): CartResult<ShoppingCart> = request {
         val cartResponse = api.current(userId)
         if (!cartResponse.isSuccessful) return@request failure(cartResponse.code())
-        val cart = cartResponse.body() ?: return@request CartResult.Failure("El servidor devolvió un carrito vacío")
+        val cart = cartResponse.body()?.data ?: return@request CartResult.Failure("El servidor devolvió un carrito vacío")
         val linesResponse = api.lines(cart.carritoId)
         if (!linesResponse.isSuccessful) return@request failure(linesResponse.code())
-        val lines = linesResponse.body()?.content.orEmpty().map { line ->
+        val lines = linesResponse.body()?.data?.content.orEmpty().map { line ->
             CartLine(line.productoId, line.cantidad, line.precioUnitario, catalog.cachedProduct(line.productoId))
         }
         CartResult.Success(ShoppingCart(cart.carritoId, lines))
@@ -30,7 +30,7 @@ class CartRepository @Inject constructor(
         if (quantity <= 0) return@request CartResult.Failure("La cantidad debe ser mayor que cero")
         val cartResponse = api.current(userId)
         if (!cartResponse.isSuccessful) return@request failure(cartResponse.code())
-        val cartId = cartResponse.body()?.carritoId ?: return@request CartResult.Failure("No se pudo obtener el carrito")
+        val cartId = cartResponse.body()?.data?.carritoId ?: return@request CartResult.Failure("No se pudo obtener el carrito")
         val response = api.add(cartId, CartQuantityRequest(productId, quantity))
         if (!response.isSuccessful) return@request failure(response.code())
         CartResult.Success(Unit)

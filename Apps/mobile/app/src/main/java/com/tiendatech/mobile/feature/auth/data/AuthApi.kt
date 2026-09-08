@@ -1,5 +1,6 @@
 package com.tiendatech.mobile.feature.auth.data
 
+import com.tiendatech.mobile.core.network.ApiEnvelope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import retrofit2.Response
@@ -9,10 +10,10 @@ import retrofit2.http.POST
 
 interface AuthApi {
     @POST("api/login")
-    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+    suspend fun login(@Body request: LoginRequest): Response<ApiEnvelope<LoginResponse>>
 
     @POST("api/otp")
-    suspend fun sendOtp(@Body request: OtpRequest): Response<OtpResponse>
+    suspend fun sendOtp(@Body request: OtpRequest): Response<ApiEnvelope<OtpResponse>>
 
     @POST("api/otp")
     suspend fun verifyOtp(@Body request: OtpRequest): Response<Unit>
@@ -24,7 +25,7 @@ interface AuthApi {
     suspend fun recoverPassword(@Body request: RecoveryRequest): Response<Unit>
 
     @GET("api/usuarios/me")
-    suspend fun profile(): Response<ProfileResponse>
+    suspend fun profile(): Response<ApiEnvelope<ProfileResponse>>
 }
 
 @Serializable

@@ -30,15 +30,15 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
             val failedCode = listOf(profileResponse, addressResponse, provinceResponse, cityResponse, methodResponse, typeResponse)
                 .firstOrNull { !it.isSuccessful }?.code()
             if (failedCode != null) return@coroutineScope failure(failedCode)
-            val provinceNames = provinceResponse.body().orEmpty().associate { it.provinciaId to it.nombre }
-            val cityList = cityResponse.body().orEmpty()
+            val provinceNames = provinceResponse.body()?.data.orEmpty().associate { it.provinciaId to it.nombre }
+            val cityList = cityResponse.body()?.data.orEmpty()
             AccountResult.Success(
                 AccountData(
-                    profile = profileResponse.body()!!.data.toDomain(),
-                    addresses = addressResponse.body().orEmpty().map { it.toDomain() },
+                    profile = profileResponse.body()!!.data.data.toDomain(),
+                    addresses = addressResponse.body()?.data.orEmpty().map { it.toDomain() },
                     cities = cityList.map { City(it.ciudadId, it.nombre, provinceNames[it.provinciaId].orEmpty()) },
-                    paymentMethods = methodResponse.body()?.content.orEmpty().map { it.toDomain() },
-                    paymentTypes = typeResponse.body().orEmpty().map { PaymentType(it.tipoId, it.nombre) }
+                    paymentMethods = methodResponse.body()?.data?.content.orEmpty().map { it.toDomain() },
+                    paymentTypes = typeResponse.body()?.data.orEmpty().map { PaymentType(it.tipoId, it.nombre) }
                 )
             )
         }
@@ -88,10 +88,10 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
     suspend fun checkout(userId: Long, addressId: Long, paymentId: Long, key: String): AccountResult<OrderConfirmation> {
         val baselineResponse = try { api.orders(userId) } catch (_: Exception) { return AccountResult.Failure("No se pudo preparar la verificación del pedido") }
         if (!baselineResponse.isSuccessful) return failure(baselineResponse.code())
-        val baseline = baselineResponse.body()?.content.orEmpty().mapTo(mutableSetOf(), OrderDto::ordenId)
+        val baseline = baselineResponse.body()?.data?.content.orEmpty().mapTo(mutableSetOf(), OrderDto::ordenId)
         return try {
             val response = api.checkout(key, CheckoutRequest(addressId, paymentId))
-            if (response.isSuccessful && response.body() != null) AccountResult.Success(response.body()!!.confirmation())
+            if (response.isSuccessful && response.body() != null) AccountResult.Success(response.body()!!.data.confirmation())
             else if (response.code() in 500..599) verifyAfterAmbiguous(userId, baseline)
             else failure(response.code())
         } catch (_: IOException) {
@@ -103,7 +103,7 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
 
     private suspend fun verifyAfterAmbiguous(userId: Long, baseline: Set<Long>): AccountResult<OrderConfirmation> = try {
         val response = api.orders(userId)
-        val created = response.body()?.content.orEmpty().firstOrNull { it.ordenId !in baseline }
+        val created = response.body()?.data?.content.orEmpty().firstOrNull { it.ordenId !in baseline }
         if (response.isSuccessful && created != null) AccountResult.Success(created.confirmation())
         else AccountResult.Ambiguous("No se pudo confirmar el resultado. Conserva esta pantalla y vuelve a verificar antes de reintentar")
     } catch (_: Exception) {

@@ -39,7 +39,7 @@ class AuthRepositoryTest {
     @After fun tearDown() = server.shutdown()
 
     @Test fun `customer login stores access token`() = runTest {
-        server.enqueue(jsonResponse("""{"success":true,"user":{"usuarioId":7,"usuario":"cliente","nombre":"Cliente","correo":"c@t.co","id_rol":2},"access":"jwt-cliente"}"""))
+        server.enqueue(jsonResponse("""{"status":200,"data":{"success":true,"user":{"usuarioId":7,"usuario":"cliente","nombre":"Cliente","correo":"c@t.co","id_rol":2},"access":"jwt-cliente"},"message":"OK","timestamp":"2026-09-08T04:00:00Z"}"""))
 
         val result = repository.login("cliente", "secreta")
 
@@ -49,7 +49,7 @@ class AuthRepositoryTest {
     }
 
     @Test fun `administrative login is rejected without storing token`() = runTest {
-        server.enqueue(jsonResponse("""{"success":true,"user":{"usuarioId":1,"usuario":"admin","nombre":"Admin","correo":"a@t.co","id_rol":1},"token":"jwt-admin"}"""))
+        server.enqueue(jsonResponse("""{"status":200,"data":{"success":true,"user":{"usuarioId":1,"usuario":"admin","nombre":"Admin","correo":"a@t.co","id_rol":1},"token":"jwt-admin"},"message":"OK"}"""))
 
         val result = repository.login("admin", "secreta")
 
@@ -65,6 +65,17 @@ class AuthRepositoryTest {
 
         assertTrue(result is AuthResult.Success && result.value == null)
         assertNull(store.getToken())
+    }
+
+    @Test fun `session restoration decodes double data envelope from profile`() = runTest {
+        store.saveToken("jwt-cliente")
+        server.enqueue(jsonResponse("""{"status":200,"data":{"data":{"usuarioId":7,"usuario":"cliente","nombre":"Cliente","correo":"c@t.co","id_rol":2}},"message":"OK"}"""))
+
+        val result = repository.restoreSession()
+
+        assertTrue(result is AuthResult.Success)
+        assertEquals(7, (result as AuthResult.Success).value?.id)
+        assertEquals("jwt-cliente", store.getToken())
     }
 
     private fun jsonResponse(body: String) = MockResponse()

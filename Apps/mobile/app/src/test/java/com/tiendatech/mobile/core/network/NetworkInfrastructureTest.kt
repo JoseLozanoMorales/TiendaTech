@@ -42,7 +42,7 @@ class NetworkInfrastructureTest {
 
     @Test
     fun diagnosticRequest_usesExpectedPathAndQuery() = runBlocking {
-        server.enqueue(jsonResponse(200, "[]"))
+        server.enqueue(jsonResponse(200, """{"status":200,"data":[],"message":"OK"}"""))
 
         service().testConnection()
 
@@ -51,12 +51,12 @@ class NetworkInfrastructureTest {
 
     @Test
     fun successfulJsonResponse_returnsSuccess() = runBlocking {
-        server.enqueue(jsonResponse(200, "[{\"producto_id\":1,\"unknown\":true}]"))
+        server.enqueue(jsonResponse(200, """{"status":200,"data":[{"producto_id":1,"unknown":true}],"message":"OK"}"""))
 
         val result = safeApiCall(json) { service().testConnection() }
 
         assertTrue(result is NetworkResult.Success)
-        assertEquals(1, (result as NetworkResult.Success).data.size)
+        assertEquals(1, (result as NetworkResult.Success).data.data.size)
     }
 
     @Test
@@ -101,7 +101,7 @@ class NetworkInfrastructureTest {
     @Test
     fun authInterceptor_addsBearerAndAcceptWhenTokenExists() = runBlocking {
         testToken = "fake-test-token"
-        server.enqueue(jsonResponse(200, "[]"))
+        server.enqueue(jsonResponse(200, """{"status":200,"data":[],"message":"OK"}"""))
 
         service().testConnection()
 
@@ -113,7 +113,7 @@ class NetworkInfrastructureTest {
     @Test
     fun authInterceptor_omitsAuthorizationAndIdentityHeadersWithoutToken() = runBlocking {
         testToken = null
-        server.enqueue(jsonResponse(200, "[]"))
+        server.enqueue(jsonResponse(200, """{"status":200,"data":[],"message":"OK"}"""))
 
         service().testConnection()
 

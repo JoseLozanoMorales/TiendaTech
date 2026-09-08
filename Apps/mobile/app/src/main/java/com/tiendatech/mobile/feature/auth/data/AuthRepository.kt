@@ -17,7 +17,8 @@ class AuthRepository @Inject constructor(
     suspend fun login(username: String, password: String): AuthResult<AuthUser> = request {
         val response = api.login(LoginRequest(username.trim(), password))
         if (!response.isSuccessful) return@request failure(response.code())
-        val body = response.body() ?: return@request AuthResult.Failure("La respuesta del servidor está vacía")
+        val envelope = response.body() ?: return@request AuthResult.Failure("La respuesta del servidor está vacía")
+        val body = envelope.data
         val userDto = body.user ?: body.usuario
             ?: return@request AuthResult.Failure(body.message ?: "La respuesta no contiene el usuario")
         val user = userDto.toDomain()
@@ -37,7 +38,7 @@ class AuthRepository @Inject constructor(
                 return@request AuthResult.Success(null)
             }
             if (!response.isSuccessful) return@request failure(response.code())
-            val user = response.body()?.data?.toDomain()
+            val user = response.body()?.data?.data?.toDomain()
                 ?: return@request AuthResult.Failure("No se pudo recuperar el perfil")
             if (!user.isCustomer()) {
                 sessionStore.clear()
@@ -50,7 +51,7 @@ class AuthRepository @Inject constructor(
     suspend fun sendOtp(email: String, transactionId: String?): AuthResult<String> = request {
         val response = api.sendOtp(OtpRequest("enviar", email.trim(), txId = transactionId))
         if (!response.isSuccessful) return@request failure(response.code())
-        val txId = response.body()?.txId
+        val txId = response.body()?.data?.txId
             ?: return@request AuthResult.Failure("El servidor no devolvió el identificador de verificación")
         AuthResult.Success(txId)
     }

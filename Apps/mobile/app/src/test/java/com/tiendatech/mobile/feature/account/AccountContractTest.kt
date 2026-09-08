@@ -34,11 +34,29 @@ class AccountContractTest {
     @After fun tearDown() = server.shutdown()
 
     @Test fun `checkout sends stable idempotency header and identifiers`() = runTest {
-        server.enqueue(json("""{"ordenId":5,"usuarioId":7,"direccionId":2,"metodopagoId":3,"subtotal":100,"total":115,"fecha":"2026-08-21"}""", 201))
+        server.enqueue(json("""{"status":201,"data":{"ordenId":5,"usuarioId":7,"direccionId":2,"metodopagoId":3,"subtotal":100,"total":115,"fecha":"2026-08-21"},"message":"OK"}""", 201))
         assertTrue(api.checkout("intent-123", CheckoutRequest(2, 3)).isSuccessful)
         val request = server.takeRequest()
         assertEquals("intent-123", request.getHeader("Idempotency-Key"))
         assertEquals("{\"direccionId\":2,\"metodopagoId\":3}", request.body.readUtf8())
+    }
+
+    @Test fun `account lists decode the production response envelope`() = runTest {
+        server.enqueue(json("""{"status":200,"data":[{"direccionId":1,"usuarioId":4,"calle":"Vía Valencia","ciudadId":1}],"message":"OK"}"""))
+
+        val address = api.addresses(4).body()?.data?.single()
+
+        assertEquals(1L, address?.direccionId)
+        assertEquals("Vía Valencia", address?.calle)
+    }
+
+    @Test fun `profile decodes its legacy inner data plus production envelope`() = runTest {
+        server.enqueue(json("""{"status":200,"data":{"data":{"usuarioId":4,"usuario":"jmoralito","nombre":"José","correo":"j@example.com"}},"message":"OK"}"""))
+
+        val profile = api.profile().body()?.data?.data
+
+        assertEquals(4L, profile?.usuarioId)
+        assertEquals("jmoralito", profile?.usuario)
     }
 
     @Test fun `password request excludes repeated password`() = runTest {

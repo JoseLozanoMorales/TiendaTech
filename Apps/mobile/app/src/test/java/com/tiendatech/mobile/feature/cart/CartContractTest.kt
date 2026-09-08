@@ -31,14 +31,14 @@ class CartContractTest {
     @After fun tearDown() = server.shutdown()
 
     @Test fun `current cart uses authenticated user path`() = runTest {
-        server.enqueue(json("""{"carritoId":12,"usuarioId":7,"total":0}"""))
-        assertEquals(12L, api.current(7).body()?.carritoId)
+        server.enqueue(json("""{"status":200,"data":{"carritoId":12,"usuarioId":7,"total":0},"message":"OK"}"""))
+        assertEquals(12L, api.current(7).body()?.data?.carritoId)
         assertEquals("/api/carrito/7", server.takeRequest().path)
     }
 
     @Test fun `cart page decodes server lines`() = runTest {
-        server.enqueue(json("""{"content":[{"carritoId":12,"productoId":9,"cantidad":2,"precioUnitario":1500.5}],"page":0,"size":20,"totalElements":1,"totalPages":1}"""))
-        val page = api.lines(12).body()
+        server.enqueue(json("""{"status":200,"data":{"content":[{"carritoId":12,"productoId":9,"cantidad":2,"precioUnitario":1500.5}],"page":0,"size":20,"totalElements":1,"totalPages":1},"message":"OK"}"""))
+        val page = api.lines(12).body()?.data
         assertEquals(9L, page?.content?.single()?.productoId)
         assertEquals(2, page?.content?.single()?.cantidad)
     }
