@@ -36,6 +36,7 @@ experiments/paso8/resultados-reales/**
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/
 experiments/paso8/resultados-reales/correctiva-20260905-final-v2/**
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/experimento_real_crudo.csv
+!experiments/paso8/resultados-reales/correctiva-20260905-final-v2/checksums.txt
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/preflight.json
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/
 experiments/paso8/resultados-reales/correctiva-20260905-final-v2/piloto-basal/**
