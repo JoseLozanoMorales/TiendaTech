@@ -10,6 +10,30 @@ permissions:
   contents: read
 
 jobs:
+  web-quality:
+    name: Web lint and unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: Apps/web/frontend/webapp/package-lock.json
+      - name: Install webapp dependencies
+        working-directory: Apps/web/frontend/webapp
+        run: npm ci
+      - name: Run web static analysis (ESLint)
+        working-directory: Apps/web/frontend/webapp
+        run: npm run lint
+      - name: Check web and test TypeScript types
+        working-directory: Apps/web/frontend/webapp
+        run: npx tsc -p tsconfig.test.json
+      - name: Run web unit tests (Vitest)
+        working-directory: Apps/web/frontend/webapp
+        run: npm test -- --reporter=verbose
+
   contract-tests:
     name: Pact consumer contracts
     runs-on: ubuntu-latest
