@@ -10,9 +10,8 @@ on:
   workflow_dispatch:
     inputs:
       image_tag:
-        description: Etiqueta de imágenes que se desplegará
+        description: Etiqueta de imágenes que se desplegará (hash corto del commit publicado)
         required: true
-        default: latest
   workflow_run:
     workflows: ["Publicar imágenes Docker"]
     types: [completed]
@@ -51,10 +50,8 @@ jobs:
           set -euo pipefail
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             tag="$MANUAL_TAG"
-          elif [[ "$EVENT_NAME" == "workflow_run" ]]; then
-            tag="${HEAD_SHA:0:7}"
           else
-            tag="latest"
+            tag="${HEAD_SHA:0:7}"
           fi
           [[ "$tag" =~ ^[A-Za-z0-9_.-]+$ ]] || {
             echo "Etiqueta de imagen no válida: $tag" >&2

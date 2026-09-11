@@ -142,7 +142,7 @@ El sistema se organiza como un API Gateway (Spring Cloud Gateway) que enruta hac
 Ver el detalle completo, con justificación de las decisiones de priorización del equipo, en `docs/entrega4/PFC4.tex` §"Pruebas y CI/CD". En resumen:
 
 - **Con pruebas:** los seis microservicios Java (`usuarios`, `productos-service`, `inventario-service`, `pedidos-service`, `ordenes-proveedores-service` y `ventas-service`); `pedidos-service` incluye integración contra CockroachDB mediante Testcontainers.
-- **CI:** `.github/workflows/ci.yml` (lint + tests + APK móvil, tests backend CRDB, tests + lint Python de `armado-ia`) y `.github/workflows/publish-images.yml` (build y publicación multi-arquitectura de las 8 imágenes en Docker Hub).
+- **CI:** `.github/workflows/ci.yml` (lint + tests + APK móvil, tests backend CRDB, tests + lint Python de `armado-ia`) y `.github/workflows/publish-images.yml` (build y publicación multi-arquitectura de las 8 imágenes en GitHub Container Registry).
 - **No implementado:** contratos Pact, pruebas E2E con Playwright y lint dedicado para todos los servicios Java y para la web. Las pruebas de carga Locust están en `tests/load/`.
 
 ---

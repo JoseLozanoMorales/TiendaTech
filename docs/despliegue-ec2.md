@@ -2,24 +2,34 @@
 
 ## Estado
 
-`docker-compose.prod.yml` ejecuta imágenes previamente publicadas en Docker Hub. No compila código en EC2 y no constituye todavía despliegue continuo: la publicación de imágenes y la actualización automática del servidor requieren un workflow separado.
+`docker-compose.prod.yml` ejecuta imágenes previamente publicadas en GitHub Container Registry (GHCR). No compila código en EC2 y no constituye todavía despliegue continuo: la publicación de imágenes y la actualización automática del servidor requieren un workflow separado.
 
 ## Convención de imágenes
 
-Por defecto se usa el repositorio `josemoralito/tiendatech` con una etiqueta por servicio:
+Cada imagen se publica en `ghcr.io/<owner>/<repo>` (minúsculas) con una etiqueta por servicio atada al hash corto del commit que la generó — no existe una etiqueta móvil como `latest`, así toda imagen puede rastrearse a un commit exacto:
 
 ```text
-productos-latest
-inventario-latest
-ventas-latest
-usuarios-latest
-ordenes-proveedores-latest
-armado-ia-latest
-pedidos-latest
-frontend-latest
+productos-38bf21e
+inventario-38bf21e
+ventas-38bf21e
+usuarios-38bf21e
+ordenes-proveedores-38bf21e
+armado-ia-38bf21e
+pedidos-38bf21e
+frontend-38bf21e
 ```
 
-`DOCKERHUB_REPOSITORY` e `IMAGE_TAG` permiten cambiar el repositorio o desplegar una versión inmutable, por ejemplo `IMAGE_TAG=38bf21e`.
+`IMAGE_REPOSITORY` e `IMAGE_TAG` son obligatorias en `.env` (sin valor por defecto) y determinan exactamente qué se despliega, por ejemplo `IMAGE_TAG=38bf21e`.
+
+### Visibilidad de los paquetes en GHCR
+
+`GITHUB_TOKEN` publica cada paquete como privado por defecto, sin importar que el
+repositorio sea público. Como el proyecto exige acceso anónimo reproducible por
+terceros, después de la primera publicación de cada imagen hay que entrar a la
+pestaña **Packages** del repositorio en GitHub y cambiar su visibilidad a
+**público** — una vez por imagen, no requiere cambios de código ni de workflow.
+Mientras algún paquete siga privado, `docker compose pull` fallará por falta de
+autenticación al descargarlo.
 
 ## Archivos privados del servidor
 
@@ -31,7 +41,7 @@ En `/opt/tiendatech` deben existir:
 
 El `.env` debe contener la conexión de CockroachDB, credenciales de correo y el mismo `AUTH_JWT_SECRET` para Usuarios, Gateway y Armado IA. No debe copiarse al repositorio ni incluirse dentro de ninguna imagen.
 
-La ruta anfitriona de certificados se configura con `CRDB_CERTS_DIR=./crdb-certs`. Compose la monta como `/app/crdb-certs` en modo de solo lectura, que debe coincidir con las rutas `sslrootcert`, `sslcert` y `sslkey` de la URL JDBC. Las claves deben conservar permisos restrictivos y nunca publicarse en Docker Hub o GitHub.
+La ruta anfitriona de certificados se configura con `CRDB_CERTS_DIR=./crdb-certs`. Compose la monta como `/app/crdb-certs` en modo de solo lectura, que debe coincidir con las rutas `sslrootcert`, `sslcert` y `sslkey` de la URL JDBC. Las claves deben conservar permisos restrictivos y nunca publicarse en ningún registro ni repositorio.
 
 ## Inicio manual
 
@@ -64,4 +74,4 @@ IMAGE_TAG=<commit> docker compose --env-file .env -f docker-compose.prod.yml pul
 IMAGE_TAG=<commit> docker compose --env-file .env -f docker-compose.prod.yml up -d
 ```
 
-La reversión consiste en repetir ambos comandos con la etiqueta del commit anterior. No se recomienda depender únicamente de `latest` en producción.
+La reversión consiste en repetir ambos comandos con la etiqueta del commit anterior. No existe una etiqueta `latest`: `IMAGE_TAG` es obligatoria, así que cada despliegue queda atado a un commit concreto.

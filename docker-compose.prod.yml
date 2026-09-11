@@ -29,7 +29,7 @@ x-crdb-volumes: &crdb-volumes
 services:
   tiendatech-productos:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:productos-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:productos-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?AUTH_JWT_SECRET debe existir en .env}
       INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?INTERNAL_SERVICE_TOKEN debe existir en .env}
@@ -46,7 +46,7 @@ services:
 
   tiendatech-inventario:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:inventario-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:inventario-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?AUTH_JWT_SECRET debe existir en .env}
       INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?INTERNAL_SERVICE_TOKEN debe existir en .env}
@@ -67,7 +67,7 @@ services:
 
   tiendatech-ventas:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:ventas-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:ventas-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?AUTH_JWT_SECRET debe existir en .env}
       INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?INTERNAL_SERVICE_TOKEN debe existir en .env}
@@ -87,7 +87,7 @@ services:
 
   tiendatech-usuarios:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:usuarios-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:usuarios-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       <<: *crdb-environment
       SERVER_PORT: "8085"
@@ -117,7 +117,7 @@ services:
 
   tiendatech-ordenes-proveedores:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:ordenes-proveedores-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:ordenes-proveedores-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?AUTH_JWT_SECRET debe existir en .env}
       INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?INTERNAL_SERVICE_TOKEN debe existir en .env}
@@ -137,7 +137,7 @@ services:
 
   tiendatech-armado-ia:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:armado-ia-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:armado-ia-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       SERVER_PORT: "8087"
       PRODUCTOS_SERVICE_URL: http://tiendatech-productos:8081
@@ -158,7 +158,7 @@ services:
 
   tiendatech-pedidos:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:pedidos-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:pedidos-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?AUTH_JWT_SECRET debe existir en .env}
       INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?INTERNAL_SERVICE_TOKEN debe existir en .env}
@@ -188,7 +188,7 @@ services:
 
   tiendatech-gateway:
     <<: *service-defaults
-    image: ${DOCKERHUB_REPOSITORY:-josemoralito/tiendatech}:frontend-${IMAGE_TAG:-latest}
+    image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY debe existir en .env}:frontend-${IMAGE_TAG:?IMAGE_TAG debe existir en .env (usa el hash corto del commit publicado)}
     environment:
       SERVER_PORT: "8080"
       SERVER_FORWARD_HEADERS_STRATEGY: framework
