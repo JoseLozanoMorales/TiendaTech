@@ -43,11 +43,13 @@ class ExplicacionService:
                     issue.code,
                     issue.detail,
                 )
-                metrics.registrar_explicacion_fallback()
-                return self._fallback.explicar(contexto)
-            metrics.registrar_explicacion_bedrock()
-            return texto.strip()
+            else:
+                metrics.registrar_explicacion_bedrock()
+                return texto.strip()
         except Exception as exc:  # noqa: BLE001 -- el LLM nunca debe tumbar la respuesta
             log.warning("Fallo la explicacion via LLM (%s), usando fallback deterministico", exc)
-            metrics.registrar_explicacion_fallback()
-            return self._fallback.explicar(contexto)
+
+        # Fuera del try del proveedor: si falla el respaldo, no volver a
+        # ejecutarlo ni contabilizar dos veces la misma solicitud.
+        metrics.registrar_explicacion_fallback()
+        return self._fallback.explicar(contexto)

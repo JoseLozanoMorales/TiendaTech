@@ -68,10 +68,17 @@ class VerifiedHardwareTokenHandler(ExplanationValidationHandler):
     def _validate_current(
         self, text: str, context: ContextoExplicacion
     ) -> ValidationIssue | None:
-        vocabulary = _normalize(_build_allowed_vocabulary(context))
+        # Comparar tokens completos evita aceptar 500 W dentro de 1500 W
+        # o confundir un modelo base con su variante Ti.
+        vocabulary = _build_allowed_vocabulary(context)
+        allowed_tokens = {
+            _normalize(match.group())
+            for pattern in _PATRONES_MODELO_HARDWARE
+            for match in pattern.finditer(vocabulary)
+        }
         for pattern in _PATRONES_MODELO_HARDWARE:
             for match in pattern.finditer(text):
-                if _normalize(match.group()) not in vocabulary:
+                if _normalize(match.group()) not in allowed_tokens:
                     return ValidationIssue("unverified_hardware", match.group())
         return None
 
