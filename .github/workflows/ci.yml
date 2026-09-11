@@ -45,9 +45,30 @@ jobs:
       - name: Check web and test TypeScript types
         working-directory: Apps/web/frontend/webapp
         run: npx tsc -p tsconfig.test.json
-      - name: Run web unit tests (Vitest)
+      - name: Run web unit tests with coverage (Vitest)
         working-directory: Apps/web/frontend/webapp
-        run: npm test -- --reporter=verbose
+        run: npm run test:coverage -- --reporter=verbose
+      - name: Summarize component coverage
+        working-directory: Apps/web/frontend/webapp
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          import { basename } from 'node:path';
+          const report = JSON.parse(readFileSync('coverage/coverage-summary.json', 'utf8'));
+          const rows = Object.entries(report).map(([file, m]) =>
+            `| ${basename(file)} | ${m.lines.pct}% | ${m.statements.pct}% | ${m.branches.pct}% | ${m.functions.pct}% |`);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            ['## Cobertura web', '| Componente | Líneas | Sentencias | Ramas | Funciones |',
+             '|---|---:|---:|---:|---:|', ...rows, '',
+             'Alcance: CartView, CheckoutView y AdminView completos, con servicios HTTP simulados.', ''].join('\n'));
+          JS
+      - name: Upload web coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-coverage
+          path: Apps/web/frontend/webapp/coverage/
+          if-no-files-found: error
 
   contract-tests:
     name: Pact consumer contracts
@@ -117,11 +138,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Verify committed mobile deliverables
+        working-directory: release
+        run: sha256sum -c tiendatech-debug.apk.sha256
+
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform
+        run: sdkmanager "platforms;android-37.0" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -139,6 +170,22 @@ jobs:
             Apps/mobile/app/build/outputs/apk/androidTest/debug/*.apk
           if-no-files-found: error
 
+      - name: Prepare installable mobile deliverables
+        run: |
+          cp Apps/mobile/app/build/outputs/apk/debug/app-debug.apk release/tiendatech-debug.apk
+          cd release
+          sha256sum tiendatech-debug.apk > tiendatech-debug.apk.sha256
+          sha256sum -c tiendatech-debug.apk.sha256
+
+      - name: Upload mobile deliverables
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-release
+          path: |
+            release/tiendatech-debug.apk
+            release/tiendatech-debug.apk.sha256
+          if-no-files-found: error
+
       - name: Upload Android reports on failure
         if: failure()
         uses: actions/upload-artifact@v4
@@ -148,6 +195,40 @@ jobs:
             Apps/mobile/app/build/reports/
             Apps/mobile/app/build/test-results/
           if-no-files-found: ignore
+
+  publish-mobile:
+    name: Publish Android prerelease
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [csv-line-endings, web-quality, contract-tests, e2e-web, android-mobile, crdb-tests, armado-ia-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: mobile-release
+          path: release
+      - name: Verify and publish APK with checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_TAG: mobile-debug-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          cd release
+          sha256sum -c tiendatech-debug.apk.sha256
+          cat > /tmp/mobile-release-notes.md <<'EOF'
+          APK debug instalable de TiendaTech (Android 8.0 o posterior).
+          Firmado con clave de depuración; no es una versión de producción.
+          Verificar: sha256sum -c tiendatech-debug.apk.sha256
+          Instalar: adb install -r tiendatech-debug.apk
+          Backend predeterminado: http://10.0.2.2:8180/ (emulador).
+          Instrucciones completas: release/README.md en el commit de esta entrega.
+          EOF
+          gh release create "$RELEASE_TAG" tiendatech-debug.apk tiendatech-debug.apk.sha256 \
+            --target "$RELEASE_SHA" --title "Android debug $RELEASE_TAG" \
+            --prerelease --notes-file /tmp/mobile-release-notes.md
 
   crdb-tests:
     name: CockroachDB integration tests

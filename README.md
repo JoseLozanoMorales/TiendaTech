@@ -1,5 +1,8 @@
 # TiendaTech — Sistema distribuido de comercio electrónico
 
+- [APK Android, SHA-256 e instrucciones de instalación (E6)](release/README.md).
+- [Cobertura medida de carrito, checkout y órdenes (E1/E3)](docs/evidencias/cobertura/web/README.md).
+
 **Asignatura:** Aplicaciones Distribuidas (ISR-701)
 **Carrera:** Ingeniería de Software, séptimo semestre
 **Institución:** Universidad Técnica Estatal de Quevedo (UTEQ)

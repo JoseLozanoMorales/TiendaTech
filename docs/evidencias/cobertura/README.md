@@ -1,5 +1,8 @@
 # Evidencia de pruebas automatizadas - Paso 1
 
+La medición adicional de componentes React para E1/E3 se encuentra en
+[web/README.md](web/README.md), con su propio alcance y dictamen.
+
 La cobertura se mide exclusivamente sobre la capa de lógica de negocio. Los adaptadores JDBC, controladores y configuración de framework quedan fuera de esta métrica.
 
 | Microservicio | Pruebas | Líneas cubiertas | Cobertura |

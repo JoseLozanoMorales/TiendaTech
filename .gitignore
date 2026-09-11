@@ -12,6 +12,7 @@ docker-compose.override.yml
 __pycache__/
 *.py[cod]
 **/node_modules/
+Apps/web/frontend/webapp/coverage/
 
 **/target/
 spark/out/

@@ -10,5 +10,11 @@ export default mergeConfig(viteConfig, defineConfig({
     include: ['tests/**/*.test.ts?(x)'],
     restoreMocks: true,
     mockReset: true,
+    coverage: {
+      provider: 'v8',
+      include: ['src/views/CartView.tsx', 'src/views/CheckoutView.tsx', 'src/views/AdminView.tsx'],
+      reporter: ['text', 'html', 'lcov', 'json-summary'],
+      reportsDirectory: './coverage',
+    },
   },
 }))
