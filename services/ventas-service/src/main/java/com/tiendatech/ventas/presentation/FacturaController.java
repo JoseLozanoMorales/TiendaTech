@@ -1,5 +1,7 @@
 package com.tiendatech.ventas.presentation;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import com.tiendatech.ventas.presentation.dto.FacturaDetalleResponse;
 import com.tiendatech.ventas.presentation.dto.FacturaResponse;
 import com.tiendatech.ventas.presentation.dto.GenerarFacturaRequest;
@@ -59,5 +61,13 @@ public class FacturaController {
         return facturaService.listarDetalle(id).stream()
                 .map(FacturaDetalleResponse::from)
                 .collect(Collectors.toList());
+    }
+    @GetMapping(value = "/{id}/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> descargarPdf(@PathVariable Integer id) {
+        byte[] pdf = facturaService.generarPdf(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=factura-" + id + ".pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
     }
 }
