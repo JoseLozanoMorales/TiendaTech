@@ -1,5 +1,11 @@
 package com.tiendatech.ventas.application;
 
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.io.ByteArrayOutputStream;
 import com.tiendatech.ventas.domain.Factura;
 import com.tiendatech.ventas.domain.FacturaDetalle;
 import com.tiendatech.ventas.domain.FacturaStore;
@@ -63,5 +69,55 @@ public class FacturaService {
 
     public List<Map<String, Object>> masVendidos(int limite) {
         return facturaRepository.masVendidos(Math.min(Math.max(limite, 1), 100));
+    }
+
+    public byte[] generarPdf(Integer facturaId) {
+        Factura factura = obtenerPorId(facturaId);
+        List<FacturaDetalle> detalle = listarDetalle(facturaId);
+
+        ByteArrayOutputStream salida = new ByteArrayOutputStream();
+        Document documento = new Document(PageSize.A4, 40, 40, 50, 50);
+        try {
+            PdfWriter.getInstance(documento, salida);
+            documento.open();
+
+            Font tituloFont = new Font(Font.HELVETICA, 18, Font.BOLD);
+            Font normalFont = new Font(Font.HELVETICA, 10);
+            Font totalFont = new Font(Font.HELVETICA, 12, Font.BOLD);
+
+            documento.add(new Paragraph("TiendaTech - Factura " + factura.getNumero(), tituloFont));
+            documento.add(new Paragraph(" "));
+            documento.add(new Paragraph("Fecha de emision: " + factura.getFechaEmision(), normalFont));
+            documento.add(new Paragraph("Cliente: " + factura.getNombre() + " (" + factura.getCedula() + ")", normalFont));
+            documento.add(new Paragraph("Correo: " + factura.getCorreo(), normalFont));
+            documento.add(new Paragraph("Direccion de entrega: " + factura.getDireccionEntrega(), normalFont));
+            documento.add(new Paragraph(" "));
+
+            PdfPTable tabla = new PdfPTable(5);
+            tabla.setWidthPercentage(100);
+            tabla.setWidths(new float[]{3f, 1f, 1.2f, 1.2f, 1.2f});
+            for (String encabezado : new String[]{"Producto", "Cant.", "Precio", "IVA", "Subtotal"}) {
+                PdfPCell celda = new PdfPCell(new Phrase(encabezado, normalFont));
+                celda.setBackgroundColor(Color.LIGHT_GRAY);
+                tabla.addCell(celda);
+            }
+            for (FacturaDetalle linea : detalle) {
+                tabla.addCell(new Phrase(linea.getNombreProducto(), normalFont));
+                tabla.addCell(new Phrase(String.valueOf(linea.getCantidad()), normalFont));
+                tabla.addCell(new Phrase(linea.getPrecio().toString(), normalFont));
+                tabla.addCell(new Phrase(linea.getIva().toString(), normalFont));
+                tabla.addCell(new Phrase(linea.getSubtotal().toString(), normalFont));
+            }
+            documento.add(tabla);
+
+            documento.add(new Paragraph(" "));
+            documento.add(new Paragraph("Subtotal: " + factura.getSubtotal(), normalFont));
+            documento.add(new Paragraph("Total: " + factura.getTotal(), totalFont));
+        } catch (DocumentException e) {
+            throw new IllegalStateException("No se pudo generar el PDF de la factura " + facturaId, e);
+        } finally {
+            documento.close();
+        }
+        return salida.toByteArray();
     }
 }
