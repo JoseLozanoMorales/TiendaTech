@@ -10,6 +10,21 @@ permissions:
   contents: read
 
 jobs:
+  csv-line-endings:
+    name: CSV line endings (LF)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify CSV files use LF line endings
+        run: |
+          files=$(git grep -Il $'\r' -- '*.csv' || true)
+          if [ -n "$files" ]; then
+            echo "CSV con CRLF detectado (deben normalizarse a LF via .gitattributes):"
+            echo "$files"
+            exit 1
+          fi
+
   web-quality:
     name: Web lint and unit tests
     runs-on: ubuntu-latest

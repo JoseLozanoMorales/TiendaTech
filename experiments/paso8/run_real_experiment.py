@@ -1,36 +1,4 @@
 #!/usr/bin/env python3
-"""Orquestador del experimento real (Paso 8) contra los microservicios vía Locust.
-
-Complementa a run_paso8.py (simulación local en SQLite): esta version pega contra
-el stack real via el API Gateway, con Locust como generador de carga.
-
-Diseno:
-- 24 condiciones = 2 estrategias (COORD) x 4 concurrencias x 3 modos de pasarela.
-- 5 repeticiones por condicion = 120 corridas.
-- Orden de ejecucion FIJO y deliberado (ver `condiciones_en_orden`): REPETICION
-  primero (1..5), y dentro de cada repeticion las 24 condiciones completas
-  (coord > fallo > concurrencia). Si el proceso se corta a mitad, el resultado
-  es N repeticiones completas de las 24 condiciones (analizable con menos
-  potencia estadistica), nunca condiciones enteras en cero -- en particular
-  'timing' (el modo que nunca se midio antes por el bug del delay) se cubre ya
-  en la primera repeticion, no se deja para el final.
-- Piloto basal obligatorio: antes de la matriz, cada estrategia debe completar
-  dos minutos con un usuario, al menos un checkout confirmado y cero errores.
-  Si falla, la campana se detiene antes de gastar horas de maquina.
-- Rampa de readiness obligatoria: despues del piloto, cada estrategia escala
-  por 1, 5, 10, 25 y 50 usuarios sin inyeccion de fallos. Su evidencia vive en
-  un directorio separado y nunca se escribe en el CSV de las 120 corridas.
-- Reanudable: antes de cada corrida se consulta el CSV crudo ya escrito y se
-  saltan las condiciones ya hechas. Cada corrida se escribe (append + flush) al
-  terminar, nunca al final del experimento completo. La granularidad de perdida
-  ante un corte es de una sola corrida (<=360s), no del experimento completo.
-- CPU/memoria del PROCESO de Locust (no de los contenedores) se muestrea cada
-  ~2s con psutil mientras la corrida esta activa.
-- Se capturan los avisos propios de Locust sobre saturacion del generador
-  (ver AVISOS_SATURACION) desde su log, y el conteo de usuarios que realmente
-  llego a spawnear vs los pedidos.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -164,6 +132,13 @@ def escribir_fila(csv_path: Path, row: dict) -> None:
         writer.writerow(row)
         fh.flush()
         os.fsync(fh.fileno())
+
+
+def escribir_checksum(csv_path: Path) -> Path:
+    digest = hashlib.sha256(csv_path.read_bytes()).hexdigest()
+    checksum_path = csv_path.parent / "checksums.txt"
+    checksum_path.write_text(f"{digest} *{csv_path.name}\n", encoding="utf-8", newline="\n")
+    return checksum_path
 
 
 def condiciones_en_orden(concurrencias: list[int], repeticiones: int,
@@ -997,6 +972,9 @@ def main() -> int:
         print(f"[{i}/{len(pendientes)}] fallo={fallo} coord={coord} c={concurrencia} r={repeticion} "
               f"p95={fila['latencia_p95_ms']}ms error={fila['tasa_error']} "
               f"({time.time() - t0:.1f}s esta corrida, {transcurrido / 3600:.2f}h acumuladas)")
+
+    checksum_path = escribir_checksum(crudo_path)
+    print(f"[checksum] sha256 de {crudo_path.name} actualizado en {checksum_path}")
 
     print(f"experimento completo: {len(pendientes)} corridas en {(time.time() - inicio_experimento) / 3600:.2f}h")
     return 0
