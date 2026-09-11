@@ -14,16 +14,17 @@ con la configuración de cobertura añadida en esta entrega. Vitest 4.1.11 / V8.
 Reportes versionados: [JSON](coverage-summary.json) y [LCOV](lcov.info).
 Las rutas del JSON se normalizaron respecto de la aplicación.
 
-## Dictamen sobre el umbral y la regla de piso
+## Alcance del criterio E1/E3
 
-La cobertura de los componentes solicitados está **medida y reportada**, no solo
-se acredita que los tests pasan. Sin embargo, **no se confirma que E1/E3 superen
-la regla de piso**: falta el criterio exacto de cada elemento. La nota 6 no
-equivale automáticamente a 60 % de cobertura. No se declara nivel 10.
+La cobertura de los componentes solicitados está medida y reportada. Según el
+criterio compartido para este cierre, E1 exige esa evidencia y no fija un porcentaje
+mínimo; por tanto, no se aplica aquí un umbral hipotético del 70 %. Se documentan
+los valores reales sin confundirlos con la nota de evaluación.
 
-Si el criterio exige 70 % de líneas por componente, AdminView no cumple; tampoco
-cumple el total instrumentado. No se configura un umbral arbitrario en CI ni se
-excluyen secciones no cubiertas para aparentar cumplimiento.
+El análisis estático web de E3 tiene su reporte y recuentos junto al backend en
+[la evidencia de análisis estático](../../../experimentos/resultados/iso25010/complejidad/README.md)
+y se referencia en `docs/entrega4/PFC4.tex`. La calificación definitiva corresponde
+al evaluador; no se deduce automáticamente del estado verde de CI.
 
 CheckoutView contiene su implementación en una sola línea ejecutable: el 100 %
 de líneas no implica todas las decisiones cubiertas. La cobertura de ramas y

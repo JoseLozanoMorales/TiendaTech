@@ -41,7 +41,16 @@ jobs:
         run: npm ci
       - name: Run web static analysis (ESLint)
         working-directory: Apps/web/frontend/webapp
-        run: npm run lint
+        run: npm run lint:report
+      - name: Upload web static analysis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-static-analysis
+          path: |
+            docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json
+            docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv
+          if-no-files-found: error
       - name: Check web and test TypeScript types
         working-directory: Apps/web/frontend/webapp
         run: npx tsc -p tsconfig.test.json
