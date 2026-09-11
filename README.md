@@ -65,7 +65,7 @@ operativo debe ejecutarse la comprobación de salud indicada en el arranque ráp
 | Herramienta | Versión |
 |---|---|
 | Docker + Docker Compose v2 | Reciente, con soporte de `profiles` |
-| JDK | 21 (microservicios backend); el módulo `frontend` compila con Java 17 |
+| JDK | 21 (microservicios backend) |
 | Maven | 3.9 (embebido en las imágenes de build Docker) |
 | Android Studio / SDK | Para compilar la app móvil desde fuente (el CI publica el APK como artefacto) |
 | LaTeX | `pdflatex` + `biblatex` (backend `biber`), paquetes `tikz`, `tabularx`, `booktabs`, `subcaption` |
@@ -109,6 +109,24 @@ Evidencia del arranque con un solo comando en el equipo de Jeremy:
 ## 4. Arquitectura
 
 El sistema se organiza como un API Gateway (Spring Cloud Gateway) que enruta hacia 7 microservicios de dominio (6 en Java/Spring Boot, 1 en Python/FastAPI para el motor de recomendación con IA), cada uno refactorizado en capas (`domain` → `application` → `infrastructure` → `presentation`) con patrones GoF aplicados según el dominio de cada servicio. La comunicación entre servicios es REST síncrona, salvo `ventas-service`→`inventario-service`, que usa un patrón Outbox transaccional asíncrono para desacoplar la generación de facturas de la disponibilidad de inventario-service.
+
+### Estructura del repositorio (carpetas de primer nivel)
+
+| Carpeta | Contenido |
+|---|---|
+| `services/` | Los 6 microservicios Java/Spring Boot (`usuarios`, `productos`, `inventario`, `pedidos`, `ordenes-proveedores`, `ventas`) y el gateway; cada uno en capas `domain`/`application`/`infrastructure`/`presentation`. |
+| `Apps/` | Aplicaciones cliente: `Apps/web/frontend` (SPA) y `Apps/mobile` (app Android). |
+| `docs/` | Manuscrito (`PFC4.tex`), diagramas, evidencias de entregas y resultados de experimentos documentados. |
+| `experiments/` | Guiones y resultados de los experimentos de la campaña real (Paso 7 coordinación, Paso 8 comparación 2PC/Saga). |
+| `tests/` | Pruebas de contrato (Pact), E2E web (Playwright) y de carga (Locust). |
+| `ops/` | Observabilidad: configuración de Prometheus, Grafana y Alloy. |
+| `contracts/` | Definiciones `.proto` de gRPC compartidas entre servicios. |
+| `deploy/` | Configuración de despliegue (`Caddyfile` como reverse proxy). |
+| `scripts/` | Utilidades de auditoría y medición (cobertura, complejidad ciclomática, ISO/IEC 25010). |
+| `spark/` | Análisis de datos con PySpark de los experimentos de rendimiento. |
+| `release/` | Capturas de pantalla y artefactos de evidencia de la entrega. |
+| `resultados/` | CSV y figuras del análisis de tiempos/eficiencia (Paso 6). |
+| `.github/` | Workflows de CI/CD. |
 
 ### Diagramas disponibles (`docs/diagrams/`)
 
