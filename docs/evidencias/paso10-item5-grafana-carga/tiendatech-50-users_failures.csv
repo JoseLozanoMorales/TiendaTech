@@ -1,5 +1,5 @@
-Method,Name,Error,Occurrences
-GET,GET /api/provincias,HTTPError('429 Client Error:  for url: GET /api/provincias'),178
-GET,GET /api/categorias,HTTPError('429 Client Error:  for url: GET /api/categorias'),381
-GET,GET /api/marcas,HTTPError('429 Client Error:  for url: GET /api/marcas'),376
-GET,GET /api/productos,HTTPError('429 Client Error:  for url: GET /api/productos'),959
+Method,Name,Error,Occurrences
+GET,GET /api/provincias,HTTPError('429 Client Error:  for url: GET /api/provincias'),178
+GET,GET /api/categorias,HTTPError('429 Client Error:  for url: GET /api/categorias'),381
+GET,GET /api/marcas,HTTPError('429 Client Error:  for url: GET /api/marcas'),376
+GET,GET /api/productos,HTTPError('429 Client Error:  for url: GET /api/productos'),959
