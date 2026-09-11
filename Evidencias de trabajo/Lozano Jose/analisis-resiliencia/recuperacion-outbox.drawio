@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="01-recuperacion-outbox" id="01-recuperacion-outbox">
+    <mxGraphModel dx="1771" dy="1051" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=30;fontColor=#132b45;align=left;" value="Recuperación de Ventas e Inventario&#xa;Recorrido de la estrategia Saga y su recuperación asíncrona" vertex="1">
+          <mxGeometry height="100" width="1420" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="FacturaService.generar&#xa;Solicita persistir la factura" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="CrdbFacturaRepository.generar&#xa;Factura, detalle y Outbox en una transacción" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="InventarioOutboxProcessor&#xa;Consulta hasta 20 pendientes con intentos &lt; 5" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="InventarioClient&#xa;Envía movimientos con clave estable por factura" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Confirmación de Inventario&#xa;El evento pasa a PROCESADO" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="805" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="Fallo de envío o procesamiento&#xa;Registra error e incrementa intentos" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="Si intentos llega a 5: FALLIDO&#xa;Si no: queda PENDIENTE para otra consulta" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="805" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="3" value="crear">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="4" value="consulta posterior">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="5" value="por factura">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="6" value="éxito">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="7" value="fallo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="8" value="evaluar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

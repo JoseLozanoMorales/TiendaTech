@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="05-reservas-concurrentes" id="05-reservas-concurrentes">
+    <mxGraphModel dx="1771" dy="1051" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=30;fontColor=#132b45;align=left;" value="Dos carritos y la última unidad&#xa;Mecanismos observados en StockReservationService" vertex="1">
+          <mxGeometry height="100" width="1420" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="reconcile(command)&#xa;Valida comando y busca operación repetida" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Transacción mediante retryExecutor&#xa;SELECT de stock ... FOR UPDATE" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Segunda consulta de operación repetida&#xa;Calcula stock físico menos reservas de otros" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Orden de eventos&#xa;Compara Lamport y desempata por deviceId" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Evento nuevo y cantidad disponible&#xa;Actualiza reserva y guarda resultado" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="805" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="operationId ya registrado&#xa;Devuelve resultado previo con replay = true" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="Evento antiguo o stock insuficiente&#xa;Rechaza; conserva cantidad actual" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="SQLSTATE 40001&#xa;Reintenta la transacción completa con espera" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="805" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="3" value="nueva">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="7" value="repetida">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="4" value="bloqueo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="5" value="calcular">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="6" value="aceptar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="8" value="rechazar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
