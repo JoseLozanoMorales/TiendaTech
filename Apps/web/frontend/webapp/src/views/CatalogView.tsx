@@ -20,7 +20,11 @@ export default function CatalogView() {
 
   const loadProducts = useCallback(async (category: number | null, requestedPage: number, append: boolean) => {
     const currentRequest = ++requestId.current
-    append ? setLoadingMore(true) : setLoading(true)
+    if (append) {
+      setLoadingMore(true)
+    } else {
+      setLoading(true)
+    }
     setError('')
     try {
       const categoryQuery = category === null ? '' : `categoriaId=${category}&`
