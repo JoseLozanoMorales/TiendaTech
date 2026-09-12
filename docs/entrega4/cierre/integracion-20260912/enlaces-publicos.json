@@ -1,0 +1,52 @@
+[
+  {
+    "sha": "3e0738268fb51f31424d88db24fb97e04d5b0101",
+    "path": "docs/evidencias/cobertura/web/coverage-summary.json",
+    "page": {
+      "url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/3e0738268fb51f31424d88db24fb97e04d5b0101/docs/evidencias/cobertura/web/coverage-summary.json",
+      "status": 200,
+      "final_url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/3e0738268fb51f31424d88db24fb97e04d5b0101/docs/evidencias/cobertura/web/coverage-summary.json"
+    },
+    "raw": {
+      "url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/3e0738268fb51f31424d88db24fb97e04d5b0101/docs/evidencias/cobertura/web/coverage-summary.json",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/3e0738268fb51f31424d88db24fb97e04d5b0101/docs/evidencias/cobertura/web/coverage-summary.json"
+    },
+    "blob_identical": true,
+    "sha256": "1718f885ccc4e7e4a5d09b9d704d449fbd6fa70ab2f336629ce01bde387d88fc"
+  },
+  {
+    "sha": "a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1",
+    "path": "docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv",
+    "page": {
+      "url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv",
+      "status": 200,
+      "final_url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv"
+    },
+    "raw": {
+      "url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv",
+      "error": "HTTP Error 503: Backend.max_conn reached"
+    },
+    "raw_retry": {
+      "url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv?verificacion=20260912",
+      "error": "HTTP Error 503: Backend.max_conn reached"
+    },
+    "csv_row_present_in_public_html": true
+  },
+  {
+    "sha": "a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1",
+    "path": "docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json",
+    "page": {
+      "url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json",
+      "status": 200,
+      "final_url": "https://github.com/JoseLozanoMorales/TiendaTech/blob/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json"
+    },
+    "raw": {
+      "url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/JoseLozanoMorales/TiendaTech/a9d4fbb57bfbe33262599da5b0f2649f1cae8bd1/docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json"
+    },
+    "blob_identical": true,
+    "sha256": "f39fa5ab6cfaec0baae91effa384115b0e941a7cfb580211318a7fb053235f2b"
+  }
+]

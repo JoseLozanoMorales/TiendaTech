@@ -1,0 +1,17 @@
+[
+  {
+    "control": "macro",
+    "exit_code": 1,
+    "detected": true
+  },
+  {
+    "control": "href",
+    "exit_code": 1,
+    "detected": true
+  },
+  {
+    "control": "matriz ISO",
+    "exit_code": 1,
+    "detected": true
+  }
+]
