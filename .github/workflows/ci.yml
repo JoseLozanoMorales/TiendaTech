@@ -43,21 +43,11 @@ jobs:
       - name: Validar referencias de evidencia citadas en el manuscrito
         run: python3 scripts/validate_evidence_refs.py
 
-      - name: Instalar TeX Live (pdflatex + biber)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
-            texlive-fonts-recommended texlive-lang-spanish texlive-pictures \
-            texlive-bibtex-extra biber
-
-      - name: Compilar PFC4.tex (pdflatex, biber, pdflatex x2)
-        working-directory: docs/entrega4
-        run: |
-          pdflatex -interaction=nonstopmode -halt-on-error PFC4.tex
-          biber PFC4
-          pdflatex -interaction=nonstopmode -halt-on-error PFC4.tex
-          pdflatex -interaction=nonstopmode -halt-on-error PFC4.tex
+      - name: Compilar PFC4.tex (imagen TeX Live completa; latexmk resuelve pdflatex/biber)
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: PFC4.tex
+          working_directory: docs/entrega4
 
       - name: Conservar el PDF compilado como artefacto
         if: always()
