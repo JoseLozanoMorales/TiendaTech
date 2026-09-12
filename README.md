@@ -276,9 +276,46 @@ mediana, desviación estándar y percentil 95, y genera
 existir en la base desplegada; los CSV incluidos solo contienen la cabecera hasta
 ejecutar el experimento real y no constituyen resultados fabricados.
 
-### Compilar el documento acumulativo
+### Validar y compilar el documento acumulativo
 
-Desde la raíz del repositorio, con TeX Live y Biber:
+Antes de compilar, `scripts/validate_evidence_refs.py` comprueba que cada
+evidencia citada en el manuscrito (archivo principal
+`docs/entrega4/PFC4.tex`, sus `\input` — `registro-cambios.tex`,
+`estado-arte-2pc-saga.tex`, `trazabilidad-temas.tex`,
+`actualizacion-evidencias.tex` — y la matriz
+`docs/experimentos/resultados/iso25010.csv`) existe realmente en el árbol
+versionado, contra el commit exacto al que cada cita está pinneada (no
+contra el filesystem local, que podría tener un archivo sin comitear). El
+CI (`manuscript-quality` en `.github/workflows/ci.yml`) ejecuta este
+validador antes de compilar y falla la compilación si alguna referencia no
+resuelve.
+
+Dependencias del validador: Python 3 y `git` con el historial completo (un
+clon superficial impide resolver commits históricos citados; en CI se usa
+`fetch-depth: 0`). Sin argumentos usa `docs/entrega4/PFC4.tex` y la matriz
+ISO como valores por defecto:
+
+```bash
+python scripts/validate_evidence_refs.py
+```
+
+Formatos verificados: la macro `\evidencia{ruta}{etiqueta}` (pinneada al
+commit fijado dentro de su propia definición), enlaces
+`\href{.../blob/<SHA>/<ruta>}` (pinneados al SHA del propio enlace),
+enlaces `\href{.../commit/<SHA>}` (solo existencia del commit) y la columna
+`evidencia` de la matriz ISO (contra `HEAD`). Enlaces a comentarios de
+issues, Pull Requests o ejecuciones de GitHub Actions se reportan como
+excepción documentada (no son objetos git, no se evalúan como fallo);
+cualquier otro formato de enlace a `github.com` no contemplado se trata
+como fallo, no se omite en silencio. Ver el docstring del script para el
+detalle completo.
+
+**Importante:** que un archivo exista no acredita por sí solo la veracidad
+de lo que el texto afirma sobre su contenido — eso se revisa por separado,
+manualmente, al redactar y verificar cada afirmación.
+
+Con la validación en verde, desde la raíz del repositorio, con TeX Live y
+Biber:
 
 ```powershell
 cd docs/entrega4
