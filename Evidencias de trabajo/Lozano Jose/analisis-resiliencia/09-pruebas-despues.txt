@@ -1,0 +1,30 @@
+Fecha UTC: 2026-09-11T21:57:32.447271+00:00
+Fase: despues
+Codigo de salida: 0
+
+test_acepta_mismo_modelo_con_espacios_y_mayusculas_distintos (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_acepta_mismo_modelo_con_espacios_y_mayusculas_distintos) ... ok
+test_no_confunde_500w_con_1500w (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_500w_con_1500w) ... ok
+test_no_confunde_modelo_base_con_variante_ti (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_modelo_base_con_variante_ti) ... ok
+test_respaldo_fallido_no_se_ejecuta_dos_veces (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_respaldo_fallido_no_se_ejecuta_dos_veces) ... Explicacion del LLM descartada (empty_response): Respuesta vacia del LLM. Usando fallback deterministico.
+ok
+test_fallo_del_respaldo_sin_proveedor_se_propaga (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_fallo_del_respaldo_sin_proveedor_se_propaga) ... ok
+test_fallo_del_validador_tambien_activa_respaldo (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_fallo_del_validador_tambien_activa_respaldo) ... Fallo la explicacion via LLM (validador no disponible), usando fallback deterministico
+ok
+test_proveedor_recuperado_se_utiliza_en_la_siguiente_solicitud (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_proveedor_recuperado_se_utiliza_en_la_siguiente_solicitud) ... Fallo la explicacion via LLM (desconectado), usando fallback deterministico
+ok
+test_respuesta_vacia_activa_respaldo_real (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_respuesta_vacia_activa_respaldo_real) ... Explicacion del LLM descartada (empty_response): Respuesta vacia del LLM. Usando fallback deterministico.
+ok
+test_sin_proveedor_conserva_datos_en_respaldo_real (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_sin_proveedor_conserva_datos_en_respaldo_real) ... ok
+test_timeout_devuelve_respaldo_y_registra_una_sola_estrategia (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_timeout_devuelve_respaldo_y_registra_una_sola_estrategia) ... Fallo la explicacion via LLM (proveedor agotó el tiempo), usando fallback deterministico
+ok
+test_returns_valid_llm_response (tests.test_explicacion_validation.ExplanationServiceValidationTest.test_returns_valid_llm_response) ... ok
+test_uses_fallback_when_chain_rejects_response (tests.test_explicacion_validation.ExplanationServiceValidationTest.test_uses_fallback_when_chain_rejects_response) ... Explicacion del LLM descartada (unverified_hardware): RTX 4090. Usando fallback deterministico.
+ok
+test_accepts_hardware_present_in_input_context (tests.test_explicacion_validation.ExplanationValidationChainTest.test_accepts_hardware_present_in_input_context) ... ok
+test_rejects_empty_response_in_first_handler (tests.test_explicacion_validation.ExplanationValidationChainTest.test_rejects_empty_response_in_first_handler) ... ok
+test_rejects_unverified_hardware_in_second_handler (tests.test_explicacion_validation.ExplanationValidationChainTest.test_rejects_unverified_hardware_in_second_handler) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.004s
+
+OK

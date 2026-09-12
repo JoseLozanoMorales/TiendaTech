@@ -1,0 +1,62 @@
+Fecha UTC: 2026-09-11T21:56:58.482554+00:00
+Fase: antes
+Codigo de salida: 1
+
+test_acepta_mismo_modelo_con_espacios_y_mayusculas_distintos (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_acepta_mismo_modelo_con_espacios_y_mayusculas_distintos) ... ok
+test_no_confunde_500w_con_1500w (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_500w_con_1500w) ... FAIL
+test_no_confunde_modelo_base_con_variante_ti (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_modelo_base_con_variante_ti) ... FAIL
+test_respaldo_fallido_no_se_ejecuta_dos_veces (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_respaldo_fallido_no_se_ejecuta_dos_veces) ... Explicacion del LLM descartada (empty_response): Respuesta vacia del LLM. Usando fallback deterministico.
+Fallo la explicacion via LLM (fallo del respaldo), usando fallback deterministico
+FAIL
+test_fallo_del_respaldo_sin_proveedor_se_propaga (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_fallo_del_respaldo_sin_proveedor_se_propaga) ... ok
+test_fallo_del_validador_tambien_activa_respaldo (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_fallo_del_validador_tambien_activa_respaldo) ... Fallo la explicacion via LLM (validador no disponible), usando fallback deterministico
+ok
+test_proveedor_recuperado_se_utiliza_en_la_siguiente_solicitud (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_proveedor_recuperado_se_utiliza_en_la_siguiente_solicitud) ... Fallo la explicacion via LLM (desconectado), usando fallback deterministico
+ok
+test_respuesta_vacia_activa_respaldo_real (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_respuesta_vacia_activa_respaldo_real) ... Explicacion del LLM descartada (empty_response): Respuesta vacia del LLM. Usando fallback deterministico.
+ok
+test_sin_proveedor_conserva_datos_en_respaldo_real (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_sin_proveedor_conserva_datos_en_respaldo_real) ... ok
+test_timeout_devuelve_respaldo_y_registra_una_sola_estrategia (tests.test_explicacion_resiliencia.ExplicacionResilienciaTest.test_timeout_devuelve_respaldo_y_registra_una_sola_estrategia) ... Fallo la explicacion via LLM (proveedor agotó el tiempo), usando fallback deterministico
+ok
+test_returns_valid_llm_response (tests.test_explicacion_validation.ExplanationServiceValidationTest.test_returns_valid_llm_response) ... ok
+test_uses_fallback_when_chain_rejects_response (tests.test_explicacion_validation.ExplanationServiceValidationTest.test_uses_fallback_when_chain_rejects_response) ... Explicacion del LLM descartada (unverified_hardware): RTX 4090. Usando fallback deterministico.
+ok
+test_accepts_hardware_present_in_input_context (tests.test_explicacion_validation.ExplanationValidationChainTest.test_accepts_hardware_present_in_input_context) ... ok
+test_rejects_empty_response_in_first_handler (tests.test_explicacion_validation.ExplanationValidationChainTest.test_rejects_empty_response_in_first_handler) ... ok
+test_rejects_unverified_hardware_in_second_handler (tests.test_explicacion_validation.ExplanationValidationChainTest.test_rejects_unverified_hardware_in_second_handler) ... ok
+
+======================================================================
+FAIL: test_no_confunde_500w_con_1500w (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_500w_con_1500w)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Programas\PFC-AppsDistribuidas\services\armado-ia\tests\test_explicacion_regresiones.py", line 18, in test_no_confunde_500w_con_1500w
+    self.assertIsNotNone(issue)
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_no_confunde_modelo_base_con_variante_ti (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_no_confunde_modelo_base_con_variante_ti)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Programas\PFC-AppsDistribuidas\services\armado-ia\tests\test_explicacion_regresiones.py", line 25, in test_no_confunde_modelo_base_con_variante_ti
+    self.assertIsNotNone(issue)
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_respaldo_fallido_no_se_ejecuta_dos_veces (tests.test_explicacion_regresiones.ExplicacionRegresionesTest.test_respaldo_fallido_no_se_ejecuta_dos_veces)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\usuario\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1396, in patched
+    return func(*newargs, **newkeywargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Programas\PFC-AppsDistribuidas\services\armado-ia\tests\test_explicacion_regresiones.py", line 44, in test_respaldo_fallido_no_se_ejecuta_dos_veces
+    respaldo.explicar.assert_called_once()
+  File "C:\Users\usuario\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 928, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'explicar' to have been called once. Called 2 times.
+Calls: [call(ContextoExplicacion(porcentaje_bottleneck=8.0, nivel='bajo', componente_limitante='GPU', advertencias=[], componentes_nombres={'componente': 'RTX 4060'}, recomendacion=None)),
+ call(ContextoExplicacion(porcentaje_bottleneck=8.0, nivel='bajo', componente_limitante='GPU', advertencias=[], componentes_nombres={'componente': 'RTX 4060'}, recomendacion=None))].
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+FAILED (failures=3)

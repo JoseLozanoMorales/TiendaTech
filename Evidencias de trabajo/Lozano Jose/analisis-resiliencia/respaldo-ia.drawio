@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="06-respaldo-ia" id="06-respaldo-ia">
+    <mxGraphModel dx="1771" dy="1051" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=30;fontColor=#132b45;align=left;" value="Respuesta útil cuando falla el proveedor IA&#xa;Decisiones de ExplicacionService.generar" vertex="1">
+          <mxGeometry height="100" width="1420" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="ContextoExplicacion&#xa;Recibe datos ya calculados del análisis" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Proveedor configurado&#xa;Solicita texto al cliente de explicación" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Cadena de validación&#xa;Rechaza vacío o hardware no verificado" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Texto aceptado&#xa;Registra estrategia Bedrock y aplica strip()" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#ffffff;strokeColor=#7f9bb7;fontColor=#18334e;" value="Devuelve explicación&#xa;Se incorpora a la respuesta del análisis" vertex="1">
+          <mxGeometry height="100" width="640" x="55" y="805" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="Sin proveedor o excepción&#xa;Activa la ruta de respaldo" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="Ruta de respaldo&#xa;Registra estrategia fallback" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fontSize=22;fillColor=#e7f0fa;strokeColor=#7f9bb7;fontColor=#18334e;" value="DeterministicExplicacionClient&#xa;Redacta y devuelve texto desde el contexto" vertex="1">
+          <mxGeometry height="100" width="640" x="805" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="3" value="con cliente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="4" value="respuesta">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="5" value="válida">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="6" value="retorno">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="7" value="error">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="8" value="rechazo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="8" value="respaldo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=0;fontSize=17;strokeColor=#3e6488;" target="9" value="generar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

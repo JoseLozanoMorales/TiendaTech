@@ -1,0 +1,112 @@
+[
+  {
+    "evidencia": "recuperacion-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/application/FacturaService.java",
+    "ancla": "public Integer generar"
+  },
+  {
+    "evidencia": "recuperacion-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/infrastructure/persistence/CrdbFacturaRepository.java",
+    "ancla": "INSERT INTO ventas.factura_outbox"
+  },
+  {
+    "evidencia": "recuperacion-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/application/InventarioOutboxProcessor.java",
+    "ancla": "public void reintentarPendientes"
+  },
+  {
+    "evidencia": "recuperacion-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/infrastructure/client/InventarioClient.java",
+    "ancla": "factura-inventario-"
+  },
+  {
+    "evidencia": "estados-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/infrastructure/persistence/FacturaOutboxRepository.java",
+    "ancla": "WHERE estado = 'PENDIENTE'"
+  },
+  {
+    "evidencia": "estados-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/infrastructure/persistence/FacturaOutboxRepository.java",
+    "ancla": "SET estado = 'PROCESADO'"
+  },
+  {
+    "evidencia": "estados-outbox",
+    "archivo": "services/ventas-service/src/main/java/com/tiendatech/ventas/infrastructure/persistence/FacturaOutboxRepository.java",
+    "ancla": "'FALLIDO' ELSE 'PENDIENTE'"
+  },
+  {
+    "evidencia": "idempotencia-checkout",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "private String calcularPayloadHash"
+  },
+  {
+    "evidencia": "idempotencia-checkout",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "private Orden buscarOrdenPorClaveExistente"
+  },
+  {
+    "evidencia": "idempotencia-checkout",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "catch (ClaveIdempotenciaEnConflictoException"
+  },
+  {
+    "evidencia": "idempotencia-checkout",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/infrastructure/persistence/JdbcOrdenRepository.java",
+    "ancla": "public Orden crear"
+  },
+  {
+    "evidencia": "facturacion-parcial",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "facturaClient.generarFactura"
+  },
+  {
+    "evidencia": "facturacion-parcial",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "creada pero falló la facturación"
+  },
+  {
+    "evidencia": "facturacion-parcial",
+    "archivo": "services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/OrdenService.java",
+    "ancla": "releaseAfterCheckout"
+  },
+  {
+    "evidencia": "reservas-concurrentes",
+    "archivo": "services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/StockReservationService.java",
+    "ancla": "FOR UPDATE"
+  },
+  {
+    "evidencia": "reservas-concurrentes",
+    "archivo": "services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/StockReservationService.java",
+    "ancla": "int availableForCart"
+  },
+  {
+    "evidencia": "reservas-concurrentes",
+    "archivo": "services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/StockReservationService.java",
+    "ancla": "boolean newer"
+  },
+  {
+    "evidencia": "reservas-concurrentes",
+    "archivo": "services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/CrdbTransactionRetryExecutor.java",
+    "ancla": "SERIALIZATION_FAILURE"
+  },
+  {
+    "evidencia": "respaldo-ia",
+    "archivo": "services/armado-ia/app/explicacion/service.py",
+    "ancla": "def generar"
+  },
+  {
+    "evidencia": "respaldo-ia",
+    "archivo": "services/armado-ia/app/explicacion/validation.py",
+    "ancla": "class VerifiedHardwareTokenHandler"
+  },
+  {
+    "evidencia": "respaldo-ia",
+    "archivo": "services/armado-ia/app/explicacion/fallback_client.py",
+    "ancla": "def explicar"
+  },
+  {
+    "evidencia": "respaldo-ia",
+    "archivo": "services/armado-ia/app/armado_service.py",
+    "ancla": "explicacion_service.generar"
+  }
+]
