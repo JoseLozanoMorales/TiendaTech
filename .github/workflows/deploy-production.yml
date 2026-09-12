@@ -81,6 +81,19 @@ jobs:
           cd /opt/tiendatech
           docker compose --env-file .env -f docker-compose.prod.yml config --quiet
 
+      - name: Detener despliegue anterior
+        shell: bash
+        env:
+          IMAGE_TAG: ${{ steps.image.outputs.tag }}
+        run: |
+          set -euo pipefail
+          cd /opt/tiendatech
+          # Un "up" interrumpido a medias (job cancelado, fallo de un servicio
+          # dependiente, etc.) deja contenedores creados sueltos que despues
+          # chocan por nombre con el siguiente intento. Se arranca siempre
+          # desde limpio en vez de asumir que el intento anterior termino bien.
+          docker compose --env-file .env -f docker-compose.prod.yml down --remove-orphans
+
       - name: Descargar y levantar servicios
         shell: bash
         env:
