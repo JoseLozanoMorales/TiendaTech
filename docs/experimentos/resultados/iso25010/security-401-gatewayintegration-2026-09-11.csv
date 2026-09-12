@@ -1,0 +1,9 @@
+familia_protegida,metodo,resultado_http,esperado_http,cumple,test,commit,fecha_ejecucion
+/api/usuarios/buscar,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/movimientos,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/carrito/1,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/ordenes,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/proveedores,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/ordenes-compra,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/facturas/1,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
+/api/armado/recomendar,GET,401,401,SI,GatewayIntegrationTest.todaFamiliaProtegidaRechazaSolicitudSinToken,24d27fc,2026-09-11
