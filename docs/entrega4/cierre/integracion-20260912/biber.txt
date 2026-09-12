@@ -1,0 +1,13 @@
+INFO - This is Biber 2.21
+INFO - Logfile is 'PFC4.blg'
+INFO - Reading 'PFC4.bcf'
+INFO - Found 23 citekeys in bib section 0
+INFO - Processing section 0
+INFO - Looking for bibtex file '../entrega3/referenciasPFC.bib' for section 0
+INFO - LaTeX decoding ...
+INFO - Found BibTeX data source '../entrega3/referenciasPFC.bib'
+INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'es-ES'
+INFO - Writing 'PFC4.bbl' with encoding 'UTF-8'
+INFO - Output to PFC4.bbl

@@ -1,0 +1,109 @@
+{
+  "checked_at_utc": "2026-09-12T17:52:49.126626+00:00",
+  "source_commit": "12580f84782b50510c647b8f91d5107d10fd4e4d",
+  "final_delivery_commit": null,
+  "clone_initial_status": "clean",
+  "pdf_pages": 59,
+  "pdf_sha256": "30dd00cd67c6d3f0314949e2ee2b1a0b3f7d333f2d19f711d576704744c7b84d",
+  "source_files": {
+    "docs\\entrega4\\PFC4.tex": {
+      "clone_sha256": "dea4f8f5a83b621242f8f1ca2e04522e8dbc59a2ad449e623a76a4de8fdfd2cc",
+      "local_sha256": "dea4f8f5a83b621242f8f1ca2e04522e8dbc59a2ad449e623a76a4de8fdfd2cc",
+      "equal_after_eol_normalization": true
+    },
+    "docs\\entrega4\\registro-cambios.tex": {
+      "clone_sha256": "8525cb100f324e776df359ec983bbc1a7d7dedb1b45cadc8d732122dd4be9b92",
+      "local_sha256": "8525cb100f324e776df359ec983bbc1a7d7dedb1b45cadc8d732122dd4be9b92",
+      "equal_after_eol_normalization": true
+    },
+    "docs\\entrega4\\estado-arte-2pc-saga.tex": {
+      "clone_sha256": "8d5b97a32aec6f2c21d25985879346eb8486944e539632fdbd5a55fa662e1e17",
+      "local_sha256": "f4dd2f7a8128eebb041d9f8e31120c06c21c34b72b3c9c560c320ef439c4db3f",
+      "equal_after_eol_normalization": true
+    },
+    "docs\\entrega4\\trazabilidad-temas.tex": {
+      "clone_sha256": "8dd27f9c9ab634c41f093bd1d755b3eec3ee3a437e0d97db93cbdf3ad059e83c",
+      "local_sha256": "8dd27f9c9ab634c41f093bd1d755b3eec3ee3a437e0d97db93cbdf3ad059e83c",
+      "equal_after_eol_normalization": true
+    },
+    "docs\\entrega4\\actualizacion-evidencias.tex": {
+      "clone_sha256": "14f799d7af01a879ffa9319ca576b4ba97c5993ca1fd1c18865189acfbaa297f",
+      "local_sha256": "be4f30a339c74de0df9f6f55ea3eb742b4477abd9498512f07ef5d9eff1f9073",
+      "equal_after_eol_normalization": true
+    }
+  },
+  "texlive_image": "sha256:8957c916b8160049f89c24d362a6d86c09d8a04095acde37e88404c4afed85b4",
+  "validator": {
+    "ok": 69,
+    "exceptions": 65,
+    "failures": 0,
+    "negative_controls": 3
+  },
+  "remote_ventas": {
+    "run_id": 34707196595,
+    "lines_covered": 80,
+    "lines_total": 84,
+    "percent": 95.23809523809524
+  },
+  "all_pages_visually_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+  ]
+}

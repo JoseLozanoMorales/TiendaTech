@@ -1,0 +1,73 @@
+Archivos .tex inspeccionados (5): docs/entrega4/PFC4.tex, docs/entrega4/registro-cambios.tex, docs/entrega4/estado-arte-2pc-saga.tex, docs/entrega4/trazabilidad-temas.tex, docs/entrega4/actualizacion-evidencias.tex
+Macro \evidencia pinneada a commit: c5dca588ea9662cab56732c97fe644b9a929854b
+
+Referencias verificadas OK: 69
+Excepciones documentadas (fuera de alcance, no verificables via git): 65
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-actions-run :: runs/33554959074 -- ejecucion de GitHub Actions, no verificable via objetos git
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-actions-run :: runs/33557738789 -- ejecucion de GitHub Actions, no verificable via objetos git
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 16#issuecomment-5499536102 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 17#issuecomment-5499878376 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 18#issuecomment-5499810621 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 19#issuecomment-5499881456 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 20#issuecomment-5499700698 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 21#issuecomment-5499702639 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 22#issuecomment-5499884436 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 23#issuecomment-5499887488 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 24#issuecomment-5499806741 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 25#issuecomment-5499444070 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 26#issuecomment-5499490631 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 27#issuecomment-5499481993 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 28#issuecomment-5499483824 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 29#issuecomment-5499486242 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 30#issuecomment-5499570043 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 31#issuecomment-5499572163 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 32#issuecomment-5499574333 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 33#issuecomment-5499576455 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 34#issuecomment-5499578395 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 35#issuecomment-5499580121 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 36#issuecomment-5499544030 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 37#issuecomment-5499542065 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 38#issuecomment-5499545660 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 39#issuecomment-5499547112 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 40\#issuecomment-5548128749 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 41#issuecomment-5499549164 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 42#issuecomment-5499562481 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 43#issuecomment-5499955308 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 44#issuecomment-5499551129 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 45#issuecomment-5499553220 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 46\#issuecomment-5548128977 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 47#issuecomment-5499564428 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 48\#issuecomment-5548129164 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 49#issuecomment-5499565384 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 50#issuecomment-5499566316 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 51#issuecomment-5499567221 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 52#issuecomment-5499568157 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 53#issuecomment-5499957575 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 54#issuecomment-5499890678 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 55#issuecomment-5499893613 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 56#issuecomment-5499959748 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 57#issuecomment-5499896900 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 58#issuecomment-5499900322 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 59#issuecomment-5499903875 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 60#issuecomment-5499907106 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 61#issuecomment-5499917467 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 62#issuecomment-5499921148 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 63#issuecomment-5499923933 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 64#issuecomment-5499962026 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 65#issuecomment-5499926865 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 66#issuecomment-5499930050 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 67#issuecomment-5499814085 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 68#issuecomment-5499537229 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 69#issuecomment-5499933929 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 70#issuecomment-5499937655 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 71#issuecomment-5499803326 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 72#issuecomment-5499539698 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 73#issuecomment-5499964342 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 74#issuecomment-5499966747 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 75#issuecomment-5499968939 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 76#issuecomment-5499971165 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 77#issuecomment-5499973475 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+  [EXCEPCION] docs/entrega4/PFC4.tex :: excepcion-issues :: 78#issuecomment-5499975479 -- enlace a discusion de GitHub Issues, no a un archivo versionado
+Fallos: 0
+
+validate_evidence_refs: todas las referencias activas resuelven correctamente.
