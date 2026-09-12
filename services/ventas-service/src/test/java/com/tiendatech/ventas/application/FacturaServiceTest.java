@@ -54,4 +54,28 @@ class FacturaServiceTest {
         assertEquals(List.of(detalle), service.listarDetalle(9));
         verify(store).obtenerPorId(9); verify(store).listarDetalle(9);
     }
+
+    @Test void generarPdfProduceBytesConEncabezadoPdfValido() {
+        var factura = new Factura(9, 4, 2, LocalDate.of(2026, 9, 11), LocalDate.of(2026, 9, 10),
+                "0102030405", "Ana Torres", "ana@example.com", "0990000000",
+                "Av. Siempre Viva 123", new BigDecimal("20.00"), new BigDecimal("22.40"), "F-0009");
+        var linea = new FacturaDetalle(9, 5, "Mouse inalambrico", 2,
+                new BigDecimal("10.00"), new BigDecimal("20.00"), new BigDecimal("2.40"), new BigDecimal("22.40"));
+        when(store.obtenerPorId(9)).thenReturn(factura);
+        when(store.listarDetalle(9)).thenReturn(List.of(linea));
+
+        byte[] pdf = service.generarPdf(9);
+
+        assertTrue(pdf.length > 0);
+        assertEquals("%PDF", new String(pdf, 0, 4, java.nio.charset.StandardCharsets.ISO_8859_1));
+        // obtenerPorId se llama dos veces: una directa y otra dentro de listarDetalle (valida existencia).
+        verify(store, times(2)).obtenerPorId(9);
+        verify(store).listarDetalle(9);
+        verifyNoInteractions(inventario, outbox);
+    }
+
+    @Test void generarPdfPropagaNotFoundSiFacturaNoExiste() {
+        var error = assertThrows(ResponseStatusException.class, () -> service.generarPdf(99));
+        assertEquals(404, error.getStatusCode().value());
+    }
 }
