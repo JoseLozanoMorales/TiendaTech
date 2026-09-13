@@ -209,6 +209,17 @@
     "usedDeprecatedRules": []
   },
   {
+    "filePath": "Apps/web/frontend/webapp/src/views/shared.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
     "filePath": "Apps/web/frontend/webapp/src/views/WorkerView.tsx",
     "messages": [],
     "suppressedMessages": [],
@@ -220,7 +231,29 @@
     "usedDeprecatedRules": []
   },
   {
-    "filePath": "Apps/web/frontend/webapp/src/views/shared.ts",
+    "filePath": "Apps/web/frontend/webapp/tests/AccountView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/AdminView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/BuilderView.test.tsx",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
@@ -242,7 +275,40 @@
     "usedDeprecatedRules": []
   },
   {
+    "filePath": "Apps/web/frontend/webapp/tests/CatalogView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
     "filePath": "Apps/web/frontend/webapp/tests/CheckoutView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/InvoiceView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/LoginView.test.tsx",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
@@ -264,7 +330,51 @@
     "usedDeprecatedRules": []
   },
   {
+    "filePath": "Apps/web/frontend/webapp/tests/ProductDetailView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/RecoveryView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/RegisterView.test.tsx",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
     "filePath": "Apps/web/frontend/webapp/tests/setup.ts",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
+    "filePath": "Apps/web/frontend/webapp/tests/WorkerView.test.tsx",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
