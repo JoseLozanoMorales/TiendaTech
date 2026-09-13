@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify CSV files use LF line endings
         run: |
-          files=$(git grep -Il $'\r' -- '*.csv' || true)
+          files=$(git grep -Il $'\r' -- '*.csv' '*.tsv' 'docs/evidencias/*-e4.txt' || true)
           if [ -n "$files" ]; then
             echo "CSV con CRLF detectado (deben normalizarse a LF via .gitattributes):"
             echo "$files"

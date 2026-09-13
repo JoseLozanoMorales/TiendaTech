@@ -1,2 +1,4 @@
 *.csv text eol=lf
 checksums.txt text eol=lf
+*.tsv text eol=lf
+docs/evidencias/*-e4.txt text eol=lf
