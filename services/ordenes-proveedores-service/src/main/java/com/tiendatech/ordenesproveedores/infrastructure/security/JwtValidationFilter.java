@@ -80,26 +80,44 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
     @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                                FilterChain chain) throws ServletException, IOException {
-        String supplied = request.getHeader("X-Internal-Token");
-        if (!internalToken.isBlank() && supplied != null && MessageDigest.isEqual(
-                internalToken.getBytes(StandardCharsets.UTF_8), supplied.getBytes(StandardCharsets.UTF_8))) {
-            chain.doFilter(request, response); return;
+        if (isInternalCall(request)) {
+            chain.doFilter(request, response);
+            return;
         }
         String authorization = request.getHeader("Authorization");
-        if (authorization == null || !authorization.startsWith("Bearer ")) { unauthorized(response, "JWT requerido"); return; }
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            unauthorized(response, "JWT requerido");
+            return;
+        }
+        if (isValidJwt(authorization.substring(7))) {
+            chain.doFilter(request, response);
+        } else {
+            unauthorized(response, "JWT invalido o expirado");
+        }
+    }
+
+    private boolean isInternalCall(HttpServletRequest request) {
+        String supplied = request.getHeader("X-Internal-Token");
+        return !internalToken.isBlank() && supplied != null && MessageDigest.isEqual(
+                internalToken.getBytes(StandardCharsets.UTF_8), supplied.getBytes(StandardCharsets.UTF_8));
+    }
+
+    // Cualquier fallo de formato/firma/expiracion se trata igual: token invalido.
+    private boolean isValidJwt(String token) {
         try {
-            String[] parts = authorization.substring(7).split("\\.");
-            if (parts.length != 3) throw new IllegalArgumentException();
+            String[] parts = token.split("\\.");
+            if (parts.length != 3) return false;
             JsonNode header = mapper.readTree(Base64.getUrlDecoder().decode(parts[0]));
-            if (!"HS256".equals(header.path("alg").asText())) throw new IllegalArgumentException();
+            if (!"HS256".equals(header.path("alg").asText())) return false;
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(new SecretKeySpec(secret, "HmacSHA256"));
             byte[] expected = mac.doFinal((parts[0] + "." + parts[1]).getBytes(StandardCharsets.US_ASCII));
-            if (!MessageDigest.isEqual(expected, Base64.getUrlDecoder().decode(parts[2]))) throw new IllegalArgumentException();
+            if (!MessageDigest.isEqual(expected, Base64.getUrlDecoder().decode(parts[2]))) return false;
             JsonNode claims = mapper.readTree(Base64.getUrlDecoder().decode(parts[1]));
-            if (!claims.has("exp") || claims.path("exp").asLong() <= Instant.now().getEpochSecond()) throw new IllegalArgumentException();
-            chain.doFilter(request, response);
-        } catch (Exception ex) { unauthorized(response, "JWT invalido o expirado"); }
+            return claims.has("exp") && claims.path("exp").asLong() > Instant.now().getEpochSecond();
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     private void unauthorized(HttpServletResponse response, String message) throws IOException {

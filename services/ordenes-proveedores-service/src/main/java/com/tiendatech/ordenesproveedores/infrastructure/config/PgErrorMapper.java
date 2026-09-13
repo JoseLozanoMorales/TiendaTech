@@ -3,7 +3,19 @@ package com.tiendatech.ordenesproveedores.infrastructure.config;
 import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpStatus;
 
+import java.util.Map;
+
 public final class PgErrorMapper {
+
+    // sqlState -> HttpStatus. Antes era un switch de 6 casos + default; se extrae a mapa
+    // para que la complejidad ciclomatica no crezca al agregar mas codigos de error.
+    private static final Map<String, HttpStatus> SQLSTATE_STATUS = Map.of(
+            "P0002", HttpStatus.NOT_FOUND,
+            "25000", HttpStatus.CONFLICT,
+            "23505", HttpStatus.CONFLICT,
+            "23503", HttpStatus.CONFLICT,
+            "40001", HttpStatus.CONFLICT,
+            "P0001", HttpStatus.BAD_REQUEST);
 
     private PgErrorMapper() {
     }
@@ -17,15 +29,7 @@ public final class PgErrorMapper {
         if (sqlState == null) {
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return switch (sqlState) {
-            case "P0002" -> HttpStatus.NOT_FOUND;
-            case "25000" -> HttpStatus.CONFLICT;
-            case "23505" -> HttpStatus.CONFLICT;
-            case "23503" -> HttpStatus.CONFLICT;
-            case "40001" -> HttpStatus.CONFLICT;
-            case "P0001" -> HttpStatus.BAD_REQUEST;
-            default -> HttpStatus.BAD_REQUEST;
-        };
+        return SQLSTATE_STATUS.getOrDefault(sqlState, HttpStatus.BAD_REQUEST);
     }
 
     public static String messageFor(Throwable ex) {

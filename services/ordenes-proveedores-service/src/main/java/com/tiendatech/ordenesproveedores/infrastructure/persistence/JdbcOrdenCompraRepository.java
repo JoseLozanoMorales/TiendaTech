@@ -189,10 +189,14 @@ public class JdbcOrdenCompraRepository implements OrdenCompraRepository {
 
     private void validarDetalle(List<DetalleOrdenCompra> detalle) {
         if (detalle == null || detalle.isEmpty()) throw new IllegalArgumentException("La orden requiere detalle");
-        for (DetalleOrdenCompra d : detalle)
-            if (d.getProductoId() == null || d.getCantidadPedida() == null || d.getCantidadPedida() <= 0 ||
-                    d.getCostoUnitario() == null || d.getCostoUnitario().signum() < 0)
-                throw new IllegalArgumentException("Linea de detalle invalida");
+        for (DetalleOrdenCompra d : detalle) {
+            if (esLineaInvalida(d)) throw new IllegalArgumentException("Linea de detalle invalida");
+        }
+    }
+
+    private boolean esLineaInvalida(DetalleOrdenCompra d) {
+        return d.getProductoId() == null || d.getCantidadPedida() == null || d.getCantidadPedida() <= 0
+                || d.getCostoUnitario() == null || d.getCostoUnitario().signum() < 0;
     }
 
     private OrdenCompra mapOrden(ResultSet rs, int row) throws SQLException {
