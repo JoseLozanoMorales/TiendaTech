@@ -132,12 +132,14 @@ jobs:
           import { readFileSync, appendFileSync } from 'node:fs';
           import { basename } from 'node:path';
           const report = JSON.parse(readFileSync('coverage/coverage-summary.json', 'utf8'));
-          const rows = Object.entries(report).map(([file, m]) =>
+          const files = Object.entries(report).filter(([key]) => key !== 'total');
+          const rows = files.map(([file, m]) =>
             `| ${basename(file)} | ${m.lines.pct}% | ${m.statements.pct}% | ${m.branches.pct}% | ${m.functions.pct}% |`);
+          const alcance = files.map(([file]) => basename(file)).sort().join(', ');
           appendFileSync(process.env.GITHUB_STEP_SUMMARY,
             ['## Cobertura web', '| Componente | Líneas | Sentencias | Ramas | Funciones |',
              '|---|---:|---:|---:|---:|', ...rows, '',
-             'Alcance: CartView, CheckoutView y AdminView completos, con servicios HTTP simulados.', ''].join('\n'));
+             `Alcance: ${alcance}, con servicios HTTP simulados. Se listan automáticamente desde vitest.config.ts (coverage.include).`, ''].join('\n'));
           JS
       - name: Upload web coverage
         if: always()
