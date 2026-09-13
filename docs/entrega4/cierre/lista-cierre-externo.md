@@ -1,5 +1,13 @@
 # Lista de cierre documental externo
 
+Actualización del 13 de septiembre de 2026: la prueba 401, el APK release firmado
+y publicado automáticamente, y el registro de imágenes ya tienen evidencia. La
+instalación e inicio móvil fueron confirmados en dos dispositivos. Las
+[confirmaciones técnicas del documentalista](pendientes-documentalista.md) conservan
+los límites y el pendiente independiente sobre el árbol final de tableros. Las
+marcas de compilación y PDF completos de abajo corresponden al corte histórico;
+deben revalidarse después de integrar estas decisiones y regenerar el documento.
+
 Estado al 7 de septiembre de 2026. Esta lista reúne comprobaciones que no pueden darse por satisfechas únicamente con archivos del repositorio.
 
 | Control | Estado | Evidencia o acción de cierre |

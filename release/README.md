@@ -1,8 +1,8 @@
 # Paquete Android instalable (E6)
 
-El nuevo [APK release](tiendatech-release.apk) está firmado por José y tiene
+El [APK release](tiendatech-release.apk) está firmado por José y tiene
 [checksum](tiendatech-release.apk.sha256) verificado. La firma v2, el certificado
-público y la validación de instalación y el pendiente de publicación se documentan en
+público y la validación de instalación y publicación se documentan en
 [Firma de distribución](FIRMA-DISTRIBUCION.md).
 
 ## Paquete debug histórico
@@ -22,19 +22,30 @@ Desde la raíz del repositorio, con Android Platform Tools instalado:
 
 ```bash
 cd release
-sha256sum -c tiendatech-debug.apk.sha256
-adb install -r tiendatech-debug.apk
+sha256sum -c tiendatech-release.apk.sha256
+adb install -r tiendatech-release.apk
 ```
 
-El primer comando debe devolver `tiendatech-debug.apk: OK`.
-En PowerShell: `Get-FileHash release/tiendatech-debug.apk -Algorithm SHA256`,
+El primer comando debe devolver `tiendatech-release.apk: OK`.
+En PowerShell: `Get-FileHash release/tiendatech-release.apk -Algorithm SHA256`,
 comparando el resultado con el `.sha256`. También se puede copiar el APK al
 teléfono y abrirlo permitiendo la instalación desde esa fuente.
 
-El backend predeterminado es `http://10.0.2.2:8180/`, para el emulador Android
-con el backend en el equipo anfitrión. Instalar el APK no inicia los servicios.
-Para un dispositivo físico, compilar agregando
-`-PTIENDATECH_DEBUG_API_BASE_URL=http://IP_DEL_SERVIDOR:8180/`.
+El APK release utiliza el gateway público configurado durante su compilación.
+Instalar el APK no inicia los servicios.
+
+### Conflicto con instalaciones anteriores
+
+Android solo permite actualizar una aplicación cuando la versión instalada y el
+nuevo APK usan el mismo identificador y el mismo certificado de firma. Si existe
+una compilación debug u otra versión de TiendaTech firmada con una clave distinta,
+la instalación de `tiendatech-release.apk` puede mostrar «conflicto de paquete».
+
+En ese caso, desinstalar primero la versión anterior y después instalar el APK
+release. La desinstalación elimina los datos locales de la aplicación, como sesión,
+preferencias y caché; conviene conservar cualquier información necesaria antes de
+hacerla. Una vez instalada la versión release firmada por José, las actualizaciones
+futuras deberán conservar esa misma identidad de firma.
 
 ## Regenerar
 
@@ -55,18 +66,13 @@ pareja: no mezclar un APK local con el checksum de otro build.
 
 ## Publicación automática y alcance de la rúbrica
 
-`ci.yml` comprueba la suma del APK versionado antes de compilar. Luego genera
-otro APK y su checksum como artefacto `mobile-release`. En los pushes a `main`,
-si todos los jobs requeridos aprueban, `publish-mobile` publica ambos archivos
-como una **GitHub prerelease**, con etiqueta `mobile-debug-<run_id>-<run_attempt>`
-y referencia al commit exacto. Las PR no publican.
+`ci.yml` conserva las comprobaciones de la variante debug y, en pushes a `main`
+que aprueban todos los trabajos requeridos, genera un APK release firmado. Antes de
+publicarlo comprueba la huella del certificado de José, genera su checksum y registra
+el commit y el run de procedencia. `publish-mobile` lo publica como una **GitHub
+prerelease**, con etiqueta `mobile-release-<run_id>-<run_attempt>`. Las PR no reciben
+la clave privada ni publican paquetes.
 
-La configuración de publicación debe validarse con el primer run remoto;
-la comprobación local no acredita que esa prerelease ya exista.
-Las claves debug pueden variar entre equipos y runs: instalar encima de una
-versión con otra clave requiere desinstalarla primero, perdiendo sus datos locales.
-
-La presencia del APK y SHA-256 cubre la condición material de E6 para el umbral 5
-descrito en la solicitud, una vez versionados y subidos. No se declara nivel 10:
-queda pendiente la identidad de firma de distribución y comprobar la publicación
-remota efectiva.
+La primera publicación automática release se verificó para el commit `c3edc7a`:
+`mobile-release-34780292598-1`, con APK, checksum, informe de `apksigner` y
+procedencia. El paquete debug se conserva únicamente como evidencia histórica.

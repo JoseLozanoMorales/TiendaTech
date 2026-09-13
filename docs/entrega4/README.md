@@ -1,5 +1,12 @@
 # Documento acumulativo y reproducibilidad — Pasos 13 y 14
 
+**Actualización del 13 de septiembre de 2026:** la evidencia de seguridad 401, el
+APK release firmado y su publicación automática, y el registro de imágenes ya
+están verificados y publicados. La instalación e inicio móvil fueron confirmados
+en dos dispositivos. Véase el
+[registro de pendientes del documentalista](cierre/pendientes-documentalista.md)
+para los límites y confirmaciones que todavía correspondan.
+
 El estado de las correcciones y los paquetes pendientes por recibir se detalla en
 [Cierre documental de las observaciones](CIERRE-DOCUMENTAL-OBSERVACIONES.md),
 actualizado el 7 de septiembre de 2026. `CIERRE-PASO13.md` conserva el corte histórico.

@@ -16,7 +16,15 @@ variables descritas en [Firma de distribución](../../release/FIRMA-DISTRIBUCION
 Ya se generó y verificó localmente un APK release con la clave de José; véase
 `../../release/tiendatech-release.apk`. Release no se empaqueta sin la clave.
 José confirmó instalación e inicio correctos en dos dispositivos tras resolver el
-conflicto de firma con la versión debug. La publicación del paquete sigue pendiente.
+conflicto de firma con la versión debug. La publicación automática del paquete
+release se verificó para el commit `c3edc7a`.
+
+Android exige que una actualización conserve el `applicationId` y el certificado
+de la aplicación instalada. Como debug y release usan certificados distintos, un
+dispositivo con TiendaTech debug puede rechazar el APK release con «conflicto de
+paquete». Hay que desinstalar primero la versión anterior, lo que elimina sus datos
+locales, e instalar después el release. Las instrucciones para usuarios están en
+[el README del paquete](../../release/README.md).
 
 La variante debug consume por defecto el Gateway de Docker en `http://10.0.2.2:8180/`, que corresponde al puerto `8180` del equipo anfitrión visto desde el emulador. El Gateway y los microservicios son quienes utilizan el `.env` de la raíz para conectarse a CockroachDB; la aplicación nunca recibe credenciales JDBC.
 

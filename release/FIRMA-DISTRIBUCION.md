@@ -10,7 +10,12 @@ Estado actual: **clave de José creada y APK release firmado y verificado localm
 
 Custodio: José Alejandro Lozano Morales. El almacén privado está fuera del repositorio, en el directorio personal `.tiendatech-signing`, archivo `jose-lozano-release.p12`, alias `jose-lozano`. La contraseña fue introducida por José en una consola local, no se guardó en los archivos del proyecto. Conservar un respaldo privado del almacén y la contraseña en el gestor personal antes de depender de esta clave para futuras actualizaciones.
 
-La generación se hizo sobre el árbol local con cambios de firma todavía sin commit. No se atribuye a un commit publicado una compilación que no contiene esa configuración. José confirmó instalación e inicio correctos en dos dispositivos después de resolver el conflicto con la versión debug. Es validación reportada por el usuario; no se registraron modelos ni versiones de Android y no equivale a una prueba integral de compra. Solo quedan pendientes el commit y la publicación de estos entregables. El APK debug anterior se conserva como artefacto histórico.
+La primera generación se hizo localmente y queda conservada como evidencia histórica.
+José confirmó instalación e inicio correctos en dos dispositivos después de resolver
+el conflicto con la versión debug. Es validación reportada por el usuario; no se
+registraron modelos ni versiones de Android y no equivale a una prueba integral de
+compra. La compilación y publicación automáticas posteriores se verificaron en CI.
+El APK debug anterior se conserva como artefacto histórico.
 
 El responsable que custodie la clave deberá proporcionar al proceso Gradle estas variables de entorno, sin guardar sus valores en Git:
 
@@ -67,6 +72,14 @@ y envía los valores por entrada estándar a `gh secret set`. No guarda contrase
 ni claves en Git. El PKCS12 de José utiliza la misma contraseña para almacén y clave.
 Requiere una sesión de GitHub CLI con permisos para administrar secretos.
 
-Estado de esta ampliación: configuración preparada; carga de secretos pendiente
-de la entrada local de contraseña y validación remota pendiente de push. No se
-atribuye una ejecución exitosa a este nuevo job antes de comprobarla.
+Estado verificado el 13 de septiembre de 2026: José cargó los cuatro secretos mediante
+el guion local y el job `Firmar APK release de Jose` terminó satisfactoriamente en el
+[run 34780292598](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34780292598),
+para el commit completo `c3edc7affc694b2192136675bd2acb7ebb988cf9`.
+La prerelease
+[`mobile-release-34780292598-1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/mobile-release-34780292598-1)
+contiene el APK, su checksum, el informe de `apksigner` y la procedencia. El digest
+SHA-256 publicado del APK es
+`91276296e17d3d16297e9af210736db1e1f588663d8f50490a6a2d3cc41a8126`.
+La evidencia reproducible se resume en
+`docs/evidencias/firma-release-jose/verificacion-ci-20260913.json`.

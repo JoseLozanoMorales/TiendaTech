@@ -1,5 +1,12 @@
 # Cierre documental de las observaciones
 
+**Actualización documental, 13 de septiembre de 2026:** la cita de seguridad 401,
+el paquete móvil release firmado y el registro de imágenes ya cuentan con evidencia
+publicada. La instalación e inicio del APK se confirmaron en dos dispositivos y su
+compilación y publicación automatizadas aprobaron CI. El
+[registro de pendientes](cierre/pendientes-documentalista.md) conserva el detalle y
+los límites; la confirmación del árbol definitivo de tableros se trata por separado.
+
 Estado vigente al 7 de septiembre de 2026. Este registro diferencia el cierre actual de los cortes históricos conservados en `CIERRE-PASO13.md`, `cierre/issues-corte.json` y `cierre/actualizacion-20260903/`. No certifica aprobación docente, firmas personales ni similitud institucional.
 
 ## Correcciones documentales cerradas
