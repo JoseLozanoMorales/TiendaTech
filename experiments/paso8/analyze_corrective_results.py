@@ -14,6 +14,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Callable
+from campaign_checksums import finish
 
 
 PASO8 = Path(__file__).resolve().parent
@@ -336,6 +337,7 @@ def main() -> int:
     metadata_path = args.output / "analisis_estadistico_metodologia.json"
     metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(metadata, ensure_ascii=False, indent=2))
+    finish(args.output)
     return 0
 
 

@@ -83,6 +83,8 @@ def main() -> int:
         json.dumps(validation, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(json.dumps(validation, ensure_ascii=False, indent=2))
+    from campaign_checksums import finish
+    finish(args.output)
     return 0 if validation["valido"] else 1
 
 

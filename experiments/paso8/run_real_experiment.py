@@ -17,6 +17,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import psutil
+from campaign_checksums import write as write_campaign_checksums
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -135,10 +136,7 @@ def escribir_fila(csv_path: Path, row: dict) -> None:
 
 
 def escribir_checksum(csv_path: Path) -> Path:
-    digest = hashlib.sha256(csv_path.read_bytes()).hexdigest()
-    checksum_path = csv_path.parent / "checksums.txt"
-    checksum_path.write_text(f"{digest} *{csv_path.name}\n", encoding="utf-8", newline="\n")
-    return checksum_path
+    return write_campaign_checksums(csv_path.parent)
 
 
 def condiciones_en_orden(concurrencias: list[int], repeticiones: int,

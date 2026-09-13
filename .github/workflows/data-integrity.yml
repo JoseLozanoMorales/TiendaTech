@@ -24,4 +24,8 @@ jobs:
         run: python -m unittest discover -s scripts -p test_data_checksums.py -v
       - name: Verificar inventario completo y sumas publicadas
         run: python scripts/check_data_checksums.py
+      - name: Probar detección de alteraciones en campañas
+        run: python -m unittest discover -s experiments/paso8 -p test_campaign_checksums.py -v
+      - name: Verificar manifiestos de campañas sobre checkout limpio
+        run: python experiments/paso8/campaign_checksums.py
 

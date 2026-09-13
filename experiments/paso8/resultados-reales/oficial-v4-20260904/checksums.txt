@@ -1,0 +1,2 @@
+ef41eca55bd72f54dce1cf69582292ffd0c44d7678e736c814c9d3bb8d146caf *analisis/resumen_por_condicion.csv
+c11d587ad1ad17deb656ff9894f442fbf3ae7b4175de03ddf2fb61855e644ef2 *experimento_real_crudo.csv

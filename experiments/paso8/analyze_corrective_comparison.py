@@ -10,6 +10,7 @@ import json
 import statistics
 from collections import defaultdict
 from pathlib import Path
+from campaign_checksums import finish
 
 
 def num(row: dict[str, str], key: str) -> float:
@@ -142,6 +143,7 @@ def main() -> int:
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
+    finish(args.output)
     return 0
 
 

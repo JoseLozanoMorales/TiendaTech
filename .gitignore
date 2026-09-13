@@ -48,3 +48,9 @@ experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness/rampa-readiness.json
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/
 !experiments/paso8/resultados-reales/correctiva-20260905-final-v2/analisis/**
+!experiments/paso8/resultados-reales/oficial-v4-20260904/
+experiments/paso8/resultados-reales/oficial-v4-20260904/**
+!experiments/paso8/resultados-reales/oficial-v4-20260904/checksums.txt
+!tests/load/results/
+tests/load/results/*
+!tests/load/results/checksums.txt

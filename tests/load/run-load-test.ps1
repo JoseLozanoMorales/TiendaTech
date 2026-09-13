@@ -19,3 +19,9 @@ python -m locust `
     --stop-timeout 10 `
     --csv (Join-Path $results "tiendatech-50-users") `
     --html (Join-Path $results "tiendatech-50-users.html")
+
+$loadExitCode = $LASTEXITCODE
+# Sellar también resultados de una corrida fallida, conservando su código de salida.
+python (Join-Path $PSScriptRoot "../../experiments/paso8/campaign_checksums.py") --directory $results --write
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+exit $loadExitCode

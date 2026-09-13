@@ -488,6 +488,9 @@ def main() -> int:
     }
     args.summary_output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
+    from campaign_checksums import finish
+    for directory in {args.output.parent, args.enriched_output.parent}:
+        finish(directory)
     return 0
 
 
