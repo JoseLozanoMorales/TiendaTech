@@ -1,0 +1,10 @@
+{
+  "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+  "service": "ventas",
+  "image": "ghcr.io/joselozanomorales/tiendatech@sha256:84f9fec7be3e3eb3feeae552a1bfea5ecee486f81899a8860255a2008b8facc6",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898"
+}

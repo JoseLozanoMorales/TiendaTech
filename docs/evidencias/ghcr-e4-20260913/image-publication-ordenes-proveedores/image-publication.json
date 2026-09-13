@@ -1,0 +1,10 @@
+{
+  "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+  "service": "ordenes-proveedores",
+  "image": "ghcr.io/joselozanomorales/tiendatech@sha256:e45ce5af3b1cee4fa0d6972aaea44242e1abc6620d3cda05c2cb47b97fa42cf4",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898"
+}

@@ -1,5 +1,10 @@
 # Verificación de publicación de imágenes (E4)
 
+Registro histórico. La ejecución remota del nuevo control ya se verificó para
+`e4ad304be7324a3e37c4b20d8d913a13a6cac551`; véase
+[la verificación del 13 de septiembre](publicacion-ghcr-20260913.md).
+Las menciones a verificaciones pendientes más abajo describen el estado del 12 de septiembre.
+
 Se consultó el run publicado `34712657152`, con resultado success para el commit
 `75aeac6d579e04f531da85e4c2d2363d549422a2`. Se inspeccionaron en GHCR los ocho
 índices asociados a ese commit: todos contienen imágenes linux/amd64 y linux/arm64.
