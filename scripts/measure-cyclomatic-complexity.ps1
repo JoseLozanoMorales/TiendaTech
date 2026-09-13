@@ -31,11 +31,18 @@ $modules = [ordered]@{
     ventas = "services/ventas-service/pom.xml"
 }
 
+$classpathSeparator = if ($onWindows) { ";" } else { ":" }
+$classpath = (Get-ChildItem -Path $pmdLib -Filter "*.jar" | ForEach-Object { $_.FullName }) -join $classpathSeparator
+
 $rows = @()
 foreach ($entry in $modules.GetEnumerator()) {
     $targetReport = Join-Path $output "$($entry.Key)-pmd.xml"
     $sourceDir = Join-Path (Split-Path (Join-Path $root $entry.Value)) "src/main/java"
-    & java -cp (Join-Path $pmdLib "*") net.sourceforge.pmd.cli.PmdCli check --dir $sourceDir --rulesets $ruleset --format xml --report-file $targetReport --no-progress
+    # El comodin "dir/*" de la JVM funciona en Windows porque PowerShell no lo
+    # expande antes de invocar java, pero pwsh en Linux si hace glob-expansion
+    # del "*", mandando los jars como argumentos sueltos y descuadrando -cp.
+    # Se arma el classpath explicito para que sea igual en ambos sistemas.
+    & java -cp $classpath net.sourceforge.pmd.cli.PmdCli check --dir $sourceDir --rulesets $ruleset --format xml --report-file $targetReport --no-progress
     if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne 4) { throw "PMD fallo para $($entry.Key)" }
     [xml]$xml = Get-Content $targetReport
     $values = @($xml.pmd.file.violation | Where-Object { $_.method } | ForEach-Object {
@@ -46,3 +53,11 @@ foreach ($entry in $modules.GetEnumerator()) {
 }
 $rows | Export-Csv -NoTypeInformation -Encoding utf8 -Path (Join-Path $output "summary.csv")
 $rows | Format-Table -AutoSize
+
+# pwsh (Linux) usa $LASTEXITCODE como codigo de salida del proceso si el
+# script no termina con "exit" explicito; el ultimo valor que queda ahi es
+# el codigo propio de PMD (4 = violaciones encontradas, tolerado arriba), no
+# un fallo de este script. Windows PowerShell no tiene ese comportamiento,
+# por eso la diferencia solo se ve en CI. La decision de pasar/fallar segun
+# el umbral la toma un paso separado, no este script de medicion.
+exit 0

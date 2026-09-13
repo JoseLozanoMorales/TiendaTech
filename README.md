@@ -130,6 +130,8 @@ El sistema se organiza como un API Gateway (Spring Cloud Gateway) que enruta hac
 | `release/` | Capturas de pantalla y artefactos de evidencia de la entrega. |
 | `resultados/` | CSV y figuras del análisis de tiempos/eficiencia (Paso 6). |
 | `.github/` | Workflows de CI/CD. |
+| `.idea/` | Único archivo de configuración de IntelliJ mantenido (`TiendaTech.iml`); el resto de la carpeta está ignorada por `.gitignore`. |
+| `Evidencias de trabajo/` | Capturas y evidencia de trabajo individual por integrante, organizadas en subcarpetas por nombre. |
 
 ### Diagramas disponibles (`docs/diagrams/`)
 
