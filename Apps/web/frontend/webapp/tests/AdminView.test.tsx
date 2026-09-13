@@ -80,7 +80,7 @@ describe('AdminView: usuarios', () => {
     openAdmin()
     await screen.findByText('Productos')
     await user.click(screen.getByRole('button', { name: '♙ Usuarios' }))
-    await screen.findByText('ada')
+    await screen.findByText('ada', { selector: 'strong' })
 
     await user.click(screen.getByRole('button', { name: 'Deshabilitar' }))
 
@@ -96,12 +96,12 @@ describe('AdminView: usuarios', () => {
     openAdmin()
     await screen.findByText('Productos')
     await user.click(screen.getByRole('button', { name: '♙ Usuarios' }))
-    await screen.findByText('ada')
+    await screen.findByText('ada', { selector: 'strong' })
 
     await user.type(screen.getByPlaceholderText('Buscar usuario…'), 'zzz-sin-coincidencias')
 
     expect(await screen.findByText('No hay usuarios de este rol. Puedes crear el primero.')).toBeInTheDocument()
-    expect(screen.queryByText('ada')).not.toBeInTheDocument()
+    expect(screen.queryByText('ada', { selector: 'strong' })).not.toBeInTheDocument()
   })
 })
 
