@@ -1,2 +1,2 @@
 module,tool,files_analyzed,errors,warnings,objective,status,report
-webapp,ESLint,38,0,0,0 errors and 0 warnings,CUMPLE,webapp-eslint.json
+webapp,ESLint,39,0,0,0 errors and 0 warnings,CUMPLE,webapp-eslint.json

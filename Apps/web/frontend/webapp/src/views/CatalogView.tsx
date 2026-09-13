@@ -81,17 +81,20 @@ export default function CatalogView() {
     void loadProducts(value, 0, false)
   }
 
-  return <>
+  const renderProducts = () => (<div className="product-grid">{visible.map((product) => <article key={productId(product)} className="product-card"><img src={productImage(product)} alt={productName(product)} onError={imageFallback} /><div><p className="product-category">{String(field(product, 'categoria', 'categoria_nombre', 'nombre_categoria') || 'Componente')}</p><h3>{productName(product)}</h3><p className="product-description">{String(field(product, 'descripcion', 'detalle') || 'Disponible en TiendaTech')}</p><div className="product-footer"><strong>{money(productPrice(product))}</strong><Link to={`/producto/${productId(product)}`}>Ver detalle</Link></div></div></article>)}</div>);
+ const renderLoadMore = () => (<div ref={loadMoreRef} className="status"><button type="button" onClick={loadMore} disabled={loadingMore}>{loadingMore ? 'Cargando más productos…' : 'Cargar más productos'}</button></div>);
+ const renderCatalogResults = () => (<>
+        {error && !products.length ? <p className="alert">{error}</p> : visible.length ? renderProducts() : <p className="status">No encontramos productos en las páginas cargadas.</p>}
+        {error && products.length > 0 && <p className="alert">{error}</p>}
+        {hasMore && renderLoadMore()}
+        {!hasMore && products.length > 0 && <p className="status">Has llegado al final del catálogo.</p>}
+      </>);
+ return <>
     <section className="hero"><div><p className="eyebrow">Tecnología a tu medida</p><h1>Todo para construir<br /><em>algo increíble.</em></h1><p>Explora componentes, compara opciones y arma el equipo ideal.</p></div><div className="hero-orbit" aria-hidden="true"><span>CPU</span><span>GPU</span><span>RAM</span><b>TT</b></div></section>
     <section className="catalog">
       <div className="section-heading"><div><p className="eyebrow">Catálogo</p><h2>Encuentra tu componente</h2></div><input value={query} onChange={(e) => setQuery(e.target.value)} className="search" type="search" placeholder="Buscar producto…" aria-label="Buscar producto" /></div>
       <div className="chips"><button className={selected === null ? 'active' : ''} onClick={() => choose(null)}>Todos</button>{categories.map((category) => { const id = rowId(category, 'id', 'id_categoria'); return <button key={id} className={selected === id ? 'active' : ''} onClick={() => choose(id)}>{String(field(category, 'nombre') || '')}</button> })}</div>
-      {loading ? <p className="status">Cargando productos…</p> : <>
-        {error && !products.length ? <p className="alert">{error}</p> : visible.length ? <div className="product-grid">{visible.map((product) => <article key={productId(product)} className="product-card"><img src={productImage(product)} alt={productName(product)} onError={imageFallback} /><div><p className="product-category">{String(field(product, 'categoria', 'categoria_nombre', 'nombre_categoria') || 'Componente')}</p><h3>{productName(product)}</h3><p className="product-description">{String(field(product, 'descripcion', 'detalle') || 'Disponible en TiendaTech')}</p><div className="product-footer"><strong>{money(productPrice(product))}</strong><Link to={`/producto/${productId(product)}`}>Ver detalle</Link></div></div></article>)}</div> : <p className="status">No encontramos productos en las páginas cargadas.</p>}
-        {error && products.length > 0 && <p className="alert">{error}</p>}
-        {hasMore && <div ref={loadMoreRef} className="status"><button type="button" onClick={loadMore} disabled={loadingMore}>{loadingMore ? 'Cargando más productos…' : 'Cargar más productos'}</button></div>}
-        {!hasMore && products.length > 0 && <p className="status">Has llegado al final del catálogo.</p>}
-      </>}
+      {loading ? <p className="status">Cargando productos…</p> : renderCatalogResults()}
     </section>
   </>
 }

@@ -133,12 +133,16 @@ jobs:
             docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv
           if-no-files-found: error
       - name: Check web and test TypeScript types
+        if: ${{ !cancelled() }}
         working-directory: Apps/web/frontend/webapp
         run: npx tsc -p tsconfig.test.json
       - name: Run web unit tests with coverage (Vitest)
+        id: web-tests
+        if: ${{ !cancelled() }}
         working-directory: Apps/web/frontend/webapp
         run: npm run test:coverage -- --reporter=verbose
       - name: Summarize component coverage
+        if: ${{ !cancelled() && steps.web-tests.outcome == 'success' }}
         working-directory: Apps/web/frontend/webapp
         run: |
           node --input-type=module <<'JS'
@@ -155,7 +159,7 @@ jobs:
              `Alcance: ${alcance}, con servicios HTTP simulados. Se listan automáticamente desde vitest.config.ts (coverage.include).`, ''].join('\n'));
           JS
       - name: Upload web coverage
-        if: always()
+        if: ${{ !cancelled() && steps.web-tests.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: web-coverage

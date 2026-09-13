@@ -112,13 +112,17 @@ public class StockReservationService {
     }
 
     private static void validate(ReservationCommand command) {
-        if (command.cartId() <= 0 || command.userId() <= 0 || command.productId() <= 0)
-            throw new IllegalArgumentException("carrito, usuario y producto deben ser positivos");
+        validateIdentifiers(command);
         if (command.quantity() < 0) throw new IllegalArgumentException("cantidad no puede ser negativa");
         if (command.lamportTimestamp() < 0) throw new IllegalArgumentException("lamport no puede ser negativo");
         if (command.deviceId() == null || command.deviceId().isBlank())
             throw new IllegalArgumentException("deviceId es obligatorio");
         UUID.fromString(command.operationId());
+    }
+
+    private static void validateIdentifiers(ReservationCommand command) {
+        if (command.cartId() <= 0 || command.userId() <= 0 || command.productId() <= 0)
+            throw new IllegalArgumentException("carrito, usuario y producto deben ser positivos");
     }
 
     private record State(int quantity, long lamport, String deviceId) {}

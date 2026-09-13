@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-12T20:19:00.253">
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\ProductosServiceApplication.java">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-13T11:38:54.655">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/ProductosServiceApplication.java">
 <violation beginline="7" endline="7" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos" class="ProductosServiceApplication" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ProductosServiceApplication' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -8,7 +8,7 @@ The class 'ProductosServiceApplication' has a total cyclomatic complexity of 1 (
 The method 'main(String[])' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\application\ProductoService.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/application/ProductoService.java">
 <violation beginline="16" endline="16" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.application" class="ProductoService" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ProductoService' has a total cyclomatic complexity of 24 (highest 3).
 </violation>
@@ -79,7 +79,7 @@ The method 'activar(Integer)' has a cyclomatic complexity of 1.
 The method 'cached(String, Supplier&lt;T&gt;)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\domain\ImagenProducto.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/domain/ImagenProducto.java">
 <violation beginline="4" endline="4" begincolumn="8" endcolumn="14" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.domain" class="ImagenProducto" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The record 'ImagenProducto' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -87,7 +87,7 @@ The record 'ImagenProducto' has a total cyclomatic complexity of 1 (highest 1).
 The method 'estaVacia()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\domain\ProductoRepository.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/domain/ProductoRepository.java">
 <violation beginline="8" endline="8" begincolumn="27" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.domain" class="ProductoRepository" method="listar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listar(int, int)' has a cyclomatic complexity of 1.
 </violation>
@@ -149,7 +149,7 @@ The method 'actualizarBasico(Integer, Map&lt;String, Object&gt;, String)' has a 
 The method 'activar(Integer)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\domain\ResourceNotFoundException.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/domain/ResourceNotFoundException.java">
 <violation beginline="3" endline="3" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.domain" class="ResourceNotFoundException" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ResourceNotFoundException' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -157,12 +157,12 @@ The class 'ResourceNotFoundException' has a total cyclomatic complexity of 1 (hi
 The constructor 'ResourceNotFoundException(String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\domain\VentasPort.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/domain/VentasPort.java">
 <violation beginline="8" endline="8" begincolumn="31" endcolumn="42" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.domain" class="VentasPort" method="masVendidos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'masVendidos(int)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\infrastructure\client\VentasClient.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/infrastructure/client/VentasClient.java">
 <violation beginline="13" endline="13" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.infrastructure.client" class="VentasClient" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'VentasClient' has a total cyclomatic complexity of 3 (highest 2).
 </violation>
@@ -173,7 +173,7 @@ The constructor 'VentasClient(Builder, String)' has a cyclomatic complexity of 1
 The method 'masVendidos(int)' has a cyclomatic complexity of 2.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\infrastructure\config\WebConfig.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/infrastructure/config/WebConfig.java">
 <violation beginline="8" endline="8" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.infrastructure.config" class="WebConfig" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'WebConfig' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -181,7 +181,7 @@ The class 'WebConfig' has a total cyclomatic complexity of 1 (highest 1).
 The method 'addCorsMappings(CorsRegistry)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\infrastructure\observability\HttpObservabilityFilter.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/infrastructure/observability/HttpObservabilityFilter.java">
 <violation beginline="23" endline="23" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.infrastructure.observability" class="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'HttpObservabilityFilter' has a total cyclomatic complexity of 6 (highest 1).
 </violation>
@@ -210,7 +210,7 @@ The record 'RequestLabels' has a total cyclomatic complexity of 1 (highest 1).
 The method 'tags(String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\infrastructure\persistence\JdbcProductoRepository.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/infrastructure/persistence/JdbcProductoRepository.java">
 <violation beginline="23" endline="23" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.infrastructure.persistence" class="JdbcProductoRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'JdbcProductoRepository' has a total cyclomatic complexity of 79 (highest 8).
 </violation>
@@ -320,7 +320,7 @@ The method 'normalizeGaleriaRow(Map&lt;String, Object&gt;)' has a cyclomatic com
 The method 'json(Object)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\infrastructure\security\JwtValidationFilter.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/infrastructure/security/JwtValidationFilter.java">
 <violation beginline="28" endline="28" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.infrastructure.security" class="JwtValidationFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'JwtValidationFilter' has a total cyclomatic complexity of 32 (highest 7).
 </violation>
@@ -358,7 +358,7 @@ The method 'validarExpiracion(String)' has a cyclomatic complexity of 4.
 The method 'unauthorized(HttpServletResponse, String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\presentation\ApiExceptionHandler.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/presentation/ApiExceptionHandler.java">
 <violation beginline="19" endline="19" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.presentation" class="ApiExceptionHandler" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ApiExceptionHandler' has a total cyclomatic complexity of 9 (highest 2).
 </violation>
@@ -387,7 +387,7 @@ The method 'handleUnexpected(Exception)' has a cyclomatic complexity of 1.
 The method 'detail(DataAccessException)' has a cyclomatic complexity of 2.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\presentation\ApiResponseAdvice.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/presentation/ApiResponseAdvice.java">
 <violation beginline="20" endline="20" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.presentation" class="ApiResponseAdvice" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ApiResponseAdvice' has a total cyclomatic complexity of 15 (highest 4).
 </violation>
@@ -419,7 +419,7 @@ The method 'status(ServerHttpResponse)' has a cyclomatic complexity of 2.
 The method 'mensaje(Object, int)' has a cyclomatic complexity of 4.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\presentation\ProductoController.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/presentation/ProductoController.java">
 <violation beginline="23" endline="23" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.presentation" class="ProductoController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ProductoController' has a total cyclomatic complexity of 50 (highest 5).
 </violation>
@@ -541,7 +541,7 @@ The method 'mediaType(String)' has a cyclomatic complexity of 4.
 The method 'toResponse(ProductoResumen)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\main\java\com\tiendatech\productos\presentation\dto\CrearProductoRequest.java">
+<file name="services/productos-service/src/main/java/com/tiendatech/productos/presentation/dto/CrearProductoRequest.java">
 <violation beginline="18" endline="18" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.productos.presentation.dto" class="CrearProductoRequest" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'CrearProductoRequest' has a total cyclomatic complexity of 18 (highest 2).
 </violation>

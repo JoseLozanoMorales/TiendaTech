@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { clearSession, getUser, lastSessionActivity, markSessionActivity, SESSION_CLEARED_EVENT } from './services/session'
+import { clearSession, getUser, isAdmin, lastSessionActivity, markSessionActivity, SESSION_CLEARED_EVENT } from './services/session'
 import AccountView from './views/AccountView'
 import AdminView from './views/AdminView'
 import BuilderView from './views/BuilderView'
@@ -13,8 +13,6 @@ import ProductDetailView from './views/ProductDetailView'
 import RecoveryView from './views/RecoveryView'
 import RegisterView from './views/RegisterView'
 import WorkerView from './views/WorkerView'
-
-const isAdmin = (user: ReturnType<typeof getUser>) => Number(user?.id_rol ?? user?.idRol ?? 0) === 1 || String(user?.rol ?? user?.role ?? '').toLowerCase() === 'admin'
 
 function AdminRoute({ children }: { children: React.ReactNode }) {
   const location = useLocation()

@@ -51,27 +51,35 @@ async function renewAccessToken(): Promise<string> {
   return refreshInFlight
 }
 
-export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+function requestHeaders(options: RequestInit): Headers {
   const headers = new Headers(options.headers)
   const jwt = token()
+  addUserHeaders(headers)
+  if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type', 'application/json')
+  if (jwt && jwt !== 'mock') headers.set('Authorization', `Bearer ${jwt}`)
+  return headers
+}
+
+function addUserHeaders(headers: Headers): void {
   const user = getUser()
   const userId = user?.usuarioId ?? user?.id
 
-  if (jwt && jwt !== 'mock') headers.set('Authorization', `Bearer ${jwt}`)
   if (userId) {
     headers.set('X-User-Id', String(userId))
     headers.set('X-Usuario-Id', String(userId))
   }
   if (user?.usuario) headers.set('X-Usuario', user.usuario)
-  if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type', 'application/json')
+}
 
-  let response: Response
+async function fetchResponse(path: string, options: RequestInit, headers: Headers): Promise<Response> {
   try {
-    response = await fetch(path, { ...options, headers, credentials: 'include' })
+    return await fetch(path, { ...options, headers, credentials: 'include' })
   } catch {
     throw new ApiError('No se pudo conectar con el servidor.', 0)
   }
+}
 
+async function refreshUnauthorized(path: string, options: RequestInit, headers: Headers, response: Response): Promise<Response> {
   if (response.status === 401 && path !== '/api/login' && path !== '/auth/refresh') {
     try {
       const renewedToken = await renewAccessToken()
@@ -81,15 +89,25 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
       clearSession()
     }
   }
+  return response
+}
+
+function parseBody(text: string): unknown {
+  if (!text) return null
+  try { return JSON.parse(text) } catch { return text }
+}
+
+function responseError(body: unknown, status: number): ApiError {
+  const data = body as { message?: string; error?: string } | null
+  return new ApiError(data?.message || data?.error || String(body || `Error ${status}`), status)
+}
+
+export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const headers = requestHeaders(options)
+  const initial = await fetchResponse(path, options, headers)
+  const response = await refreshUnauthorized(path, options, headers, initial)
   if (response.status === 401) clearSession()
-  const text = await response.text()
-  let body: unknown = null
-  if (text) {
-    try { body = JSON.parse(text) } catch { body = text }
-  }
-  if (!response.ok) {
-    const data = body as { message?: string; error?: string } | null
-    throw new ApiError(data?.message || data?.error || String(body || `Error ${response.status}`), response.status)
-  }
+  const body = parseBody(await response.text())
+  if (!response.ok) throw responseError(body, response.status)
   return unwrapEnvelope<T>(body)
 }

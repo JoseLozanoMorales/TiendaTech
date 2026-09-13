@@ -25,5 +25,5 @@ writeFileSync(resolve(output, 'webapp-eslint-summary.csv'),
   `webapp,ESLint,${totals.files},${totals.errors},${totals.warnings},0 errors and 0 warnings,${status},webapp-eslint.json\n`)
 const message = `ESLint web: ${totals.files} archivos, ${totals.errors} errores, ${totals.warnings} advertencias. ${status}.`
 console.log(message)
-if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Análisis estático web\n\n${message}\n\nNo es una medición de complejidad ciclomática.\n`)
+if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Análisis estático web\n\n${message}\n\nEstos recuentos corresponden al lint general. La complejidad ciclomática se reporta por separado mediante complexity:report.\n`)
 if (status !== 'CUMPLE') process.exitCode = 1

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-12T20:18:55.421">
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\InventarioServiceApplication.java">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-13T11:38:50.982">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/InventarioServiceApplication.java">
 <violation beginline="7" endline="7" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario" class="InventarioServiceApplication" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'InventarioServiceApplication' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -8,7 +8,7 @@ The class 'InventarioServiceApplication' has a total cyclomatic complexity of 1 
 The method 'main(String[])' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\application\InventarioService.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/application/InventarioService.java">
 <violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application" class="InventarioService" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'InventarioService' has a total cyclomatic complexity of 9 (highest 3).
 </violation>
@@ -34,7 +34,7 @@ The method 'listarStock(List&lt;Integer&gt;)' has a cyclomatic complexity of 1.
 The method 'registrarMovimiento(JsonNode, String, String)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\application\reservation\CrdbTransactionRetryExecutor.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/CrdbTransactionRetryExecutor.java">
 <violation beginline="14" endline="14" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="CrdbTransactionRetryExecutor" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'CrdbTransactionRetryExecutor' has a total cyclomatic complexity of 16 (highest 6).
 </violation>
@@ -51,7 +51,7 @@ The method 'hasSqlState(Throwable, String)' has a cyclomatic complexity of 4.
 The method 'pause(int)' has a cyclomatic complexity of 5.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\application\reservation\LamportClock.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/LamportClock.java">
 <violation beginline="8" endline="8" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="LamportClock" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'LamportClock' has a total cyclomatic complexity of 2 (highest 1).
 </violation>
@@ -62,9 +62,9 @@ The method 'receive(long)' has a cyclomatic complexity of 1.
 The method 'current()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\application\reservation\StockReservationService.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/application/reservation/StockReservationService.java">
 <violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="StockReservationService" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'StockReservationService' has a total cyclomatic complexity of 24 (highest 12).
+The class 'StockReservationService' has a total cyclomatic complexity of 25 (highest 8).
 </violation>
 <violation beginline="21" endline="21" begincolumn="12" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="StockReservationService" method="StockReservationService" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'StockReservationService(JdbcTemplate, LamportClock, CrdbTransactionRetryExecutor)' has a cyclomatic complexity of 1.
@@ -82,10 +82,13 @@ The method 'reconcileOnce(ReservationCommand)' has a cyclomatic complexity of 6.
 The method 'findReplay(ReservationCommand)' has a cyclomatic complexity of 1.
 </violation>
 <violation beginline="114" endline="114" begincolumn="25" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="StockReservationService" method="validate" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validate(ReservationCommand)' has a cyclomatic complexity of 12.
+The method 'validate(ReservationCommand)' has a cyclomatic complexity of 8.
+</violation>
+<violation beginline="123" endline="123" begincolumn="25" endcolumn="44" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.application.reservation" class="StockReservationService" method="validateIdentifiers" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validateIdentifiers(ReservationCommand)' has a cyclomatic complexity of 5.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\domain\InventarioRepository.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/domain/InventarioRepository.java">
 <violation beginline="8" endline="8" begincolumn="31" endcolumn="48" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.domain" class="InventarioRepository" method="listarMovimientos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarMovimientos()' has a cyclomatic complexity of 1.
 </violation>
@@ -102,7 +105,7 @@ The method 'listarStock(List&lt;Integer&gt;)' has a cyclomatic complexity of 1.
 The method 'registrarMovimiento(String, String, String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\domain\reservation\ReservationResult.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/domain/reservation/ReservationResult.java">
 <violation beginline="3" endline="3" begincolumn="8" endcolumn="14" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.domain.reservation" class="ReservationResult" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The record 'ReservationResult' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -110,7 +113,7 @@ The record 'ReservationResult' has a total cyclomatic complexity of 1 (highest 1
 The method 'asReplay()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\config\InventarioSchemaInitializer.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/config/InventarioSchemaInitializer.java">
 <violation beginline="8" endline="8" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.config" class="InventarioSchemaInitializer" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'InventarioSchemaInitializer' has a total cyclomatic complexity of 2 (highest 1).
 </violation>
@@ -121,7 +124,7 @@ The constructor 'InventarioSchemaInitializer(JdbcTemplate)' has a cyclomatic com
 The method 'initializeIdempotencyLedger()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\config\WebConfig.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/config/WebConfig.java">
 <violation beginline="8" endline="8" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.config" class="WebConfig" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'WebConfig' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -129,7 +132,7 @@ The class 'WebConfig' has a total cyclomatic complexity of 1 (highest 1).
 The method 'addCorsMappings(CorsRegistry)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\observability\HttpObservabilityFilter.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/observability/HttpObservabilityFilter.java">
 <violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.observability" class="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'HttpObservabilityFilter' has a total cyclomatic complexity of 4 (highest 3).
 </violation>
@@ -140,7 +143,7 @@ The constructor 'HttpObservabilityFilter(MeterRegistry, String)' has a cyclomati
 The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\persistence\IdempotencyGuard.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/persistence/IdempotencyGuard.java">
 <violation beginline="16" endline="16" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="IdempotencyGuard" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'IdempotencyGuard' has a total cyclomatic complexity of 12 (highest 8).
 </violation>
@@ -154,9 +157,9 @@ The method 'isReplay(String, Object)' has a cyclomatic complexity of 8.
 The method 'hash(Object)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\persistence\JdbcInventarioRepository.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/persistence/JdbcInventarioRepository.java">
 <violation beginline="29" endline="29" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'JdbcInventarioRepository' has a total cyclomatic complexity of 61 (highest 20).
+The class 'JdbcInventarioRepository' has a total cyclomatic complexity of 65 (highest 8).
 </violation>
 <violation beginline="36" endline="36" begincolumn="12" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="JdbcInventarioRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'JdbcInventarioRepository(JdbcTemplate, ObjectMapper, IdempotencyGuard, Validator)' has a cyclomatic complexity of 1.
@@ -180,25 +183,37 @@ The method 'registrarMovimiento(String, String, String)' has a cyclomatic comple
 The method 'bloquearProductos(List&lt;MovimientoInventarioRequest&gt;)' has a cyclomatic complexity of 1.
 </violation>
 <violation beginline="154" endline="154" begincolumn="18" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="registrarItem" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'registrarItem(MovimientoInventarioRequest)' has a cyclomatic complexity of 20.
+The method 'registrarItem(MovimientoInventarioRequest)' has a cyclomatic complexity of 8.
 </violation>
-<violation beginline="237" endline="237" begincolumn="47" endcolumn="62" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="normalizarItems" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'normalizarItems(JsonNode)' has a cyclomatic complexity of 10.
+<violation beginline="216" endline="216" begincolumn="18" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="validarCantidad" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validarCantidad(String, int)' has a cyclomatic complexity of 4.
 </violation>
-<violation beginline="261" endline="261" begincolumn="18" endcolumn="29" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="validarItem" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="222" endline="222" begincolumn="24" endcolumn="45" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="calcularCostoPromedio" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'calcularCostoPromedio(String, BigDecimal, BigDecimal, int, int, int)' has a cyclomatic complexity of 4.
+</violation>
+<violation beginline="233" endline="233" begincolumn="18" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="registrarKardex" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'registrarKardex(Timestamp, String, int, BigDecimal, BigDecimal, int, BigDecimal, int)' has a cyclomatic complexity of 7.
+</violation>
+<violation beginline="253" endline="253" begincolumn="47" endcolumn="62" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="normalizarItems" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'normalizarItems(JsonNode)' has a cyclomatic complexity of 7.
+</violation>
+<violation beginline="272" endline="272" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="validarItems" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validarItems(List&lt;MovimientoInventarioRequest&gt;)' has a cyclomatic complexity of 4.
+</violation>
+<violation beginline="281" endline="281" begincolumn="18" endcolumn="29" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="validarItem" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'validarItem(MovimientoInventarioRequest, int)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="272" endline="272" begincolumn="31" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="decimal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="292" endline="292" begincolumn="31" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="decimal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'decimal(Object)' has a cyclomatic complexity of 2.
 </violation>
-<violation beginline="277" endline="277" begincolumn="31" endcolumn="46" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="decimalNullable" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="297" endline="297" begincolumn="31" endcolumn="46" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="decimalNullable" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'decimalNullable(Object)' has a cyclomatic complexity of 2.
 </violation>
-<violation beginline="281" endline="281" begincolumn="30" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="timestamp" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="301" endline="301" begincolumn="30" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.persistence" class="JdbcInventarioRepository" method="timestamp" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'timestamp(Object)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\reservation\GrpcReservationEndpoint.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/reservation/GrpcReservationEndpoint.java">
 <violation beginline="11" endline="11" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.reservation" class="GrpcReservationEndpoint" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'GrpcReservationEndpoint' has a total cyclomatic complexity of 4 (highest 3).
 </violation>
@@ -209,7 +224,7 @@ The constructor 'GrpcReservationEndpoint(StockReservationService)' has a cycloma
 The method 'reconcileReservation(ReservationRequest, StreamObserver&lt;ReservationResponse&gt;)' has a cyclomatic complexity of 3.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\reservation\GrpcReservationServer.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/reservation/GrpcReservationServer.java">
 <violation beginline="13" endline="13" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.reservation" class="GrpcReservationServer" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'GrpcReservationServer' has a total cyclomatic complexity of 9 (highest 3).
 </violation>
@@ -232,7 +247,7 @@ The method 'isAutoStartup()' has a cyclomatic complexity of 1.
 The method 'getPhase()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\reservation\LengthPrefixedJson.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/reservation/LengthPrefixedJson.java">
 <violation beginline="8" endline="8" begincolumn="14" endcolumn="19" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.reservation" class="LengthPrefixedJson" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'LengthPrefixedJson' has a total cyclomatic complexity of 10 (highest 5).
 </violation>
@@ -246,7 +261,7 @@ The method 'read(DataInputStream)' has a cyclomatic complexity of 5.
 The method 'write(DataOutputStream, byte[])' has a cyclomatic complexity of 4.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\reservation\TcpReservationServer.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/reservation/TcpReservationServer.java">
 <violation beginline="27" endline="27" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.reservation" class="TcpReservationServer" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'TcpReservationServer' has a total cyclomatic complexity of 23 (highest 7).
 </violation>
@@ -278,9 +293,9 @@ The method 'isAutoStartup()' has a cyclomatic complexity of 1.
 The method 'getPhase()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\infrastructure\security\JwtValidationFilter.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/infrastructure/security/JwtValidationFilter.java">
 <violation beginline="28" endline="28" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'JwtValidationFilter' has a total cyclomatic complexity of 28 (highest 16).
+The class 'JwtValidationFilter' has a total cyclomatic complexity of 29 (highest 7).
 </violation>
 <violation beginline="33" endline="33" begincolumn="12" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="JwtValidationFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'JwtValidationFilter(Environment, ObjectMapper)' has a cyclomatic complexity of 4.
@@ -289,13 +304,22 @@ The constructor 'JwtValidationFilter(Environment, ObjectMapper)' has a cyclomati
 The method 'shouldNotFilter(HttpServletRequest)' has a cyclomatic complexity of 7.
 </violation>
 <violation beginline="53" endline="53" begincolumn="30" endcolumn="46" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="doFilterInternal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 16.
+The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 5.
 </violation>
-<violation beginline="77" endline="77" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="unauthorized" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="66" endline="66" begincolumn="21" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="hasInternalToken" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'hasInternalToken(HttpServletRequest)' has a cyclomatic complexity of 1.
+</violation>
+<violation beginline="72" endline="72" begincolumn="18" endcolumn="29" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="validateJwt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validateJwt(String)' has a cyclomatic complexity of 7.
+</violation>
+<violation beginline="84" endline="84" begincolumn="18" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="validateExpiration" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validateExpiration(String)' has a cyclomatic complexity of 4.
+</violation>
+<violation beginline="89" endline="89" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.infrastructure.security" class="JwtValidationFilter" method="unauthorized" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'unauthorized(HttpServletResponse, String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\presentation\ApiExceptionHandler.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/presentation/ApiExceptionHandler.java">
 <violation beginline="16" endline="16" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiExceptionHandler" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ApiExceptionHandler' has a total cyclomatic complexity of 9 (highest 2).
 </violation>
@@ -321,18 +345,27 @@ The method 'handleUnexpected(Exception)' has a cyclomatic complexity of 1.
 The method 'detail(DataAccessException)' has a cyclomatic complexity of 2.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\presentation\ApiResponseAdvice.java">
-<violation beginline="20" endline="20" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'ApiResponseAdvice' has a total cyclomatic complexity of 16 (highest 15).
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/presentation/ApiResponseAdvice.java">
+<violation beginline="19" endline="19" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'ApiResponseAdvice' has a total cyclomatic complexity of 12 (highest 5).
 </violation>
-<violation beginline="24" endline="24" begincolumn="20" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="supports" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="23" endline="23" begincolumn="20" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="supports" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'supports(MethodParameter, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="28" endline="28" begincolumn="19" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="beforeBodyWrite" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'beforeBodyWrite(Object, MethodParameter, MediaType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;, ServerHttpRequest, ServerHttpResponse)' has a cyclomatic complexity of 15.
+<violation beginline="27" endline="27" begincolumn="19" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="beforeBodyWrite" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'beforeBodyWrite(Object, MethodParameter, MediaType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;, ServerHttpRequest, ServerHttpResponse)' has a cyclomatic complexity of 5.
+</violation>
+<violation beginline="38" endline="38" begincolumn="21" endcolumn="41" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="isInfrastructurePath" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'isInfrastructurePath(String)' has a cyclomatic complexity of 1.
+</violation>
+<violation beginline="43" endline="43" begincolumn="21" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="isRawResponse" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'isRawResponse(Object, MediaType)' has a cyclomatic complexity of 1.
+</violation>
+<violation beginline="49" endline="49" begincolumn="20" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ApiResponseAdvice" method="responseMessage" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'responseMessage(Object, int)' has a cyclomatic complexity of 4.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\presentation\InventarioController.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/presentation/InventarioController.java">
 <violation beginline="14" endline="14" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="InventarioController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'InventarioController' has a total cyclomatic complexity of 9 (highest 3).
 </violation>
@@ -358,7 +391,7 @@ The method 'registrarMovimiento(JsonNode, String, String, String)' has a cycloma
 The method 'toResponse(StockProducto)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\presentation\ReservationStatusController.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/presentation/ReservationStatusController.java">
 <violation beginline="15" endline="15" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation" class="ReservationStatusController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ReservationStatusController' has a total cyclomatic complexity of 2 (highest 1).
 </violation>
@@ -369,7 +402,7 @@ The constructor 'ReservationStatusController(TcpReservationServer, GrpcReservati
 The method 'status()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\inventario-service\src\main\java\com\tiendatech\inventario\presentation\dto\MovimientoInventarioRequest.java">
+<file name="services/inventario-service/src/main/java/com/tiendatech/inventario/presentation/dto/MovimientoInventarioRequest.java">
 <violation beginline="8" endline="8" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.inventario.presentation.dto" class="MovimientoInventarioRequest" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'MovimientoInventarioRequest' has a total cyclomatic complexity of 14 (highest 1).
 </violation>

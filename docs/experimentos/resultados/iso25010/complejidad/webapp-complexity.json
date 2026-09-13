@@ -5,112 +5,105 @@
   "variant": "classic",
   "scope": "src/**/*.{ts,tsx}",
   "files_analyzed": 19,
-  "functions_analyzed": 404,
-  "max_method_complexity": 26,
+  "functions_analyzed": 434,
+  "max_method_complexity": 9,
   "objective": "<10",
-  "status": "NO CUMPLE",
+  "status": "CUMPLE",
   "methods": [
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
       "line": 17,
-      "column": 52,
-      "complexity": 10,
-      "message": "Arrow function has a complexity of 10. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 19,
       "column": 1,
       "complexity": 2,
       "message": "Function 'AdminRoute' has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 24,
+      "line": 22,
       "column": 16,
       "complexity": 8,
       "message": "Function 'App' has a complexity of 8. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 28,
+      "line": 26,
       "column": 26,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 28,
+      "line": 26,
       "column": 45,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 29,
+      "line": 27,
       "column": 21,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 30,
+      "line": 28,
       "column": 16,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 35,
+      "line": 33,
       "column": 23,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 40,
+      "line": 38,
       "column": 25,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 46,
+      "line": 44,
       "column": 25,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 54,
+      "line": 52,
       "column": 31,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 56,
+      "line": 54,
       "column": 26,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 59,
+      "line": 57,
       "column": 15,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 61,
+      "line": 59,
       "column": 28,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/App.tsx",
-      "line": 73,
+      "line": 71,
       "column": 69,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
@@ -153,9 +146,51 @@
     {
       "file": "Apps/web/frontend/webapp/src/services/api.ts",
       "line": 54,
+      "column": 1,
+      "complexity": 5,
+      "message": "Function 'requestHeaders' has a complexity of 5. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 63,
+      "column": 1,
+      "complexity": 7,
+      "message": "Function 'addUserHeaders' has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 74,
+      "column": 1,
+      "complexity": 2,
+      "message": "Async function 'fetchResponse' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 82,
+      "column": 1,
+      "complexity": 5,
+      "message": "Async function 'refreshUnauthorized' has a complexity of 5. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 95,
+      "column": 1,
+      "complexity": 3,
+      "message": "Function 'parseBody' has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 100,
+      "column": 1,
+      "complexity": 6,
+      "message": "Function 'responseError' has a complexity of 6. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/services/api.ts",
+      "line": 105,
       "column": 8,
-      "complexity": 26,
-      "message": "Async function 'api' has a complexity of 26. Maximum allowed is 0."
+      "complexity": 4,
+      "message": "Async function 'api' has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/services/cart.ts",
@@ -291,11 +326,18 @@
       "message": "Function 'token' has a complexity of 3. Maximum allowed is 0."
     },
     {
+      "file": "Apps/web/frontend/webapp/src/services/session.ts",
+      "line": 76,
+      "column": 8,
+      "complexity": 7,
+      "message": "Function 'isAdmin' has a complexity of 7. Maximum allowed is 0."
+    },
+    {
       "file": "Apps/web/frontend/webapp/src/views/AccountView.tsx",
       "line": 6,
       "column": 16,
-      "complexity": 13,
-      "message": "Function 'AccountView' has a complexity of 13. Maximum allowed is 0."
+      "complexity": 7,
+      "message": "Function 'AccountView' has a complexity of 7. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AccountView.tsx",
@@ -349,7 +391,14 @@
     {
       "file": "Apps/web/frontend/webapp/src/views/AccountView.tsx",
       "line": 6,
-      "column": 2470,
+      "column": 1459,
+      "complexity": 7,
+      "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AccountView.tsx",
+      "line": 7,
+      "column": 586,
       "complexity": 4,
       "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
     },
@@ -475,1337 +524,1428 @@
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
       "line": 23,
-      "column": 16,
-      "complexity": 19,
-      "message": "Function 'AdminView' has a complexity of 19. Maximum allowed is 0."
+      "column": 1,
+      "complexity": 2,
+      "message": "Function 'numericField' has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 25,
+      "line": 24,
+      "column": 1,
+      "complexity": 3,
+      "message": "Function 'productFormFromDetail' has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 27,
+      "column": 16,
+      "complexity": 9,
+      "message": "Function 'AdminView' has a complexity of 9. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 29,
       "column": 20,
       "complexity": 1,
       "message": "Async arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 26,
+      "line": 30,
       "column": 14,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 27,
+      "line": 31,
       "column": 27,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 27,
+      "line": 31,
       "column": 55,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 27,
+      "line": 31,
       "column": 117,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 28,
+      "line": 32,
       "column": 18,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 28,
+      "line": 32,
       "column": 106,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 28,
+      "line": 32,
       "column": 121,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 28,
+      "line": 32,
       "column": 208,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 28,
+      "line": 32,
       "column": 226,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 29,
+      "line": 33,
       "column": 18,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 30,
+      "line": 34,
       "column": 26,
       "complexity": 6,
       "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 31,
+      "line": 35,
       "column": 35,
       "complexity": 7,
       "message": "Async arrow function has a complexity of 7. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 32,
+      "line": 36,
       "column": 34,
       "complexity": 5,
       "message": "Async arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 33,
+      "line": 37,
       "column": 19,
       "complexity": 7,
       "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 34,
+      "line": 38,
       "column": 21,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 35,
+      "line": 39,
       "column": 34,
-      "complexity": 15,
-      "message": "Async arrow function has a complexity of 15. Maximum allowed is 0."
+      "complexity": 6,
+      "message": "Async arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 36,
+      "line": 40,
       "column": 49,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 37,
+      "line": 41,
       "column": 32,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 38,
+      "line": 42,
       "column": 34,
       "complexity": 2,
       "message": "Async arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 38,
+      "line": 42,
       "column": 208,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 38,
+      "line": 42,
       "column": 223,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 39,
+      "line": 43,
       "column": 25,
       "complexity": 4,
       "message": "Async arrow function has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 39,
+      "line": 43,
       "column": 196,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 40,
+      "line": 44,
       "column": 38,
       "complexity": 9,
       "message": "Async arrow function has a complexity of 9. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 40,
+      "line": 44,
       "column": 164,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 40,
+      "line": 44,
       "column": 665,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 41,
+      "line": 45,
       "column": 37,
       "complexity": 5,
       "message": "Async arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 42,
+      "line": 46,
       "column": 38,
       "complexity": 3,
       "message": "Async arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 482,
-      "complexity": 2,
-      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 551,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 871,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 955,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 1348,
-      "complexity": 2,
-      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 1420,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 1532,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 1969,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 2110,
+      "line": 48,
+      "column": 31,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 2227,
+      "line": 49,
+      "column": 30,
+      "complexity": 6,
+      "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 49,
+      "column": 185,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 49,
+      "column": 257,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 2389,
+      "line": 49,
+      "column": 369,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 2687,
+      "line": 49,
+      "column": 806,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 2891,
+      "line": 49,
+      "column": 947,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 49,
+      "column": 1064,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 44,
-      "column": 3933,
+      "line": 49,
+      "column": 1226,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 46,
+      "line": 49,
+      "column": 1524,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 49,
+      "column": 1728,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 50,
+      "column": 33,
+      "complexity": 4,
+      "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 50,
+      "column": 819,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 51,
+      "column": 415,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 51,
+      "column": 484,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 51,
+      "column": 804,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 51,
+      "column": 888,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 53,
       "column": 1,
       "complexity": 1,
       "message": "Function 'Overview' has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 46,
+      "line": 53,
       "column": 394,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 47,
+      "line": 54,
       "column": 1,
       "complexity": 2,
       "message": "Function 'UserTable' has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 47,
+      "line": 54,
       "column": 294,
       "complexity": 6,
       "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 47,
+      "line": 54,
       "column": 664,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 47,
+      "line": 54,
       "column": 730,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 1,
       "complexity": 8,
       "message": "Function 'ProductForm' has a complexity of 8. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 103,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 118,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 621,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 756,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 952,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 1121,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 1289,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 1346,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 1538,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 2138,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 2384,
       "complexity": 4,
       "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 2475,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 2494,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 2859,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3291,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3404,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3508,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3538,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3570,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3600,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3775,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3876,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 49,
+      "line": 56,
       "column": 3963,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 50,
+      "line": 57,
       "column": 1,
       "complexity": 2,
       "message": "Function 'ProductTable' has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 50,
-      "column": 352,
-      "complexity": 10,
-      "message": "Arrow function has a complexity of 10. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 50,
-      "column": 1000,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 50,
-      "column": 1080,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 50,
-      "column": 1142,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 51,
-      "column": 1,
-      "complexity": 2,
-      "message": "Function 'SalesPanel' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 51,
-      "column": 75,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 51,
-      "column": 290,
+      "line": 57,
+      "column": 234,
       "complexity": 5,
       "message": "Arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 53,
-      "column": 1,
-      "complexity": 15,
-      "message": "Function 'ProvidersPanel' has a complexity of 15. Maximum allowed is 0."
+      "line": 58,
+      "column": 197,
+      "complexity": 6,
+      "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 55,
-      "column": 15,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 55,
-      "column": 72,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 56,
-      "column": 14,
-      "complexity": 2,
-      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 56,
-      "column": 56,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 56,
-      "column": 86,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 57,
-      "column": 18,
+      "line": 58,
+      "column": 707,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
       "line": 58,
-      "column": 26,
-      "complexity": 7,
-      "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
+      "column": 787,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 58,
+      "column": 849,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
       "line": 59,
-      "column": 57,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+      "column": 1,
+      "complexity": 2,
+      "message": "Function 'SalesPanel' has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 60,
-      "column": 65,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 60,
-      "column": 113,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 61,
+      "line": 59,
       "column": 75,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 61,
-      "column": 128,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 62,
-      "column": 17,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 64,
-      "column": 40,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 64,
-      "column": 76,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 65,
-      "column": 31,
-      "complexity": 6,
-      "message": "Async arrow function has a complexity of 6. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 66,
-      "column": 29,
-      "complexity": 9,
-      "message": "Async arrow function has a complexity of 9. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 50,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 527,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 648,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 743,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 783,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 817,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1120,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1224,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1269,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1308,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1612,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1723,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 1867,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 2195,
-      "complexity": 9,
-      "message": "Arrow function has a complexity of 9. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 2656,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 67,
-      "column": 2738,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 69,
-      "column": 1,
-      "complexity": 5,
-      "message": "Function 'ReceiveModal' has a complexity of 5. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 72,
-      "column": 14,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 72,
-      "column": 63,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 73,
-      "column": 14,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 73,
-      "column": 82,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 74,
-      "column": 31,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 74,
-      "column": 61,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 75,
-      "column": 22,
-      "complexity": 11,
-      "message": "Async arrow function has a complexity of 11. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 106,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 472,
+      "line": 59,
+      "column": 290,
       "complexity": 5,
       "message": "Arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 932,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 945,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 1377,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 93,
-      "column": 1497,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 95,
+      "line": 61,
       "column": 1,
-      "complexity": 14,
-      "message": "Function 'OrdersPanel' has a complexity of 14. Maximum allowed is 0."
+      "complexity": 4,
+      "message": "Function 'ProvidersPanel' has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 98,
-      "column": 44,
+      "line": 63,
+      "column": 15,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 99,
-      "column": 30,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 99,
-      "column": 138,
+      "line": 63,
+      "column": 72,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 100,
-      "column": 56,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 100,
-      "column": 110,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 100,
-      "column": 165,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 100,
-      "column": 225,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 101,
-      "column": 55,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 101,
-      "column": 152,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 101,
-      "column": 241,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 101,
-      "column": 312,
-      "complexity": 2,
-      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 102,
-      "column": 44,
-      "complexity": 2,
-      "message": "Async arrow function has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 107,
-      "column": 14,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 108,
+      "line": 64,
       "column": 14,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 108,
+      "line": 64,
       "column": 56,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 108,
+      "line": 64,
       "column": 86,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 109,
-      "column": 33,
-      "complexity": 5,
-      "message": "Async arrow function has a complexity of 5. Maximum allowed is 0."
+      "line": 65,
+      "column": 18,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 110,
-      "column": 54,
+      "line": 66,
+      "column": 26,
+      "complexity": 7,
+      "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 67,
+      "column": 57,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 68,
+      "column": 65,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 68,
+      "column": 113,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 69,
+      "column": 75,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 69,
+      "column": 128,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 70,
+      "column": 17,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 72,
+      "column": 66,
+      "complexity": 4,
+      "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 73,
+      "column": 40,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 73,
+      "column": 76,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 74,
+      "column": 31,
       "complexity": 6,
       "message": "Async arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 111,
-      "column": 27,
-      "complexity": 1,
-      "message": "Async arrow function has a complexity of 1. Maximum allowed is 0."
+      "line": 75,
+      "column": 29,
+      "complexity": 9,
+      "message": "Async arrow function has a complexity of 9. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
+      "line": 76,
+      "column": 32,
+      "complexity": 6,
+      "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 280,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 401,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 496,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 536,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 570,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 828,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 932,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 977,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 1016,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 1260,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 1371,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 76,
+      "column": 1515,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 77,
       "column": 50,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 372,
-      "complexity": 2,
-      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+      "line": 77,
+      "column": 482,
+      "complexity": 9,
+      "message": "Arrow function has a complexity of 9. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 444,
+      "line": 77,
+      "column": 943,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 551,
-      "complexity": 2,
-      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 865,
+      "line": 77,
+      "column": 1025,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1023,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1188,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1329,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1543,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1719,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1867,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 1879,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2040,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2052,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2173,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2231,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2512,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2587,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2813,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2825,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 2841,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 3000,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 3329,
-      "complexity": 12,
-      "message": "Arrow function has a complexity of 12. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 3407,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4004,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4129,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4246,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4559,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4659,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4809,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4822,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 4929,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 5043,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 112,
-      "column": 5078,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 117,
+      "line": 79,
       "column": 1,
-      "complexity": 23,
-      "message": "Function 'SystemNodes' has a complexity of 23. Maximum allowed is 0."
+      "complexity": 5,
+      "message": "Function 'ReceiveModal' has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 119,
-      "column": 23,
-      "complexity": 4,
-      "message": "Async arrow function has a complexity of 4. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 119,
-      "column": 459,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 120,
+      "line": 82,
       "column": 14,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 82,
+      "column": 63,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 83,
+      "column": 14,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 83,
+      "column": 82,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 84,
+      "column": 31,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 84,
+      "column": 61,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 85,
+      "column": 22,
+      "complexity": 9,
+      "message": "Async arrow function has a complexity of 9. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 106,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 472,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 928,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 941,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 1373,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 103,
+      "column": 1493,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 105,
+      "column": 1,
+      "complexity": 7,
+      "message": "Function 'OrdersPanel' has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 108,
+      "column": 44,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 109,
+      "column": 30,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 109,
+      "column": 138,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 110,
+      "column": 56,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 110,
+      "column": 110,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 110,
+      "column": 165,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 110,
+      "column": 225,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 111,
+      "column": 55,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 111,
+      "column": 152,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 111,
+      "column": 241,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 111,
+      "column": 312,
+      "complexity": 2,
+      "message": "Method 'render' has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 112,
+      "column": 44,
+      "complexity": 2,
+      "message": "Async arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 117,
+      "column": 14,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 118,
+      "column": 14,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 118,
+      "column": 56,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 118,
+      "column": 86,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 119,
+      "column": 33,
+      "complexity": 5,
+      "message": "Async arrow function has a complexity of 5. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 120,
+      "column": 54,
+      "complexity": 6,
+      "message": "Async arrow function has a complexity of 6. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 121,
+      "column": 27,
+      "complexity": 1,
+      "message": "Async arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
       "line": 122,
-      "column": 285,
+      "column": 29,
+      "complexity": 8,
+      "message": "Arrow function has a complexity of 8. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 219,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
       "line": 122,
+      "column": 377,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 542,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 683,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 897,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1073,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1221,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1233,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1394,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1406,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1527,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1585,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1866,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 1941,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 2167,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 2179,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 2195,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 122,
+      "column": 2354,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 123,
+      "column": 55,
+      "complexity": 4,
+      "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 123,
+      "column": 130,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 123,
+      "column": 255,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 123,
+      "column": 372,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 50,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 372,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 444,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 551,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 886,
+      "complexity": 9,
+      "message": "Arrow function has a complexity of 9. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 964,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 1789,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 1889,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 2039,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 2052,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 2159,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 2273,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 124,
+      "column": 2308,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 129,
+      "column": 1,
+      "complexity": 8,
+      "message": "Function 'SystemNodes' has a complexity of 8. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 131,
+      "column": 23,
+      "complexity": 4,
+      "message": "Async arrow function has a complexity of 4. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 131,
+      "column": 459,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 132,
+      "column": 14,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 134,
+      "column": 33,
+      "complexity": 8,
+      "message": "Arrow function has a complexity of 8. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 135,
+      "column": 29,
+      "complexity": 5,
+      "message": "Arrow function has a complexity of 5. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 136,
+      "column": 30,
+      "complexity": 5,
+      "message": "Arrow function has a complexity of 5. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 137,
+      "column": 285,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
+      "line": 137,
       "column": 550,
       "complexity": 5,
       "message": "Arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/AdminView.tsx",
-      "line": 122,
-      "column": 2240,
+      "line": 137,
+      "column": 1463,
       "complexity": 4,
       "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
     },
@@ -1826,146 +1966,153 @@
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
       "line": 16,
-      "column": 16,
-      "complexity": 24,
-      "message": "Function 'BuilderView' has a complexity of 24. Maximum allowed is 0."
+      "column": 40,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
       "line": 17,
+      "column": 16,
+      "complexity": 8,
+      "message": "Function 'BuilderView' has a complexity of 8. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 18,
       "column": 181,
       "complexity": 4,
       "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 18,
+      "line": 19,
       "column": 24,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 18,
+      "line": 19,
       "column": 65,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 18,
+      "line": 19,
       "column": 160,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 18,
+      "line": 19,
       "column": 181,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 19,
+      "line": 20,
       "column": 43,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 19,
+      "line": 20,
       "column": 134,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 20,
+      "line": 21,
       "column": 45,
       "complexity": 3,
       "message": "Async arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 20,
+      "line": 21,
       "column": 215,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 21,
+      "line": 22,
       "column": 14,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 22,
+      "line": 23,
       "column": 32,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 22,
+      "line": 23,
       "column": 148,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 23,
-      "column": 27,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
       "line": 24,
-      "column": 16,
+      "column": 27,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
       "line": 25,
+      "column": 16,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 26,
       "column": 24,
       "complexity": 5,
       "message": "Async arrow function has a complexity of 5. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 26,
+      "line": 27,
       "column": 27,
-      "complexity": 10,
-      "message": "Async arrow function has a complexity of 10. Maximum allowed is 0."
+      "complexity": 8,
+      "message": "Async arrow function has a complexity of 8. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 26,
-      "column": 487,
+      "line": 27,
+      "column": 456,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 27,
+      "line": 28,
       "column": 16,
       "complexity": 4,
       "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 27,
+      "line": 28,
       "column": 215,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 28,
+      "line": 29,
       "column": 18,
       "complexity": 2,
       "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
@@ -1973,98 +2120,119 @@
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
       "line": 30,
+      "column": 32,
+      "complexity": 6,
+      "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 30,
+      "column": 172,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 30,
+      "column": 197,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 30,
+      "column": 594,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 31,
+      "column": 28,
+      "complexity": 8,
+      "message": "Arrow function has a complexity of 8. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 31,
+      "column": 412,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 31,
+      "column": 548,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 31,
+      "column": 1262,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 32,
+      "column": 34,
+      "complexity": 7,
+      "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 32,
+      "column": 236,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 32,
+      "column": 276,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 32,
+      "column": 863,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
+      "line": 34,
       "column": 250,
       "complexity": 7,
       "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 30,
+      "line": 34,
       "column": 399,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 30,
+      "line": 34,
       "column": 654,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 31,
+      "line": 35,
       "column": 355,
       "complexity": 6,
       "message": "Arrow function has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 31,
+      "line": 35,
       "column": 734,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 32,
-      "column": 138,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 32,
-      "column": 163,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 32,
-      "column": 560,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 382,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 518,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 1232,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 1474,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 1514,
-      "complexity": 1,
-      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/BuilderView.tsx",
-      "line": 33,
-      "column": 2101,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
@@ -2310,8 +2478,8 @@
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
       "line": 8,
       "column": 16,
-      "complexity": 12,
-      "message": "Function 'CatalogView' has a complexity of 12. Maximum allowed is 0."
+      "complexity": 3,
+      "message": "Function 'CatalogView' has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
@@ -2406,38 +2574,59 @@
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
-      "line": 87,
+      "line": 84,
+      "column": 29,
+      "complexity": 1,
+      "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
+      "line": 84,
+      "column": 86,
+      "complexity": 3,
+      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
+      "line": 85,
+      "column": 28,
+      "complexity": 2,
+      "message": "Arrow function has a complexity of 2. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
+      "line": 86,
+      "column": 34,
+      "complexity": 9,
+      "message": "Arrow function has a complexity of 9. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
+      "line": 95,
       "column": 153,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
-      "line": 88,
+      "line": 96,
       "column": 96,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
-      "line": 88,
+      "line": 96,
       "column": 154,
       "complexity": 3,
       "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
-      "line": 88,
+      "line": 96,
       "column": 289,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
-    },
-    {
-      "file": "Apps/web/frontend/webapp/src/views/CatalogView.tsx",
-      "line": 90,
-      "column": 143,
-      "complexity": 3,
-      "message": "Arrow function has a complexity of 3. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/CheckoutView.tsx",
@@ -2520,8 +2709,8 @@
       "file": "Apps/web/frontend/webapp/src/views/InvoiceView.tsx",
       "line": 5,
       "column": 16,
-      "complexity": 10,
-      "message": "Function 'InvoiceView' has a complexity of 10. Maximum allowed is 0."
+      "complexity": 7,
+      "message": "Function 'InvoiceView' has a complexity of 7. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/InvoiceView.tsx",
@@ -2538,29 +2727,43 @@
       "message": "Async arrow function has a complexity of 4. Maximum allowed is 0."
     },
     {
+      "file": "Apps/web/frontend/webapp/src/views/InvoiceView.tsx",
+      "line": 5,
+      "column": 610,
+      "complexity": 4,
+      "message": "Arrow function has a complexity of 4. Maximum allowed is 0."
+    },
+    {
       "file": "Apps/web/frontend/webapp/src/views/LoginView.tsx",
       "line": 7,
+      "column": 1,
+      "complexity": 3,
+      "message": "Function 'loginToken' has a complexity of 3. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/LoginView.tsx",
+      "line": 8,
       "column": 16,
       "complexity": 4,
       "message": "Function 'LoginView' has a complexity of 4. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/LoginView.tsx",
-      "line": 9,
+      "line": 10,
       "column": 43,
-      "complexity": 15,
-      "message": "Async arrow function has a complexity of 15. Maximum allowed is 0."
+      "complexity": 8,
+      "message": "Async arrow function has a complexity of 8. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/LoginView.tsx",
-      "line": 11,
+      "line": 12,
       "column": 468,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/LoginView.tsx",
-      "line": 11,
+      "line": 12,
       "column": 632,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
@@ -2569,8 +2772,8 @@
       "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
       "line": 8,
       "column": 16,
-      "complexity": 11,
-      "message": "Function 'ProductDetailView' has a complexity of 11. Maximum allowed is 0."
+      "complexity": 6,
+      "message": "Function 'ProductDetailView' has a complexity of 6. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
@@ -2617,21 +2820,28 @@
     {
       "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
       "line": 13,
-      "column": 468,
+      "column": 32,
+      "complexity": 7,
+      "message": "Arrow function has a complexity of 7. Maximum allowed is 0."
+    },
+    {
+      "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
+      "line": 13,
+      "column": 507,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
-      "line": 13,
-      "column": 503,
+      "line": 14,
+      "column": 467,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },
     {
       "file": "Apps/web/frontend/webapp/src/views/ProductDetailView.tsx",
-      "line": 13,
-      "column": 1065,
+      "line": 14,
+      "column": 502,
       "complexity": 1,
       "message": "Arrow function has a complexity of 1. Maximum allowed is 0."
     },

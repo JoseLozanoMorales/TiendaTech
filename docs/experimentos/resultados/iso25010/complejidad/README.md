@@ -1,36 +1,70 @@
-# Análisis estático de servicios y cliente web
+# Complejidad ciclomática después del refactor
 
-`summary.csv` reúne dos mediciones distintas:
+Medición local del 13 de septiembre de 2026. `summary.csv` reúne máximos por
+método/función, con el mismo objetivo estricto `<10` para Java y TypeScript/React.
 
-- Java / PMD: máximo de complejidad por método y objetivo `<10`. Los recuentos
-  de archivos, errores y advertencias se dejan vacíos porque estos informes no
-  aportan esa misma medición.
-- Web / ESLint: archivos analizados, errores y advertencias. La complejidad por
-  método se deja vacía: **no medida**, no cero.
+| Módulo | Máximo | Estado |
+| --- | ---: | --- |
+| gateway | 7 | CUMPLE |
+| inventario | 8 | CUMPLE |
+| ordenes_proveedores | 8 | CUMPLE |
+| pedidos | 9 | CUMPLE |
+| productos | 8 | CUMPLE |
+| usuarios | 9 | CUMPLE |
+| ventas | 8 | CUMPLE |
+| webapp | 9 | CUMPLE |
 
-La ejecución web del 11 de septiembre de 2026 analizó **27 archivos**, con
-**0 errores y 0 advertencias**. Incluye fuentes TypeScript/TSX, pruebas y
-configuración/scripts seleccionados por `eslint.config.js`; excluye copias JS
-bajo `src/`, dependencias, `dist/` y reportes de cobertura. No se infiere ausencia
-universal de defectos a partir de cero incidencias de las reglas habilitadas.
+## Alcance y reproducción
 
-Evidencia: `webapp-eslint.json` contiene los resultados por archivo con rutas
-relativas al repositorio; `webapp-eslint-summary.csv` conserva los recuentos.
-El manuscrito los referencia en la subsección «Cobertura y complejidad».
+- Java: PMD 7.17.0 y `docs/experimentos/pmd-cyclomatic-ruleset.xml`, sobre todo
+  `src/main/java` de los siete módulos. Se extraen los valores por método de los
+  XML, no la complejidad total por clase. La ejecución local usó JDK 21 y la CLI
+  de PMD directamente, con los mismos argumentos del script PowerShell.
+- Web: ESLint 10.10.0, regla `complexity`, variante `classic`, umbral de reporte 0
+  y supresiones inline desactivadas. Se midieron 434 funciones en 19 archivos de
+  `src/**/*.{ts,tsx}`; incluye callbacks y funciones de renderizado extraídas.
+  Pruebas y herramientas están fuera de ese directorio. `webapp-complexity.json`
+  conserva cada ubicación y valor. Cada herramienta cuenta las decisiones de su
+  lenguaje; no se afirma identidad de todas sus convenciones sintácticas.
+- `webapp-eslint*.{json,csv}` documenta el lint general por separado: 39 archivos,
+  cero errores y cero advertencias. Sus recuentos no reemplazan la complejidad.
+- El servicio Python y el cliente Android no forman parte de esta medición.
 
-Para regenerar desde la raíz:
+Desde la raíz del repositorio, con PowerShell, Java y Node disponibles:
 
-```bash
-npm --prefix Apps/web/frontend/webapp ci
+```powershell
+./scripts/measure-cyclomatic-complexity.ps1
+npm --prefix Apps/web/frontend/webapp run complexity:report
 npm --prefix Apps/web/frontend/webapp run lint:report
 ```
 
-El comando aplica las mismas reglas de ESLint que `npm run lint`, escribe los
-reportes y actualiza la fila web de `summary.csv` conservando las filas PMD.
-Devuelve fallo si hay errores, advertencias o ningún archivo analizado.
-Después de regenerar los informes Java con `scripts/measure-cyclomatic-complexity.ps1`,
-ejecutar también `lint:report` para incorporar de nuevo la fila web al resumen.
+La regla de reporte 0 permite observar también funciones de complejidad 1.
+El script web falla ante un máximo >=10. En Java, el paso posterior de CI
+comprueba el umbral sobre `summary.csv`; el código 4 de PMD indica que se
+produjeron mediciones, no que se incumplió necesariamente el objetivo.
 
-En CI se generan el JSON y CSV, se muestran los recuentos en el resumen del job
-`web-quality` y se conservan como `web-static-analysis`, incluso cuando el análisis
-falla. El workflow no hace commits automáticos de los informes.
+`web-quality` descarga el artefacto PMD de la misma ejecución antes de añadir la
+fila web, y conserva el resumen combinado. Las pruebas y la cobertura web se
+siguen ejecutando si falla la complejidad; ese fallo mantiene rojo el job.
+
+Al versionar CSV regenerados, actualizar y comprobar también el manifiesto:
+
+```bash
+python3 scripts/check_data_checksums.py --write
+python3 scripts/check_data_checksums.py
+```
+
+## Validación del refactor
+
+- Web: 62 pruebas aprobadas; TypeScript y build de producción aprobados.
+- Inventario: 45 pruebas aprobadas, incluyendo costes ponderados, kardex,
+  validación JWT y respuestas HTTP.
+- Pedidos: 78 pruebas aprobadas; 2 de integración omitidas al no disponer de
+  Docker local. Incluye validación JWT, respuestas HTTP y validaciones del
+  checkout. La integración real con CockroachDB queda para CI.
+- Integridad: 60 sumas de datos tabulares verificadas y 5 pruebas del verificador
+  aprobadas. Referencias del manuscrito: cero fallos.
+
+Los enlaces del manuscrito al commit `f6de760` identifican explícitamente la
+medición histórica anterior (máximo web 26). La tabla actual corresponde a los
+archivos regenerados que acompañan este refactor, no a aquel commit.

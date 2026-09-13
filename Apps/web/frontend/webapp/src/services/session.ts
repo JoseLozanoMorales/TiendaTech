@@ -72,3 +72,9 @@ export function lastSessionActivity(): number {
 export function token(): string {
   return sessionStorage.getItem('access') || sessionStorage.getItem('token') || ''
 }
+
+export function isAdmin(user: SessionUser | null): boolean {
+  if (!user) return false
+  return Number(user.id_rol ?? user.idRol ?? 0) === 1 ||
+    String(user.rol ?? user.role ?? '').toLowerCase() === 'admin'
+}

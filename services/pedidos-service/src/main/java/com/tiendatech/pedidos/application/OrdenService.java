@@ -92,30 +92,16 @@ public class OrdenService {
         IdempotenciaRepository repo = resolverRepositorioIdempotencia(idempotencyKey);
         String payloadHash = repo != null ? calcularPayloadHash(direccionId, metodopagoId) : null;
 
-        if (repo != null) {
-            Orden existente = buscarOrdenPorClaveExistente(repo, usuarioId, idempotencyKey, payloadHash);
-            if (existente != null) {
-                return existente;
-            }
-        }
+        Orden existente = buscarOrdenIdempotente(repo, usuarioId, idempotencyKey, payloadHash);
+        if (existente != null) return existente;
 
         CrdbRetryPort retry = crdbRetryExecutor.getIfAvailable();
         String claveParaPersistencia = repo != null ? idempotencyKey : null;
         Orden orden;
         try {
-            orden = retry == null
-                    ? ordenRepository.crear(usuarioId, direccionId, metodopagoId, claveParaPersistencia, payloadHash)
-                    : retry.execute(() -> ordenRepository.crear(
-                            usuarioId, direccionId, metodopagoId, claveParaPersistencia, payloadHash));
+            orden = crearConReintento(retry, usuarioId, direccionId, metodopagoId, claveParaPersistencia, payloadHash);
         } catch (ClaveIdempotenciaEnConflictoException conflicto) {
-            Orden ordenGanadora = repo.buscarPorUsuarioYClave(usuarioId, idempotencyKey)
-                    .map(s -> obtenerOrdenPorId(s.ordenId()))
-                    .orElse(null);
-            if (ordenGanadora == null) {
-                businessMetrics.registrarCheckoutFallido("idempotencia_carrera");
-                throw conflicto;
-            }
-            return ordenGanadora;
+            return resolverCarreraIdempotente(repo, usuarioId, idempotencyKey, conflicto);
         } catch (RuntimeException e) {
             // Cubre, entre otras, las validaciones de JdbcOrdenRepository.crear()
             // (carrito vacío, usuario/dirección/método de pago inválidos): no se
@@ -125,6 +111,38 @@ public class OrdenService {
             throw e;
         }
 
+        facturarOrden(orden);
+
+        businessMetrics.registrarCheckoutCompletado();
+        if (carritoService != null) carritoService.releaseAfterCheckout(reservationSnapshot);
+        return orden;
+    }
+
+    private Orden crearConReintento(CrdbRetryPort retry, Integer usuarioId, Integer direccionId, Integer metodopagoId,
+                                    String clave, String payloadHash) {
+        return retry == null
+                ? ordenRepository.crear(usuarioId, direccionId, metodopagoId, clave, payloadHash)
+                : retry.execute(() -> ordenRepository.crear(usuarioId, direccionId, metodopagoId, clave, payloadHash));
+    }
+
+    private Orden buscarOrdenIdempotente(IdempotenciaRepository repo, Integer usuarioId,
+                                         String key, String hash) {
+        return repo == null ? null : buscarOrdenPorClaveExistente(repo, usuarioId, key, hash);
+    }
+
+    private Orden resolverCarreraIdempotente(IdempotenciaRepository repo, Integer usuarioId,
+                                             String idempotencyKey, ClaveIdempotenciaEnConflictoException conflicto) {
+        Orden ordenGanadora = repo.buscarPorUsuarioYClave(usuarioId, idempotencyKey)
+                .map(s -> obtenerOrdenPorId(s.ordenId()))
+                .orElse(null);
+        if (ordenGanadora == null) {
+            businessMetrics.registrarCheckoutFallido("idempotencia_carrera");
+            throw conflicto;
+        }
+        return ordenGanadora;
+    }
+
+    private void facturarOrden(Orden orden) {
         try {
             var detalle = ordenRepository.obtenerDetalle(
                     orden.getOrdenId(), orden.getFecha(), Paginacion.de(0, 100)).content();
@@ -135,10 +153,6 @@ public class OrdenService {
             businessMetrics.registrarCheckoutFallido("facturacion");
             throw new IllegalStateException("Orden " + orden.getOrdenId() + " creada pero falló la facturación", e);
         }
-
-        businessMetrics.registrarCheckoutCompletado();
-        if (carritoService != null) carritoService.releaseAfterCheckout(reservationSnapshot);
-        return orden;
     }
 
     // Vocabulario fijo y pequeño a propósito (ver BusinessMetricsPort): nunca el

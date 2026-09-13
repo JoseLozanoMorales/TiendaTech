@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-12T20:18:54.024">
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\FrontendApplication.java">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-13T11:38:50.039">
+<file name="Apps/web/frontend/src/main/java/com/tiendatech/frontend/FrontendApplication.java">
 <violation beginline="7" endline="7" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="FrontendApplication" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'FrontendApplication' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
@@ -8,7 +8,7 @@ The class 'FrontendApplication' has a total cyclomatic complexity of 1 (highest 
 The method 'main(String[])' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\SystemObservabilityController.java">
+<file name="Apps/web/frontend/src/main/java/com/tiendatech/frontend/SystemObservabilityController.java">
 <violation beginline="20" endline="20" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'SystemObservabilityController' has a total cyclomatic complexity of 16 (highest 6).
 </violation>
@@ -25,7 +25,7 @@ The method 'probe(Target, Instant)' has a cyclomatic complexity of 6.
 The method 'elapsedMillis(long)' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\WebappController.java">
+<file name="Apps/web/frontend/src/main/java/com/tiendatech/frontend/WebappController.java">
 <violation beginline="9" endline="9" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="WebappController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'WebappController' has a total cyclomatic complexity of 17 (highest 3).
 </violation>
@@ -72,7 +72,7 @@ The method 'admin()' has a cyclomatic complexity of 1.
 The method 'worker()' has a cyclomatic complexity of 1.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\security\GatewayTrafficFilter.java">
+<file name="Apps/web/frontend/src/main/java/com/tiendatech/frontend/security/GatewayTrafficFilter.java">
 <violation beginline="25" endline="25" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend.security" class="GatewayTrafficFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'GatewayTrafficFilter' has a total cyclomatic complexity of 21 (highest 7).
 </violation>
@@ -92,7 +92,7 @@ The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChai
 The method 'safe(String)' has a cyclomatic complexity of 2.
 </violation>
 </file>
-<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\security\JwtGatewayFilter.java">
+<file name="Apps/web/frontend/src/main/java/com/tiendatech/frontend/security/JwtGatewayFilter.java">
 <violation beginline="32" endline="32" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend.security" class="JwtGatewayFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'JwtGatewayFilter' has a total cyclomatic complexity of 17 (highest 6).
 </violation>

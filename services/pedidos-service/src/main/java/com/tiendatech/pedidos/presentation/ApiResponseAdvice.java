@@ -1,6 +1,5 @@
 package com.tiendatech.pedidos.presentation;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -30,16 +29,27 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpRequest request, ServerHttpResponse response) {
         String path = request instanceof ServletServerHttpRequest servlet
                 ? servlet.getServletRequest().getRequestURI() : "";
-        if (path.startsWith("/actuator") || path.equals("/health") || path.equals("/metrics")
-                || path.startsWith("/internal/") || body instanceof ApiResponse
-                || body instanceof Resource || body instanceof byte[]
-                || MediaType.APPLICATION_OCTET_STREAM.includes(contentType)
-                || contentType.getType().equals("image")) return body;
+        if (isInfrastructurePath(path) || isRawResponse(body, contentType)) return body;
         int status = response instanceof ServletServerHttpResponse servlet
                 ? servlet.getServletResponse().getStatus() : 200;
-        String message = body instanceof Map<?, ?> map && map.get("message") != null
-                ? String.valueOf(map.get("message")) : status < 400 ? "OK" : "Error";
+        String message = responseMessage(body, status);
         return new ApiResponse(status, body, message, Instant.now());
     }
+    private boolean isInfrastructurePath(String path) {
+        return path.startsWith("/actuator") || path.equals("/health")
+                || path.equals("/metrics") || path.startsWith("/internal/");
+    }
+
+    private boolean isRawResponse(Object body, MediaType contentType) {
+        return body instanceof ApiResponse || body instanceof Resource || body instanceof byte[]
+                || MediaType.APPLICATION_OCTET_STREAM.includes(contentType)
+                || contentType.getType().equals("image");
+    }
+
+    private String responseMessage(Object body, int status) {
+        return body instanceof Map<?, ?> map && map.get("message") != null
+                ? String.valueOf(map.get("message")) : status < 400 ? "OK" : "Error";
+    }
+
 }
 

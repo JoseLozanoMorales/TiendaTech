@@ -10,7 +10,6 @@ import com.tiendatech.pedidos.domain.ProductoPort;
 import com.tiendatech.pedidos.domain.UsuarioPort;
 import com.tiendatech.pedidos.domain.DireccionInfo;
 import com.tiendatech.pedidos.domain.ProductoInfo;
-import com.tiendatech.pedidos.domain.UsuarioInfo;
 import com.tiendatech.pedidos.infrastructure.config.CrdbMetrics;
 import io.micrometer.core.instrument.Timer;
 import org.springframework.beans.factory.ObjectProvider;
@@ -135,35 +134,7 @@ public class JdbcOrdenRepository implements OrdenRepository {
     public Orden crear(Integer usuarioId, Integer direccionId, Integer metodopagoId,
                        String idempotencyKey, String payloadHash) {
 
-        // 0) Validar usuario y dirección
-        // Solo un 404 real de usuarios-service significa "no existe" (400). Cualquier
-        // otra falla (circuit breaker abierto, timeout, 5xx) NO es lo mismo y no debe
-        // camuflarse como error del cliente: se deja propagar para que el handler
-        // correspondiente (503 en ambos casos) lo reporte tal cual es.
-        UsuarioInfo usuario;
-        try {
-            usuario = usuarioClient.obtenerUsuario(usuarioId);
-        } catch (HttpClientErrorException.NotFound e) {
-            throw new IllegalArgumentException("Usuario " + usuarioId + " no existe en usuarios-service", e);
-        }
-
-        List<DireccionInfo> direcciones = usuarioClient.obtenerDirecciones(usuarioId);
-        boolean direccionValida = direcciones.stream()
-                .anyMatch(d -> direccionId.equals(d.direccionId()) && Boolean.TRUE.equals(d.habilitado()));
-
-        if (!direccionValida) {
-            throw new IllegalArgumentException(
-                    "La direccion " + direccionId + " no pertenece al usuario " + usuarioId + " o está deshabilitada");
-        }
-
-        // 0.1) Validar método de pago
-        String sqlMetodo = "SELECT COUNT(*) FROM pedidos.metodopago " +
-                "WHERE metodopago_id = ? AND usuario_id = ? AND habilitado = true";
-        Integer countMetodo = jdbcTemplate.queryForObject(sqlMetodo, Integer.class, metodopagoId, usuarioId);
-        if (countMetodo == null || countMetodo == 0) {
-            throw new IllegalArgumentException(
-                    "El metodo de pago " + metodopagoId + " no existe, no pertenece al usuario " + usuarioId + " o esta deshabilitado");
-        }
+        validarCheckout(usuarioId, direccionId, metodopagoId);
 
         // 1) Buscar carrito activo
         String sqlCarrito = "SELECT carrito_id FROM pedidos.carrito_de_compra " +
@@ -236,6 +207,38 @@ public class JdbcOrdenRepository implements OrdenRepository {
         }
 
         return new Orden(ordenId, usuarioId, direccionId, metodopagoId, subtotal, total, hoy);
+    }
+
+    private void validarCheckout(Integer usuarioId, Integer direccionId, Integer metodopagoId) {
+        // 0) Validar usuario y dirección
+        // Solo un 404 real de usuarios-service significa "no existe" (400). Cualquier
+        // otra falla (circuit breaker abierto, timeout, 5xx) NO es lo mismo y no debe
+        // camuflarse como error del cliente: se deja propagar para que el handler
+        // correspondiente (503 en ambos casos) lo reporte tal cual es.
+        try {
+            usuarioClient.obtenerUsuario(usuarioId);
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new IllegalArgumentException("Usuario " + usuarioId + " no existe en usuarios-service", e);
+        }
+
+        List<DireccionInfo> direcciones = usuarioClient.obtenerDirecciones(usuarioId);
+        boolean direccionValida = direcciones.stream()
+                .anyMatch(d -> direccionId.equals(d.direccionId()) && Boolean.TRUE.equals(d.habilitado()));
+
+        if (!direccionValida) {
+            throw new IllegalArgumentException(
+                    "La direccion " + direccionId + " no pertenece al usuario " + usuarioId + " o está deshabilitada");
+        }
+
+        // 0.1) Validar método de pago
+        String sqlMetodo = "SELECT COUNT(*) FROM pedidos.metodopago " +
+                "WHERE metodopago_id = ? AND usuario_id = ? AND habilitado = true";
+        Integer countMetodo = jdbcTemplate.queryForObject(sqlMetodo, Integer.class, metodopagoId, usuarioId);
+        if (countMetodo == null || countMetodo == 0) {
+            throw new IllegalArgumentException(
+                    "El metodo de pago " + metodopagoId + " no existe, no pertenece al usuario " + usuarioId + " o esta deshabilitado");
+        }
+
     }
 
     private <T> T medirConsulta(Supplier<T> consulta) {

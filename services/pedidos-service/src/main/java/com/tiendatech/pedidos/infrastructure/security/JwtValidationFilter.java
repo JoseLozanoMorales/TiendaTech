@@ -52,26 +52,38 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
     @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                                FilterChain chain) throws ServletException, IOException {
-        String supplied = request.getHeader("X-Internal-Token");
-        if (!internalToken.isBlank() && supplied != null && MessageDigest.isEqual(
-                internalToken.getBytes(StandardCharsets.UTF_8), supplied.getBytes(StandardCharsets.UTF_8))) {
+        if (hasInternalToken(request)) {
             chain.doFilter(request, response); return;
         }
         String authorization = request.getHeader("Authorization");
         if (authorization == null || !authorization.startsWith("Bearer ")) { unauthorized(response, "JWT requerido"); return; }
         try {
-            String[] parts = authorization.substring(7).split("\\.");
-            if (parts.length != 3) throw new IllegalArgumentException();
-            JsonNode header = mapper.readTree(Base64.getUrlDecoder().decode(parts[0]));
-            if (!"HS256".equals(header.path("alg").asText())) throw new IllegalArgumentException();
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(new SecretKeySpec(secret, "HmacSHA256"));
-            byte[] expected = mac.doFinal((parts[0] + "." + parts[1]).getBytes(StandardCharsets.US_ASCII));
-            if (!MessageDigest.isEqual(expected, Base64.getUrlDecoder().decode(parts[2]))) throw new IllegalArgumentException();
-            JsonNode claims = mapper.readTree(Base64.getUrlDecoder().decode(parts[1]));
-            if (!claims.has("exp") || claims.path("exp").asLong() <= Instant.now().getEpochSecond()) throw new IllegalArgumentException();
+            validateJwt(authorization.substring(7));
             chain.doFilter(request, response);
         } catch (Exception ex) { unauthorized(response, "JWT invalido o expirado"); }
+    }
+
+    private boolean hasInternalToken(HttpServletRequest request) {
+        String supplied = request.getHeader("X-Internal-Token");
+        return !internalToken.isBlank() && supplied != null && MessageDigest.isEqual(
+                internalToken.getBytes(StandardCharsets.UTF_8), supplied.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private void validateJwt(String token) throws Exception {
+        String[] parts = token.split("\\.");
+        if (parts.length != 3) throw new IllegalArgumentException();
+        JsonNode header = mapper.readTree(Base64.getUrlDecoder().decode(parts[0]));
+        if (!"HS256".equals(header.path("alg").asText())) throw new IllegalArgumentException();
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(secret, "HmacSHA256"));
+        byte[] expected = mac.doFinal((parts[0] + "." + parts[1]).getBytes(StandardCharsets.US_ASCII));
+        if (!MessageDigest.isEqual(expected, Base64.getUrlDecoder().decode(parts[2]))) throw new IllegalArgumentException();
+        validateExpiration(parts[1]);
+    }
+
+    private void validateExpiration(String payload) throws IOException {
+        JsonNode claims = mapper.readTree(Base64.getUrlDecoder().decode(payload));
+        if (!claims.has("exp") || claims.path("exp").asLong() <= Instant.now().getEpochSecond()) throw new IllegalArgumentException();
     }
 
     private void unauthorized(HttpServletResponse response, String message) throws IOException {

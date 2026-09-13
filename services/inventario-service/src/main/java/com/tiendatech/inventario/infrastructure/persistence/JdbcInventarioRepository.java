@@ -161,9 +161,7 @@ public class JdbcInventarioRepository implements InventarioRepository {
                 JOIN inventario.tipo_movimiento t ON t.tipo_id = s.tipo_id
                 WHERE s.subtipo_id = ?
                 """, String.class, subtipoId);
-        if (!"AJUSTE".equalsIgnoreCase(tipo) && cantidad <= 0) {
-            throw new IllegalArgumentException("La cantidad debe ser positiva");
-        }
+        validarCantidad(tipo, cantidad);
 
         Map<String, Object> producto = jdbc.queryForMap("""
                 SELECT stock, costo, precio_referencia FROM inventario.inventario_producto
@@ -181,12 +179,8 @@ public class JdbcInventarioRepository implements InventarioRepository {
                 ? costoEntrada : costoAnterior;
         int stockNuevo = "SALIDA".equalsIgnoreCase(tipo)
                 ? stockAnterior - cantidad : stockAnterior + cantidad;
-        BigDecimal costoNuevo = costoAnterior;
-        if ("ENTRADA".equalsIgnoreCase(tipo) && costoEntrada != null && stockNuevo > 0) {
-            costoNuevo = costoAnterior.multiply(BigDecimal.valueOf(stockAnterior))
-                    .add(costoEntrada.multiply(BigDecimal.valueOf(cantidad)))
-                    .divide(BigDecimal.valueOf(stockNuevo), 2, RoundingMode.HALF_UP);
-        }
+        BigDecimal costoNuevo = calcularCostoPromedio(tipo, costoEntrada, costoAnterior,
+                stockAnterior, stockNuevo, cantidad);
         BigDecimal total = costoEfectivo.multiply(BigDecimal.valueOf(cantidad)).setScale(2, RoundingMode.HALF_UP);
         Timestamp fecha = timestamp(item.getFecha());
 
@@ -216,6 +210,28 @@ public class JdbcInventarioRepository implements InventarioRepository {
                 """, stockNuevo, costoNuevo,
                 costoNuevo.multiply(BigDecimal.valueOf(stockNuevo)).setScale(2, RoundingMode.HALF_UP),
                 debeDesactivar, productoId);
+        registrarKardex(fecha, tipo, cantidad, costoEfectivo, total, stockNuevo, costoNuevo, productoId);
+    }
+
+    private void validarCantidad(String tipo, int cantidad) {
+        if (!"AJUSTE".equalsIgnoreCase(tipo) && cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser positiva");
+        }
+    }
+
+    private BigDecimal calcularCostoPromedio(String tipo, BigDecimal costoEntrada, BigDecimal costoAnterior,
+                                             int stockAnterior, int stockNuevo, int cantidad) {
+        BigDecimal costoNuevo = costoAnterior;
+        if ("ENTRADA".equalsIgnoreCase(tipo) && costoEntrada != null && stockNuevo > 0) {
+            costoNuevo = costoAnterior.multiply(BigDecimal.valueOf(stockAnterior))
+                    .add(costoEntrada.multiply(BigDecimal.valueOf(cantidad)))
+                    .divide(BigDecimal.valueOf(stockNuevo), 2, RoundingMode.HALF_UP);
+        }
+        return costoNuevo;
+    }
+
+    private void registrarKardex(Timestamp fecha, String tipo, int cantidad, BigDecimal costoEfectivo,
+                                 BigDecimal total, int stockNuevo, BigDecimal costoNuevo, int productoId) {
         jdbc.update("""
                 INSERT INTO inventario.kardex_inventario
                     (fecha, tipo_operacion, cantidad_entrada, costo_unitario_entrada,
@@ -249,13 +265,17 @@ public class JdbcInventarioRepository implements InventarioRepository {
         } else {
             throw new IllegalArgumentException("El cuerpo debe ser un movimiento o una lista de movimientos");
         }
+        validarItems(items);
+        return items;
+    }
+
+    private void validarItems(List<MovimientoInventarioRequest> items) {
         if (items.isEmpty()) {
             throw new IllegalArgumentException("Debe enviar al menos un movimiento");
         }
         for (int index = 0; index < items.size(); index++) {
             validarItem(items.get(index), index);
         }
-        return items;
     }
 
     private void validarItem(MovimientoInventarioRequest item, int index) {
