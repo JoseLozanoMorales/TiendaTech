@@ -20,12 +20,32 @@ import java.security.MessageDigest;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /** Cada servicio valida firma HS256 y expiración, aun si se evita el Gateway. */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE + 5)
 public class JwtValidationFilter extends OncePerRequestFilter {
+
+    // Rutas publicas exactas: no requieren JWT bajo ningun metodo HTTP.
+    private static final Set<String> PUBLIC_PATHS = Set.of(
+            "/api/login",
+            "/api/usuarios/crear",
+            "/api/usuarios/recuperar-password");
+    private static final String PUBLIC_PREFIX_OTP = "/api/otp/";
+
+    // Prefijos de catalogo que son de lectura publica (solo GET/HEAD).
+    private static final List<String> PUBLIC_READ_PREFIXES = List.of(
+            "/api/productos",
+            "/api/categorias",
+            "/api/marcas",
+            "/api/gamas",
+            "/api/galeria",
+            "/api/provincias",
+            "/api/ciudades");
+
     private final byte[] secret;
     private final String internalToken;
     private final ObjectMapper mapper;
@@ -40,14 +60,22 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
     @Override protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        if (!path.startsWith("/api/") || "OPTIONS".equalsIgnoreCase(request.getMethod())) return true;
-        if (path.equals("/api/login") || path.startsWith("/api/otp/") || path.equals("/api/usuarios/crear")
-                || path.equals("/api/usuarios/recuperar-password")) return true;
-        boolean read = "GET".equalsIgnoreCase(request.getMethod()) || "HEAD".equalsIgnoreCase(request.getMethod());
-        return read && (path.startsWith("/api/productos") || path.startsWith("/api/categorias")
-                || path.startsWith("/api/marcas") || path.startsWith("/api/gamas")
-                || path.startsWith("/api/galeria") || path.startsWith("/api/provincias")
-                || path.startsWith("/api/ciudades"));
+        String method = request.getMethod();
+        if (!path.startsWith("/api/") || "OPTIONS".equalsIgnoreCase(method)) return true;
+        if (isPublicPath(path)) return true;
+        return isReadOnly(method) && isPublicReadPath(path);
+    }
+
+    private boolean isPublicPath(String path) {
+        return PUBLIC_PATHS.contains(path) || path.startsWith(PUBLIC_PREFIX_OTP);
+    }
+
+    private boolean isReadOnly(String method) {
+        return "GET".equalsIgnoreCase(method) || "HEAD".equalsIgnoreCase(method);
+    }
+
+    private boolean isPublicReadPath(String path) {
+        return PUBLIC_READ_PREFIXES.stream().anyMatch(path::startsWith);
     }
 
     @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -81,4 +109,3 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         mapper.writeValue(response.getWriter(), body);
     }
 }
-
