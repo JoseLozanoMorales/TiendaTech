@@ -1,2 +1,3 @@
 *.csv text eol=lf
 checksums.txt text eol=lf
+docs/experimentos/resultados/checksums-datos.sha256 text eol=lf

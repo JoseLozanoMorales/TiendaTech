@@ -1,0 +1,30 @@
+{
+  "remote_commit": "6e15199d9f81ccc142c002beffe38969097dadcb",
+  "local_manifest_on_remote": {
+    "exit": 1,
+    "message": "ERROR: Contenido modificado: ['docs/experimentos/resultados/iso25010/complejidad/summary.csv']"
+  },
+  "regenerated_manifest_on_remote": {
+    "exit": 0,
+    "message": "Verificadas 60 sumas SHA-256 de datos tabulares"
+  },
+  "tests": {
+    "exit": 0,
+    "count": 5
+  },
+  "manifest_differences": [
+    {
+      "local": "4ae35752d8edc6ffac4023c82f8a46099337cb37015febf74fcf5e2f0182c5cc  docs/experimentos/resultados/iso25010/complejidad/summary.csv",
+      "remote": "361f66a52340470c584c35fd26d451da3d4e5977f6e960a5b61191045a48313b  docs/experimentos/resultados/iso25010/complejidad/summary.csv"
+    }
+  ],
+  "scope": "CSV/TSV versionados; pruebas locales en copia aislada, no ejecución remota de CI",
+  "integration_validation": {
+    "source_commit": "c89740913bb69847402c20d60651d2966514a449",
+    "tracked_tables": 60,
+    "verification_exit": 0,
+    "tests_passed": 5,
+    "manifest_sha256": "e6bed7826332d2799fb35f42e7f40a929ade7629dfdb059f41eee3d097cf46b4",
+    "remote_ci": "pendiente de comprobar después de publicar"
+  }
+}
