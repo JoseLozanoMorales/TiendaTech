@@ -39,3 +39,31 @@ Antes de entregar:
 3. Copiar el APK acordado a `release/`, generar su SHA-256 y conservar resultados de firma e instalación. No declarar E6 cerrado antes de disponer de esos archivos y comprobaciones.
 
 Referencia de configuración: https://developer.android.com/studio/publish/app-signing
+
+## Firma automática en CI
+
+La ampliación de CI construye `lintRelease testReleaseUnitTest assembleRelease`
+solo en pushes a `main`, después de las comprobaciones de calidad. Los pull requests
+mantienen pruebas debug y no reciben la clave de distribución. El almacén temporal
+se elimina al terminar el paso; la compilación de firma no utiliza caché Gradle.
+Antes de publicar se exige la huella exacta del certificado de José y se generan
+el checksum del APK, el informe de `apksigner` y la procedencia (commit y run).
+Se publican como prerelease `mobile-release-*`; no se actualiza el APK versionado
+automáticamente ni se altera la identidad de firma de debug.
+
+Secretos de repositorio necesarios: `TIENDATECH_KEYSTORE_BASE64`,
+`TIENDATECH_KEYSTORE_PASSWORD`, `TIENDATECH_KEY_ALIAS` y `TIENDATECH_KEY_PASSWORD`.
+José autorizó alojarlos en GitHub. Para cargarlos, ejecutar en PowerShell local:
+
+```powershell
+./scripts/configure-mobile-signing-secrets.ps1
+```
+
+El guion solicita la contraseña de forma oculta, valida el almacén y el certificado,
+y envía los valores por entrada estándar a `gh secret set`. No guarda contraseñas
+ni claves en Git. El PKCS12 de José utiliza la misma contraseña para almacén y clave.
+Requiere una sesión de GitHub CLI con permisos para administrar secretos.
+
+Estado de esta ampliación: configuración preparada; carga de secretos pendiente
+de la entrada local de contraseña y validación remota pendiente de push. No se
+atribuye una ejecución exitosa a este nuevo job antes de comprobarla.
