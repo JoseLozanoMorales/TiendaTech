@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-01T15:05:54.910">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-12T19:46:21.441">
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\FrontendApplication.java">
 <violation beginline="7" endline="7" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="FrontendApplication" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'FrontendApplication' has a total cyclomatic complexity of 1 (highest 1).
 </violation>
 <violation beginline="9" endline="9" begincolumn="21" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="FrontendApplication" method="main" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'main(String[])' has a cyclomatic complexity of 1.
+</violation>
+</file>
+<file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\SystemObservabilityController.java">
+<violation beginline="20" endline="20" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'SystemObservabilityController' has a total cyclomatic complexity of 16 (highest 6).
+</violation>
+<violation beginline="24" endline="24" begincolumn="12" endcolumn="41" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" method="SystemObservabilityController" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The constructor 'SystemObservabilityController(String, String, String, String, String, String)' has a cyclomatic complexity of 3.
+</violation>
+<violation beginline="39" endline="39" begincolumn="27" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" method="status" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'status(String)' has a cyclomatic complexity of 6.
+</violation>
+<violation beginline="49" endline="49" begincolumn="34" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" method="probe" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'probe(Target, Instant)' has a cyclomatic complexity of 6.
+</violation>
+<violation beginline="67" endline="67" begincolumn="25" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.frontend" class="SystemObservabilityController" method="elapsedMillis" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'elapsedMillis(long)' has a cyclomatic complexity of 1.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\Apps\web\frontend\src\main\java\com\tiendatech\frontend\WebappController.java">

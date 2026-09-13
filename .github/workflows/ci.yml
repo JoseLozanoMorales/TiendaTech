@@ -57,6 +57,42 @@ jobs:
           path: docs/entrega4/PFC4.pdf
           if-no-files-found: ignore
 
+  backend-complexity:
+    name: Complejidad ciclomatica del backend (PMD)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Medir complejidad ciclomatica de los 7 servicios Java
+        shell: pwsh
+        run: ./scripts/measure-cyclomatic-complexity.ps1
+
+      - name: Fallar si algun metodo alcanza el umbral (>=10)
+        shell: pwsh
+        run: |
+          $rows = Import-Csv docs/experimentos/resultados/iso25010/complejidad/summary.csv
+          $rows | Format-Table -AutoSize
+          $incumple = $rows | Where-Object { $_.status -ne "CUMPLE" }
+          if ($incumple) {
+            Write-Host "::error::Complejidad >= 10 en: $($incumple.module -join ', ')"
+            exit 1
+          }
+
+      - name: Conservar reportes de PMD como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pmd-complejidad
+          path: docs/experimentos/resultados/iso25010/complejidad/
+          if-no-files-found: ignore
+
   web-quality:
     name: Web lint and unit tests
     runs-on: ubuntu-latest

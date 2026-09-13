@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-01T15:05:57.632">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.17.0" timestamp="2026-09-12T19:46:25.453">
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\OrdenesProveedoresServiceApplication.java">
 <violation beginline="7" endline="7" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores" class="OrdenesProveedoresServiceApplication" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'OrdenesProveedoresServiceApplication' has a total cyclomatic complexity of 1 (highest 1).
@@ -30,16 +30,16 @@ The method 'cancelar(Integer)' has a cyclomatic complexity of 1.
 <violation beginline="48" endline="48" begincolumn="17" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="registrarRecepcion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'registrarRecepcion(Integer, Map&lt;Integer, Integer&gt;, String)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="62" endline="62" begincolumn="20" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="mensajeInventario" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="61" endline="61" begincolumn="20" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="mensajeInventario" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'mensajeInventario(Exception)' has a cyclomatic complexity of 7.
 </violation>
-<violation beginline="79" endline="79" begincolumn="30" endcolumn="45" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="77" endline="77" begincolumn="30" endcolumn="45" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarPorEstado(EstadoOrdenCompra)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="83" endline="83" begincolumn="24" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="81" endline="81" begincolumn="24" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'obtenerPorId(Integer)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="91" endline="91" begincolumn="37" endcolumn="50" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="89" endline="89" begincolumn="37" endcolumn="50" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.application" class="OrdenCompraService" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarDetalle(Integer)' has a cyclomatic complexity of 1.
 </violation>
 </file>
@@ -199,28 +199,28 @@ The method 'setTotal(BigDecimal)' has a cyclomatic complexity of 1.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\domain\OrdenCompraRepository.java">
-<violation beginline="15" endline="15" begincolumn="13" endcolumn="18" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="11" endline="11" begincolumn="13" endcolumn="18" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'crear(Integer, Integer, LocalDate, List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="18" endline="18" begincolumn="10" endcolumn="20" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="14" endline="14" begincolumn="10" endcolumn="20" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'actualizar(Integer, Integer, LocalDate, List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="21" endline="21" begincolumn="10" endcolumn="16" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="enviar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="17" endline="17" begincolumn="10" endcolumn="16" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="enviar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'enviar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="23" endline="23" begincolumn="10" endcolumn="18" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="cancelar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="19" endline="19" begincolumn="10" endcolumn="18" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="cancelar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'cancelar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="28" endline="28" begincolumn="30" endcolumn="48" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="registrarRecepcion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="22" endline="22" begincolumn="30" endcolumn="48" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="registrarRecepcion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'registrarRecepcion(Integer, Map&lt;Integer, Integer&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="30" endline="30" begincolumn="23" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="24" endline="24" begincolumn="23" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarPorEstado(EstadoOrdenCompra)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="32" endline="32" begincolumn="17" endcolumn="29" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="26" endline="26" begincolumn="17" endcolumn="29" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'obtenerPorId(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="34" endline="34" begincolumn="30" endcolumn="43" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="28" endline="28" begincolumn="30" endcolumn="43" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="OrdenCompraRepository" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarDetalle(Integer)' has a cyclomatic complexity of 1.
 </violation>
 </file>
@@ -293,10 +293,10 @@ The method 'desactivar(Integer)' has a cyclomatic complexity of 1.
 <violation beginline="18" endline="18" begincolumn="10" endcolumn="17" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="ProveedorRepository" method="activar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'activar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="23" endline="23" begincolumn="21" endcolumn="32" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="ProveedorRepository" method="listarTodos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="20" endline="20" begincolumn="21" endcolumn="32" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="ProveedorRepository" method="listarTodos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarTodos()' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="25" endline="25" begincolumn="15" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="ProveedorRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="22" endline="22" begincolumn="15" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.domain" class="ProveedorRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'obtenerPorId(Integer)' has a cyclomatic complexity of 1.
 </violation>
 </file>
@@ -316,27 +316,21 @@ The method 'registrarEntradasPorRecepcionFallback(Integer, Map&lt;Integer, Integ
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\infrastructure\config\PgErrorMapper.java">
 <violation beginline="6" endline="6" begincolumn="14" endcolumn="19" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'PgErrorMapper' has a total cyclomatic complexity of 24 (highest 7).
+The class 'PgErrorMapper' has a total cyclomatic complexity of 22 (highest 10).
 </violation>
 <violation beginline="8" endline="8" begincolumn="13" endcolumn="26" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="PgErrorMapper" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'PgErrorMapper()' has a cyclomatic complexity of 1.
 </violation>
 <violation beginline="11" endline="11" begincolumn="30" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="statusFor" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'statusFor(Throwable)' has a cyclomatic complexity of 2.
+The method 'statusFor(Throwable)' has a cyclomatic complexity of 10.
 </violation>
-<violation beginline="19" endline="19" begincolumn="27" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="sqlStateOf" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'sqlStateOf(PSQLException)' has a cyclomatic complexity of 3.
-</violation>
-<violation beginline="26" endline="26" begincolumn="31" endcolumn="48" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="statusForSqlState" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'statusForSqlState(String)' has a cyclomatic complexity of 7.
-</violation>
-<violation beginline="35" endline="35" begincolumn="26" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="messageFor" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="31" endline="31" begincolumn="26" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="messageFor" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'messageFor(Throwable)' has a cyclomatic complexity of 4.
 </violation>
-<violation beginline="50" endline="50" begincolumn="27" endcolumn="51" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="friendlyDuplicateMessage" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="46" endline="46" begincolumn="27" endcolumn="51" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="friendlyDuplicateMessage" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'friendlyDuplicateMessage(String)' has a cyclomatic complexity of 4.
 </violation>
-<violation beginline="61" endline="61" begincolumn="34" endcolumn="51" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="findPsqlException" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="57" endline="57" begincolumn="34" endcolumn="51" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.config" class="PgErrorMapper" method="findPsqlException" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'findPsqlException(Throwable)' has a cyclomatic complexity of 3.
 </violation>
 </file>
@@ -349,160 +343,118 @@ The method 'addCorsMappings(CorsRegistry)' has a cyclomatic complexity of 1.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\infrastructure\observability\HttpObservabilityFilter.java">
-<violation beginline="23" endline="23" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'HttpObservabilityFilter' has a total cyclomatic complexity of 6 (highest 1).
+<violation beginline="3" endline="3" begincolumn="19" endcolumn="24" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'HttpObservabilityFilter' has a total cyclomatic complexity of 2 (highest 1).
 </violation>
-<violation beginline="30" endline="30" begincolumn="12" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="4" endline="4" begincolumn="220" endcolumn="243" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="HttpObservabilityFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'HttpObservabilityFilter(MeterRegistry, String)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="37" endline="37" begincolumn="20" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="doFilterInternal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="6" endline="6" begincolumn="30" endcolumn="46" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="doFilterInternal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="49" endline="49" begincolumn="18" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="registrar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'registrar(HttpServletRequest, HttpServletResponse, long)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="55" endline="55" begincolumn="27" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="labels" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'labels(HttpServletRequest, HttpServletResponse)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="59" endline="59" begincolumn="18" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="registrarMetricas" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'registrarMetricas(RequestLabels, long)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="65" endline="65" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="HttpObservabilityFilter" method="registrarLog" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'registrarLog(RequestLabels, long)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="75" endline="75" begincolumn="13" endcolumn="19" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="RequestLabels" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The record 'RequestLabels' has a total cyclomatic complexity of 1 (highest 1).
-</violation>
-<violation beginline="76" endline="76" begincolumn="18" endcolumn="22" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.observability" class="RequestLabels" method="tags" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'tags(String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\infrastructure\persistence\JdbcOrdenCompraRepository.java">
-<violation beginline="25" endline="25" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'JdbcOrdenCompraRepository' has a total cyclomatic complexity of 47 (highest 9).
+<violation beginline="21" endline="21" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The class 'JdbcOrdenCompraRepository' has a total cyclomatic complexity of 44 (highest 11).
 </violation>
-<violation beginline="29" endline="29" begincolumn="12" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="JdbcOrdenCompraRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="25" endline="25" begincolumn="12" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="JdbcOrdenCompraRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'JdbcOrdenCompraRepository(JdbcTemplate)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="33" endline="33" begincolumn="20" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="29" endline="29" begincolumn="20" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'crear(Integer, Integer, LocalDate, List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="54" endline="54" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="50" endline="50" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'actualizar(Integer, Integer, LocalDate, List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="67" endline="67" begincolumn="17" endcolumn="23" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="enviar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="63" endline="63" begincolumn="17" endcolumn="23" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="enviar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'enviar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="74" endline="74" begincolumn="17" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="cancelar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="70" endline="70" begincolumn="17" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="cancelar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'cancelar(Integer)' has a cyclomatic complexity of 4.
 </violation>
-<violation beginline="83" endline="83" begincolumn="37" endcolumn="55" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="registrarRecepcion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="79" endline="79" begincolumn="37" endcolumn="55" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="registrarRecepcion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'registrarRecepcion(Integer, Map&lt;Integer, Integer&gt;)' has a cyclomatic complexity of 8.
 </violation>
-<violation beginline="117" endline="117" begincolumn="38" endcolumn="55" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="costosPorProducto" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="113" endline="113" begincolumn="38" endcolumn="55" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="costosPorProducto" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'costosPorProducto(Integer, Set&lt;Integer&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="132" endline="132" begincolumn="30" endcolumn="45" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="128" endline="128" begincolumn="30" endcolumn="45" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="listarPorEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarPorEstado(EstadoOrdenCompra)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="140" endline="140" begincolumn="24" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="136" endline="136" begincolumn="24" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'obtenerPorId(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="146" endline="146" begincolumn="37" endcolumn="50" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="142" endline="142" begincolumn="37" endcolumn="50" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="listarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarDetalle(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="153" endline="153" begincolumn="32" endcolumn="42" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="mapDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="149" endline="149" begincolumn="32" endcolumn="42" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="mapDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'mapDetalle(ResultSet, int)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="165" endline="165" begincolumn="18" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="insertarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="161" endline="161" begincolumn="18" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="insertarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'insertarDetalle(Integer, List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 2.
 </violation>
-<violation beginline="173" endline="173" begincolumn="18" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="recalcular" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="169" endline="169" begincolumn="18" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="recalcular" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'recalcular(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="183" endline="183" begincolumn="31" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="estado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="179" endline="179" begincolumn="31" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="estado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'estado(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="189" endline="189" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="exigirEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="185" endline="185" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="exigirEstado" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'exigirEstado(Integer, EstadoOrdenCompra)' has a cyclomatic complexity of 3.
 </violation>
-<violation beginline="194" endline="194" begincolumn="18" endcolumn="32" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="validarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarDetalle(List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 5.
+<violation beginline="190" endline="190" begincolumn="18" endcolumn="32" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="validarDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'validarDetalle(List&lt;DetalleOrdenCompra&gt;)' has a cyclomatic complexity of 11.
 </violation>
-<violation beginline="201" endline="201" begincolumn="25" endcolumn="44" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="validarLineaDetalle" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarLineaDetalle(DetalleOrdenCompra)' has a cyclomatic complexity of 9.
-</violation>
-<violation beginline="211" endline="211" begincolumn="25" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="mapOrden" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="198" endline="198" begincolumn="25" endcolumn="33" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcOrdenCompraRepository" method="mapOrden" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'mapOrden(ResultSet, int)' has a cyclomatic complexity of 1.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\infrastructure\persistence\JdbcProveedorRepository.java">
-<violation beginline="18" endline="18" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="14" endline="14" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'JdbcProveedorRepository' has a total cyclomatic complexity of 11 (highest 3).
 </violation>
-<violation beginline="21" endline="21" begincolumn="12" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="JdbcProveedorRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="17" endline="17" begincolumn="12" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="JdbcProveedorRepository" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'JdbcProveedorRepository(JdbcTemplate)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="26" endline="26" begincolumn="20" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="22" endline="22" begincolumn="20" endcolumn="25" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="crear" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'crear(Proveedor)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="37" endline="37" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="33" endline="33" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="actualizar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'actualizar(Proveedor)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="48" endline="48" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="desactivar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="44" endline="44" begincolumn="17" endcolumn="27" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="desactivar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'desactivar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="54" endline="54" begincolumn="17" endcolumn="24" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="activar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="50" endline="50" begincolumn="17" endcolumn="24" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="activar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'activar(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="63" endline="63" begincolumn="28" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="listarTodos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="59" endline="59" begincolumn="28" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="listarTodos" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'listarTodos()' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="71" endline="71" begincolumn="22" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="67" endline="67" begincolumn="22" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="obtenerPorId" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'obtenerPorId(Integer)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="78" endline="78" begincolumn="23" endcolumn="26" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="map" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="74" endline="74" begincolumn="23" endcolumn="26" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="map" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'map(ResultSet, int)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="91" endline="91" begincolumn="18" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="requireOne" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="87" endline="87" begincolumn="18" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.persistence" class="JdbcProveedorRepository" method="requireOne" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'requireOne(int, Integer)' has a cyclomatic complexity of 3.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\infrastructure\security\JwtValidationFilter.java">
 <violation beginline="28" endline="28" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'JwtValidationFilter' has a total cyclomatic complexity of 32 (highest 7).
+The class 'JwtValidationFilter' has a total cyclomatic complexity of 28 (highest 16).
 </violation>
 <violation beginline="33" endline="33" begincolumn="12" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="JwtValidationFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The constructor 'JwtValidationFilter(Environment, ObjectMapper)' has a cyclomatic complexity of 4.
 </violation>
-<violation beginline="42" endline="42" begincolumn="23" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="shouldNotFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="41" endline="41" begincolumn="33" endcolumn="48" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="shouldNotFilter" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'shouldNotFilter(HttpServletRequest)' has a cyclomatic complexity of 7.
 </violation>
-<violation beginline="55" endline="55" begincolumn="20" endcolumn="36" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="doFilterInternal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 3.
+<violation beginline="53" endline="53" begincolumn="30" endcolumn="46" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="doFilterInternal" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)' has a cyclomatic complexity of 16.
 </violation>
-<violation beginline="69" endline="69" begincolumn="21" endcolumn="39" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="tokenInternoValido" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'tokenInternoValido(HttpServletRequest)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="75" endline="75" begincolumn="28" endcolumn="47" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="authorizationValida" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'authorizationValida(String)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="79" endline="79" begincolumn="18" endcolumn="37" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="validarJwtORechazar" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarJwtORechazar(String, HttpServletResponse, FilterChain, HttpServletRequest)' has a cyclomatic complexity of 2.
-</violation>
-<violation beginline="89" endline="89" begincolumn="18" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="validarJwt" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarJwt(String)' has a cyclomatic complexity of 3.
-</violation>
-<violation beginline="97" endline="97" begincolumn="18" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="validarAlgoritmo" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarAlgoritmo(String)' has a cyclomatic complexity of 3.
-</violation>
-<violation beginline="102" endline="102" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="validarFirma" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarFirma(String[])' has a cyclomatic complexity of 3.
-</violation>
-<violation beginline="109" endline="109" begincolumn="18" endcolumn="35" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="validarExpiracion" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'validarExpiracion(String)' has a cyclomatic complexity of 4.
-</violation>
-<violation beginline="114" endline="114" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="unauthorized" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="77" endline="77" begincolumn="18" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.infrastructure.security" class="JwtValidationFilter" method="unauthorized" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'unauthorized(HttpServletResponse, String)' has a cyclomatic complexity of 1.
 </violation>
 </file>
@@ -510,61 +462,40 @@ The method 'unauthorized(HttpServletResponse, String)' has a cyclomatic complexi
 <violation beginline="17" endline="17" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The class 'ApiExceptionHandler' has a total cyclomatic complexity of 11 (highest 2).
 </violation>
-<violation beginline="22" endline="22" begincolumn="48" endcolumn="68" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleResponseStatus" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="21" endline="21" begincolumn="48" endcolumn="68" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleResponseStatus" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleResponseStatus(ResponseStatusException)' has a cyclomatic complexity of 2.
 </violation>
-<violation beginline="30" endline="30" begincolumn="48" endcolumn="60" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleBadSql" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="27" endline="27" begincolumn="48" endcolumn="60" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleBadSql" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleBadSql(BadSqlGrammarException)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="38" endline="38" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleDataAccess" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="34" endline="34" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleDataAccess" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleDataAccess(DataAccessException)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="54" endline="54" begincolumn="48" endcolumn="66" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleIllegalState" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="42" endline="42" begincolumn="48" endcolumn="66" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleIllegalState" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleIllegalState(IllegalStateException)' has a cyclomatic complexity of 2.
 </violation>
-<violation beginline="68" endline="68" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleValidation" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="54" endline="54" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleValidation" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleValidation(MethodArgumentNotValidException)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="78" endline="78" begincolumn="48" endcolumn="69" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleIllegalArgument" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="63" endline="63" begincolumn="48" endcolumn="69" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleIllegalArgument" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleIllegalArgument(IllegalArgumentException)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="84" endline="84" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleUnexpected" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="69" endline="69" begincolumn="48" endcolumn="64" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="handleUnexpected" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'handleUnexpected(Exception)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="89" endline="89" begincolumn="20" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="rootMessage" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+<violation beginline="74" endline="74" begincolumn="20" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiExceptionHandler" method="rootMessage" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'rootMessage(DataAccessException)' has a cyclomatic complexity of 2.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\presentation\ApiResponseAdvice.java">
 <violation beginline="20" endline="20" begincolumn="8" endcolumn="13" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The class 'ApiResponseAdvice' has a total cyclomatic complexity of 15 (highest 4).
+The class 'ApiResponseAdvice' has a total cyclomatic complexity of 16 (highest 15).
 </violation>
 <violation beginline="24" endline="24" begincolumn="20" endcolumn="28" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="supports" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
 The method 'supports(MethodParameter, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;)' has a cyclomatic complexity of 1.
 </violation>
-<violation beginline="30" endline="30" begincolumn="19" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="beforeBodyWrite" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'beforeBodyWrite(Object, MethodParameter, MediaType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;, ServerHttpRequest, ServerHttpResponse)' has a cyclomatic complexity of 2.
-</violation>
-<violation beginline="40" endline="40" begincolumn="28" endcolumn="38" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="debeOmitir" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'debeOmitir(Object, MediaType, ServerHttpRequest)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="44" endline="44" begincolumn="27" endcolumn="31" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="path" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'path(ServerHttpRequest)' has a cyclomatic complexity of 2.
-</violation>
-<violation beginline="48" endline="48" begincolumn="28" endcolumn="40" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="rutaExcluida" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'rutaExcluida(String)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="53" endline="53" begincolumn="28" endcolumn="42" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="cuerpoExcluido" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'cuerpoExcluido(Object)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="57" endline="57" begincolumn="28" endcolumn="44" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="contenidoBinario" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'contenidoBinario(MediaType)' has a cyclomatic complexity of 1.
-</violation>
-<violation beginline="62" endline="62" begincolumn="24" endcolumn="30" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="status" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'status(ServerHttpResponse)' has a cyclomatic complexity of 2.
-</violation>
-<violation beginline="66" endline="66" begincolumn="27" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="mensaje" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
-The method 'mensaje(Object, int)' has a cyclomatic complexity of 4.
+<violation beginline="28" endline="28" begincolumn="19" endcolumn="34" rule="CyclomaticComplexity" ruleset="Design" package="com.tiendatech.ordenesproveedores.presentation" class="ApiResponseAdvice" method="beforeBodyWrite" externalInfoUrl="https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java_design.html#cyclomaticcomplexity" priority="3">
+The method 'beforeBodyWrite(Object, MethodParameter, MediaType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;, ServerHttpRequest, ServerHttpResponse)' has a cyclomatic complexity of 15.
 </violation>
 </file>
 <file name="C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\ordenes-proveedores-service\src\main\java\com\tiendatech\ordenesproveedores\presentation\OrdenCompraController.java">

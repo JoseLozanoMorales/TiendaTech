@@ -1,9 +1,8 @@
-"module","max_method_complexity","objective","status","report","tool","files_analyzed","errors","warnings"
-"gateway","7","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\gateway-pmd.xml","PMD",,,
-"inventario","8","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\inventario-pmd.xml","PMD",,,
-"ordenes_proveedores","9","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\ordenes_proveedores-pmd.xml","PMD",,,
-"pedidos","7","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\pedidos-pmd.xml","PMD",,,
-"productos","8","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\productos-pmd.xml","PMD",,,
-"usuarios","9","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\usuarios-pmd.xml","PMD",,,
-"ventas","7","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\ventas-pmd.xml","PMD",,,
-"webapp","","0 errors and 0 warnings","CUMPLE","webapp-eslint.json","ESLint","27","0","0"
+﻿"module","max_method_complexity","objective","status","report"
+"gateway","7","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\gateway-pmd.xml"
+"inventario","20","<10","NO CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\inventario-pmd.xml"
+"ordenes_proveedores","16","<10","NO CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\ordenes_proveedores-pmd.xml"
+"pedidos","16","<10","NO CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\pedidos-pmd.xml"
+"productos","8","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\productos-pmd.xml"
+"usuarios","9","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\usuarios-pmd.xml"
+"ventas","8","<10","CUMPLE","C:\Users\franc\OneDrive\Escritorio\TiendaTech\docs\experimentos\resultados\iso25010\complejidad\ventas-pmd.xml"
