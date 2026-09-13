@@ -42,9 +42,12 @@ Referencia de configuración: https://developer.android.com/studio/publish/app-s
 
 ## Firma automática en CI
 
-La ampliación de CI construye `lintRelease testReleaseUnitTest assembleRelease`
-solo en pushes a `main`, después de las comprobaciones de calidad. Los pull requests
-mantienen pruebas debug y no reciben la clave de distribución. El almacén temporal
+La ampliación de CI ejecuta `lintRelease assembleRelease`
+solo en pushes a `main`, después de las comprobaciones de calidad.
+Las pruebas unitarias `testDebugUnitTest` se ejecutan en el trabajo previo
+`android-mobile`, del que depende la firma. Este proyecto no expone una tarea
+`testReleaseUnitTest`.
+Los pull requests mantienen pruebas debug y no reciben la clave de distribución. El almacén temporal
 se elimina al terminar el paso; la compilación de firma no utiliza caché Gradle.
 Antes de publicar se exige la huella exacta del certificado de José y se generan
 el checksum del APK, el informe de `apksigner` y la procedencia (commit y run).

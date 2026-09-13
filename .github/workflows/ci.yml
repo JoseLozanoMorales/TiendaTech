@@ -307,7 +307,7 @@ jobs:
           export TIENDATECH_KEYSTORE_PATH="$RUNNER_TEMP/jose-release.p12"
           trap 'rm -f "$TIENDATECH_KEYSTORE_PATH"' EXIT
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$TIENDATECH_KEYSTORE_PATH"
-          ./gradlew lintRelease testReleaseUnitTest assembleRelease --no-daemon --no-configuration-cache --no-build-cache
+          ./gradlew lintRelease assembleRelease --no-daemon --no-configuration-cache --no-build-cache
       - name: Verificar identidad y conservar evidencia
         shell: bash
         run: |
