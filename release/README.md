@@ -1,5 +1,12 @@
 # Paquete Android instalable (E6)
 
+El nuevo [APK release](tiendatech-release.apk) está firmado por José y tiene
+[checksum](tiendatech-release.apk.sha256) verificado. La firma v2, el certificado
+público y la validación de instalación y el pendiente de publicación se documentan en
+[Firma de distribución](FIRMA-DISTRIBUCION.md).
+
+## Paquete debug histórico
+
 Entregables: [tiendatech-debug.apk](tiendatech-debug.apk) y
 [tiendatech-debug.apk.sha256](tiendatech-debug.apk.sha256).
 Versión 1.0, aplicación `com.tiendatech.mobile`, Android 8.0 (API 26) o posterior.

@@ -11,6 +11,13 @@ Cliente móvil de compra para TiendaTech, construido con Kotlin, Jetpack Compose
 
 ## Ejecución
 
+Para distribuir una versión release se necesita la clave del equipo y las cuatro
+variables descritas en [Firma de distribución](../../release/FIRMA-DISTRIBUCION.md).
+Ya se generó y verificó localmente un APK release con la clave de José; véase
+`../../release/tiendatech-release.apk`. Release no se empaqueta sin la clave.
+José confirmó instalación e inicio correctos en dos dispositivos tras resolver el
+conflicto de firma con la versión debug. La publicación del paquete sigue pendiente.
+
 La variante debug consume por defecto el Gateway de Docker en `http://10.0.2.2:8180/`, que corresponde al puerto `8180` del equipo anfitrión visto desde el emulador. El Gateway y los microservicios son quienes utilizan el `.env` de la raíz para conectarse a CockroachDB; la aplicación nunca recibe credenciales JDBC.
 
 Para un dispositivo físico, una instalación remota o un puerto diferente, configurar la URL del Gateway sin editar el código:

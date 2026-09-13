@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Claves privadas de distribución; nunca acompañan al APK.
+*.jks
+*.keystore
+keystore.properties
