@@ -1,0 +1,161 @@
+{
+  "checked_at_utc": "2026-09-12T23:32:14.262624+00:00",
+  "published_source_commit": "75aeac6d579e04f531da85e4c2d2363d549422a2",
+  "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34712657152",
+  "run_result": "success",
+  "images": [
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:armado-ia-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:ae5cb45e06e70a5a3561d93bbd8147619d748c3b6ed891e43d18e2e2e8ef0163"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:c15c234246e2e1c6d4324184fa63aa40cefb354310cbc0799ada03e30c3d22e5"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:frontend-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:83260dc4570448fa64ae5a0bc94f8a7d01f6680d6f728aa8ce1ad3c41fecbe22"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:b54c7559e292bf264db673e742fda6f5595a8aced2e030cb093c45f0bf0e4ac1"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:inventario-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:3f7b829525f945823624fa07022cde0196752d48e59e959f6fc3cf3c2d1fcbfb"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:0c58675fb7a617ab149cb2c65315ef20a1d84aaecc35324e0df264f9d1ff9cbc"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:ordenes-proveedores-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:fbd18e46fc241cb60d1449f064cc930da8649796185da7b7e77d9518e7273e17"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:137329aaec13ee055fb498f73549bc9e2b14136b0cf77b5af9c5ae3fc56ec60c"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:pedidos-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:0663e3abb989e902849047904334313a3e21f36d900c90e7a78d3173cbcc2034"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:ae66e22f050dc8bafe9badef957573ee47638df9e7d426f02968073692454479"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:productos-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:618321d801bfcf3e62418edddf1d7e468162391087c8df396617f502d52cf122"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:e4e1a39e0c7e0f3a2fe04afe584a0be0ec60103bd6cb3d745db47751e4bbc612"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:usuarios-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:65d40fb1d3ad7eb42afeede6fc55dc9ddb2ae319c06ebc844195e8da64ddf9a6"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:a7e8f0983f94b0a4540492482d4984f7c5a826dbab83aaa75ee64a146106cb1a"
+        }
+      ]
+    },
+    {
+      "tag": "ghcr.io/joselozanomorales/tiendatech:ventas-75aeac6",
+      "manifests": [
+        {
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          },
+          "digest": "sha256:d1919bd04eeb12845b851df30c9f8b6d626b114d42297a0a690d507fc3561566"
+        },
+        {
+          "platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "digest": "sha256:161df9cc237c884456471e364f25dc635e00bb9096e0d85ac60c5342319525dc"
+        }
+      ]
+    }
+  ],
+  "new_workflow_remote_validation": "pending"
+}

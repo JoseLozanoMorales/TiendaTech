@@ -1,0 +1,31 @@
+{
+  "checked_at_utc": "2026-09-13T00:37:47.292959+00:00",
+  "base_commit": "c5d68ba5bfade20e924a858075c89aa614ae70f8",
+  "source_state": "árbol local con configuración release aún sin commit",
+  "gradle_build_script_sha256": "3f0da12782d5291a87347fd01cb7afc28020cb47332022c2081f1df7bd0cd1ef",
+  "artifact": "release\\tiendatech-release.apk",
+  "artifact_sha256": "9da16724b311ac53e2a670fedd08dfaabe7c3a28ce7589fe80199a2999a04e59",
+  "bytes": 35849002,
+  "certificate_subject": "CN=Jose Alejandro Lozano Morales",
+  "certificate_sha256": "6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd",
+  "key_algorithm": "RSA",
+  "key_bits": 3072,
+  "signature_v2_verified": true,
+  "matches_exported_public_certificate": true,
+  "debuggable": false,
+  "application_id": "com.tiendatech.mobile",
+  "version_name": "1.0",
+  "version_code": 1,
+  "min_sdk": 26,
+  "target_sdk": 37,
+  "device_installation": "Instalación e inicio correctos en dos dispositivos, confirmados por José en esta conversación tras resolver el conflicto con la versión debug.",
+  "published": false,
+  "device_validation_scope": {
+    "source": "confirmación del usuario; no observación directa del asistente",
+    "devices": 2,
+    "models_and_android_versions": "no proporcionados",
+    "functional_scope": "instalación e inicio; no prueba integral de compra",
+    "initial_issue": "mismo applicationId con certificados debug y release distintos",
+    "resolution": "usuario confirmó que el conflicto de firmas era la causa y que el release inicia correctamente"
+  }
+}

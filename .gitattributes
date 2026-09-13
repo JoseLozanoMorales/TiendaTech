@@ -2,3 +2,4 @@
 checksums.txt text eol=lf
 *.tsv text eol=lf
 docs/evidencias/*-e4.txt text eol=lf
+docs/experimentos/resultados/checksums-datos.sha256 text eol=lf

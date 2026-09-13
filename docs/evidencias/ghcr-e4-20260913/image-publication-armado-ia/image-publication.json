@@ -1,0 +1,10 @@
+{
+  "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+  "service": "armado-ia",
+  "image": "ghcr.io/joselozanomorales/tiendatech@sha256:edd420b333683747ae02b1b77bd1d2eefde14fedd30ffa3157d8e383bb385a1d",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898"
+}

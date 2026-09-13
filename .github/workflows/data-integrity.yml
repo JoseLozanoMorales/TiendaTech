@@ -1,0 +1,27 @@
+name: Integridad de datos
+
+on:
+  push:
+    branches: [main, feature/entrega-3, feature/entrega-4]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  data-integrity:
+    name: Integridad de todos los datos CSV y TSV
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Comprobar que el verificador detecta alteraciones y ausencias
+        run: python -m unittest discover -s scripts -p test_data_checksums.py -v
+      - name: Verificar inventario completo y sumas publicadas
+        run: python scripts/check_data_checksums.py
+

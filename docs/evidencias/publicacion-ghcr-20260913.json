@@ -1,0 +1,1239 @@
+{
+  "checked_at_utc": "2026-09-13T05:19:40.043551+00:00",
+  "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+  "publication_run": {
+    "conclusion": "success",
+    "headSha": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+    "jobs": [
+      {
+        "completedAt": "2026-09-13T04:59:21Z",
+        "conclusion": "success",
+        "databaseId": 103675353466,
+        "name": "pedidos",
+        "startedAt": "2026-09-13T04:55:32Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:55:34Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:55:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:41Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:55:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:41Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:55:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:41Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:55:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:49Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:55:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:52Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:55:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:52Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:55:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:16Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:55:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:16Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T04:59:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:17Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T04:59:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:18Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T04:59:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:18Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T04:59:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:19Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T04:59:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:20Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T04:59:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:20Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T04:59:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:20Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T04:59:20Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353466"
+      },
+      {
+        "completedAt": "2026-09-13T05:01:52Z",
+        "conclusion": "success",
+        "databaseId": 103675353534,
+        "name": "ordenes-proveedores",
+        "startedAt": "2026-09-13T04:58:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:58:30Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:58:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:39Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:58:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:39Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:58:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:39Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:58:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:57Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:58:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:02Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:58:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:59:02Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:59:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:44Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:59:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:45Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T05:01:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:46Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T05:01:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:48Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T05:01:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:48Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T05:01:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:49Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T05:01:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:50Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T05:01:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:50Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T05:01:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:50Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T05:01:50Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353534"
+      },
+      {
+        "completedAt": "2026-09-13T04:55:30Z",
+        "conclusion": "success",
+        "databaseId": 103675353547,
+        "name": "frontend",
+        "startedAt": "2026-09-13T04:54:37Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:54:42Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:54:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:51Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:54:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:51Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:54:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:51Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:54:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:09Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:54:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:14Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:55:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:15Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:55:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:24Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:55:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:24Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T04:55:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:25Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T04:55:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:27Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T04:55:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:27Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T04:55:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:27Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T04:55:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:28Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T04:55:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:28Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T04:55:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:28Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T04:55:28Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353547"
+      },
+      {
+        "completedAt": "2026-09-13T04:58:27Z",
+        "conclusion": "success",
+        "databaseId": 103675353564,
+        "name": "usuarios",
+        "startedAt": "2026-09-13T04:54:37Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:54:41Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:54:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:54:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:02Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:08Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:55:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:09Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:55:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:21Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:55:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T04:58:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:23Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T04:58:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:24Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T04:58:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:24Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T04:58:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:25Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T04:58:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:25Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T04:58:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:26Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T04:58:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:26Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T04:58:26Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353564"
+      },
+      {
+        "completedAt": "2026-09-13T05:01:20Z",
+        "conclusion": "success",
+        "databaseId": 103675353572,
+        "name": "ventas",
+        "startedAt": "2026-09-13T04:58:13Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:58:15Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:58:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:58:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:58:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:58:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:27Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:58:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:30Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:58:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:31Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:58:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:15Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:58:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:15Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T05:01:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:16Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T05:01:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:17Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T05:01:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:17Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T05:01:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:18Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T05:01:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:19Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T05:01:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:19Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T05:01:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:19Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T05:01:19Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353572"
+      },
+      {
+        "completedAt": "2026-09-13T04:58:23Z",
+        "conclusion": "success",
+        "databaseId": 103675353578,
+        "name": "productos",
+        "startedAt": "2026-09-13T04:54:37Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:54:40Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:54:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:47Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:54:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:47Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:54:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:47Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:54:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:52Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:54:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:56Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:54:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:56Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:54:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:17Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:54:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:17Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T04:58:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:18Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T04:58:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:19Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T04:58:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:20Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T04:58:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:21Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T04:58:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:21Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T04:58:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T04:58:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:22Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T04:58:22Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353578"
+      },
+      {
+        "completedAt": "2026-09-13T05:01:23Z",
+        "conclusion": "success",
+        "databaseId": 103675353581,
+        "name": "armado-ia",
+        "startedAt": "2026-09-13T04:58:29Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:58:31Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:58:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:38Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:58:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:38Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:58:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:38Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:58:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:42Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:58:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:46Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:58:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:46Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:58:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:18Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:58:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:18Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T05:01:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:19Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T05:01:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:20Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T05:01:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:20Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T05:01:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:21Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T05:01:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:22Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T05:01:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:22Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T05:01:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T05:01:22Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T05:01:22Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353581"
+      },
+      {
+        "completedAt": "2026-09-13T04:58:11Z",
+        "conclusion": "success",
+        "databaseId": 103675353705,
+        "name": "inventario",
+        "startedAt": "2026-09-13T04:54:37Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-13T04:54:42Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-13T04:54:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Descargar código",
+            "number": 2,
+            "startedAt": "2026-09-13T04:54:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Calcular versión",
+            "number": 3,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:54:48Z",
+            "conclusion": "success",
+            "name": "Calcular repositorio de imagen (minusculas, lo exige GHCR)",
+            "number": 4,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:01Z",
+            "conclusion": "success",
+            "name": "Habilitar emulación ARM64",
+            "number": 5,
+            "startedAt": "2026-09-13T04:54:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:07Z",
+            "conclusion": "success",
+            "name": "Preparar Docker Buildx",
+            "number": 6,
+            "startedAt": "2026-09-13T04:55:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:55:08Z",
+            "conclusion": "success",
+            "name": "Iniciar sesión en GitHub Container Registry",
+            "number": 7,
+            "startedAt": "2026-09-13T04:55:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:04Z",
+            "conclusion": "success",
+            "name": "Construir y publicar",
+            "number": 8,
+            "startedAt": "2026-09-13T04:55:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:05Z",
+            "conclusion": "success",
+            "name": "Verificar el índice publicado y registrar su digest",
+            "number": 9,
+            "startedAt": "2026-09-13T04:58:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:05Z",
+            "conclusion": "success",
+            "name": "Conservar prueba de publicación por imagen",
+            "number": 10,
+            "startedAt": "2026-09-13T04:58:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:07Z",
+            "conclusion": "success",
+            "name": "Post Construir y publicar",
+            "number": 16,
+            "startedAt": "2026-09-13T04:58:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:07Z",
+            "conclusion": "success",
+            "name": "Post Iniciar sesión en GitHub Container Registry",
+            "number": 17,
+            "startedAt": "2026-09-13T04:58:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:08Z",
+            "conclusion": "success",
+            "name": "Post Preparar Docker Buildx",
+            "number": 18,
+            "startedAt": "2026-09-13T04:58:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:09Z",
+            "conclusion": "success",
+            "name": "Post Habilitar emulación ARM64",
+            "number": 19,
+            "startedAt": "2026-09-13T04:58:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:09Z",
+            "conclusion": "success",
+            "name": "Post Descargar código",
+            "number": 20,
+            "startedAt": "2026-09-13T04:58:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-13T04:58:09Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-13T04:58:09Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898/job/103675353705"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898"
+  },
+  "method": "Anonymous GHCR pull token; GET by digest and tag; SHA-256 of raw index; compare downloaded Actions index; verify linux/amd64 and linux/arm64. No container execution.",
+  "images": [
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "armado-ia",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:edd420b333683747ae02b1b77bd1d2eefde14fedd30ffa3157d8e383bb385a1d",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:armado-ia-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "frontend",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:d8b7ebe131f90a5df5a35d8ae5abb04a0093bbe166329f1315999274b5339360",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:frontend-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "inventario",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:c82995e6469d809d796a757238a9886d4bbcd4d851cd758492fd5c47fa2a8c28",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:inventario-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "ordenes-proveedores",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:e45ce5af3b1cee4fa0d6972aaea44242e1abc6620d3cda05c2cb47b97fa42cf4",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:ordenes-proveedores-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "pedidos",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:10366b4ab63f3227fb99571d9ed6afa05a9f9c7fba8dbed7099c9347ac0ab1f0",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:pedidos-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "productos",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:85da08aa87d1abc7bbadc5d27b9b9f95e53764f27582a47b4e53d31c21371d8b",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:productos-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "usuarios",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:63d2409908e0e84aa562e4e8da92b8d8b2a99ddfed6d56fd7fcf7ee323d813cc",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:usuarios-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    },
+    {
+      "source_commit": "e4ad304be7324a3e37c4b20d8d913a13a6cac551",
+      "service": "ventas",
+      "image": "ghcr.io/joselozanomorales/tiendatech@sha256:84f9fec7be3e3eb3feeae552a1bfea5ecee486f81899a8860255a2008b8facc6",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "run_url": "https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34738998898",
+      "tag": "ghcr.io/joselozanomorales/tiendatech:ventas-e4ad304",
+      "registry_digest_verified": true,
+      "tag_matches_digest": true,
+      "artifact_matches_registry": true
+    }
+  ]
+}

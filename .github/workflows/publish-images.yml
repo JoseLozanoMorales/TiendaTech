@@ -83,6 +83,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Construir y publicar
+        id: published
         uses: docker/build-push-action@v7
         with:
           context: ${{ matrix.context }}
@@ -93,3 +94,43 @@ jobs:
           cache-from: type=gha,scope=${{ matrix.image }}
           cache-to: type=gha,mode=max,scope=${{ matrix.image }}
           provenance: mode=max
+
+      - name: Verificar el índice publicado y registrar su digest
+        env:
+          IMAGE_REPOSITORY: ghcr.io/${{ steps.repo.outputs.name }}
+          IMAGE_SERVICE: ${{ matrix.image }}
+          IMAGE_DIGEST: ${{ steps.published.outputs.digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker buildx imagetools inspect "$IMAGE_REPOSITORY@$IMAGE_DIGEST" --raw > image-index.json
+          python3 - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          index = json.loads(Path("image-index.json").read_text())
+          platforms = sorted({
+              f"{p.get('os')}/{p.get('architecture')}"
+              for entry in index.get("manifests", [])
+              for p in [entry.get("platform", {})]
+              if p.get("os") == "linux"
+          })
+          if not {"linux/amd64", "linux/arm64"}.issubset(platforms):
+              raise SystemExit(f"Arquitecturas publicadas incompletas: {platforms}")
+          record = {
+              "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+              "service": os.environ["IMAGE_SERVICE"],
+              "image": os.environ["IMAGE_REPOSITORY"] + "@" + os.environ["IMAGE_DIGEST"],
+              "platforms": platforms,
+              "run_url": os.environ["GITHUB_SERVER_URL"] + "/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + os.environ["GITHUB_RUN_ID"],
+          }
+          Path("image-publication.json").write_text(json.dumps(record, indent=2) + "\n")
+          PY
+
+      - name: Conservar prueba de publicación por imagen
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-publication-${{ matrix.image }}
+          path: |
+            image-index.json
+            image-publication.json
+          if-no-files-found: error
