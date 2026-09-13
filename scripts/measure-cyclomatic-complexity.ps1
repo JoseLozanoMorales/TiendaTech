@@ -49,7 +49,7 @@ foreach ($entry in $modules.GetEnumerator()) {
         if ($_.InnerText -match "cyclomatic complexity of (\d+)") { [int]$Matches[1] }
     })
     $maximum = if ($values.Count) { ($values | Measure-Object -Maximum).Maximum } else { 1 }
-    $rows += [pscustomobject]@{ module = $entry.Key; max_method_complexity = $maximum; objective = "<10"; status = if ($maximum -lt 10) { "CUMPLE" } else { "NO CUMPLE" }; report = $targetReport }
+    $rows += [pscustomobject]@{ module = $entry.Key; max_method_complexity = $maximum; objective = "<10"; status = if ($maximum -lt 10) { "CUMPLE" } else { "NO CUMPLE" }; report = "$($entry.Key)-pmd.xml" }
 }
 $rows | Export-Csv -NoTypeInformation -Encoding utf8 -Path (Join-Path $output "summary.csv")
 $rows | Format-Table -AutoSize

@@ -11,6 +11,17 @@
     "usedDeprecatedRules": []
   },
   {
+    "filePath": "Apps/web/frontend/webapp/scripts/complexity-report.mjs",
+    "messages": [],
+    "suppressedMessages": [],
+    "errorCount": 0,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": []
+  },
+  {
     "filePath": "Apps/web/frontend/webapp/scripts/lint-report.mjs",
     "messages": [],
     "suppressedMessages": [],
@@ -209,7 +220,7 @@
     "usedDeprecatedRules": []
   },
   {
-    "filePath": "Apps/web/frontend/webapp/src/views/shared.ts",
+    "filePath": "Apps/web/frontend/webapp/src/views/WorkerView.tsx",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
@@ -220,7 +231,7 @@
     "usedDeprecatedRules": []
   },
   {
-    "filePath": "Apps/web/frontend/webapp/src/views/WorkerView.tsx",
+    "filePath": "Apps/web/frontend/webapp/src/views/shared.ts",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
@@ -363,7 +374,7 @@
     "usedDeprecatedRules": []
   },
   {
-    "filePath": "Apps/web/frontend/webapp/tests/setup.ts",
+    "filePath": "Apps/web/frontend/webapp/tests/WorkerView.test.tsx",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,
@@ -374,7 +385,7 @@
     "usedDeprecatedRules": []
   },
   {
-    "filePath": "Apps/web/frontend/webapp/tests/WorkerView.test.tsx",
+    "filePath": "Apps/web/frontend/webapp/tests/setup.ts",
     "messages": [],
     "suppressedMessages": [],
     "errorCount": 0,

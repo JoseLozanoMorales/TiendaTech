@@ -94,6 +94,8 @@ jobs:
           if-no-files-found: ignore
 
   web-quality:
+    needs: backend-complexity
+    if: ${{ !cancelled() }}
     name: Web lint and unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -107,7 +109,16 @@ jobs:
       - name: Install webapp dependencies
         working-directory: Apps/web/frontend/webapp
         run: npm ci
+      - name: Download freshly measured backend complexity
+        uses: actions/download-artifact@v4
+        with:
+          name: pmd-complejidad
+          path: docs/experimentos/resultados/iso25010/complejidad/
+      - name: Measure web cyclomatic complexity (maximum <10)
+        working-directory: Apps/web/frontend/webapp
+        run: npm run complexity:report
       - name: Run web static analysis (ESLint)
+        if: ${{ !cancelled() }}
         working-directory: Apps/web/frontend/webapp
         run: npm run lint:report
       - name: Upload web static analysis
@@ -116,6 +127,8 @@ jobs:
         with:
           name: web-static-analysis
           path: |
+            docs/experimentos/resultados/iso25010/complejidad/summary.csv
+            docs/experimentos/resultados/iso25010/complejidad/webapp-complexity.json
             docs/experimentos/resultados/iso25010/complejidad/webapp-eslint.json
             docs/experimentos/resultados/iso25010/complejidad/webapp-eslint-summary.csv
           if-no-files-found: error

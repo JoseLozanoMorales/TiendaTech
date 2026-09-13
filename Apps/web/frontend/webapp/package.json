@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint:report": "node scripts/lint-report.mjs"
+    "lint:report": "node scripts/lint-report.mjs",
+    "complexity:report": "node scripts/complexity-report.mjs"
   },
   "dependencies": {
     "react": "18.3.1",
