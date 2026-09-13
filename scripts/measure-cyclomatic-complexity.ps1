@@ -53,3 +53,11 @@ foreach ($entry in $modules.GetEnumerator()) {
 }
 $rows | Export-Csv -NoTypeInformation -Encoding utf8 -Path (Join-Path $output "summary.csv")
 $rows | Format-Table -AutoSize
+
+# pwsh (Linux) usa $LASTEXITCODE como codigo de salida del proceso si el
+# script no termina con "exit" explicito; el ultimo valor que queda ahi es
+# el codigo propio de PMD (4 = violaciones encontradas, tolerado arriba), no
+# un fallo de este script. Windows PowerShell no tiene ese comportamiento,
+# por eso la diferencia solo se ve en CI. La decision de pasar/fallar segun
+# el umbral la toma un paso separado, no este script de medicion.
+exit 0
