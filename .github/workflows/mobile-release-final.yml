@@ -61,7 +61,13 @@ jobs:
           export TIENDATECH_KEYSTORE_PATH="$RUNNER_TEMP/tiendatech-release.p12"
           trap 'rm -f "$TIENDATECH_KEYSTORE_PATH"' EXIT
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$TIENDATECH_KEYSTORE_PATH"
-          ./gradlew lintRelease testReleaseUnitTest assembleRelease --no-daemon --no-configuration-cache --no-build-cache
+          # Este proyecto no expone una tarea testReleaseUnitTest (solo hay
+          # src/test compartido, sin variante release separada; ver
+          # release/FIRMA-DISTRIBUCION.md). Las pruebas unitarias ya se
+          # ejecutan en el job "Android mobile quality" de ci.yml
+          # (testDebugUnitTest), que es prerrequisito de este flujo porque
+          # exige que el tag apunte a un commit de main ya aprobado por CI.
+          ./gradlew lintRelease assembleRelease --no-daemon --no-configuration-cache --no-build-cache
 
       - name: Verify and describe the exact artifact
         shell: bash

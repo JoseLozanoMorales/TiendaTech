@@ -53,7 +53,9 @@ disparado al empujar un tag `v*`:
 
 1. Exige que el commit del tag sea exactamente el tip de `origin/main` en ese
    momento (así el binario firmado sale del mismo código revisado).
-2. Compila un único APK (`lintRelease testReleaseUnitTest assembleRelease`).
+2. Compila un único APK (`lintRelease assembleRelease`; este proyecto no
+   expone `testReleaseUnitTest` — las pruebas unitarias corren en el job
+   "Android mobile quality" de `ci.yml`, prerrequisito de este flujo).
 3. Verifica con `apksigner` que el certificado firmante coincida exactamente
    con la huella de José (`6ad168c1...8bbd`).
 4. Genera el checksum del APK, el resumen SHA-256 del guion de construcción
