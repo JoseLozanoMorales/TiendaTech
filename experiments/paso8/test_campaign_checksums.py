@@ -49,6 +49,25 @@ class CampaignChecksumsTest(unittest.TestCase):
         self.raw.write_bytes(b'value\r\n1\r\n')
         self.assertEqual(verify(self.root), 2)
 
+    def test_structured_json_covered(self):
+        # Los veredictos del experimento (p. ej. validacion.json) y otros archivos
+        # estructurados de la campaña deben quedar cubiertos, no solo lo tabular.
+        (self.root / 'validacion.json').write_bytes(b'{"valido": true}')
+        subdir = self.root / 'piloto-basal'
+        subdir.mkdir()
+        (subdir / 'piloto-saga.json').write_bytes(b'{"ok": true}')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+        write(self.root)
+        self.assertEqual(verify(self.root), 4)
+
+    def test_json_tampering_detected(self):
+        (self.root / 'validacion.json').write_bytes(b'{"valido": true}')
+        write(self.root)
+        (self.root / 'validacion.json').write_bytes(b'{"valido": false}')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()
