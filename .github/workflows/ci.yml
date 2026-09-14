@@ -239,13 +239,13 @@ jobs:
         run: sha256sum -c tiendatech-debug.apk.sha256
 
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "21"
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Install Android platform
         run: sdkmanager "platforms;android-37.0" "build-tools;36.0.0"
@@ -275,90 +275,6 @@ jobs:
             Apps/mobile/app/build/reports/
             Apps/mobile/app/build/test-results/
           if-no-files-found: ignore
-
-  android-release:
-    name: Firmar APK release de Jose
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [android-mobile, backend-complexity, manuscript-quality, web-quality, contract-tests, e2e-web, crdb-tests, armado-ia-tests, csv-line-endings]
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "21"
-      - uses: android-actions/setup-android@v3
-      - run: sdkmanager "platforms;android-37.0" "build-tools;36.0.0"
-      - name: Compilar con la clave privada temporal
-        working-directory: Apps/mobile
-        env:
-          KEYSTORE_BASE64: ${{ secrets.TIENDATECH_KEYSTORE_BASE64 }}
-          TIENDATECH_KEYSTORE_PASSWORD: ${{ secrets.TIENDATECH_KEYSTORE_PASSWORD }}
-          TIENDATECH_KEY_ALIAS: ${{ secrets.TIENDATECH_KEY_ALIAS }}
-          TIENDATECH_KEY_PASSWORD: ${{ secrets.TIENDATECH_KEY_PASSWORD }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          for name in KEYSTORE_BASE64 TIENDATECH_KEYSTORE_PASSWORD TIENDATECH_KEY_ALIAS TIENDATECH_KEY_PASSWORD; do
-            if [ -z "${!name}" ]; then echo "::error::Falta secreto de firma: $name"; exit 1; fi
-          done
-          umask 077
-          export TIENDATECH_KEYSTORE_PATH="$RUNNER_TEMP/jose-release.p12"
-          trap 'rm -f "$TIENDATECH_KEYSTORE_PATH"' EXIT
-          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$TIENDATECH_KEYSTORE_PATH"
-          ./gradlew lintRelease assembleRelease --no-daemon --no-configuration-cache --no-build-cache
-      - name: Verificar identidad y conservar evidencia
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p mobile-delivery
-          cp Apps/mobile/app/build/outputs/apk/release/app-release.apk mobile-delivery/tiendatech-release.apk
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs mobile-delivery/tiendatech-release.apk > mobile-delivery/apksigner.txt
-          grep -Fqx 'Signer #1 certificate SHA-256 digest: 6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd' mobile-delivery/apksigner.txt
-          cd mobile-delivery
-          sha256sum tiendatech-release.apk > tiendatech-release.apk.sha256
-          sha256sum -c tiendatech-release.apk.sha256
-          printf 'source_commit=%s\nrun_url=%s/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > provenance.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: mobile-release
-          path: mobile-delivery/
-          if-no-files-found: error
-
-  publish-mobile:
-    name: Publish Android prerelease
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [android-release]
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: mobile-release
-          path: release
-      - name: Verify and publish APK with checksum
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          RELEASE_SHA: ${{ github.sha }}
-          RELEASE_TAG: mobile-release-${{ github.run_id }}-${{ github.run_attempt }}
-        run: |
-          cd release
-          sha256sum -c tiendatech-release.apk.sha256
-          cat > /tmp/mobile-release-notes.md <<'EOF'
-          APK release instalable de TiendaTech (Android 8.0 o posterior).
-          Firmado con la identidad de Jose Alejandro Lozano Morales.
-          Verificar: sha256sum -c tiendatech-release.apk.sha256
-          Instalar: adb install -r tiendatech-release.apk
-          Backend predeterminado: https://18-221-94-105.sslip.io/
-          Instrucciones completas: release/README.md en el commit de esta entrega.
-          EOF
-          gh release create "$RELEASE_TAG" tiendatech-release.apk tiendatech-release.apk.sha256 apksigner.txt provenance.txt \
-            --target "$RELEASE_SHA" --title "Android release $RELEASE_TAG" \
-            --prerelease --notes-file /tmp/mobile-release-notes.md
 
   crdb-tests:
     name: CockroachDB integration tests

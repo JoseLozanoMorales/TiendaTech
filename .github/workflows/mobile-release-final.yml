@@ -1,0 +1,94 @@
+name: Final Android release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  final-mobile-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require tag at current main tip
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$GITHUB_SHA" = "$(git rev-parse origin/main)"
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android platform
+        run: sdkmanager "platforms;android-37.0" "build-tools;36.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build exactly one signed APK
+        working-directory: Apps/mobile
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.TIENDATECH_KEYSTORE_BASE64 }}
+          TIENDATECH_KEYSTORE_PASSWORD: ${{ secrets.TIENDATECH_KEYSTORE_PASSWORD }}
+          TIENDATECH_KEY_ALIAS: ${{ secrets.TIENDATECH_KEY_ALIAS }}
+          TIENDATECH_KEY_PASSWORD: ${{ secrets.TIENDATECH_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for name in KEYSTORE_BASE64 TIENDATECH_KEYSTORE_PASSWORD TIENDATECH_KEY_ALIAS TIENDATECH_KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then echo "::error::Falta secreto: $name"; exit 1; fi
+          done
+          umask 077
+          export TIENDATECH_KEYSTORE_PATH="$RUNNER_TEMP/tiendatech-release.p12"
+          trap 'rm -f "$TIENDATECH_KEYSTORE_PATH"' EXIT
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$TIENDATECH_KEYSTORE_PATH"
+          ./gradlew lintRelease testReleaseUnitTest assembleRelease --no-daemon --no-configuration-cache --no-build-cache
+
+      - name: Verify and describe the exact artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir mobile-delivery
+          cp Apps/mobile/app/build/outputs/apk/release/app-release.apk mobile-delivery/tiendatech-release.apk
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs mobile-delivery/tiendatech-release.apk > mobile-delivery/apksigner.txt
+          grep -Fqx 'Signer #1 certificate SHA-256 digest: 6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd' mobile-delivery/apksigner.txt
+          cd mobile-delivery
+          sha256sum tiendatech-release.apk > tiendatech-release.apk.sha256
+          sha256sum -c tiendatech-release.apk.sha256
+          git -C .. show "$GITHUB_SHA:Apps/mobile/app/build.gradle.kts" | sha256sum | sed 's/  -$/  Apps\/mobile\/app\/build.gradle.kts/' > gradle-build-script.sha256
+          printf 'source_commit=%s\ntag=%s\nrun_url=%s/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_REF_NAME" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > provenance.txt
+
+      - name: Upload immutable evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-mobile-${{ github.ref_name }}
+          path: mobile-delivery/
+          if-no-files-found: error
+
+      - name: Publish definitive GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$GITHUB_REF_NAME" mobile-delivery/* \
+            --verify-tag \
+            --target "$GITHUB_SHA" \
+            --title "TiendaTech $GITHUB_REF_NAME" \
+            --latest \
+            --notes "APK final firmado de TiendaTech. Verificar con: sha256sum -c tiendatech-release.apk.sha256"
