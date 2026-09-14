@@ -209,7 +209,30 @@ compilar el PDF están en `docs/entrega4/README.md`.
 
 ---
 
-## 9. Trazabilidad con la rúbrica
+## 9. Higiene del repositorio: artefactos pesados fuera del árbol
+
+Desde el punto 37 del cierre, el video de evidencia, los dos instalables Android,
+el agente de instrumentación OpenTelemetry y las bases de datos SQLite crudas de
+los experimentos ya no se versionan (ver `.gitignore`); antes sumaban más de
+340 MB en el árbol. Se conservan en el historial de git (recuperables con
+`git show <commit>:<ruta>`) y se publican como adjuntos de la versión etiquetada
+`v4.0.0`:
+
+| Artefacto | Tamaño | Adjunto en la release |
+|---|---:|---|
+| Video de tolerancia a fallos (`docs/evidencias/tolerancia_fallos.mp4`) | 90,2 MB | [tolerancia_fallos.mp4](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tolerancia_fallos.mp4) |
+| APK debug histórico (`release/tiendatech-debug.apk`) | 39,1 MB | [tiendatech-debug.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-debug.apk) |
+| APK release firmado (`release/tiendatech-release.apk`) | 34,2 MB | [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) — publicado automáticamente por `mobile-release-final.yml` (ver punto 44) |
+| Agente OpenTelemetry Java (`ops/observability/opentelemetry-javaagent.jar`) | 22,3 MB | [opentelemetry-javaagent.jar](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/opentelemetry-javaagent.jar) |
+| Bases de datos SQLite de los experimentos (360 archivos, piloto y campañas) | 156,5 MB | [experimentos-bases-de-datos.zip](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/experimentos-bases-de-datos.zip) |
+
+Ver [release/README.md](release/README.md) y
+[Apps/mobile/README.md](Apps/mobile/README.md) para instrucciones de verificación
+e instalación de los paquetes Android.
+
+---
+
+## 10. Trazabilidad con la rúbrica
 
 > **Cierre acumulativo del Paso 13 (1 de septiembre de 2026):** la versión actualizada es [PFC4.tex](docs/entrega4/PFC4.tex), con [PDF](docs/entrega4/PFC4.pdf) e [instrucciones de compilación con Biber](docs/entrega4/README.md). Las tablas históricas de esta sección no sustituyen el diagnóstico actualizado de esa memoria, que incorpora las evidencias posteriores y sus límites.
 
@@ -231,7 +254,7 @@ Ver `docs/entrega4/PFC4.tex` §"Trazabilidad E1-E4" para la tabla completa de ci
 
 ---
 
-## 10. Pendientes conocidos
+## 11. Pendientes conocidos
 
 - Falta ampliar la cobertura de `ordenes-proveedores-service` y `ventas-service`; ambos ya contienen pruebas unitarias.
 - Los contratos Pact cubren dos interacciones y los E2E web dos recorridos; ampliar casos si cambian esos contratos o rutas.
@@ -241,7 +264,7 @@ Ver `docs/entrega4/PFC4.tex` §"Trazabilidad E1-E4" para la tabla completa de ci
 - Para producción deben sustituirse todos los valores de ejemplo y montarse los certificados del clúster administrado; el Compose local es autocontenido y no requiere sobrescribir `CRDB_DATASOURCE_URL`.
 ---
 
-## 11. Paso 3 — TCP, gRPC y relojes de Lamport
+## 12. Paso 3 — TCP, gRPC y relojes de Lamport
 
 El carrito reserva stock mediante un canal TCP persistente entre `pedidos-service`
 y `inventario-service`. Cada mensaje usa un encabezado de 4 bytes, entero sin

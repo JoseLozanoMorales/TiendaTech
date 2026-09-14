@@ -13,11 +13,14 @@ Cliente móvil de compra para TiendaTech, construido con Kotlin, Jetpack Compose
 
 Para distribuir una versión release se necesita la clave del equipo y las cuatro
 variables descritas en [Firma de distribución](../../release/FIRMA-DISTRIBUCION.md).
-Ya se generó y verificó localmente un APK release con la clave de José; véase
-`../../release/tiendatech-release.apk`. Release no se empaqueta sin la clave.
+Ya se generó y verificó localmente un APK release con la clave de José; el
+binario ya no se versiona en el repositorio (ver punto 37) y se descarga desde
+la [versión `v4.0.0`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0),
+adjunto como `tiendatech-release.apk`. Release no se empaqueta sin la clave.
 José confirmó instalación e inicio correctos en dos dispositivos tras resolver el
-conflicto de firma con la versión debug. La publicación automática del paquete
-release se verificó para el commit `c3edc7a`.
+conflicto de firma con la versión debug. La publicación automática y definitiva
+del paquete release se hace con `.github/workflows/mobile-release-final.yml`
+(ver punto 44).
 
 Android exige que una actualización conserve el `applicationId` y el certificado
 de la aplicación instalada. Como debug y release usan certificados distintos, un

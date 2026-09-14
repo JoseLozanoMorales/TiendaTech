@@ -54,3 +54,18 @@ experiments/paso8/resultados-reales/oficial-v4-20260904/**
 !tests/load/results/
 tests/load/results/*
 !tests/load/results/checksums.txt
+
+# Punto 37 (Higiene del repositorio): estos artefactos pesados ya no se
+# versionan. Se publican como adjuntos de la versión etiquetada (ver enlaces
+# en README.md, release/README.md y Apps/mobile/README.md) en vez de vivir en
+# el árbol. No volver a `git add -f` estos archivos.
+docs/evidencias/tolerancia_fallos.mp4
+ops/observability/opentelemetry-javaagent.jar
+release/tiendatech-debug.apk
+release/tiendatech-release.apk
+experiments/paso8/resultados-rubrica-20260904/warmup/*.db
+experiments/paso8/resultados-rubrica-20260904/warmup/*.db-journal
+experiments/paso8/resultados-rubrica-20260904/db/*.db
+experiments/paso8/resultados/db/*.db
+docs/entrega4/cierre/actualizacion-20260903/*.db
+experiments/paso7/evidence/*.db

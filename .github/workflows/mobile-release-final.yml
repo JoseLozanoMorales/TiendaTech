@@ -33,6 +33,10 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
+        with:
+          # Ver nota equivalente en ci.yml: el paquete "tools" heredado que
+          # el action pide por defecto ya no existe en el repositorio del SDK.
+          packages: "platform-tools"
 
       - name: Install Android platform
         run: sdkmanager "platforms;android-37.0" "build-tools;36.0.0"

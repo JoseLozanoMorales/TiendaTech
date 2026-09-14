@@ -2,7 +2,7 @@
 
 Estado actual: **clave de José creada y APK release firmado y verificado localmente**. Certificado `CN=Jose Alejandro Lozano Morales`, RSA de 3072 bits; firma APK v2 válida y certificado del APK idéntico al exportado de su almacén. El APK no es depurable. Fecha local: 12 de septiembre de 2026.
 
-- Instalador: [tiendatech-release.apk](tiendatech-release.apk).
+- Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) (ya no se versiona en `release/`; ver punto 37).
 - Checksum: [tiendatech-release.apk.sha256](tiendatech-release.apk.sha256).
 - Certificado público: [jose-lozano-certificado-publico.pem](jose-lozano-certificado-publico.pem).
 - Huella SHA-256 del certificado: `6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd`.
@@ -45,19 +45,28 @@ Antes de entregar:
 
 Referencia de configuración: https://developer.android.com/studio/publish/app-signing
 
-## Firma automática en CI
+## Firma automática y publicación definitiva en CI
 
-La ampliación de CI ejecuta `lintRelease assembleRelease`
-solo en pushes a `main`, después de las comprobaciones de calidad.
-Las pruebas unitarias `testDebugUnitTest` se ejecutan en el trabajo previo
-`android-mobile`, del que depende la firma. Este proyecto no expone una tarea
-`testReleaseUnitTest`.
-Los pull requests mantienen pruebas debug y no reciben la clave de distribución. El almacén temporal
-se elimina al terminar el paso; la compilación de firma no utiliza caché Gradle.
-Antes de publicar se exige la huella exacta del certificado de José y se generan
-el checksum del APK, el informe de `apksigner` y la procedencia (commit y run).
-Se publican como prerelease `mobile-release-*`; no se actualiza el APK versionado
-automáticamente ni se altera la identidad de firma de debug.
+Desde el cierre del punto 44, la firma y publicación ya no ocurren en cada push
+a `main`. El único mecanismo es `.github/workflows/mobile-release-final.yml`,
+disparado al empujar un tag `v*`:
+
+1. Exige que el commit del tag sea exactamente el tip de `origin/main` en ese
+   momento (así el binario firmado sale del mismo código revisado).
+2. Compila un único APK (`lintRelease testReleaseUnitTest assembleRelease`).
+3. Verifica con `apksigner` que el certificado firmante coincida exactamente
+   con la huella de José (`6ad168c1...8bbd`).
+4. Genera el checksum del APK, el resumen SHA-256 del guion de construcción
+   (`Apps/mobile/app/build.gradle.kts` tal como está versionado en ese commit,
+   ver punto 44) y la procedencia (commit, tag, run).
+5. Publica con `gh release create --verify-tag --target "$GITHUB_SHA" --latest`
+   (sin `--prerelease`): una versión **definitiva**, no preliminar.
+
+Los dos trabajos antiguos que compilaban y firmaban en cada push
+(`android-release`, `publish-mobile`, que publicaban como prerelease
+`mobile-release-<run_id>-<run_attempt>`) fueron retirados de `ci.yml`: producían
+un artefacto distinto del versionado y solo se publicaban como versión
+preliminar — exactamente el defecto que cerró el punto 44.
 
 Secretos de repositorio necesarios: `TIENDATECH_KEYSTORE_BASE64`,
 `TIENDATECH_KEYSTORE_PASSWORD`, `TIENDATECH_KEY_ALIAS` y `TIENDATECH_KEY_PASSWORD`.
@@ -72,14 +81,9 @@ y envía los valores por entrada estándar a `gh secret set`. No guarda contrase
 ni claves en Git. El PKCS12 de José utiliza la misma contraseña para almacén y clave.
 Requiere una sesión de GitHub CLI con permisos para administrar secretos.
 
-Estado verificado el 13 de septiembre de 2026: José cargó los cuatro secretos mediante
-el guion local y el job `Firmar APK release de Jose` terminó satisfactoriamente en el
-[run 34780292598](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34780292598),
-para el commit completo `c3edc7affc694b2192136675bd2acb7ebb988cf9`.
-La prerelease
-[`mobile-release-34780292598-1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/mobile-release-34780292598-1)
-contiene el APK, su checksum, el informe de `apksigner` y la procedencia. El digest
-SHA-256 publicado del APK es
-`91276296e17d3d16297e9af210736db1e1f588663d8f50490a6a2d3cc41a8126`.
-La evidencia reproducible se resume en
-`docs/evidencias/firma-release-jose/verificacion-ci-20260913.json`.
+**Pendiente de completar tras publicar `v4.0.0`:** reemplazar este párrafo con
+el commit, tag, URL del run y digest SHA-256 reales de la ejecución que produjo
+la versión definitiva (ver `PLANTILLAS/resultado-punto44.md` del paquete de
+cierre del punto 44 para la plantilla exacta de estos datos), y adjuntar a esa
+misma versión etiquetada el APK debug, el video de tolerancia a fallos, el
+agente OpenTelemetry y el zip de bases de datos de los experimentos (punto 37).

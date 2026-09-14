@@ -1,14 +1,19 @@
 # Paquete Android instalable (E6)
 
-El [APK release](tiendatech-release.apk) está firmado por José y tiene
-[checksum](tiendatech-release.apk.sha256) verificado. La firma v2, el certificado
-público y la validación de instalación y publicación se documentan en
-[Firma de distribución](FIRMA-DISTRIBUCION.md).
+Desde el punto 37 (higiene del repositorio), los binarios ya no se versionan en
+esta carpeta: pesan demasiado para el árbol de git y se publican como adjuntos
+de la versión etiquetada `v4.0.0`. Solo quedan aquí los checksums, el
+certificado público y la documentación.
+
+El [APK release](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk)
+está firmado por José y tiene [checksum](tiendatech-release.apk.sha256)
+verificado. La firma v2, el certificado público y la validación de instalación
+y publicación se documentan en [Firma de distribución](FIRMA-DISTRIBUCION.md).
 
 ## Paquete debug histórico
 
-Entregables: [tiendatech-debug.apk](tiendatech-debug.apk) y
-[tiendatech-debug.apk.sha256](tiendatech-debug.apk.sha256).
+Entregable: [tiendatech-debug.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-debug.apk),
+con checksum en [tiendatech-debug.apk.sha256](tiendatech-debug.apk.sha256).
 Versión 1.0, aplicación `com.tiendatech.mobile`, Android 8.0 (API 26) o posterior.
 
 Validación local del 11 de septiembre de 2026: `assembleDebug` aprobado,
@@ -18,16 +23,17 @@ No se realizó una instalación en dispositivo durante esta validación.
 
 ## Verificar e instalar
 
-Desde la raíz del repositorio, con Android Platform Tools instalado:
+Descargar `tiendatech-release.apk` y `tiendatech-release.apk.sha256` desde la
+[versión `v4.0.0`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0),
+colocarlos en la misma carpeta y, con Android Platform Tools instalado:
 
 ```bash
-cd release
 sha256sum -c tiendatech-release.apk.sha256
 adb install -r tiendatech-release.apk
 ```
 
 El primer comando debe devolver `tiendatech-release.apk: OK`.
-En PowerShell: `Get-FileHash release/tiendatech-release.apk -Algorithm SHA256`,
+En PowerShell: `Get-FileHash tiendatech-release.apk -Algorithm SHA256`,
 comparando el resultado con el `.sha256`. También se puede copiar el APK al
 teléfono y abrirlo permitiendo la instalación desde esa fuente.
 
@@ -56,23 +62,28 @@ Requiere JDK 21, `ANDROID_HOME` y SDK `platforms;android-37.0` /
 cd Apps/mobile
 ./gradlew assembleDebug --no-daemon
 cd ../..
-cp Apps/mobile/app/build/outputs/apk/debug/app-debug.apk release/tiendatech-debug.apk
-(cd release && sha256sum tiendatech-debug.apk > tiendatech-debug.apk.sha256)
-(cd release && sha256sum -c tiendatech-debug.apk.sha256)
+sha256sum Apps/mobile/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Incluir **ambos archivos** en el commit de entrega. El APK y su suma son una
-pareja: no mezclar un APK local con el checksum de otro build.
+Comparar el resultado con `release/tiendatech-debug.apk.sha256`. El APK
+regenerado ya no se commitea (ver `.gitignore`); si cambia por una actualización
+legítima, subir el nuevo binario como adjunto de una nueva versión etiquetada y
+actualizar aquí el `.sha256` y el enlace de descarga.
 
 ## Publicación automática y alcance de la rúbrica
 
-`ci.yml` conserva las comprobaciones de la variante debug y, en pushes a `main`
-que aprueban todos los trabajos requeridos, genera un APK release firmado. Antes de
-publicarlo comprueba la huella del certificado de José, genera su checksum y registra
-el commit y el run de procedencia. `publish-mobile` lo publica como una **GitHub
-prerelease**, con etiqueta `mobile-release-<run_id>-<run_attempt>`. Las PR no reciben
-la clave privada ni publican paquetes.
+El único mecanismo de publicación es `.github/workflows/mobile-release-final.yml`
+(ver punto 44): se dispara al empujar un tag `v*`, exige que ese tag apunte al
+commit vigente de `main`, compila y firma un único APK release, verifica la
+huella del certificado de José y publica una **versión definitiva** (no
+preliminar) con `gh release create --verify-tag --latest`, adjuntando el APK,
+su checksum, el informe de `apksigner`, el resumen del guion de construcción y
+la procedencia (commit, tag, run). El APK debug histórico, el video de
+tolerancia a fallos, el agente OpenTelemetry y las bases de datos de los
+experimentos se adjuntan a esa misma versión etiquetada por separado (ver
+punto 37 en el README raíz).
 
-La primera publicación automática release se verificó para el commit `c3edc7a`:
-`mobile-release-34780292598-1`, con APK, checksum, informe de `apksigner` y
-procedencia. El paquete debug se conserva únicamente como evidencia histórica.
+Los dos trabajos antiguos que compilaban y publicaban el release como
+prerelease en cada push (`android-release`, `publish-mobile`) fueron retirados
+de `ci.yml` al cerrar el punto 44: producían un artefacto distinto del
+versionado y solo se publicaban como versión preliminar.
