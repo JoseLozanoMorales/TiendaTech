@@ -14,57 +14,57 @@
     {
       "servicio": "inventario-service",
       "reporte": "docs/evidencias/cobertura/inventario-service-jacoco.xml",
-      "lineas_cubiertas": 8,
-      "lineas_totales": 8,
-      "cobertura_porcentaje": 100.0,
+      "lineas_cubiertas": 311,
+      "lineas_totales": 1396,
+      "cobertura_porcentaje": 22.28,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     },
     {
       "servicio": "ordenes-proveedores-service",
       "reporte": "docs/evidencias/cobertura/ordenes-proveedores-service-jacoco.xml",
-      "lineas_cubiertas": 47,
-      "lineas_totales": 51,
-      "cobertura_porcentaje": 92.16,
+      "lineas_cubiertas": 64,
+      "lineas_totales": 546,
+      "cobertura_porcentaje": 11.72,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     },
     {
       "servicio": "pedidos-service",
       "reporte": "docs/evidencias/cobertura/pedidos-service-jacoco.xml",
-      "lineas_cubiertas": 104,
-      "lineas_totales": 129,
-      "cobertura_porcentaje": 80.62,
+      "lineas_cubiertas": 443,
+      "lineas_totales": 1938,
+      "cobertura_porcentaje": 22.86,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     },
     {
       "servicio": "productos-service",
       "reporte": "docs/evidencias/cobertura/productos-service-jacoco.xml",
-      "lineas_cubiertas": 23,
-      "lineas_totales": 23,
-      "cobertura_porcentaje": 100.0,
+      "lineas_cubiertas": 116,
+      "lineas_totales": 512,
+      "cobertura_porcentaje": 22.66,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     },
     {
       "servicio": "usuarios",
       "reporte": "docs/evidencias/cobertura/usuarios-jacoco.xml",
-      "lineas_cubiertas": 321,
-      "lineas_totales": 358,
-      "cobertura_porcentaje": 89.66,
+      "lineas_cubiertas": 411,
+      "lineas_totales": 999,
+      "cobertura_porcentaje": 41.14,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     },
     {
       "servicio": "ventas-service",
       "reporte": "docs/evidencias/cobertura/ventas-service-jacoco.xml",
-      "lineas_cubiertas": 27,
-      "lineas_totales": 27,
-      "cobertura_porcentaje": 100.0,
+      "lineas_cubiertas": 161,
+      "lineas_totales": 493,
+      "cobertura_porcentaje": 32.66,
       "umbral_porcentaje": 70.0,
-      "cumple": true
+      "cumple": false
     }
   ],
-  "todos_cumplen": true
+  "todos_cumplen": false
 }
