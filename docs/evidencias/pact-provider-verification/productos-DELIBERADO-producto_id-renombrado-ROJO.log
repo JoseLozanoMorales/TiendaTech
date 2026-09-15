@@ -1,0 +1,180 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.tiendatech:productos-service >------------------
+[INFO] Building productos-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (default) @ productos-service ---
+[INFO] argLine set to -javaagent:C:\\Users\\franc\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\franc\\OneDrive\\Escritorio\\TiendaTech\\services\\productos-service\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ productos-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ productos-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 19 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- build-helper:3.6.1:add-test-source (pact-test-source) @ productos-service ---
+[INFO] Test Source directory: C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\test\pact-java added.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ productos-service ---
+[INFO] skip non existing resourceDirectory C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ productos-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 7 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] /C:/Users/franc/OneDrive/Escritorio/TiendaTech/services/productos-service/src/test/java/com/tiendatech/productos/presentation/ApiExceptionHandlerTest.java: C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\src\test\java\com\tiendatech\productos\presentation\ApiExceptionHandlerTest.java uses or overrides a deprecated API.
+[INFO] /C:/Users/franc/OneDrive/Escritorio/TiendaTech/services/productos-service/src/test/java/com/tiendatech/productos/presentation/ApiExceptionHandlerTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ productos-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.tiendatech.productos.contract.ProductosProviderVerificationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+{"@timestamp":"2026-09-14T22:44:56.6334181-05:00","@version":"1","message":"HV000001: Hibernate Validator 8.0.1.Final","logger_name":"org.hibernate.validator.internal.util.Version","thread_name":"background-preinit","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:56.7164274-05:00","@version":"1","message":"Starting ForkedBooter v3.2.5 using Java 21.0.11 with PID 13112 (started by Andy in C:\\Users\\franc\\OneDrive\\Escritorio\\TiendaTech\\services\\productos-service)","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:56.7189806-05:00","@version":"1","message":"No active profile set, falling back to 1 default profile: \"default\"","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+WARNING: A Java agent has been loaded dynamically (C:\Users\franc\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.19\byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+{"@timestamp":"2026-09-14T22:45:01.340715-05:00","@version":"1","message":"Tomcat initialized with port 0 (http)","logger_name":"org.springframework.boot.web.embedded.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:01.393041-05:00","@version":"1","message":"Initializing ProtocolHandler [\"http-nio-auto-1\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:01.4028017-05:00","@version":"1","message":"Starting service [Tomcat]","logger_name":"org.apache.catalina.core.StandardService","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:01.4041018-05:00","@version":"1","message":"Starting Servlet engine: [Apache Tomcat/10.1.31]","logger_name":"org.apache.catalina.core.StandardEngine","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:01.6349951-05:00","@version":"1","message":"Initializing Spring embedded WebApplicationContext","logger_name":"org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:01.6360125-05:00","@version":"1","message":"Root WebApplicationContext: initialization completed in 4400 ms","logger_name":"org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:02.4970313-05:00","@version":"1","message":"Starting ProtocolHandler [\"http-nio-auto-1\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:02.5497419-05:00","@version":"1","message":"Tomcat started on port 60307 (http) with context path '/'","logger_name":"org.springframework.boot.web.embedded.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:02.5570436-05:00","@version":"1","message":"Started ForkedBooter in 7.213 seconds (process running for 8.792)","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:04.5242178-05:00","@version":"1","message":"Invoking state change method 'existen productos habilitados':SETUP","logger_name":"au.com.dius.pact.provider.junit5.PactVerificationStateChangeExtension$Companion","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+
+Verifying a pact between tiendatech-webapp and productos-service
+  [Using File ..\..\tests\contract\pacts\tiendatech-webapp-productos-service.json]
+  Given existen productos habilitados
+  una solicitud de la primera pagina del catalogo
+{"@timestamp":"2026-09-14T22:45:04.9918185-05:00","@version":"1","message":"\n            Please note: we are tracking events anonymously to gather important usage statistics like JVM version\n            and operating system. To disable tracking, set the 'pact_do_not_track' system property or environment\n            variable to 'true'.\n            ","logger_name":"au.com.dius.pact.core.support.Metrics","thread_name":"Thread-4","level":"WARN","level_value":30000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:05.5159823-05:00","@version":"1","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","logger_name":"org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:05.5164911-05:00","@version":"1","message":"Initializing Servlet 'dispatcherServlet'","logger_name":"org.springframework.web.servlet.DispatcherServlet","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:05.5190143-05:00","@version":"1","message":"Completed initialization in 3 ms","logger_name":"org.springframework.web.servlet.DispatcherServlet","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+    returns a response which
+      has status code 200 (OK)
+      has a matching body (FAILED)
+
+Failures:
+
+1) Verifying a pact between tiendatech-webapp and productos-service - una solicitud de la primera pagina del catalogo has a matching body
+
+    1.1) body: $[0] Actual map is missing the following keys: producto_id
+
+        {
+          "habilitado": true,
+          "nombre": "Procesador Ryzen 7",
+          "preciounitario": 349.99,
+        -  "producto_id": 1,
+        +  "productoId": 1,
+          "stock": 10
+        }
+
+
+
+{"@timestamp":"2026-09-14T22:45:05.9628269-05:00","@version":"1","message":"Skipping publishing of verification results as it has been disabled (pact.verifier.publishResults is not 'true')","logger_name":"au.com.dius.pact.provider.DefaultTestResultAccumulator","thread_name":"main","level":"WARN","level_value":30000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:45:05.9932072-05:00","@version":"1","message":"Stopping ProtocolHandler [\"http-nio-auto-1-60307\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 11.04 s <<< FAILURE! -- in com.tiendatech.productos.contract.ProductosProviderVerificationTest
+[ERROR] com.tiendatech.productos.contract.ProductosProviderVerificationTest.pactVerificationTestTemplate(PactVerificationContext)[1] -- Time elapsed: 1.492 s <<< FAILURE!
+java.lang.AssertionError: 
+tiendatech-webapp - Upon una solicitud de la primera pagina del catalogo 
+Failures:
+
+1) Verifying a pact between tiendatech-webapp and productos-service - una solicitud de la primera pagina del catalogo has a matching body
+
+    1.1) body: $[0] Actual map is missing the following keys: producto_id
+
+        {
+          "habilitado": true,
+          "nombre": "Procesador Ryzen 7",
+          "preciounitario": 349.99,
+        -  "producto_id": 1,
+        +  "productoId": 1,
+          "stock": 10
+        }
+
+
+
+	at au.com.dius.pact.provider.junit5.PactVerificationContext.verifyInteraction(PactVerificationContext.kt:75)
+	at com.tiendatech.productos.contract.ProductosProviderVerificationTest.pactVerificationTestTemplate(ProductosProviderVerificationTest.java:126)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ProductosProviderVerificationTest.pactVerificationTestTemplate:126 tiendatech-webapp - Upon una solicitud de la primera pagina del catalogo 
+Failures:
+
+1) Verifying a pact between tiendatech-webapp and productos-service - una solicitud de la primera pagina del catalogo has a matching body
+
+    1.1) body: $[0] Actual map is missing the following keys: producto_id
+
+        {
+          "habilitado": true,
+          "nombre": "Procesador Ryzen 7",
+          "preciounitario": 349.99,
+        -  "producto_id": 1,
+        +  "productoId": 1,
+          "stock": 10
+        }
+
+
+
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  21.869 s
+[INFO] Finished at: 2026-09-14T22:45:06-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project productos-service: There are test failures.
+[ERROR] 
+[ERROR] Please refer to C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\productos-service\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

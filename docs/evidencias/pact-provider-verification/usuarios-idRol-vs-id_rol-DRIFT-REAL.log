@@ -1,0 +1,166 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.tiendatech:usuarios >-----------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (default) @ usuarios ---
+[INFO] argLine set to -javaagent:C:\\Users\\franc\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\franc\\OneDrive\\Escritorio\\TiendaTech\\services\\usuarios\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ usuarios ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ usuarios ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- build-helper:3.6.1:add-test-source (pact-test-source) @ usuarios ---
+[INFO] Test Source directory: C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\usuarios\src\test\pact-java added.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ usuarios ---
+[INFO] skip non existing resourceDirectory C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\usuarios\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ usuarios ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ usuarios ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.tiendatech.usuarios.contract.UsuariosProviderVerificationTest
+22:44:14.720 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.7)
+
+{"@timestamp":"2026-09-14T22:44:16.0677357-05:00","@version":"1","message":"HV000001: Hibernate Validator 9.0.1.Final","logger_name":"org.hibernate.validator.internal.util.Version","thread_name":"background-preinit","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:16.233446-05:00","@version":"1","message":"Starting ForkedBooter v3.5.6 using Java 21.0.11 with PID 23124 (started by Andy in C:\\Users\\franc\\OneDrive\\Escritorio\\TiendaTech\\services\\usuarios)","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:16.2384795-05:00","@version":"1","message":"No active profile set, falling back to 1 default profile: \"default\"","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\franc\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+{"@timestamp":"2026-09-14T22:44:21.4868804-05:00","@version":"1","message":"Tomcat initialized with port 0 (http)","logger_name":"org.springframework.boot.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:21.5387968-05:00","@version":"1","message":"Initializing ProtocolHandler [\"http-nio-auto-1\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:21.5433163-05:00","@version":"1","message":"Starting service [Tomcat]","logger_name":"org.apache.catalina.core.StandardService","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:21.5433163-05:00","@version":"1","message":"Starting Servlet engine: [Apache Tomcat/11.0.22]","logger_name":"org.apache.catalina.core.StandardEngine","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:21.7736896-05:00","@version":"1","message":"Root WebApplicationContext: initialization completed in 5000 ms","logger_name":"org.springframework.boot.web.context.servlet.WebApplicationContextInitializer","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:22.9492591-05:00","@version":"1","message":"Starting ProtocolHandler [\"http-nio-auto-1\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:23.0016908-05:00","@version":"1","message":"Tomcat started on port 60282 (http) with context path '/'","logger_name":"org.springframework.boot.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:23.0096947-05:00","@version":"1","message":"Started ForkedBooter in 8.319 seconds (process running for 10.245)","logger_name":"org.apache.maven.surefire.booter.ForkedBooter","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:25.216108-05:00","@version":"1","message":"Invoking state change method 'el usuario cliente existe y esta habilitado':SETUP","logger_name":"au.com.dius.pact.provider.junit5.PactVerificationStateChangeExtension$Companion","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+
+Verifying a pact between tiendatech-mobile and usuarios-service
+  [Using File ..\..\tests\contract\pacts\tiendatech-mobile-usuarios-service.json]
+  Given el usuario cliente existe y esta habilitado
+  una solicitud de inicio de sesion valida
+{"@timestamp":"2026-09-14T22:44:25.7515111-05:00","@version":"1","message":"\n            Please note: we are tracking events anonymously to gather important usage statistics like JVM version\n            and operating system. To disable tracking, set the 'pact_do_not_track' system property or environment\n            variable to 'true'.\n            ","logger_name":"au.com.dius.pact.core.support.Metrics","thread_name":"Thread-5","level":"WARN","level_value":30000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.1876907-05:00","@version":"1","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","logger_name":"org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.1886984-05:00","@version":"1","message":"Initializing Servlet 'dispatcherServlet'","logger_name":"org.springframework.web.servlet.DispatcherServlet","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.191292-05:00","@version":"1","message":"Completed initialization in 2 ms","logger_name":"org.springframework.web.servlet.DispatcherServlet","thread_name":"http-nio-auto-1-exec-1","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+    returns a response which
+      has status code 200 (OK)
+      has a matching body (FAILED)
+
+Failures:
+
+1) Verifying a pact between tiendatech-mobile and usuarios-service - una solicitud de inicio de sesion valida has a matching body
+
+    1.1) body: $.user Actual map is missing the following keys: idRol
+
+        {
+        -  "idRol": 2,
+        +  "cedula": "0000000000",
+        +  "correo": "cliente@tiendatech.test",
+        +  "id_rol": 2,
+          "nombre": "Cliente Pact",
+          "usuario": "cliente",
+          "usuarioId": 20
+        }
+
+
+
+{"@timestamp":"2026-09-14T22:44:26.5898123-05:00","@version":"1","message":"Skipping publishing of verification results as it has been disabled (pact.verifier.publishResults is not 'true')","logger_name":"au.com.dius.pact.provider.DefaultTestResultAccumulator","thread_name":"main","level":"WARN","level_value":30000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.6120242-05:00","@version":"1","message":"Commencing graceful shutdown. Waiting for active requests to complete","logger_name":"org.springframework.boot.tomcat.GracefulShutdown","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.6130257-05:00","@version":"1","message":"Pausing ProtocolHandler [\"http-nio-auto-1-60282\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"tomcat-shutdown","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.6206021-05:00","@version":"1","message":"Graceful shutdown complete","logger_name":"org.springframework.boot.tomcat.GracefulShutdown","thread_name":"tomcat-shutdown","level":"INFO","level_value":20000,"appEnvironment":"local","tags":["COMMONS-LOGGING"],"environment":"local"}
+{"@timestamp":"2026-09-14T22:44:26.621601-05:00","@version":"1","message":"Stopping ProtocolHandler [\"http-nio-auto-1\"]","logger_name":"org.apache.coyote.http11.Http11NioProtocol","thread_name":"main","level":"INFO","level_value":20000,"appEnvironment":"local","environment":"local"}
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 12.40 s <<< FAILURE! -- in com.tiendatech.usuarios.contract.UsuariosProviderVerificationTest
+[ERROR] com.tiendatech.usuarios.contract.UsuariosProviderVerificationTest.pactVerificationTestTemplate(PactVerificationContext)[1] -- Time elapsed: 1.435 s <<< FAILURE!
+java.lang.AssertionError: 
+tiendatech-mobile - Upon una solicitud de inicio de sesion valida 
+Failures:
+
+1) Verifying a pact between tiendatech-mobile and usuarios-service - una solicitud de inicio de sesion valida has a matching body
+
+    1.1) body: $.user Actual map is missing the following keys: idRol
+
+        {
+        -  "idRol": 2,
+        +  "cedula": "0000000000",
+        +  "correo": "cliente@tiendatech.test",
+        +  "id_rol": 2,
+          "nombre": "Cliente Pact",
+          "usuario": "cliente",
+          "usuarioId": 20
+        }
+
+
+
+	at au.com.dius.pact.provider.junit5.PactVerificationContext.verifyInteraction(PactVerificationContext.kt:75)
+	at com.tiendatech.usuarios.contract.UsuariosProviderVerificationTest.pactVerificationTestTemplate(UsuariosProviderVerificationTest.java:132)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   UsuariosProviderVerificationTest.pactVerificationTestTemplate:132 tiendatech-mobile - Upon una solicitud de inicio de sesion valida 
+Failures:
+
+1) Verifying a pact between tiendatech-mobile and usuarios-service - una solicitud de inicio de sesion valida has a matching body
+
+    1.1) body: $.user Actual map is missing the following keys: idRol
+
+        {
+        -  "idRol": 2,
+        +  "cedula": "0000000000",
+        +  "correo": "cliente@tiendatech.test",
+        +  "id_rol": 2,
+          "nombre": "Cliente Pact",
+          "usuario": "cliente",
+          "usuarioId": 20
+        }
+
+
+
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.891 s
+[INFO] Finished at: 2026-09-14T22:44:26-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project usuarios: There are test failures.
+[ERROR] 
+[ERROR] See C:\Users\franc\OneDrive\Escritorio\TiendaTech\services\usuarios\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

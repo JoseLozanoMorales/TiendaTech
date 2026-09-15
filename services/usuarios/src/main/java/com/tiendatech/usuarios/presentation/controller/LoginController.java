@@ -54,7 +54,8 @@ public class LoginController {
                 "cedula",    u.getCedula(),
                 "correo",    u.getCorreo(),
                 "telefono",  u.getTelefono(),
-                "id_rol",    u.getIdRol()
+                "id_rol",    u.getIdRol(),
+                "idRol",     u.getIdRol()
         );
         var tokens = refreshTokenService.issueOnLogin(
                 u.getUsuarioId(),

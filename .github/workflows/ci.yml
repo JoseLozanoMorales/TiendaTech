@@ -223,6 +223,40 @@ jobs:
           path: tests/contract/pacts/*.json
           if-no-files-found: error
 
+  provider-verification-usuarios:
+    name: Pact provider verification (usuarios-service)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: contract-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: services/*/pom.xml
+      - name: Verify usuarios-service against the local mobile-login pact
+        working-directory: services/usuarios
+        run: mvn -B -ntp -Ppact -Dtest=com.tiendatech.usuarios.contract.UsuariosProviderVerificationTest test
+
+  provider-verification-productos:
+    name: Pact provider verification (productos-service)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: contract-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: services/*/pom.xml
+      - name: Verify productos-service against the local web-catalog pact
+        working-directory: services/productos-service
+        run: mvn -B -ntp -Ppact -Dtest=com.tiendatech.productos.contract.ProductosProviderVerificationTest test
+
   e2e-web:
     name: Playwright web E2E
     runs-on: ubuntu-latest
