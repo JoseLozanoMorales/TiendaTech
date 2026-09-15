@@ -83,9 +83,23 @@ y envía los valores por entrada estándar a `gh secret set`. No guarda contrase
 ni claves en Git. El PKCS12 de José utiliza la misma contraseña para almacén y clave.
 Requiere una sesión de GitHub CLI con permisos para administrar secretos.
 
-**Pendiente de completar tras publicar `v4.0.0`:** reemplazar este párrafo con
-el commit, tag, URL del run y digest SHA-256 reales de la ejecución que produjo
-la versión definitiva (ver `PLANTILLAS/resultado-punto44.md` del paquete de
-cierre del punto 44 para la plantilla exacta de estos datos), y adjuntar a esa
-misma versión etiquetada el APK debug, el video de tolerancia a fallos, el
-agente OpenTelemetry y el zip de bases de datos de los experimentos (punto 37).
+## Publicación definitiva verificada
+
+Etiqueta `v4.0.0`, commit `92e66686f8bdbb79d68487ad40008b014a432aba`
+(tip de `main` en el momento de etiquetar), ejecución
+[34911055622](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/34911055622).
+La [release `v4.0.0`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0)
+aparece marcada `Latest`, no `Pre-release`.
+
+- APK SHA-256: `b1e622a201e40cc662a1a768e3832ba53e5274b6aacd2d10f5150f4eccb1d304`.
+- Resumen del guion de construcción (`Apps/mobile/app/build.gradle.kts` tal
+  como está versionado en ese commit): `29ec862d1ca3873a1dc9652ae98fb5ed4a8885d8d65f498a2636ff54c3653233`
+  — coincide con `docs/evidencias/firma-release-jose/verificacion.json`.
+- Certificado firmante extraído directamente del APK descargado (huella
+  SHA-256): `6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd`,
+  `CN=Jose Alejandro Lozano Morales`, firma APK v2 verificada.
+- El APK descargado de la release fue verificado de extremo a extremo:
+  su SHA-256 coincide con `tiendatech-release.apk.sha256`, y `provenance.txt`
+  identifica el mismo commit, tag y ejecución.
+
+Evidencia completa en `docs/evidencias/firma-release-jose/verificacion-final-v4.0.0.md`.
