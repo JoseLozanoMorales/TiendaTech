@@ -54,6 +54,13 @@ experiments/paso8/resultados-reales/oficial-v4-20260904/**
 !tests/load/results/
 tests/load/results/*
 !tests/load/results/checksums.txt
+# Punto 14: se versionan los CSV crudos de cada campaña (junto a su
+# checksum en checksums.txt) para que la verificación de integridad de
+# datos corra sobre un checkout limpio de CI, no solo en local. Los .html
+# (reportes completos de Locust, ~1 MB cada uno) se quedan fuera para no
+# abultar el árbol -- no forman parte de lo que campaign_checksums.py
+# checksumea de todas formas.
+!tests/load/results/*.csv
 
 # Punto 37 (Higiene del repositorio): estos artefactos pesados ya no se
 # versionan. Se publican como adjuntos de la versión etiquetada (ver enlaces
