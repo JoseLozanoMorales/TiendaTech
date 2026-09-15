@@ -193,7 +193,10 @@ jobs:
   e2e-web:
     name: Playwright web E2E
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # El interceptor global que respondía sin backend permitía terminar en
+    # minutos; el sistema completo (3 nodos CockroachDB + 7 microservicios +
+    # gateway, todos compilados desde cero) tarda bastante más en levantarse.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -212,6 +215,22 @@ jobs:
       - name: Install Chromium
         working-directory: tests/e2e-web
         run: npx playwright install --with-deps chromium
+
+      # --- Punto 13: el sistema real, no un interceptor, es lo que responde ---
+      - name: Levantar el sistema completo (CRDB + microservicios + gateway)
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml \
+            up -d --build --wait --wait-timeout 900
+      - name: Sembrar datos deterministas para las pruebas E2E
+        run: |
+          docker compose exec -T tiendatech-crdb-1 \
+            cockroach sql --insecure --host=localhost:26257 --file=/dev/stdin \
+            < docs/db/seed-e2e.sql
+      - name: Verificar que el gateway responde con datos reales
+        run: |
+          curl --fail --silent http://localhost:8080/actuator/health
+          curl --fail --silent http://localhost:8080/api/productos | grep -q 'Procesador Ryzen 7'
+
       - name: Run browser journeys
         working-directory: tests/e2e-web
         run: npm test
@@ -224,6 +243,19 @@ jobs:
             tests/e2e-web/playwright-report/
             tests/e2e-web/test-results/
           if-no-files-found: ignore
+      - name: Registrar logs del sistema (diagnóstico si algo falló)
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml logs --no-color > docker-compose.log 2>&1 || true
+      - name: Subir logs del sistema
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-system-logs
+          path: docker-compose.log
+          if-no-files-found: ignore
+      - name: Apagar el sistema
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down -v
 
   android-mobile:
     name: Android mobile quality

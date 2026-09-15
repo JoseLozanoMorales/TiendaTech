@@ -1,0 +1,15 @@
+# Superposición de docker-compose.yml usada SOLO por el job "Playwright web
+# E2E" de .github/workflows/ci.yml (punto 13 de la rúbrica).
+#
+# No modifica docker-compose.yml porque ese archivo es el que describe el
+# despliegue real (local o en el servidor de AWS); esta superposición existe
+# únicamente para que, en el runner de CI, el gateway quede alcanzable en el
+# mismo puerto que espera el proxy de Vite (Apps/web/frontend/webapp/vite.config.ts
+# tiene 'http://localhost:8080' escrito literal, no es configurable por
+# variable de entorno). docker-compose.yml publica el gateway en el host como
+# 8180:8080 para no chocar con otros servicios locales del equipo; aquí se
+# agrega, además, la publicación 8080:8080 solo para la ejecución en CI.
+services:
+  tiendatech-gateway:
+    ports:
+      - "0.0.0.0:8080:8080"

@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test'
-import { mockReadApis } from './fixtures.js'
 
 test('un visitante no puede abrir administracion', async ({ page }) => {
   await page.goto('./#/admin', { waitUntil: 'domcontentloaded' })
@@ -7,17 +6,13 @@ test('un visitante no puede abrir administracion', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Inicia sesión' })).toBeVisible()
 })
 
+// Antes de esta prueba, un interceptor devolvía un usuario y un token
+// inventados sin que la petición de login saliera nunca hacia el servidor.
+// Ahora inicia sesión contra el sistema real: docs/db/seed-e2e.sql siembra
+// el usuario "admin"/"Secreto123!" con rol administrador (rol_id 1) antes de
+// que corra esta suite, y POST /api/login llega de verdad al gateway y de
+// ahí a usuarios-service, que valida el hash BCrypt real.
 test('un administrador inicia sesion y gestiona productos', async ({ page }) => {
-  await mockReadApis(page)
-  await page.route('**/api/login', route => route.fulfill({
-    status: 200,
-    contentType: 'application/json',
-    body: JSON.stringify({
-      user: { usuarioId: 1, usuario: 'admin', nombre: 'Administrador E2E', idRol: 1 },
-      access: 'mock',
-    }),
-  }))
-
   await page.goto('./#/login?next=%2Fadmin', { waitUntil: 'domcontentloaded' })
   await page.getByLabel('Usuario').fill('admin')
   await page.getByLabel('Contraseña').fill('Secreto123!')
