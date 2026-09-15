@@ -429,7 +429,7 @@ jobs:
             tiendatech-usuarios tiendatech-productos tiendatech-inventario \
             tiendatech-pedidos tiendatech-ordenes-proveedores tiendatech-ventas
 
-      - name: Verificar que las 33 tablas y los 6 historiales Flyway existen
+      - name: Verificar que las 35 tablas y los 6 historiales Flyway existen
         run: |
           cat > /tmp/verificar-esquema.sql <<'SQL'
           SELECT table_schema || '.' || table_name AS tabla
@@ -443,10 +443,21 @@ jobs:
             --format=csv --file=/dev/stdin < /tmp/verificar-esquema.sql \
             | tail -n +2 | tr -d '\r' > /tmp/tablas-reales.txt
 
+          # 35, no 33: inventario.reserva_stock y inventario.operacion_reserva
+          # no vienen de ninguna migracion Flyway. InventarioSchemaInitializer
+          # (src/main/java/.../infrastructure/config/) las crea con
+          # CREATE TABLE IF NOT EXISTS en un @PostConstruct -- una reserva de
+          # stock con reloj Lamport que se agrego directo por codigo despues
+          # de escribirse docs/db/schema.sql. El esquema real de inventario
+          # ya tenia 35 tablas desde antes del punto 5; solo se hacia
+          # invisible porque antes schema.sql se aplicaba una vez y estas dos
+          # se sumaban por su cuenta sin que nadie lo notara.
           cat > /tmp/tablas-esperadas.txt <<'EOF'
           inventario.inventario_producto
           inventario.kardex_inventario
           inventario.movimiento_inventario
+          inventario.operacion_reserva
+          inventario.reserva_stock
           inventario.solicitud_idempotente
           inventario.tipo_movimiento
           inventario.subtipo_movimiento

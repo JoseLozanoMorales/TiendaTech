@@ -38,12 +38,19 @@ services:
     networks:
       - default
       - tiendatech-net
+    # Punto 5: start_period/retries ampliados (antes 30s/5 = 80s) en los 6
+    # servicios que ahora migran su propio esquema con Flyway al arrancar.
+    # Contra un cluster recien creado (sin schema.sql precargado) la
+    # migracion es trabajo real y no instantaneo -- se vio timeout real de
+    # ordenes-proveedores-service en CI con la ventana anterior. Con
+    # docs/db/schema.sql aplicado una sola vez de antemano esto no pasaba
+    # porque el servicio arrancaba sin nada que migrar.
     healthcheck:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8083/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
 
   tiendatech-productos:
     build:
@@ -70,8 +77,8 @@ services:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8081/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
 
   # tiendatech-armado-ia: sin datasource propio (servicio de calculo puro sobre
   # el catalogo de tiendatech-productos via HTTP, no persiste nada). Las
@@ -141,8 +148,8 @@ services:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8082/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
 
   tiendatech-ventas:
     build:
@@ -175,8 +182,8 @@ services:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8086/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
 
   tiendatech-ordenes-proveedores:
     build:
@@ -205,8 +212,8 @@ services:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8084/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
 
   tiendatech-usuarios:
     build:
@@ -240,8 +247,8 @@ services:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8085/health"]
       interval: 10s
       timeout: 3s
-      retries: 5
-      start_period: 30s
+      retries: 8
+      start_period: 90s
     networks:
       - default
       - tiendatech-net

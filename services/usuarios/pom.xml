@@ -105,10 +105,19 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-        <!-- Punto 5: motor de migraciones versionadas, uno por servicio -->
+        <!-- Punto 5: motor de migraciones versionadas, uno por servicio.
+             En Spring Boot 4 la auto-configuracion de Flyway se separo del
+             jar monolitico "spring-boot-autoconfigure" a un modulo propio
+             (spring-boot-flyway); flyway-core por si solo queda en el
+             classpath como libreria suelta pero Spring nunca la conecta, y
+             el arranque no imprime ni una sola linea de Flyway ni falla:
+             simplemente no migra nada. usuarios es el unico de los 6
+             servicios en Boot 4.0.7 (el resto sigue en Boot 3.x, donde
+             flyway-core basta); por eso aqui va el starter oficial en vez
+             de flyway-core directo. -->
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-flyway</artifactId>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
