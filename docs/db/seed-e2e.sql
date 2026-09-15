@@ -51,8 +51,18 @@ UPSERT INTO usuarios.rol (rol_id, nombre, habilitado) VALUES
 -- El hash corresponde a la contraseña en claro "Secreto123!" (BCrypt, costo
 -- 12, igual que SecurityBeans.passwordEncoder() en el servicio de usuarios).
 -- Generado con: python3 -c "import bcrypt; print(bcrypt.hashpw(b'Secreto123!', bcrypt.gensalt(rounds=12)).decode())"
+--
+-- cedula y telefono se siembran con un valor (no NULL) a propósito: son
+-- columnas opcionales del esquema, pero LoginController.login() arma la
+-- respuesta con Map.of(...), que en Java lanza NullPointerException si
+-- CUALQUIER valor es null. Un usuario real sin cédula u sin teléfono
+-- registrado haría que /api/login devuelva 500 hoy mismo — no es un
+-- requisito de este seed, es un defecto real del backend que este seed
+-- sortea a propósito para no bloquear el punto 13 con un bug ajeno a él
+-- (ver el aviso aparte sobre esto).
 UPSERT INTO usuarios.usuario
-    (usuario_id, nombre, correo, usuario, contrasenia, rol_id, habilitado)
+    (usuario_id, nombre, cedula, correo, telefono, usuario, contrasenia, rol_id, habilitado)
 VALUES
-    (999999, 'Administrador E2E', 'admin.e2e@tiendatech.local', 'admin',
+    (999999, 'Administrador E2E', '9999999999', 'admin.e2e@tiendatech.local',
+     '0999999999', 'admin',
      '$2b$12$lYPCF.IIZQr9YHCWcH6QC.ik4FvU7X1EcGi9RQPxw2xv5xyct0bU.', 1, true);
