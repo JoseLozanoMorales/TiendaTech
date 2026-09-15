@@ -13,6 +13,7 @@ scrape_configs:
           - tiendatech-ordenes-proveedores:8084
           - tiendatech-usuarios:8085
           - tiendatech-ventas:8086
+          - tiendatech-gateway:8080
   - job_name: tiendatech-armado-ia
     metrics_path: /metrics
     static_configs:

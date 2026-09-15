@@ -1,5 +1,9 @@
 package com.tiendatech.frontend.security;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +22,8 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** Protección local por ventana fija. Varias réplicas requieren un limitador compartido. */
 @Component
@@ -25,6 +31,8 @@ import java.util.Map;
 public class GatewayTrafficFilter extends OncePerRequestFilter {
     private static final Logger LOG = LoggerFactory.getLogger(GatewayTrafficFilter.class);
     private final Clock clock;
+    private final MeterRegistry registry;
+    private final AtomicInteger active = new AtomicInteger();
     private final int limit;
     private final int maxClients;
     private final long windowMillis;
@@ -32,12 +40,28 @@ public class GatewayTrafficFilter extends OncePerRequestFilter {
     private long windowStart;
 
     @Autowired
-    public GatewayTrafficFilter(Environment environment) {
-        this(environment, Clock.systemUTC());
+    public GatewayTrafficFilter(Environment environment, MeterRegistry registry) {
+        this(environment, Clock.systemUTC(), registry);
+    }
+
+    // Sin MeterRegistry: usado por la prueba de configuracion invalida
+    // (rechazaConfiguracionInvalida), que no necesita metricas, solo
+    // disparar la validacion de limites del constructor.
+    GatewayTrafficFilter(Environment environment) {
+        this(environment, Clock.systemUTC(), null);
     }
 
     GatewayTrafficFilter(Environment environment, Clock clock) {
+        this(environment, clock, null);
+    }
+
+    GatewayTrafficFilter(Environment environment, Clock clock, MeterRegistry registry) {
         this.clock = clock;
+        this.registry = registry;
+        if (registry != null) {
+            Gauge.builder("active_connections", active, AtomicInteger::get)
+                    .tag("service", "tiendatech-gateway").register(registry);
+        }
         limit = environment.getProperty("GATEWAY_RATE_LIMIT_REQUESTS", Integer.class, 300);
         maxClients = environment.getProperty("GATEWAY_RATE_LIMIT_MAX_CLIENTS", Integer.class, 10000);
         int seconds = environment.getProperty("GATEWAY_RATE_LIMIT_WINDOW_SECONDS", Integer.class, 60);
@@ -67,6 +91,8 @@ public class GatewayTrafficFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
         boolean failed = false;
+        long start = System.nanoTime();
+        active.incrementAndGet();
         try {
             String path = request.getRequestURI();
             boolean api = path.equals("/api") || path.startsWith("/api/")
@@ -88,9 +114,19 @@ public class GatewayTrafficFilter extends OncePerRequestFilter {
             failed = true;
             throw error;
         } finally {
+            int status = failed ? 500 : response.getStatus();
+            if (registry != null) {
+                String[] tags = {"service", "tiendatech-gateway", "method", request.getMethod(),
+                        "status", Integer.toString(status)};
+                Counter.builder("request_count").tags(tags).register(registry).increment();
+                Timer.builder("request_duration").publishPercentileHistogram()
+                        .tags(tags).register(registry)
+                        .record(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            }
+            active.decrementAndGet();
             LOG.info("gateway_request timestamp={} method={} path={} origin={} status={}",
                     Instant.now(clock), safe(request.getMethod()), safe(request.getRequestURI()),
-                    safe(request.getRemoteAddr()), failed ? 500 : response.getStatus());
+                    safe(request.getRemoteAddr()), status);
         }
     }
 

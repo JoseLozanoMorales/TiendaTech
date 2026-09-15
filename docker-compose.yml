@@ -296,7 +296,12 @@ services:
       - default
       - tiendatech-net
     healthcheck:
-      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/actuator/health"]
+      # El paquete de observabilidad del punto 17 fija
+      # management.endpoints.web.base-path=/ en application.yml (para que
+      # /metrics quede sin el prefijo /actuator/), lo que también mueve el
+      # endpoint de salud de /actuator/health a /health. Se actualiza este
+      # healthcheck para que apunte al endpoint real.
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/health"]
       interval: 10s
       timeout: 3s
       retries: 5
