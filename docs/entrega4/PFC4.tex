@@ -675,26 +675,27 @@ Compatibilidad & Contratos HTTP/gRPC; Pact y ensayo completo entre consumidores 
 Capacidad de interacción & Interfaces web/Android; sin estudio formal de usuarios.\\
 Fiabilidad & Ventana oficial de 3600 s: 3588/3588 sondeos, 100\,\% (IC95\,\% Wilson 99{,}8931--100\,\%); en carga, 0/2112 respuestas 5xx (límite superior 0{,}1816\,\%).\\
 Seguridad & JWT, restricciones de exposición y pruebas negativas; no auditoría integral.\\
-Mantenibilidad & Cobertura instrumentada 82{,}31\,\% y PMD máximo 9; cumplimiento acotado porque varios módulos conservan filtros estrechos de JaCoCo.\\
+Mantenibilidad & Cobertura agregada 25{,}60\,\% sobre el árbol completo de los seis servicios Java (11{,}72--41{,}14\,\% por módulo; ninguno alcanza el 70\,\%) y PMD máximo 9; cifra regenerada el 14 de septiembre de 2026 tras retirar el filtro de alcance previo, ver §\ref{sec:cobertura-complejidad}.\\
 Flexibilidad & Contenedores y configuración; no ensayo multientorno exhaustivo.\\
 Seguridad operacional & Riesgos de stock/pago identificados; no análisis completo de daño operacional.\\\bottomrule
 \end{tabularx}
 \end{table}
 
-\subsection{Cobertura y complejidad}
-La tabla \ref{tab:cobertura} procede de los informes de cobertura y sus notas de alcance. Las líneas corresponden a clases instrumentadas, en particular lógica de negocio; no incluyen necesariamente controladores, infraestructura, entidades, SPA o código generado. Un 100\,\% de ocho líneas no prueba todo el servicio.
+\subsection{Cobertura y complejidad}\label{sec:cobertura-complejidad}
+La tabla \ref{tab:cobertura} procede del informe \path{informe-umbral-70.json}, regenerado el 14 de septiembre de 2026 sobre el árbol completo de cada servicio Java, tras retirar el filtro de alcance que antes limitaba la medición al paquete \texttt{application/**}. Las cifras resultantes son más bajas que las reportadas antes de ese ajuste, pero honestas: ningún servicio Java alcanza todavía el umbral del 70\,\%. \texttt{armado-ia}, no modificado en este trabajo, conserva su alcance y cifra previos.
 
 \begin{table}[H]\centering\small
 \caption{Cobertura en el alcance de los informes disponibles.}\label{tab:cobertura}
 \begin{tabular}{lrrr}
 \toprule Módulo & Cubiertas & Medidas & Porcentaje\\\midrule
-Inventario & 8 & 8 & 100,00\\
-Órdenes a proveedores & 47 & 51 & 92,16\\
-Pedidos & 104 & 129 & 80,62\\
-Productos & 23 & 23 & 100,00\\
-Usuarios & 321 & 358 & 89,66\\
-Ventas & 27 & 27 & 100,00\\
-armado-ia & 405 & 540 & 75,00\\\bottomrule
+Inventario & 311 & 1396 & 22,28\\
+Órdenes a proveedores & 64 & 546 & 11,72\\
+Pedidos & 443 & 1938 & 22,86\\
+Productos & 116 & 512 & 22,66\\
+Usuarios & 411 & 999 & 41,14\\
+Ventas & 161 & 493 & 32,66\\
+armado-ia & 405 & 540 & 75,00\\\midrule
+Agregado (seis servicios Java) & 1506 & 5884 & 25,60\\\bottomrule
 \end{tabular}
 \end{table}
 
