@@ -1,5 +1,10 @@
-Method,Name,Error,Occurrences,First Seen,Last Seen
+﻿Method,Name,Error,Occurrences,First Seen,Last Seen
+
 GET,GET /api/provincias,HTTPError('429 Client Error:  for url: GET /api/provincias'),2734,2026-09-15T07:47:52Z,2026-09-15T07:49:09Z
+
 GET,GET /api/categorias,HTTPError('429 Client Error:  for url: GET /api/categorias'),5610,2026-09-15T07:47:52Z,2026-09-15T07:49:09Z
+
 GET,GET /api/marcas,HTTPError('429 Client Error:  for url: GET /api/marcas'),5691,2026-09-15T07:47:52Z,2026-09-15T07:49:09Z
+
 GET,GET /api/productos,HTTPError('429 Client Error:  for url: GET /api/productos'),14152,2026-09-15T07:47:52Z,2026-09-15T07:49:09Z
+

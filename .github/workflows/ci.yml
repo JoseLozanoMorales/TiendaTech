@@ -295,7 +295,7 @@ jobs:
             < docs/db/seed-e2e.sql
       - name: Verificar que el gateway responde con datos reales
         run: |
-          curl --fail --silent http://localhost:8080/actuator/health
+          curl --fail --silent http://localhost:8080/health
           curl --fail --silent http://localhost:8080/api/productos | grep -q 'Procesador Ryzen 7'
 
       - name: Run browser journeys
