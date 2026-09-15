@@ -25,6 +25,39 @@ jobs:
             exit 1
           fi
 
+  openapi-contracts:
+    name: OpenAPI generation and route coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: services/*/pom.xml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            scripts/openapi/requirements.txt
+            services/armado-ia/requirements.txt
+      - name: Install OpenAPI export and validation dependencies
+        run: pip install -r scripts/openapi/requirements.txt
+      - name: Test contract validation failures
+        run: python -m unittest discover -s scripts/openapi -p 'test_*.py' -v
+      - name: Regenerate and compare all contracts
+        run: python scripts/openapi/generate.py --check
+      - name: Preserve framework exports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi-framework-exports
+          path: services/*/target/openapi/*.json
+          if-no-files-found: ignore
+
   manuscript-quality:
     name: Validar evidencia y compilar manuscrito (E4)
     runs-on: ubuntu-latest

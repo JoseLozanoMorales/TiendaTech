@@ -1,86 +1,297 @@
-openapi: 3.0.3
-info:
-  title: TiendaTech - API consolidada (Gateway)
-  version: "1.0.0"
-  description: >-
-    Punto de entrada único que consolida los siete contratos por servicio ya
-    existentes en este mismo directorio (armado-ia.yaml, inventario.yaml,
-    ordenes-proveedores.yaml, pedidos.yaml, productos.yaml, usuarios.yaml,
-    ventas.yaml). No redefine ninguna operación: cada ruta de abajo es una
-    referencia ($ref) directa a la definición real dentro del archivo del
-    servicio correspondiente, que sigue siendo la fuente de verdad de su
-    propio contrato. Todo el tráfico externo entra por el API Gateway.
-servers:
-  - url: http://localhost:8180
-    description: Gateway local (docker-compose.yml)
-tags:
-  - name: armado-ia
-  - name: inventario
-  - name: ordenes-proveedores
-  - name: pedidos
-  - name: productos
-  - name: usuarios
-  - name: ventas
-paths:
-  /api/armado/analizar:
-    $ref: './armado-ia.yaml#/paths/~1api~1armado~1analizar'
-
-  /api/inventario:
-    $ref: './inventario.yaml#/paths/~1api~1inventario'
-  /api/inventario/{productoId}:
-    $ref: './inventario.yaml#/paths/~1api~1inventario~1{productoId}'
-  /api/sp/movimiento-inventario:
-    $ref: './inventario.yaml#/paths/~1api~1sp~1movimiento-inventario'
-
-  /api/proveedores:
-    $ref: './ordenes-proveedores.yaml#/paths/~1api~1proveedores'
-  /api/proveedores/{id}:
-    $ref: './ordenes-proveedores.yaml#/paths/~1api~1proveedores~1{id}'
-  /api/ordenes-compra:
-    $ref: './ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra'
-  /api/ordenes-compra/{id}:
-    $ref: './ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}'
-
-  /api/ordenes:
-    $ref: './pedidos.yaml#/paths/~1api~1ordenes'
-  /api/ordenes/{id}:
-    $ref: './pedidos.yaml#/paths/~1api~1ordenes~1{id}'
-  /api/carrito:
-    $ref: './pedidos.yaml#/paths/~1api~1carrito'
-  /api/checkout:
-    $ref: './pedidos.yaml#/paths/~1api~1checkout'
-  /api/metodos-pago:
-    $ref: './pedidos.yaml#/paths/~1api~1metodos-pago'
-
-  /api/productos:
-    $ref: './productos.yaml#/paths/~1api~1productos'
-  /api/productos/{id}:
-    $ref: './productos.yaml#/paths/~1api~1productos~1{id}'
-  /api/productos/mas-vendidos:
-    $ref: './productos.yaml#/paths/~1api~1productos~1mas-vendidos'
-  /api/categorias:
-    $ref: './productos.yaml#/paths/~1api~1categorias'
-  /api/marcas:
-    $ref: './productos.yaml#/paths/~1api~1marcas'
-  /api/gamas:
-    $ref: './productos.yaml#/paths/~1api~1gamas'
-
-  /api/login:
-    $ref: './usuarios.yaml#/paths/~1api~1login'
-  /api/usuarios:
-    $ref: './usuarios.yaml#/paths/~1api~1usuarios'
-  /api/usuarios/{id}:
-    $ref: './usuarios.yaml#/paths/~1api~1usuarios~1{id}'
-  /auth/refresh:
-    $ref: './usuarios.yaml#/paths/~1auth~1refresh'
-  /api/provincias:
-    $ref: './usuarios.yaml#/paths/~1api~1provincias'
-  /api/ciudades:
-    $ref: './usuarios.yaml#/paths/~1api~1ciudades'
-
-  /api/facturas:
-    $ref: './ventas.yaml#/paths/~1api~1facturas'
-  /api/facturas/{id}:
-    $ref: './ventas.yaml#/paths/~1api~1facturas~1{id}'
-  /api/facturas/{id}/detalle:
-    $ref: './ventas.yaml#/paths/~1api~1facturas~1{id}~1detalle'
+{
+  "info": {
+    "description": "Rutas publicadas por el gateway; referencias a los siete contratos generados por servicio.",
+    "title": "TiendaTech - API del Gateway",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/armado/analizar": {
+      "$ref": "./armado-ia.yaml#/paths/~1api~1armado~1analizar"
+    },
+    "/api/auditoria/logins": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1auditoria~1logins"
+    },
+    "/api/auditoria/usuariosL": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1auditoria~1usuariosL"
+    },
+    "/api/carrito/{carritoId}/actualizar/{productoId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1carrito~1{carritoId}~1actualizar~1{productoId}"
+    },
+    "/api/carrito/{carritoId}/agregar": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1carrito~1{carritoId}~1agregar"
+    },
+    "/api/carrito/{carritoId}/detalle": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1carrito~1{carritoId}~1detalle"
+    },
+    "/api/carrito/{carritoId}/quitar/{productoId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1carrito~1{carritoId}~1quitar~1{productoId}"
+    },
+    "/api/carrito/{usuarioId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1carrito~1{usuarioId}"
+    },
+    "/api/categorias": {
+      "$ref": "./productos.yaml#/paths/~1api~1categorias"
+    },
+    "/api/ciudades": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1ciudades"
+    },
+    "/api/ciudades/{id}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1ciudades~1{id}"
+    },
+    "/api/facturas": {
+      "$ref": "./ventas.yaml#/paths/~1api~1facturas"
+    },
+    "/api/facturas/{id}": {
+      "$ref": "./ventas.yaml#/paths/~1api~1facturas~1{id}"
+    },
+    "/api/facturas/{id}/detalle": {
+      "$ref": "./ventas.yaml#/paths/~1api~1facturas~1{id}~1detalle"
+    },
+    "/api/facturas/{id}/pdf": {
+      "$ref": "./ventas.yaml#/paths/~1api~1facturas~1{id}~1pdf"
+    },
+    "/api/galeria/img/{galeriaId}": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria~1img~1{galeriaId}"
+    },
+    "/api/galeria/{galeriaId}/contenido": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria~1{galeriaId}~1contenido"
+    },
+    "/api/galeria/{galeriaId}/media": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria~1{galeriaId}~1media"
+    },
+    "/api/galeria_v2/img/{galeriaId}": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria_v2~1img~1{galeriaId}"
+    },
+    "/api/galeria_v2/producto/{productoId}": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria_v2~1producto~1{productoId}"
+    },
+    "/api/galeria_v2/{id}": {
+      "$ref": "./productos.yaml#/paths/~1api~1galeria_v2~1{id}"
+    },
+    "/api/gamas": {
+      "$ref": "./productos.yaml#/paths/~1api~1gamas"
+    },
+    "/api/login": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1login"
+    },
+    "/api/marcas": {
+      "$ref": "./productos.yaml#/paths/~1api~1marcas"
+    },
+    "/api/metodopago": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1metodopago"
+    },
+    "/api/metodopago/tipos": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1metodopago~1tipos"
+    },
+    "/api/metodopago/usuario/{usuarioId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1metodopago~1usuario~1{usuarioId}"
+    },
+    "/api/metodopago/{metodopagoId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1metodopago~1{metodopagoId}"
+    },
+    "/api/metodopago/{metodopagoId}/reactivar": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1metodopago~1{metodopagoId}~1reactivar"
+    },
+    "/api/movimientos": {
+      "$ref": "./inventario.yaml#/paths/~1api~1movimientos"
+    },
+    "/api/ordenes": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes"
+    },
+    "/api/ordenes-compra": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra"
+    },
+    "/api/ordenes-compra/{id}": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}"
+    },
+    "/api/ordenes-compra/{id}/cancelar": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}~1cancelar"
+    },
+    "/api/ordenes-compra/{id}/detalle": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}~1detalle"
+    },
+    "/api/ordenes-compra/{id}/enviar": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}~1enviar"
+    },
+    "/api/ordenes-compra/{id}/recepcion": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1ordenes-compra~1{id}~1recepcion"
+    },
+    "/api/ordenes/checkout": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes~1checkout"
+    },
+    "/api/ordenes/transacciones": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes~1transacciones"
+    },
+    "/api/ordenes/usuario/{usuarioId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes~1usuario~1{usuarioId}"
+    },
+    "/api/ordenes/{ordenId}": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes~1{ordenId}"
+    },
+    "/api/ordenes/{ordenId}/detalle": {
+      "$ref": "./pedidos.yaml#/paths/~1api~1ordenes~1{ordenId}~1detalle"
+    },
+    "/api/otp": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1otp"
+    },
+    "/api/otp/recuperar-password": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1otp~1recuperar-password"
+    },
+    "/api/productos": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos"
+    },
+    "/api/productos/buscar": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1buscar"
+    },
+    "/api/productos/mas-vendidos": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1mas-vendidos"
+    },
+    "/api/productos/por-categoria": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1por-categoria"
+    },
+    "/api/productos/recientes-menu": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1recientes-menu"
+    },
+    "/api/productos/{id}": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1{id}"
+    },
+    "/api/productos/{id}/galeria": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1{id}~1galeria"
+    },
+    "/api/productos/{id}/galeria/orden": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1{id}~1galeria~1orden"
+    },
+    "/api/productos/{productoId}/galeria/lista": {
+      "$ref": "./productos.yaml#/paths/~1api~1productos~1{productoId}~1galeria~1lista"
+    },
+    "/api/proveedores": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1proveedores"
+    },
+    "/api/proveedores/{id}": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1proveedores~1{id}"
+    },
+    "/api/proveedores/{id}/activar": {
+      "$ref": "./ordenes-proveedores.yaml#/paths/~1api~1proveedores~1{id}~1activar"
+    },
+    "/api/provincias": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1provincias"
+    },
+    "/api/provincias/{id}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1provincias~1{id}"
+    },
+    "/api/reservas/status": {
+      "$ref": "./inventario.yaml#/paths/~1api~1reservas~1status"
+    },
+    "/api/seguridad/cambiar-password": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1seguridad~1cambiar-password"
+    },
+    "/api/seguridad/cambiar-password-token": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1seguridad~1cambiar-password-token"
+    },
+    "/api/sp/accesorios": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1accesorios"
+    },
+    "/api/sp/almacenamientos": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1almacenamientos"
+    },
+    "/api/sp/cpu": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1cpu"
+    },
+    "/api/sp/cpu-cooler": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1cpu-cooler"
+    },
+    "/api/sp/cubiertas": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1cubiertas"
+    },
+    "/api/sp/fuentes": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1fuentes"
+    },
+    "/api/sp/gpu": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1gpu"
+    },
+    "/api/sp/ivas": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1ivas"
+    },
+    "/api/sp/motherboards": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1motherboards"
+    },
+    "/api/sp/movimiento-inventario": {
+      "$ref": "./inventario.yaml#/paths/~1api~1sp~1movimiento-inventario"
+    },
+    "/api/sp/perifericos": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1perifericos"
+    },
+    "/api/sp/productos/{id}": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1productos~1{id}"
+    },
+    "/api/sp/productos/{id}/activar": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1productos~1{id}~1activar"
+    },
+    "/api/sp/productos/{id}/basico": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1productos~1{id}~1basico"
+    },
+    "/api/sp/productos/{id}/editar": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1productos~1{id}~1editar"
+    },
+    "/api/sp/ram": {
+      "$ref": "./productos.yaml#/paths/~1api~1sp~1ram"
+    },
+    "/api/subtipos-movimiento": {
+      "$ref": "./inventario.yaml#/paths/~1api~1subtipos-movimiento"
+    },
+    "/api/usuarios/admin/{id}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1admin~1{id}"
+    },
+    "/api/usuarios/buscar": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1buscar"
+    },
+    "/api/usuarios/buscar-min": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1buscar-min"
+    },
+    "/api/usuarios/cliente/{id}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1cliente~1{id}"
+    },
+    "/api/usuarios/crear": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1crear"
+    },
+    "/api/usuarios/crear-usuario": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1crear-usuario"
+    },
+    "/api/usuarios/crear-usuarioAdmin": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1crear-usuarioAdmin"
+    },
+    "/api/usuarios/me": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1me"
+    },
+    "/api/usuarios/recuperar-password": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1recuperar-password"
+    },
+    "/api/usuarios/{id}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1{id}"
+    },
+    "/api/usuarios/{id}/avatar": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1{id}~1avatar"
+    },
+    "/api/usuarios/{usuarioId}/direcciones": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1{usuarioId}~1direcciones"
+    },
+    "/api/usuarios/{usuarioId}/direcciones/{direccionId}": {
+      "$ref": "./usuarios.yaml#/paths/~1api~1usuarios~1{usuarioId}~1direcciones~1{direccionId}"
+    },
+    "/auth/keepalive": {
+      "$ref": "./usuarios.yaml#/paths/~1auth~1keepalive"
+    },
+    "/auth/logout": {
+      "$ref": "./usuarios.yaml#/paths/~1auth~1logout"
+    },
+    "/auth/refresh": {
+      "$ref": "./usuarios.yaml#/paths/~1auth~1refresh"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8180"
+    }
+  ]
+}

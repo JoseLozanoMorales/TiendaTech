@@ -1,0 +1,46 @@
+{
+  "productos": {
+    "POST /api/productos": {"status": 201, "errors": [400, 404, 500, 503]},
+    "GET /api/sp/productos/{id}/editar": {"errors": [404]},
+    "GET /api/galeria/{galeriaId}/contenido": {"errors": [404]},
+    "HEAD /api/galeria/{galeriaId}/contenido": {"errors": [404]},
+    "GET /api/galeria/{galeriaId}/media": {"errors": [404]},
+    "GET /api/galeria/img/{galeriaId}": {"errors": [404]},
+    "GET /api/galeria_v2/img/{galeriaId}": {"errors": [404]},
+    "HEAD /api/galeria_v2/img/{galeriaId}": {"errors": [404]}
+  },
+  "inventario": {"POST /api/sp/movimiento-inventario": {"status": 204}},
+  "pedidos": {
+    "POST /api/ordenes/checkout": {"status": 201, "errors": [400, 404, 409, 500, 503]},
+    "POST /api/metodopago": {"status": 201},
+    "PUT /api/metodopago/{metodopagoId}": {"status": 204},
+    "DELETE /api/metodopago/{metodopagoId}": {"status": 204},
+    "POST /api/metodopago/{metodopagoId}/reactivar": {"status": 204},
+    "DELETE /api/carrito/{carritoId}/quitar/{productoId}": {"status": 204},
+    "POST /api/carrito/{carritoId}/agregar": {"errors": [400, 404, 409, 503]},
+    "PUT /api/carrito/{carritoId}/actualizar/{productoId}": {"errors": [400, 404, 409, 503]}
+  },
+  "ordenes-proveedores": {
+    "POST /api/proveedores": {"status": 201},
+    "PUT /api/proveedores/{id}": {"status": 204},
+    "DELETE /api/proveedores/{id}": {"status": 204},
+    "PUT /api/proveedores/{id}/activar": {"status": 204},
+    "POST /api/ordenes-compra": {"status": 201},
+    "PUT /api/ordenes-compra/{id}": {"status": 204},
+    "POST /api/ordenes-compra/{id}/enviar": {"status": 204},
+    "POST /api/ordenes-compra/{id}/cancelar": {"status": 204},
+    "POST /api/ordenes-compra/{id}/recepcion": {"status": 204}
+  },
+  "ventas": {"POST /api/facturas": {"status": 201, "errors": [400, 404, 500, 503]}},
+  "usuarios": {
+    "POST /api/usuarios/crear": {"status": 201},
+    "POST /api/usuarios/crear-usuario": {"status": 201},
+    "POST /api/usuarios/crear-usuarioAdmin": {"status": 201},
+    "POST /api/provincias": {"status": 201, "location": false},
+    "POST /api/ciudades": {"status": 201, "location": false},
+    "DELETE /api/ciudades/{id}": {"status": 204},
+    "DELETE /api/provincias/{id}": {"status": 204},
+    "POST /api/otp": {"errors": [400, 429, 500]},
+    "POST /api/usuarios/{id}/avatar": {"errors": [400]}
+  }
+}

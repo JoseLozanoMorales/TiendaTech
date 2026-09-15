@@ -1,75 +1,572 @@
 {
-  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "AnalizarRequest": {
+        "properties": {
+          "componentes": {
+            "additionalProperties": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "title": "Componentes",
+            "type": "object"
+          },
+          "presupuestoMaximo": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true,
+                "type": "object"
+              }
+            ],
+            "title": "Presupuestomaximo"
+          }
+        },
+        "required": [
+          "componentes"
+        ],
+        "title": "AnalizarRequest",
+        "type": "object"
+      },
+      "AnalizarResponse": {
+        "properties": {
+          "advertencias": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Advertencias",
+            "type": "array"
+          },
+          "componenteLimitante": {
+            "title": "Componentelimitante",
+            "type": "string"
+          },
+          "explicacion": {
+            "title": "Explicacion",
+            "type": "string"
+          },
+          "nivel": {
+            "title": "Nivel",
+            "type": "string"
+          },
+          "porcentajeCuelloBotella": {
+            "title": "Porcentajecuellobotella",
+            "type": "number"
+          },
+          "recomendacion": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecomendacionResponse"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true,
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": [
+          "porcentajeCuelloBotella",
+          "nivel",
+          "componenteLimitante",
+          "explicacion",
+          "advertencias"
+        ],
+        "title": "AnalizarResponse",
+        "type": "object"
+      },
+      "ComponenteResponse": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "nombre": {
+            "title": "Nombre",
+            "type": "string"
+          },
+          "precio": {
+            "title": "Precio",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "nombre",
+          "precio"
+        ],
+        "title": "ComponenteResponse",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "RecomendacionResponse": {
+        "properties": {
+          "advertencias": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Advertencias",
+            "type": "array"
+          },
+          "componenteLimitante": {
+            "nullable": true,
+            "title": "Componentelimitante",
+            "type": "string"
+          },
+          "componentes": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ComponenteResponse"
+            },
+            "title": "Componentes",
+            "type": "object"
+          },
+          "nivelCuelloBotella": {
+            "nullable": true,
+            "title": "Nivelcuellobotella",
+            "type": "string"
+          },
+          "porcentajeCuelloBotella": {
+            "nullable": true,
+            "title": "Porcentajecuellobotella",
+            "type": "number"
+          },
+          "presupuestoUsado": {
+            "title": "Presupuestousado",
+            "type": "number"
+          }
+        },
+        "required": [
+          "presupuestoUsado",
+          "componentes"
+        ],
+        "title": "RecomendacionResponse",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "refreshCookie": {
+        "in": "cookie",
+        "name": "refresh",
+        "type": "apiKey"
+      }
+    }
+  },
   "info": {
+    "description": "Generado desde los controladores. Los objetos dinámicos conservan propiedades abiertas cuando el código no declara un DTO.",
     "title": "TiendaTech armado-ia",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "/"
-    }
-  ],
+  "openapi": "3.0.3",
   "paths": {
+    "/actuator/circuitbreakers": {
+      "get": {
+        "operationId": "armado_ia_get_actuator_circuitbreakers",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "additionalProperties": {
+                        "additionalProperties": {
+                          "additionalProperties": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  null
+                                ],
+                                "nullable": true,
+                                "type": "object"
+                              }
+                            ]
+                          },
+                          "type": "object"
+                        },
+                        "type": "object"
+                      },
+                      "title": "Response 200 Circuitbreakers Actuator Circuitbreakers Get",
+                      "type": "object"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [],
+        "summary": "Circuitbreakers",
+        "x-gateway-exposed": false,
+        "x-scope": "diagnostic"
+      }
+    },
+    "/actuator/health": {
+      "get": {
+        "operationId": "armado_ia_get_actuator_health",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response 200 Health Actuator Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [],
+        "summary": "Health",
+        "x-gateway-exposed": false,
+        "x-scope": "diagnostic"
+      }
+    },
     "/api/armado/analizar": {
       "post": {
-        "summary": "Crear o procesar /api/armado/analizar",
+        "operationId": "armado_ia_post_api_armado_analizar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalizarRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/AnalizarResponse"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Solicitud inválida"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Credenciales ausentes o inválidas"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error interno"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Servicio no disponible"
+          }
+        },
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Respuesta uniforme",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "JWT ausente, inválido o expirado"
-          }
-        }
+        "summary": "Analizar",
+        "x-gateway-exposed": true,
+        "x-scope": "business"
       }
     }
   },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    },
-    "schemas": {
-      "ApiResponse": {
-        "type": "object",
-        "required": [
-          "status",
-          "data",
-          "message",
-          "timestamp"
-        ],
-        "properties": {
-          "status": {
-            "type": "integer"
-          },
-          "data": {
-            "nullable": true
-          },
-          "message": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      }
+  "servers": [
+    {
+      "description": "URL base del servicio",
+      "url": "/"
     }
-  }
+  ]
 }
-

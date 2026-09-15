@@ -1,125 +1,973 @@
 {
-  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "FacturaDetalleResponse": {
+        "properties": {
+          "cantidad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "iva": {
+            "type": "number"
+          },
+          "nombreProducto": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "productoId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "FacturaResponse": {
+        "properties": {
+          "cedula": {
+            "type": "string"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "direccionEntrega": {
+            "type": "string"
+          },
+          "facturaId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "fechaEmision": {
+            "format": "date",
+            "type": "string"
+          },
+          "fechaOrden": {
+            "format": "date",
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "ordenId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "GenerarFacturaRequest": {
+        "properties": {
+          "fechaOrden": {
+            "format": "date",
+            "type": "string"
+          },
+          "lineas": {
+            "items": {
+              "$ref": "#/components/schemas/Linea"
+            },
+            "type": "array"
+          },
+          "ordenId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "fechaOrden",
+          "lineas",
+          "ordenId",
+          "subtotal",
+          "total",
+          "usuarioId"
+        ],
+        "type": "object"
+      },
+      "Linea": {
+        "properties": {
+          "cantidad": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "iva": {
+            "type": "number"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "productoId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "cantidad",
+          "iva",
+          "precio",
+          "productoId",
+          "subtotal",
+          "total"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      },
+      "refreshCookie": {
+        "in": "cookie",
+        "name": "refresh",
+        "type": "apiKey"
+      }
+    }
+  },
   "info": {
+    "description": "Generado desde los controladores. Los objetos dinámicos conservan propiedades abiertas cuando el código no declara un DTO.",
     "title": "TiendaTech ventas",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "/"
-    }
-  ],
+  "openapi": "3.0.3",
   "paths": {
     "/api/facturas": {
-      "post": {
-        "summary": "Crear o procesar /api/facturas",
+      "get": {
+        "operationId": "ventas_get_api_facturas",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "usuarioId",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/FacturaResponse"
+                      },
+                      "type": "array"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Credenciales ausentes o inválidas"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
+          }
+        },
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "tags": [
+          "factura-controller"
+        ],
+        "x-gateway-exposed": true,
+        "x-scope": "business"
+      },
+      "post": {
+        "operationId": "ventas_post_api_facturas",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Failure-Mode",
+            "required": false,
+            "schema": {
+              "default": "none",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Coordination-Strategy",
+            "required": false,
+            "schema": {
+              "default": "2pc",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerarFacturaRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "200": {
-            "description": "Respuesta uniforme",
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
+                  "properties": {
+                    "data": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "description": "URI del recurso creado",
+                "schema": {
+                  "type": "string"
                 }
               }
             }
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Solicitud inválida"
+          },
           "401": {
-            "description": "JWT ausente, inválido o expirado"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Credenciales ausentes o inválidas"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Error interno"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Servicio no disponible"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "factura-controller"
+        ],
+        "x-gateway-exposed": true,
+        "x-scope": "business"
       }
     },
     "/api/facturas/{id}": {
       "get": {
-        "summary": "Consultar /api/facturas/{id}",
+        "operationId": "ventas_get_api_facturas_id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/FacturaResponse"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Credenciales ausentes o inválidas"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
+          }
+        },
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Respuesta uniforme",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "JWT ausente, inválido o expirado"
-          }
-        }
+        "tags": [
+          "factura-controller"
+        ],
+        "x-gateway-exposed": true,
+        "x-scope": "business"
       }
     },
     "/api/facturas/{id}/detalle": {
       "get": {
-        "summary": "Consultar /api/facturas/{id}/detalle",
+        "operationId": "ventas_get_api_facturas_id_detalle",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/FacturaDetalleResponse"
+                      },
+                      "type": "array"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Credenciales ausentes o inválidas"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
+          }
+        },
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "tags": [
+          "factura-controller"
+        ],
+        "x-gateway-exposed": true,
+        "x-scope": "business"
+      }
+    },
+    "/api/facturas/{id}/pdf": {
+      "get": {
+        "operationId": "ventas_get_api_facturas_id_pdf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Respuesta uniforme",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "format": "byte",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
                 }
               }
-            }
+            },
+            "description": "Credenciales ausentes o inválidas"
           },
-          "401": {
-            "description": "JWT ausente, inválido o expirado"
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "description": "Detalles del error; su estructura depende del manejador.",
+                      "nullable": true
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data",
+                    "message",
+                    "timestamp"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Acceso denegado"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "factura-controller"
+        ],
+        "x-gateway-exposed": true,
+        "x-scope": "business"
+      }
+    },
+    "/internal/ventas/mas-vendidos": {
+      "get": {
+        "operationId": "ventas_get_internal_ventas_mas_vendidos",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limite",
+            "required": false,
+            "schema": {
+              "default": 3,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "tags": [
+          "ventas-internas-controller"
+        ],
+        "x-gateway-exposed": false,
+        "x-scope": "internal"
       }
     }
   },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    },
-    "schemas": {
-      "ApiResponse": {
-        "type": "object",
-        "required": [
-          "status",
-          "data",
-          "message",
-          "timestamp"
-        ],
-        "properties": {
-          "status": {
-            "type": "integer"
-          },
-          "data": {
-            "nullable": true
-          },
-          "message": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      }
+  "servers": [
+    {
+      "description": "URL base del servicio",
+      "url": "/"
     }
-  }
+  ]
 }
-
