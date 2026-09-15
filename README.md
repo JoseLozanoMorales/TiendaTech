@@ -31,7 +31,7 @@ El manuscrito (`docs/entrega4/PFC4.tex`) documenta el estado real del proyecto s
 | Frente | Alcance | Estado | Evidencia |
 |---|---|---|---|
 | Arquitectura en capas | Refactor de los 6 microservicios Java a `domain`/`application`/`infrastructure`/`presentation`, con patrones GoF (Repository, Factory Method, Strategy, Observer, Decorator) | ✅ Completo | `docs/entrega4/PFC4.tex` §"Arquitectura del sistema", código bajo `services/*/src/main/java/com/tiendatech/` |
-| Persistencia distribuida | Clúster CockroachDB de 3 nodos; cada microservicio es dueño de su esquema y no consulta esquemas ajenos | ✅ Completo | `docker-compose.yml`, `.env.example`, `docs/db/schema.sql` |
+| Persistencia distribuida | Clúster CockroachDB de 3 nodos; cada microservicio es dueño de su esquema, migra con Flyway de forma independiente y no consulta esquemas ajenos | ✅ Completo | `docker-compose.yml`, `.env.example`, `services/*/src/main/resources/db/migration/` |
 | Aplicación web | SPA con 12 rutas documentadas, panel de administración completo | ✅ Completo | `docs/entrega4/PFC4.tex` §"Aplicación web", capturas en `release/screenshots/` |
 | Aplicación móvil | App Android con 2 capacidades de dispositivo (caché local Room/SQLite + funcionalidad adicional documentada), pruebas unitarias e instrumentadas | ✅ Completo | `docs/entrega4/PFC4.tex` §"Aplicación móvil" |
 | Contratos Pact (consumidor-proveedor) | Verificación de contratos web↔backend y móvil↔backend | ✅ Implementado | `tests/contract/` y job `contract-tests` de `.github/workflows/ci.yml` |

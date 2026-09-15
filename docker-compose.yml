@@ -333,14 +333,19 @@ services:
     image: cockroachdb/cockroach:v23.2.4
     container_name: tiendatech-crdb-init
     entrypoint: ["/bin/sh", "-c"]
+    # Punto 5: ya no se aplica docs/db/schema.sql aqui. Cada uno de los seis
+    # microservicios trae su propio esquema versionado con Flyway
+    # (services/<servicio>/src/main/resources/db/migration/) y lo aplica al
+    # arrancar, contra el esquema CockroachDB que le corresponde
+    # (spring.flyway.create-schemas=true en su application.properties). Este
+    # contenedor solo deja el cluster inicializado y la base `tiendatech`
+    # creada y vacia; las 33 tablas las forman las migraciones, no este paso.
     command:
       - >-
         sleep 5;
         cockroach init --insecure --host=tiendatech-crdb-1:26257 || true;
         until cockroach sql --insecure --host=tiendatech-crdb-1:26257 --execute='SELECT 1'; do sleep 2; done;
-        cockroach sql --insecure --host=tiendatech-crdb-1:26257 --file=/schema.sql
-    volumes:
-      - ./docs/db/schema.sql:/schema.sql:ro
+        cockroach sql --insecure --host=tiendatech-crdb-1:26257 --execute='CREATE DATABASE IF NOT EXISTS tiendatech;'
     depends_on:
       - tiendatech-crdb-1
       - tiendatech-crdb-2

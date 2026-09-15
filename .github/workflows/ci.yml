@@ -407,6 +407,110 @@ jobs:
           path: services/pedidos-service/target/surefire-reports/
           if-no-files-found: ignore
 
+  db-migrations-clean-start:
+    name: Esquema desde cero solo con migraciones (Punto 5)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Punto 5: docker-compose.yml ya no monta ni aplica docs/db/schema.sql
+      # en tiendatech-crdb-init (ver docs/db/README.md). Este job levanta un
+      # cluster CockroachDB realmente vacio -- sin schema.sql, sin seeds -- y
+      # arranca los seis microservicios que tienen esquema propio; Compose
+      # resuelve solo sus dependencias reales (crdb-1/2/3, crdb-init,
+      # jaeger y, entre ellos, pedidos->usuarios/productos/ventas,
+      # ordenes-proveedores->inventario), sin gateway/armado-ia/observabilidad
+      # porque nada de esto necesita esquema propio.
+      - name: Levantar CRDB vacio y los seis servicios con esquema propio
+        run: |
+          docker compose -f docker-compose.yml up -d --build --wait --wait-timeout 900 \
+            tiendatech-usuarios tiendatech-productos tiendatech-inventario \
+            tiendatech-pedidos tiendatech-ordenes-proveedores tiendatech-ventas
+
+      - name: Verificar que las 33 tablas y los 6 historiales Flyway existen
+        run: |
+          cat > /tmp/verificar-esquema.sql <<'SQL'
+          SELECT table_schema || '.' || table_name AS tabla
+          FROM information_schema.tables
+          WHERE table_schema IN ('usuarios','pedidos','productos','inventario','ordenes_proveedores','ventas')
+            AND table_name <> 'flyway_schema_history'
+          ORDER BY 1;
+          SQL
+          docker compose -f docker-compose.yml exec -T tiendatech-crdb-1 \
+            cockroach sql --insecure --host=localhost:26257 --database=tiendatech \
+            --format=csv --file=/dev/stdin < /tmp/verificar-esquema.sql \
+            | tail -n +2 | tr -d '\r' > /tmp/tablas-reales.txt
+
+          cat > /tmp/tablas-esperadas.txt <<'EOF'
+          inventario.inventario_producto
+          inventario.kardex_inventario
+          inventario.movimiento_inventario
+          inventario.solicitud_idempotente
+          inventario.tipo_movimiento
+          inventario.subtipo_movimiento
+          ordenes_proveedores.detalle_orden_compra
+          ordenes_proveedores.orden_compra
+          ordenes_proveedores.proveedor
+          pedidos.carrito_de_compra
+          pedidos.carrito_detalle
+          pedidos.detalle_orden
+          pedidos.metodopago
+          pedidos.orden
+          pedidos.retry_probe
+          pedidos.solicitud_idempotente
+          pedidos.tipo_metodopago
+          productos.categoria_producto
+          productos.galeria_productos_v2
+          productos.gama
+          productos.iva
+          productos.marca
+          productos.producto
+          usuarios.auth_refresh_tokens
+          usuarios.ciudad
+          usuarios.direccion
+          usuarios.provincia
+          usuarios.rol
+          usuarios.usuario
+          usuarios.usuario_auditoria
+          ventas.factura_cuerpo
+          ventas.factura_encabezado
+          ventas.factura_outbox
+          EOF
+          sed -i 's/^ *//' /tmp/tablas-esperadas.txt
+          sort /tmp/tablas-esperadas.txt -o /tmp/tablas-esperadas.txt
+          sort /tmp/tablas-reales.txt -o /tmp/tablas-reales.txt
+
+          echo "--- Tablas creadas por las migraciones ---"
+          cat /tmp/tablas-reales.txt
+          echo "--- Diferencia contra las 33 esperadas (vacio = OK) ---"
+          diff /tmp/tablas-esperadas.txt /tmp/tablas-reales.txt
+
+          echo "--- flyway_schema_history por esquema (V1, o V1+V2) ---"
+          for esquema in usuarios productos inventario pedidos ordenes_proveedores ventas; do
+            echo "== $esquema =="
+            docker compose -f docker-compose.yml exec -T tiendatech-crdb-1 \
+              cockroach sql --insecure --host=localhost:26257 --database=tiendatech \
+              --execute="SELECT version, success FROM ${esquema}.flyway_schema_history ORDER BY installed_rank;"
+          done
+
+      - name: Registrar logs del sistema (diagnostico si algo fallo)
+        if: always()
+        run: docker compose -f docker-compose.yml logs --no-color > db-migrations-clean-start.log 2>&1 || true
+
+      - name: Subir logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-migrations-clean-start-logs
+          path: db-migrations-clean-start.log
+          if-no-files-found: ignore
+
+      - name: Apagar el sistema
+        if: always()
+        run: docker compose -f docker-compose.yml down -v
+
   armado-ia-tests:
     name: armado-ia quality
     runs-on: ubuntu-latest
