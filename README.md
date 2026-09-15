@@ -225,6 +225,7 @@ los experimentos ya no se versionan (ver `.gitignore`); antes sumaban más de
 | APK release firmado (`release/tiendatech-release.apk`) | 34,2 MB | [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) — publicado automáticamente por `mobile-release-final.yml` (ver punto 44) |
 | Agente OpenTelemetry Java (`ops/observability/opentelemetry-javaagent.jar`) | 22,3 MB | [opentelemetry-javaagent.jar](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/opentelemetry-javaagent.jar) |
 | Bases de datos SQLite de los experimentos (360 archivos, piloto y campañas) | 156,5 MB | [experimentos-bases-de-datos.zip](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/experimentos-bases-de-datos.zip) |
+| Manuscrito final (`docs/entrega4/PFC4.pdf`), compilado por CI a partir de `PFC4.tex` | ~2 MB | [PFC4.pdf](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/PFC4.pdf) |
 
 Ver [release/README.md](release/README.md) y
 [Apps/mobile/README.md](Apps/mobile/README.md) para instrucciones de verificación
@@ -234,7 +235,7 @@ e instalación de los paquetes Android.
 
 ## 10. Trazabilidad con la rúbrica
 
-> **Cierre acumulativo del Paso 13 (1 de septiembre de 2026):** la versión actualizada es [PFC4.tex](docs/entrega4/PFC4.tex), con [PDF](docs/entrega4/PFC4.pdf) e [instrucciones de compilación con Biber](docs/entrega4/README.md). Las tablas históricas de esta sección no sustituyen el diagnóstico actualizado de esa memoria, que incorpora las evidencias posteriores y sus límites.
+> **Cierre acumulativo del Paso 13 (1 de septiembre de 2026):** la versión actualizada es [PFC4.tex](docs/entrega4/PFC4.tex), con [PDF](docs/entrega4/PFC4.pdf) (también adjunto a la [versión etiquetada v4.0.0](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0), ver §9) e [instrucciones de compilación con Biber](docs/entrega4/README.md). Las tablas históricas de esta sección no sustituyen el diagnóstico actualizado de esa memoria, que incorpora las evidencias posteriores y sus límites.
 
 Ver `docs/entrega4/PFC4.tex` §"Trazabilidad E1-E4" para la tabla completa de cierre del ciclo de las cuatro entregas y `docs/auditoria-rubrica-e4.md` para la auditoría interna de requisitos. Resumen por dimensión:
 
