@@ -256,7 +256,7 @@
                         },
                         "type": "object"
                       },
-                      "title": "Response 200 Circuitbreakers Actuator Circuitbreakers Get",
+                      "title": "Response Circuitbreakers Actuator Circuitbreakers Get",
                       "type": "object"
                     },
                     "message": {
@@ -300,7 +300,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "title": "Response 200 Health Actuator Health Get",
+                  "title": "Response Health Actuator Health Get",
                   "type": "object"
                 }
               }

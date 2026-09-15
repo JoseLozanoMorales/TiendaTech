@@ -24,7 +24,7 @@ from app.explicacion.bedrock_client import BedrockExplicacionClient
 from app.explicacion.client import ExplicacionClient
 from app.explicacion.fallback_client import DeterministicExplicacionClient
 from app.explicacion.service import ExplicacionService
-from app.schemas import AnalizarRequest
+from app.schemas import AnalizarRequest, AnalizarResponse
 from app.security import IdentidadOpcional, identidad_requerida
 
 
@@ -167,7 +167,7 @@ explicacion_service = ExplicacionService(_crear_explicacion_client(), Determinis
 
 
 @app.get("/actuator/health")
-def health():
+def health() -> dict[str, str]:
     return {"status": "UP"}
 
 
@@ -175,13 +175,13 @@ def health():
 # exponer el estado del circuit breaker -- equivalente a
 # /actuator/circuitbreakers de la version Java, evidencia de resiliencia.
 @app.get("/actuator/circuitbreakers")
-def circuitbreakers():
+def circuitbreakers() -> dict[str, dict[str, dict[str, str | int | float | None]]]:
     return estado_circuit_breaker()
 
 
 # Identidad opcional (ver security.py): el gateway protege /api/** asi que en
 # la practica siempre llega, pero este endpoint no persiste nada por usuario
 # y no bloquea si faltara. Si viene, se usa en el log.
-@app.post("/api/armado/analizar")
+@app.post("/api/armado/analizar", response_model=AnalizarResponse)
 def analizar(request: AnalizarRequest, identidad: IdentidadOpcional = Depends(identidad_requerida)):
     return armado_service.analizar(request, identidad, explicacion_service)
