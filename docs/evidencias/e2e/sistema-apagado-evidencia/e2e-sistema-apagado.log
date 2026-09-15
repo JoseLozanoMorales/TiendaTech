@@ -1,0 +1,743 @@
+
+Running 3 tests using 1 worker
+
+  ✓  1 [chromium] › tests/auth-admin.spec.js:3:1 › un visitante no puede abrir administracion (1.0s)
+[WebServer] 1:02:53 AM [vite] http proxy error: /api/login
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+  ✘  2 [chromium] › tests/auth-admin.spec.js:15:1 › un administrador inicia sesion y gestiona productos (6.1s)
+[WebServer] 1:03:00 AM [vite] http proxy error: /api/categorias
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:00 AM [vite] http proxy error: /api/productos?page=0&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:00 AM [vite] http proxy error: /api/categorias
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:00 AM [vite] http proxy error: /api/productos?page=0&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:01 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:02 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:03 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:04 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:05 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[WebServer] 1:03:06 AM [vite] http proxy error: /api/productos?page=1&size=12
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:8080
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+  ✘  3 [chromium] › tests/catalog.spec.js:10:1 › un visitante consulta y filtra el catalogo (6.2s)
+
+
+  1) [chromium] › tests/auth-admin.spec.js:15:1 › un administrador inicia sesion y gestiona productos 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /#\/admin$/
+    Received string:  "http://127.0.0.1:4173/app/#/login?next=%2Fadmin"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × locator resolved to <html lang="es">…</html>
+           - unexpected value "http://127.0.0.1:4173/app/#/login?next=%2Fadmin"
+
+
+      19 |   await page.getByRole('button', { name: 'Entrar' }).click()
+      20 |
+    > 21 |   await expect(page).toHaveURL(/#\/admin$/)
+         |                      ^
+      22 |   await expect(page.getByRole('heading', { name: 'Vista general' })).toBeVisible()
+      23 |   await page.getByRole('button', { name: /Productos/ }).click()
+      24 |   await expect(page.getByRole('heading', { name: 'Gestión de productos' })).toBeVisible()
+        at /tmp/e2e/tests/e2e-web/tests/auth-admin.spec.js:21:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-admin-un-administrado-d7639-sesion-y-gestiona-productos-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/auth-admin-un-administrado-d7639-sesion-y-gestiona-productos-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/auth-admin-un-administrado-d7639-sesion-y-gestiona-productos-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/auth-admin-un-administrado-d7639-sesion-y-gestiona-productos-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/catalog.spec.js:10:1 › un visitante consulta y filtra el catalogo ──────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Procesador Ryzen 7' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Procesador Ryzen 7' })
+
+
+      11 |   await page.goto('./#/', { waitUntil: 'domcontentloaded' })
+      12 |   await expect(page.getByRole('heading', { name: 'Encuentra tu componente' })).toBeVisible()
+    > 13 |   await expect(page.getByRole('heading', { name: 'Procesador Ryzen 7' })).toBeVisible()
+         |                                                                           ^
+      14 |   await page.getByRole('searchbox', { name: 'Buscar producto' }).fill('producto inexistente')
+      15 |   await expect(page.getByText('No encontramos productos')).toBeVisible()
+      16 | })
+        at /tmp/e2e/tests/e2e-web/tests/catalog.spec.js:13:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/catalog-un-visitante-consulta-y-filtra-el-catalogo-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/catalog-un-visitante-consulta-y-filtra-el-catalogo-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/catalog-un-visitante-consulta-y-filtra-el-catalogo-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/catalog-un-visitante-consulta-y-filtra-el-catalogo-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/auth-admin.spec.js:15:1 › un administrador inicia sesion y gestiona productos 
+    [chromium] › tests/catalog.spec.js:10:1 › un visitante consulta y filtra el catalogo ───────────
+  1 passed (17.5s)
