@@ -198,7 +198,15 @@ if ($script:RegistroDisparos.Count -gt 0) {
     if ($carpetaRegistro -and -not (Test-Path $carpetaRegistro)) {
         New-Item -ItemType Directory -Force -Path $carpetaRegistro | Out-Null
     }
-    $script:RegistroDisparos | ConvertTo-Json -Depth 5 | Set-Content -Path $ArchivoRegistro -Encoding utf8
+    # -Encoding utf8 en Windows PowerShell 5.1 escribe BOM UTF-8, que
+    # check_no_bom.py rechaza para archivos versionados (encontrado al
+    # comitear disparos-5xx-real.json por primera vez, CI "Integridad de
+    # datos" #83). Se escribe explicitamente sin BOM, igual que la
+    # normalizacion ya aplicada a los CSV de Locust en run-load-test.ps1.
+    $jsonRegistro = $script:RegistroDisparos | ConvertTo-Json -Depth 5
+    $utf8SinBom = New-Object System.Text.UTF8Encoding($false)
+    $rutaAbsolutaRegistro = Join-Path (Get-Location) $ArchivoRegistro
+    [System.IO.File]::WriteAllText($rutaAbsolutaRegistro, $jsonRegistro, $utf8SinBom)
     $resumen = $script:RegistroDisparos | Group-Object resultado | ForEach-Object { "$($_.Name)=$($_.Count)" }
     Write-Host "`nDato crudo de esta corrida guardado en $ArchivoRegistro ($($resumen -join ', '))." -ForegroundColor Cyan
 }
