@@ -32,8 +32,17 @@
   referencia, y contra las consultas PromQL reales del propio
   `ops/observability/grafana-dashboard.json`):
   - `active_connections` (gauge, tag `service=tiendatech-gateway`)
-  - `request_count_total` (counter, tags `service`, `method`, `status`)
+  - `request_count_total` (counter, tags `service`, `method`, `route`, `status`)
   - `request_duration_seconds` (histograma con percentiles, mismos tags)
+
+  **Corrección (punto 17 de la guía de cierre):** una versión anterior de
+  este documento afirmaba "mismo formato" pero el `GatewayTrafficFilter`
+  no emitía el tag `route` que sí lleva `HttpObservabilityFilter` — la
+  frase de arriba no estaba verificada contra el código real, solo contra
+  el nombre de las tres métricas. Corregido agregando `"route",
+  request.getRequestURI()` al arreglo de tags, y agregada una aserción en
+  `GatewayTrafficFilterTest` que verifica el tag `route` real (no solo que
+  compile), para que ahora sí sea una afirmación comprobada.
 - **`ops/observability/prometheus.yml`**: se agrega `tiendatech-gateway:8080`
   al job `tiendatech-java-services` ya existente.
 

@@ -117,6 +117,7 @@ class GatewayTrafficFilterTest {
         Counter counter = registry.find("request_count")
                 .tag("service", "tiendatech-gateway")
                 .tag("method", "POST")
+                .tag("route", "/api/ordenes")
                 .tag("status", "401")
                 .counter();
         assertNotNull(counter, "Debe existir un contador request_count con status=401 real");

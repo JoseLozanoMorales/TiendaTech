@@ -116,8 +116,13 @@ public class GatewayTrafficFilter extends OncePerRequestFilter {
         } finally {
             int status = failed ? 500 : response.getStatus();
             if (registry != null) {
+                // Mismo tag "route" que HttpObservabilityFilter (la implementacion de
+                // referencia en los microservicios Java), para que el Gateway quede con
+                // el mismo formato y convencion de nombres, no solo los mismos 3 nombres
+                // de metrica -- el punto 17 de la guia de cierre senalo que el Gateway
+                // no emitia esta etiqueta pese a que el documento afirmaba lo contrario.
                 String[] tags = {"service", "tiendatech-gateway", "method", request.getMethod(),
-                        "status", Integer.toString(status)};
+                        "route", request.getRequestURI(), "status", Integer.toString(status)};
                 Counter.builder("request_count").tags(tags).register(registry).increment();
                 Timer.builder("request_duration").publishPercentileHistogram()
                         .tags(tags).register(registry)
