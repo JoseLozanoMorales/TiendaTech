@@ -1,4 +1,4 @@
-﻿"marca_tiempo","evento"
+"marca_tiempo","evento"
 "2026-09-01 02:14:59.211","Inicio de la prueba. Tres nodos deberian estar sanos."
 "2026-09-01 02:15:00.175","Consulta 'tres_nodos_antes': exito=True, latencia=464.01ms"
 "2026-09-01 02:15:00.179","Deteniendo tiendatech-crdb-2 con docker kill."

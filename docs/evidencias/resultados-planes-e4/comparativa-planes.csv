@@ -1,4 +1,4 @@
-﻿"consulta","entorno","tiempo_planificacion","tiempo_ejecucion","distribucion","vectorizado"
+"consulta","entorno","tiempo_planificacion","tiempo_ejecucion","distribucion","vectorizado"
 "1_historial_usuario","cluster_3nodos","25ms","3ms","local","true"
 "1_historial_usuario","nodo_unico","973┬Ás","3ms","local","true"
 "2_top10_productos_trimestre","cluster_3nodos","32ms","625ms","full","true"

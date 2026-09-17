@@ -1,4 +1,4 @@
-﻿"etapa","intentos","exitos","latencia_promedio_ms","latencia_maxima_ms"
+"etapa","intentos","exitos","latencia_promedio_ms","latencia_maxima_ms"
 "tres_nodos","5","5","428.33","595.09"
 "un_nodo_caido","5","5","423.44","631.52"
 "recuperado","5","5","386.02","486.56"

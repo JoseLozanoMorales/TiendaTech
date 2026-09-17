@@ -1,4 +1,4 @@
-﻿"etapa","exito","latencia_ms","codigo_salida","respuesta"
+"etapa","exito","latencia_ms","codigo_salida","respuesta"
 "tres_nodos_antes","True","464,01","0","SET ordenes_dia 1644"
 "inmediatamente_tras_caida","True","4919,55","0","SET ordenes_dia 1644"
 "tras_espera_30s","True","428,94","0","SET ordenes_dia 1644"

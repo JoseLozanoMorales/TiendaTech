@@ -1,4 +1,4 @@
-﻿"etapa","repeticion","exito","latencia_ms","codigo_salida","respuesta"
+"etapa","repeticion","exito","latencia_ms","codigo_salida","respuesta"
 "tres_nodos","1","True","367.7","0","SET ordenes_dia 1370"
 "tres_nodos","2","True","354.63","0","SET ordenes_dia 1370"
 "tres_nodos","3","True","374.03","0","SET ordenes_dia 1370"
