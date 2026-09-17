@@ -28,4 +28,8 @@ jobs:
         run: python -m unittest discover -s experiments/paso8 -p test_campaign_checksums.py -v
       - name: Verificar manifiestos de campañas sobre checkout limpio
         run: python experiments/paso8/campaign_checksums.py
+      - name: Probar detección de alteraciones en evidencia adicional (trazas, oráculos, JSON sueltos)
+        run: python -m unittest discover -s scripts -p test_check_raw_evidence_checksums.py -v
+      - name: Verificar checksums de evidencia adicional sin manifiesto propio
+        run: python scripts/check_raw_evidence_checksums.py
 
