@@ -10,18 +10,18 @@ permissions:
   contents: read
 
 jobs:
-  csv-line-endings:
-    name: CSV line endings (LF)
+  line-endings:
+    name: Fin de linea LF en todo el repo (excepto *.cmd)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Verify CSV files use LF line endings
+      - name: Verify tracked text files use LF line endings
         run: |
-          files=$(git grep -l $'\r' -- '*.csv' '*.tsv' 'docs/evidencias/*-e4.txt' || true)
-          if [ -n "$files" ]; then
-            echo "CSV con CRLF detectado (deben normalizarse a LF via .gitattributes):"
-            echo "$files"
+          offenders=$(git ls-files --eol | grep -E 'i/(crlf|mixed)' | grep -v '\.cmd$' || true)
+          if [ -n "$offenders" ]; then
+            echo "Archivos con CRLF/mixed en el indice (deben normalizarse a LF via .gitattributes, o declarar la excepcion si es intencional):"
+            echo "$offenders"
             exit 1
           fi
 
