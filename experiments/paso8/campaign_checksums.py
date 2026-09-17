@@ -1,8 +1,12 @@
-"""Manifiestos de datos de campaña, con CSV/TSV/JSON canónicos LF (sin alterar archivos).
+"""Manifiestos de datos de campaña, con CSV/TSV/JSON/SVG canónicos LF (sin alterar archivos).
 
 Incluye los archivos estructurados (JSON) de toda la carpeta de campaña, no solo los
 tabulares: ahí viven los veredictos del experimento (por ejemplo validacion.json) y la
-metodología con sus propias sumas de referencia, que antes quedaban sin verificar."""
+metodología con sus propias sumas de referencia, que antes quedaban sin verificar.
+
+También incluye los SVG (por ejemplo los boxplot_*.svg de analyze_corrective_results.py):
+antes no estaban en ningún manifiesto y una alteración de su contenido (por ejemplo un
+color) pasaba desapercibida para todos los verificadores."""
 from __future__ import annotations
 
 import argparse
@@ -17,7 +21,7 @@ def inventory(directory: Path) -> dict[str, str]:
     # rampa-readiness/; excluye reproducciones locales auxiliares fuera del árbol.
     paths = directory.rglob('*')
     for path in sorted(paths):
-        if path.suffix.lower() not in {'.csv', '.tsv', '.json'} or not path.is_file():
+        if path.suffix.lower() not in {'.csv', '.tsv', '.json', '.svg'} or not path.is_file():
             continue
         if path.is_symlink() or not path.resolve().is_relative_to(directory.resolve()):
             raise ValueError(f'Enlace no permitido: {path}')

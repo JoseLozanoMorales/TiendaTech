@@ -68,6 +68,19 @@ class CampaignChecksumsTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify(self.root)
 
+    def test_svg_covered_and_tampering_detected(self):
+        # Los graficos generados (p. ej. boxplot_*.svg) deben quedar cubiertos:
+        # antes ningun verificador detectaba una alteracion de su contenido.
+        svg = self.root / 'analisis/boxplot_ejemplo.svg'
+        svg.write_bytes(b'<svg><rect fill="#4e79a7"/></svg>')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+        write(self.root)
+        self.assertEqual(verify(self.root), 3)
+        svg.write_bytes(b'<svg><rect fill="#ff0000"/></svg>')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()
