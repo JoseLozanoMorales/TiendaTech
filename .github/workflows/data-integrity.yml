@@ -32,4 +32,7 @@ jobs:
         run: python -m unittest discover -s scripts -p test_check_raw_evidence_checksums.py -v
       - name: Verificar checksums de evidencia adicional sin manifiesto propio
         run: python scripts/check_raw_evidence_checksums.py
-
+      - name: Probar detección de BOM UTF-8 (falsos positivos y casos límite)
+        run: python -m unittest discover -s scripts -p test_check_no_bom.py -v
+      - name: Verificar ausencia de BOM UTF-8 en archivos versionados
+        run: python scripts/check_no_bom.py
