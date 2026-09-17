@@ -80,10 +80,18 @@ salieron a la luz solo al intentar levantar y usar el sistema real—:
   -HostUrl http://localhost:8180 -Users 400 -SpawnRate 50 -RunTime 90s`,
   deliberadamente muy por encima de los 300 req/60s del rate limiter del
   Gateway, para forzar `429` reales en vez de dejar el panel de errores
-  vacío): **28,803 peticiones**, **28,203** con `429`
-  (`tests/load/results` → `docs/evidencias/punto17-observabilidad-gateway/`,
-  archivos `tiendatech-50-users_stats.csv`, `_failures.csv`,
-  `_exceptions.csv`). Ningún fallo `5xx`.
+  vacío): **28,787 peticiones**, **28,187** con `429` (fila `Aggregated` de
+  `tiendatech-50-users_stats.csv`, cifra corregida: una versión anterior de
+  este documento citaba 28,803/28,203, un desfase de 16 frente al conteo
+  final del CSV, probablemente leído del panel en vivo de Locust en vez del
+  archivo ya cerrado). Copia versionada en
+  `docs/evidencias/punto17-observabilidad-gateway/tiendatech-50-users_stats.csv`,
+  `_failures.csv`, `_exceptions.csv` (0 excepciones) — **no** en
+  `tests/load/results/`, donde ese mismo nombre de archivo se reutiliza para
+  cada corrida nueva del escenario público de 50 usuarios y ya fue
+  sobrescrito por corridas posteriores no relacionadas con este cierre (ver
+  la nota sobre nombres reutilizados en `tests/load/README.md`). Ningún
+  fallo `5xx`.
 - **Captura real del dashboard**
   (`docs/evidencias/punto17-observabilidad-gateway/dashboard-gateway-carga.png`,
   rango `Last 15 minutes` tomado justo después de la corrida): se observa el

@@ -136,12 +136,10 @@ los comentarios del código y de `application.properties` de
   table"). Corregido con `baselineOnMigrate=true` +
   `baselineVersion=1` (la única migración existente).
 
-## Resultados por nivel de concurrencia
+## Resultados por nivel de concurrencia (corrida del 15/09, antes de la corrección de abajo)
 
-Los tres niveles quedan con **0 fallos** en el estado final versionado en
-`tests/load/results/` (`tiendatech-critical-path-{5,10,20}-users_stats.csv`,
-`_failures.csv`, `_exceptions.csv`, `_stats_history.csv`, `.html`,
-verificados en `checksums.txt`):
+Los tres niveles quedaron con **0 fallos** en el estado versionado en su
+momento:
 
 | Usuarios concurrentes | Peticiones totales | Fallos | RPS | Mediana | p95 | Máximo |
 |---|---|---|---|---|---|---|
@@ -149,42 +147,138 @@ verificados en `checksums.txt`):
 | 10 | 1208 | 0 | 13.9 | 120ms | 1200ms | 4.04s |
 | 20 | 2041 | 0 | 23.0 | 140ms | 2300ms | 4.34s |
 
-El nivel de 20 usuarios es el más significativo de los tres: es la corrida
-que **reprodujo el hallazgo real** del `SQLSTATE 40001` (4 fallos de 2209
-peticiones en la corrida previa a la corrección, 0.18%, todos en
-`/auth/refresh`) y, tras aplicar la corrección de
-`CrdbTransactionRetryExecutor`, **confirmó su resolución completa** en la
-corrida final versionada arriba (2041 peticiones, 0 fallos, ningún `500`).
-Se optó deliberadamente por conservar ese antes/después como parte de la
-narrativa de esta evidencia — es más representativo de un ejercicio real de
-pruebas de carga en sistemas distribuidos que tres corridas limpias desde
-el inicio, y documenta un hallazgo genuino de CockroachDB bajo concurrencia
-real, no simulado.
+El nivel de 20 usuarios reprodujo en su momento el `SQLSTATE 40001` descrito
+arriba (fallos observados en consola durante la corrida previa a la
+corrección de `CrdbTransactionRetryExecutor`, no preservados en ningún
+archivo porque esa corrida se sobrescribió al aplicar el fix y volver a
+correr) y, tras el fix, la corrida final sí quedó versionada con 0 fallos.
+**Esta tabla y estos archivos ya no son la evidencia vigente de este
+cierre** — ver la corrección de abajo: la campaña se repitió por completo
+el 17/09 porque estos tres archivos tenían dos problemas de fondo no
+detectados en su momento.
 
-Nota aparte, sin relación con TiendaTech: en la corrida de 10 usuarios
-apareció un traceback de Locust después de la línea `Shutting down (exit
-code 0)` (`ValueError: I/O operation on closed file` en
-`locust/stats.py`), producido por una carrera interna conocida de Locust/
-gevent entre el hilo periódico que escribe el CSV de estadísticas y el
-cierre del proceso — más frecuente en Windows por su timing de shutdown más
-rápido que Linux/Mac. No afecta los resultados: la tabla de percentiles ya
-se había impreso completa, `exit code` fue `0`, y `campaign_checksums.py`
-verificó los CSV/HTML sin problema después. Es ruido de la herramienta, no
-un defecto de TiendaTech.
+## Corrección (17 de septiembre de 2026): el asistente de armado nunca se ejecutaba, abandonos sin marcar, y crudos alterados a posteriori
+
+La revisión externa del docente encontró tres problemas reales en el cierre
+anterior, ninguno relacionado con los dos bugs de `usuarios-service` de
+arriba (esos siguen corregidos y se reverifican más abajo):
+
+**1. El asistente de armado nunca se ejercitó.** Ninguna de las tres
+corridas de la tabla anterior tiene una sola fila
+`POST /api/armado/analizar` — 0 peticiones en los tres niveles, pese a que
+`_analizar_armado()` es parte del flujo que la evidencia afirmaba cubrir.
+Causa raíz: `_CatalogoCompartido.cpu_producto_id()`
+(`critical_path_locustfile.py`) buscaba una categoría llamada
+`"procesador"`, pero la semilla real la llama `'CPU'`
+(`docs/db/product-management-reference.sql:9`, `seed-e2e.sql:23`). El
+lookup nunca encontraba nada, `cpu_producto_id` quedaba siempre en `None`,
+y `_analizar_armado()` se saltaba en silencio en las tres corridas.
+**Corrección**: comparar contra `"cpu"` en vez de `"procesador"`.
+
+**2. Abandonos de iteración sin marcar como fallo.** `flujo_completo()`
+hacía `return` en silencio (ni éxito ni fallo registrado) cuando el
+registro/login de `on_start` no se completaba, o cuando el usuario virtual
+no tenía dirección/método de pago propios — un hueco invisible en la tasa
+de error real de la campaña. **Corrección**: se agregó
+`_registrar_abandono()`, que dispara el mismo evento interno que usa
+Locust para cada petición HTTP real (`environment.events.request.fire(...)`
+con una excepción como marca de fallo), para que estos abandonos aparezcan
+en `_stats.csv`/`_failures.csv` en vez de desaparecer sin dejar rastro.
+Verificado en la práctica: con el stack de Docker apagado por error durante
+una prueba de esta corrección, los 5 usuarios virtuales efectivamente
+abandonaron su primera iteración (registro con `HTTP 0`, conexión
+rechazada) y el reporte de errores de Locust mostró explícitamente `215
+occurrences TASK flujo_completo: RuntimeError('registro/login de on_start
+no se completo...')` — el hueco que antes no se veía ahora sí se ve.
+
+**3. Crudos alterados después de la corrida, en dos frentes distintos**
+(hallazgo compartido con #22/#42/#46, tratado aquí solo en lo que toca a
+los archivos de este punto):
+
+- El commit `62d37e4` ("eliminar CR sueltos") reescribió los CSV ya
+  versionados de la campaña conservada del 04/09
+  (`tiendatech-50-users-20260904-local_*.csv`), agregando BOM UTF-8 a cada
+  uno y regenerando `checksums.txt` contra esos bytes alterados en vez de
+  los que Locust escribió originalmente. **Corrección**: restaurados los
+  cuatro archivos con `git checkout 822399a -- <archivo>` (el commit previo
+  a la alteración) y regenerado el manifiesto contra los bytes reales. El
+  único cambio real en cada archivo es la línea de encabezado (se quita el
+  BOM; en `_stats.csv` de paso se corrigió un `90` que en la versión
+  alterada había perdido su `%`) — todas las filas de datos quedaron
+  intactas.
+- El nombre `tiendatech-50-users_*.csv` en `tests/load/results/` (genérico,
+  el que escribe `run-load-test.ps1` por defecto) había sido pisado por una
+  tercera corrida sin relación con ningún cierre documentado (15/09 13:49
+  UTC, concurrencia real de 10 usuarios, 790 peticiones, 253 fallos `429`),
+  distinta tanto de la campaña de `paso10-item5-grafana-carga.md` (04/09,
+  2194 peticiones) como de la de `punto17-observabilidad-gateway.md` (15/09,
+  400 usuarios reales, 28,787 peticiones — cifra corregida ahí mismo, el
+  documento tenía un desfase de 16 frente al CSV real). **Corrección**:
+  renombrado a `tiendatech-ratelimit-check-10usuarios-20260915_*` para que
+  el nombre ya no compita con las dos campañas documentadas, cuyas copias
+  de evidencia sobreviven intactas en sus propias carpetas
+  (`docs/evidencias/paso10-item5-grafana-carga/`,
+  `docs/evidencias/punto17-observabilidad-gateway/`). Se documentó la regla
+  a futuro en `tests/load/README.md`: nunca dejar `-OutputPrefix` en su
+  valor por defecto para una corrida que se vaya a citar como evidencia.
+
+## Resultados por nivel de concurrencia (corrida real del 17/09, con el fix aplicado)
+
+Stack levantado localmente (Docker Desktop), semillas ya aplicadas
+(`seed-ecuador-mobile-checkout.sql`, `seed-inventario-stock.sql`,
+`product-management-reference.sql` + `seed-e2e.sql`), `GATEWAY_RATE_LIMIT_REQUESTS=20000`.
+Cifras tomadas de la fila `Aggregated` y la fila `POST /api/armado/analizar`
+de cada `_stats.csv` versionado, no del panel en vivo de Locust: en la
+corrida de 20 usuarios el panel mostró 1251 peticiones agregadas y 209 en
+`armado/analizar` contra 1239 y 197 en el `_stats.csv` final (12 de
+diferencia en ambos) — la misma carrera
+Locust/gevent al cerrar ya documentada más abajo, sin relación con
+TiendaTech):
+
+| Usuarios concurrentes | Duración | Peticiones totales | Fallos | Peticiones `armado/analizar` | Fallos en `armado/analizar` |
+|---|---|---|---|---|---|
+| 5  | 88s | 326  | 0 | 50  | 0 |
+| 10 | 91s | 766  | 0 | 125 | 0 |
+| 20 | 91s | 1239 | 0 | 197 | 0 |
+
+Las tres corridas también ejercitaron `POST /auth/refresh` (5/10/20
+usuarios → 15/40/~65 renovaciones forzadas cada
+`REFRESH_EVERY_N_ITERATIONS=3` iteraciones) sin ningún fallo, confirmando
+que las dos correcciones de `usuarios-service` de la sección anterior
+(`username=null` en tokens renovados, `SQLSTATE 40001` sin reintento) siguen
+funcionando bajo esta nueva corrida. `_failures.csv` y `_exceptions.csv`
+quedaron vacíos (solo encabezado) en los tres niveles. Archivos versionados
+en `tests/load/results/` (`tiendatech-critical-path-{5,10,20}-users_stats.csv`,
+`_failures.csv`, `_exceptions.csv`, `_stats_history.csv`) y verificados en
+`checksums.txt` — el `.html` de cada nivel existe localmente pero **no**
+está versionado ni sometido a checksum (`.gitignore`), y no debe citarse
+como "verificado en checksums.txt".
+
+Nota aparte, sin relación con TiendaTech: en las corridas de 10 y 20
+usuarios apareció el mismo traceback ya documentado en la corrida anterior
+(`ValueError: I/O operation on closed file` en `locust/stats.py`), la
+carrera interna conocida de Locust/gevent entre el hilo que escribe el CSV
+y el cierre del proceso, más frecuente en Windows. No afecta los resultados
+versionados: `exit code` fue `0` en los tres niveles y
+`campaign_checksums.py` verificó los CSV sin problema después.
 
 ## Conclusión
 
-El camino crítico autenticado completo —incluyendo renovación de sesión
-bajo carga, no solo el `happy path` sin refresh— queda ejercitado y
-verificado en tres niveles de concurrencia, con evidencia versionada y
-checksums en `tests/load/results/`. El ejercicio encontró y corrigió dos
-bugs reales de `usuarios-service` que solo se manifestaban bajo carga real
-(tokens de acceso inválidos tras renovar sesión, y conflictos de
-serialización de CockroachDB sin reintento), sumados a los dos hallazgos de
-preparación del entorno (cookiejar de Python, crash-loop de Flyway) ya
-documentados en el código. Los cuatro hallazgos, en conjunto, son evidencia
-de un ejercicio de pruebas de carga genuino contra un sistema distribuido
-real, no una demostración superficial.
+El camino crítico autenticado completo —registro, login, dirección propia,
+método de pago propio, carrito, checkout, factura, asistente de armado, y
+renovación de sesión bajo carga— queda ejercitado de verdad en tres niveles
+de concurrencia, con las cinco operaciones exigidas por la guía presentes
+en el mismo `_stats.csv` (incluyendo `armado/analizar`, ausente en el
+cierre anterior), sin abandonos invisibles (el mecanismo que los detecta
+fue verificado en la práctica), y con evidencia versionada cuyos checksums
+reflejan exactamente los bytes que escribió Locust, no una versión
+"limpiada" después. El ejercicio combinado (esta corrección más el cierre
+original) encontró y corrigió cuatro bugs reales: dos en `usuarios-service`
+bajo carga (tokens de acceso inválidos tras renovar sesión, conflictos de
+serialización de CockroachDB sin reintento) y dos en el propio guion de
+carga (categoría de armado mal referenciada, abandonos de iteración sin
+marcar), más la restauración de integridad de los crudos de una campaña de
+otro punto que había sido alterada por error.
 
 ## Pendiente
 
@@ -199,3 +293,6 @@ real, no una demostración superficial.
   que era el hallazgo pendiente. El escenario de 50 usuarios de solo
   lectura ya tiene su propia evidencia en `paso10-item5-grafana-carga.md`
   y `punto17-observabilidad-gateway.md`.
+- La alteración de crudos por el commit `62d37e4` puede tener alcance más
+  amplio que los archivos tocados en esta corrección (ver #22/#42/#46) —
+  no se auditó aquí ningún archivo fuera de `tests/load/results/`.

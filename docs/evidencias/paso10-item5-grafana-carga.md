@@ -51,8 +51,12 @@ python -m pip install -r tests/load/requirements.txt
 ./tests/load/run-load-test.ps1
 ```
 
-Resultado real (`tests/load/results/tiendatech-50-users_stats.csv`, copiado
-en esta carpeta porque `tests/load/results/` está en `.gitignore`):
+Resultado real (copiado en esta misma carpeta el 2026-09-04 porque
+`tests/load/results/` está en `.gitignore`; el archivo con este mismo
+nombre que hoy vive en `tests/load/results/` corresponde a una corrida muy
+posterior y distinta — ver la nota sobre nombres reutilizados en
+`tests/load/README.md` — la copia válida para este cierre es únicamente la
+de esta carpeta):
 
 | Endpoint | Peticiones | Fallos | Mediana | P95 | Máx |
 |---|---|---|---|---|---|

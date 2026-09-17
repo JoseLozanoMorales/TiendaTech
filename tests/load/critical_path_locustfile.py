@@ -5,9 +5,13 @@ Cada usuario virtual es un cliente nuevo, autosuficiente: se registra via el
 signup publico (POST /api/usuarios/crear), inicia sesion, se crea su propia
 direccion y metodo de pago, y solo entonces entra al bucle de la tarea. No
 depende de datos precargados de usuario -- pero SI depende de catalogo de
-referencia (ciudades/provincias y tipos de metodo de pago) que no viene
-poblado por defecto en un stack recien levantado; ver tests/load/README.md
-para el prerequisito de aplicar docs/db/seed-ecuador-mobile-checkout.sql.
+referencia (ciudades/provincias, tipos de metodo de pago, y stock real en
+inventario.inventario_producto) que no viene poblado por defecto en un stack
+recien levantado; ver tests/load/README.md para los dos prerequisitos:
+docs/db/seed-ecuador-mobile-checkout.sql (ciudades/provincias/metodos de
+pago) y docs/db/seed-inventario-stock.sql (stock de inventario; sin el,
+"agregar al carrito" falla con 409 aunque productos.producto.stock muestre
+unidades disponibles).
 
 Separado de locustfile.py (que sigue intacto con sus 4 lecturas publicas) a
 proposito: mezclar ambas clases en el mismo archivo haria que
@@ -46,6 +50,24 @@ def _detalle_error(resp) -> str:
     return (resp.text or "").strip()[:200]
 
 
+def _registrar_abandono(environment, nombre: str, motivo: str) -> None:
+    """Registra como fallo una iteracion que se abandona SIN hacer ninguna
+    peticion HTTP (por ejemplo, porque el setup por-usuario en on_start nunca
+    completo). Sin esto, un `return` silencioso desaparece de las
+    estadisticas sin dejar rastro: ni exito ni fallo, un hueco invisible en
+    el porcentaje de error real de la campana. Se dispara el mismo evento
+    que Locust usa internamente para cada peticion HTTP, con response_time=0
+    y una excepcion como marca de fallo, para que aparezca en
+    _stats.csv/_failures.csv igual que cualquier otro fallo real."""
+    environment.events.request.fire(
+        request_type="TASK",
+        name=nombre,
+        response_time=0,
+        response_length=0,
+        exception=RuntimeError(motivo),
+    )
+
+
 class _CatalogoCompartido:
     """Productos y categoria CPU resueltos una sola vez y reusados por todos
     los usuarios virtuales: son datos de referencia, no datos por-usuario, y
@@ -81,7 +103,13 @@ class _CatalogoCompartido:
                 resp.failure(f"categorias HTTP {resp.status_code}")
                 return None
             categorias = _unwrap(resp)
-            cpu = next((c for c in categorias if str(c.get("nombre", "")).strip().lower() == "procesador"), None)
+            # La semilla real (docs/db/product-management-reference.sql:9,
+            # seed-e2e.sql:23) nombra esta categoria "CPU", no "Procesador":
+            # con el literal anterior este lookup nunca encontraba nada,
+            # cpu_producto_id() siempre devolvia None, y _analizar_armado()
+            # se saltaba en silencio en las tres corridas versionadas (0
+            # peticiones POST /api/armado/analizar en ninguna de ellas).
+            cpu = next((c for c in categorias if str(c.get("nombre", "")).strip().lower() == "cpu"), None)
             if cpu is None:
                 return None
             categoria_id = cpu.get("id") or cpu.get("id_categoria")
@@ -255,11 +283,15 @@ class CriticalPathUser(HttpUser):
     @task
     def flujo_completo(self) -> None:
         if getattr(self, "token", None) is None:
-            return  # el registro/login de on_start no se completo; nada que hacer esta iteracion
+            _registrar_abandono(self.environment, "TASK flujo_completo",
+                                 "registro/login de on_start no se completo: nada que hacer esta iteracion")
+            return
         if self.producto_id is None:
             self.producto_id = self._elegir_producto()
         if self.direccion_id is None or self.metodopago_id is None:
-            return  # sin direccion/metodo de pago propios no hay checkout posible
+            _registrar_abandono(self.environment, "TASK flujo_completo",
+                                 "sin direccion/metodo de pago propios no hay checkout posible")
+            return
 
         self._iteraciones += 1
         if self._iteraciones % REFRESH_EVERY_N_ITERATIONS == 0:
