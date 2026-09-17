@@ -51,13 +51,18 @@
       "response": {
         "body": {
           "content": {
-            "access": "pact-access-token",
-            "user": {
-              "idRol": 2,
-              "nombre": "Cliente Pact",
-              "usuario": "cliente",
-              "usuarioId": 20
-            }
+            "data": {
+              "access": "pact-access-token",
+              "user": {
+                "idRol": 2,
+                "nombre": "Cliente Pact",
+                "usuario": "cliente",
+                "usuarioId": 20
+              }
+            },
+            "message": "OK",
+            "status": 200,
+            "timestamp": "2026-09-16T23:23:59.403Z"
           },
           "contentType": "application/json",
           "encoded": false
@@ -69,7 +74,7 @@
         },
         "matchingRules": {
           "body": {
-            "$.access": {
+            "$.data.access": {
               "combine": "AND",
               "matchers": [
                 {
@@ -78,7 +83,7 @@
                 }
               ]
             },
-            "$.user.idRol": {
+            "$.data.user.idRol": {
               "combine": "AND",
               "matchers": [
                 {
@@ -86,7 +91,7 @@
                 }
               ]
             },
-            "$.user.nombre": {
+            "$.data.user.nombre": {
               "combine": "AND",
               "matchers": [
                 {
@@ -94,7 +99,7 @@
                 }
               ]
             },
-            "$.user.usuario": {
+            "$.data.user.usuario": {
               "combine": "AND",
               "matchers": [
                 {
@@ -102,11 +107,36 @@
                 }
               ]
             },
-            "$.user.usuarioId": {
+            "$.data.user.usuarioId": {
               "combine": "AND",
               "matchers": [
                 {
                   "match": "integer"
+                }
+              ]
+            },
+            "$.message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.timestamp": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z?$"
                 }
               ]
             }

@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -60,6 +61,13 @@ class ProductosProviderVerificationTest {
             return registry -> {
                 var scanner = new ClassPathScanningCandidateComponentProvider(false);
                 scanner.addIncludeFilter(new AnnotationTypeFilter(Controller.class));
+                // El envoltorio uniforme {status,data,message,timestamp} lo aplica
+                // ApiResponseAdvice, que es @RestControllerAdvice (meta-anota
+                // @ControllerAdvice, no @Controller). Sin esta linea el arnes nunca
+                // lo registra como bean, Spring nunca arma la cadena
+                // ResponseBodyAdvice, y la verificacion de Pact compara contra la
+                // respuesta cruda del controlador en vez del envoltorio real.
+                scanner.addIncludeFilter(new AnnotationTypeFilter(ControllerAdvice.class));
                 Set<Class<?>> dependencies = new HashSet<>();
                 for (var candidate : scanner.findCandidateComponents("com.tiendatech")) {
                     try {

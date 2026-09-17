@@ -216,6 +216,9 @@ jobs:
       - name: Generate and validate Pact contracts
         working-directory: tests/contract
         run: npm test
+      - name: Fail if the regenerated contracts drifted from the committed ones
+        working-directory: tests/contract
+        run: git diff --exit-code -- pacts/
       - name: Upload Pact contracts
         uses: actions/upload-artifact@v4
         with:

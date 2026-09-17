@@ -102,9 +102,11 @@ valor fuera `null` el `Map.of()` ya fallaría en esa entrada antes de
 llegar a la nueva — la corrección no añade ninguna superficie de riesgo
 que no existiera ya.
 
-## Verificación final
+## Verificación final (cierre original, commit 883cb4b)
 
-- Run: `https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/266`
+- Run citado en su momento: `.../actions/runs/266` — **este enlace ya no
+  resuelve** (404) y no debe usarse como evidencia; ver la corrección de
+  abajo.
 - Commit: `883cb4b` ("verificación de proveedor en usuarios y productos;
   corrige drift real idRol/id_rol")
 - Job **"Pact provider verification (usuarios-service)"**: succeeded.
@@ -113,12 +115,83 @@ que no existiera ya.
 - Contenido de `LoginController.java` y ambos `pom.xml` en `main`
   verificado directamente contra el repositorio remoto.
 
+## Corrección posterior (16 de septiembre de 2026): el arnés excluía el envoltorio real
+
+La revisión externa del docente reprodujo el defecto de fondo que el cierre
+original no detectó: `scanner.addIncludeFilter(new
+AnnotationTypeFilter(Controller.class))` en ambos arneses solo registra
+clases `@Controller`. `ApiResponseAdvice` es `@RestControllerAdvice` (meta
+anota `@ControllerAdvice`, no `@Controller`), así que nunca se registraba
+como bean, Spring nunca armaba la cadena `ResponseBodyAdvice`, y la
+verificación comparaba contra el cuerpo crudo del controlador en vez del
+envoltorio `{status,data,message,timestamp}` que el sistema real emite en
+producción. Además, los dos pacts de consumidor (`tiendatech-mobile-usuarios-
+service.json`, `tiendatech-webapp-productos-service.json`) pedían la forma
+sin envolver, contradiciendo a los clientes reales (móvil: `Response<ApiEnvelope<LoginResponse>>`;
+web: desenvuelve `data` en `services/api.ts`).
+
+**Corrección aplicada:**
+
+- `UsuariosProviderVerificationTest.java` y
+  `ProductosProviderVerificationTest.java`: se añadió
+  `scanner.addIncludeFilter(new AnnotationTypeFilter(ControllerAdvice.class))`
+  junto al filtro de `@Controller` ya existente, sin tocar código de
+  producción.
+- `tests/contract/tests/mobile-login.pact.test.js` y
+  `web-catalog.pact.test.js`: el cuerpo esperado ahora exige el envoltorio
+  real (`data.user`, `data.access` / `data` como arreglo), regenerando los
+  dos `.json` versionados con `npm test`.
+- De paso, se corrigió un bug preexistente de portabilidad en ambos
+  `.pact.test.js`: `new URL('../pacts', import.meta.url).pathname` producía
+  una ruta inválida en Windows (`/C:/Users/...`, rechazada por el núcleo
+  nativo de Pact con "os error 123"); se reemplazó por
+  `fileURLToPath(new URL('../pacts', import.meta.url))`.
+- `.github/workflows/ci.yml`, job `contract-tests`: se añadió el paso
+  `git diff --exit-code -- pacts/` inmediatamente después de `npm test`,
+  para que el job falle si el contrato regenerado difiere del commiteado
+  (la brecha de control de deriva que señaló la revisión externa).
+
+**Verificación local tras el fix** (perfil `pact`, `mvn -Ppact
+-Dtest=...ProviderVerificationTest test`):
+
+```
+Verifying a pact between tiendatech-mobile and usuarios-service
+  ... has a matching body (OK)
+Verifying a pact between tiendatech-webapp and productos-service
+  ... has a matching body (OK)
+```
+
+**Prueba de mutación repetida con el arnés ya corregido** (esta vez sobre el
+envoltorio real, no sobre el cuerpo crudo): se renombró temporalmente
+`"access"` → `"tokenRenombrado"` en la respuesta de `LoginController.login`.
+La verificación falló exactamente como se esperaba:
+
+```
+1.1) body: $.data Actual map is missing the following keys: access
+
+    {
+    -  "access": "pact-access-token",
+    +  "success": true,
+    +  "token": "pact-access-token",
+    +  "tokenRenombrado": "pact-access-token",
+      "user": { ... }
+    }
+```
+
+El cambio se revirtió de inmediato; `LoginController.java` en el árbol de
+trabajo quedó verificado byte a byte contra su versión anterior a la
+mutación antes de continuar.
+
 ## Conclusión
 
 Ya existe verificación de proveedor real sobre los dos servicios con
 contratos versionados, enganchada al flujo de CI, y se demostró
-explícitamente que la verificación falla ante un cambio deliberado de
-forma en una respuesta. Además, la compuerta demostró su valor real el
-primer día que corrió: encontró una divergencia genuina y preexistente
-entre el móvil y el backend (no simulada) que ningún mecanismo anterior
-detectaba, y esa divergencia quedó corregida en el mismo cierre.
+explícitamente — dos veces, con el arnés original y de nuevo con el
+arnés corregido — que la verificación falla ante un cambio deliberado de
+forma en una respuesta. El enlace de evidencia del cierre original quedó
+roto y se documenta aquí en vez de repetirlo; **la próxima entrada de este
+archivo debe reemplazarlo por el run real** de `provider-verification-usuarios`
+y `provider-verification-productos` sobre el commit en el que se suban estos
+cambios. La compuerta de deriva (`git diff --exit-code`) añadida en esta
+corrección cierra además el hallazgo de que un cambio en el consumidor podía
+no propagarse nunca al `.json` versionado sin que CI lo notara.
