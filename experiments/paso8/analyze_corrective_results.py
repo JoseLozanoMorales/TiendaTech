@@ -29,6 +29,17 @@ COORD_ORDER = {"2pc": 0, "saga": 1}
 NO_VERIFICADO = "no_verificado"
 
 
+def rootrelative(path: Path) -> str:
+    """Ruta relativa a ROOT para metadatos; si `path` cae fuera del repo (por
+    ejemplo con --output apuntando a otro lugar), usa la ruta absoluta en vez
+    de reventar con ValueError."""
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(resolved).replace("\\", "/")
+
+
 def parse_args() -> argparse.Namespace:
     base = PASO8 / "resultados-reales" / "correctiva-20260905-final-v2"
     ap = argparse.ArgumentParser()
@@ -322,7 +333,7 @@ def main() -> int:
         *chart_paths,
     ]
     metadata = {
-        "input": str(args.input.relative_to(ROOT)).replace("\\", "/"),
+        "input": rootrelative(args.input),
         "rows": len(rows),
         "conditions": len({condition_key(row) for row in rows}),
         "bootstrap_samples": args.bootstrap_samples,
@@ -331,8 +342,8 @@ def main() -> int:
         "mann_whitney": "bilateral; p exacto sin empates y aproximacion normal cuando hay empates",
         "effect_size": "A12 de Vargha-Delaney; probabilidad de que 2PC sea mayor que Saga",
         "multiplicity": "Bonferroni por metrica: 12 comparaciones, alfa 0.05/12",
-        "outputs": [str(path.relative_to(ROOT)).replace("\\", "/") for path in output_paths],
-        "sha256": {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in output_paths},
+        "outputs": [rootrelative(path) for path in output_paths],
+        "sha256": {path.name: hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest() for path in output_paths},
     }
     metadata_path = args.output / "analisis_estadistico_metodologia.json"
     metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
