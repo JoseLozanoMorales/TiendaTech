@@ -2,7 +2,7 @@
   "title": "TiendaTech - Observabilidad distribuida",
   "uid": "tiendatech-observability",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "refresh": "5s",
   "time": {"from": "now-15m", "to": "now"},
   "panels": [
@@ -12,8 +12,8 @@
       {"refId": "B", "expr": "histogram_quantile(0.95, sum by (le, service) (rate(request_duration_seconds_bucket[5m])))", "legendFormat": "P95 {{service}}"},
       {"refId": "C", "expr": "histogram_quantile(0.99, sum by (le, service) (rate(request_duration_seconds_bucket[5m])))", "legendFormat": "P99 {{service}}"}
     ]},
-    {"id": 3, "type": "timeseries", "title": "Tasa de errores HTTP 4xx", "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}, "targets": [{"refId": "A", "expr": "sum by (service) (rate(request_count_total{status=~\"4..\"}[5m])) / clamp_min(sum by (service) (rate(request_count_total[5m])), 0.001)", "legendFormat": "{{service}}"}]},
-    {"id": 4, "type": "timeseries", "title": "Tasa de errores HTTP 5xx", "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}, "targets": [{"refId": "A", "expr": "sum by (service) (rate(request_count_total{status=~\"5..\"}[5m])) / clamp_min(sum by (service) (rate(request_count_total[5m])), 0.001)", "legendFormat": "{{service}}"}]},
+    {"id": 3, "type": "timeseries", "title": "Tasa de errores HTTP 4xx", "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}, "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0}, "overrides": []}, "targets": [{"refId": "A", "expr": "sum by (service) (rate(request_count_total{status=~\"4..\"}[5m])) / clamp_min(sum by (service) (rate(request_count_total[5m])), 0.001)", "legendFormat": "{{service}}"}]},
+    {"id": 4, "type": "timeseries", "title": "Tasa de errores HTTP 5xx", "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}, "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0}, "overrides": []}, "targets": [{"refId": "A", "expr": "sum by (service) (rate(request_count_total{status=~\"5..\"}[5m])) / clamp_min(sum by (service) (rate(request_count_total[5m])), 0.001)", "legendFormat": "{{service}}"}]},
     {"id": 5, "type": "timeseries", "title": "Conexiones activas", "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16}, "targets": [{"refId": "A", "expr": "sum by (service) (active_connections)", "legendFormat": "{{service}}"}]}
   ]
 }

@@ -12,7 +12,14 @@ experiments/paso8/resultados/ (distinto de resultados-reales/) y el resumen
 docs/experimentos/resultados/resumen.json.
 
 No duplica CSV/TSV ya cubiertos en otro lado: solo indexa .json, .headers,
-.txt y .svg dentro de los directorios objetivo.
+.txt, .svg y .png dentro de los directorios objetivo (los CSV de
+docs/evidencias/punto17-observabilidad-gateway/ ya quedan cubiertos por
+check_data_checksums.py, que inventaria .csv/.tsv en todo el repo).
+
+.png se agrego porque ningun verificador del repo cubria capturas de
+pantalla: las de docs/evidencias/punto17-observabilidad-gateway/ son la
+evidencia central de ese cierre (los 5 paneles del dashboard con datos
+reales) y podian alterarse sin que nada lo detectara.
 """
 from __future__ import annotations
 
@@ -21,7 +28,7 @@ import hashlib
 from pathlib import Path
 import re
 
-EXTENSIONS = {".json", ".headers", ".txt", ".svg"}
+EXTENSIONS = {".json", ".headers", ".txt", ".svg", ".png"}
 DEFAULT_MANIFEST = "docs/experimentos/resultados/checksums-evidencia-adicional.sha256"
 
 
@@ -30,6 +37,7 @@ def default_targets(root: Path) -> list[Path]:
         root / "docs/experimentos/resultados/iso25010/2026-09-04T08-44-12",
         root / "experiments/paso7/evidence",
         root / "experiments/paso8/resultados",
+        root / "docs/evidencias/punto17-observabilidad-gateway",
     ]
 
 

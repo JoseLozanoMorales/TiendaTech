@@ -1,6 +1,6 @@
 # Cierre — Punto 17 (Observabilidad: métricas del Gateway)
 
-- Fecha: 2026-09-15
+- Fecha: 2026-09-15 (implementación) / 2026-09-17 (evidencia final de los 5 paneles)
 - Objetivo: completar la instrumentación de observabilidad extendiéndola al
   API Gateway (`Apps/web/frontend`), que hasta ahora quedaba fuera del
   scraping de Prometheus — cerrando además el hallazgo ya documentado en
@@ -80,57 +80,89 @@ salieron a la luz solo al intentar levantar y usar el sistema real—:
   -HostUrl http://localhost:8180 -Users 400 -SpawnRate 50 -RunTime 90s`,
   deliberadamente muy por encima de los 300 req/60s del rate limiter del
   Gateway, para forzar `429` reales en vez de dejar el panel de errores
-  vacío): **28,787 peticiones**, **28,187** con `429` (fila `Aggregated` de
-  `tiendatech-50-users_stats.csv`, cifra corregida: una versión anterior de
-  este documento citaba 28,803/28,203, un desfase de 16 frente al conteo
-  final del CSV, probablemente leído del panel en vivo de Locust en vez del
-  archivo ya cerrado). Copia versionada en
-  `docs/evidencias/punto17-observabilidad-gateway/tiendatech-50-users_stats.csv`,
-  `_failures.csv`, `_exceptions.csv` (0 excepciones) — **no** en
-  `tests/load/results/`, donde ese mismo nombre de archivo se reutiliza para
-  cada corrida nueva del escenario público de 50 usuarios y ya fue
-  sobrescrito por corridas posteriores no relacionadas con este cierre (ver
-  la nota sobre nombres reutilizados en `tests/load/README.md`). Ningún
-  fallo `5xx`.
+  vacío): **33,006 peticiones**, **3,812** con `429` (fila `Aggregated` de
+  `tiendatech-400-users_stats.csv`), repartidas entre `GET /api/categorias`
+  (774), `GET /api/marcas` (734), `GET /api/productos` (1,912) y
+  `GET /api/provincias` (392); **0 excepciones internas** de Locust
+  (`tiendatech-400-users_exceptions.csv` vacío). Copia versionada completa
+  en `docs/evidencias/punto17-observabilidad-gateway/` con el nombre real
+  del escenario (`tiendatech-400-users_stats.csv`, `_failures.csv`,
+  `_exceptions.csv`, `_stats_history.csv`) — corrige el nombre engañoso
+  `tiendatech-50-users_*` que citaba una versión anterior de este
+  documento (el escenario siempre corrió con 400 usuarios, nunca con 50;
+  los archivos originales con ese nombre quedan pendientes de archivar o
+  borrar, ver Pendiente). `--csv-full-history` se agregó a
+  `run-load-test.ps1` para que esta corrida sí incluya
+  `_stats_history.csv` (73,802 bytes, serie temporal completa), algo que
+  ninguna corrida anterior de este cierre tenía.
 - **Captura real del dashboard**
   (`docs/evidencias/punto17-observabilidad-gateway/dashboard-gateway-carga.png`,
-  rango `Last 15 minutes` tomado justo después de la corrida): se observa el
-  pico real de ~380 req/s en "Solicitudes por segundo" coincidiendo con la
-  ventana de la prueba, y —a diferencia de la captura de
-  `paso10-item5-grafana-carga.md`— el panel **"Tasa de errores HTTP 4xx"**
-  ya no se queda en 0/"No data": pasa a una línea sostenida cercana a 1
-  durante toda la ventana de sobrecarga, cayendo a 0 en cuanto termina. En
-  esta corrida el panel "5xx" quedó en "No data" — el rate limiter protege
-  devolviendo `429`, nunca `500`, así que no hay ningún 5xx real que este
-  tráfico en particular pueda mostrar (ver siguiente sección).
+  de una corrida previa, `Last 15 minutes` tomado justo después de la
+  corrida): se observa el pico real de ~380 req/s en "Solicitudes por
+  segundo" coincidiendo con la ventana de la prueba, y —a diferencia de la
+  captura de `paso10-item5-grafana-carga.md`— el panel **"Tasa de errores
+  HTTP 4xx"** ya no se queda en 0/"No data". Esta captura por sí sola no
+  cubre el panel 5xx (ver siguiente sección para la evidencia completa de
+  los 5 paneles).
 
 ## Los cinco paneles con datos: generando un 5xx real
 
 La observación del docente sobre este punto fue literal: los cinco paneles
 del dashboard (`Solicitudes por segundo`, `Latencia P50/P95/P99`, `4xx`,
 `5xx`, `Conexiones activas`) deben mostrar series con datos, no solo
-"cobertura de instrumentación". Con la corrida de carga anterior, 4 de 5
-paneles ya tenían datos reales, pero **"Tasa de errores HTTP 5xx" seguía en
-"No data"** — el rate limiter, funcionando correctamente, nunca deja pasar
-tráfico suficiente para que un backend real falle con un `5xx` genuino.
+"cobertura de instrumentación". Cerrar esto realmente tomó tres
+correcciones encadenadas, cada una descubierta al intentar generar la
+evidencia real (no en revisión de código):
 
-En vez de fabricar un error falso, se usó un mecanismo de inyección de
-fallos **ya existente y documentado en el propio código** del proyecto
+**1) El panel 4xx parecía plano en cada intento anterior por un problema de
+unidad del eje, no por falta de datos.** La consulta PromQL de los paneles
+4xx/5xx devuelve una fracción entre 0 y 1 (`rate(...status=~"4.."...) /
+rate(...total...)`), pero los paneles no tenían `fieldConfig.unit`
+configurado — Grafana escalaba el eje Y por defecto a un rango donde
+valores reales pero pequeños (máximo observado ~0.11) quedaban pegados
+visualmente al cero. Esto explica por qué el panel 4xx aparecía "vacío" en
+capturas anteriores de todo este proyecto (incluida la de
+`paso10-item5-grafana-carga.md`) aun cuando el `429` real sí estaba
+llegando al Gateway. Corregido agregando
+`"fieldConfig": {"defaults": {"unit": "percentunit", "min": 0}}` a los
+paneles 3 y 4 de `ops/observability/grafana-dashboard.json` (el dashboard
+está provisionado como código —`allowUiUpdates: false`,
+`updateIntervalSeconds: 30`— así que este archivo es la única fuente del
+panel; no hay forma de que haya quedado un dashboard diferente editado a
+mano en la UI).
+
+**2) Un solo checkout con fallo inyectado no bastaba: la ventana deslizante
+de `rate(...[5m])` diluye un evento aislado a casi cero.** El panel 5xx usa
+una ventana de 5 minutos; un único `500`/`504` real generado y luego
+capturado varios minutos después ya no aparecía en el `rate()`. Se necesitan
+varios eventos repartidos dentro de la ventana de captura, no uno solo.
+
+**3) Preparar las cuentas de prueba mientras la carga de 400 usuarios ya
+está saturando el rate limiter provoca que la propia preparación (crear
+cuenta, dirección, método de pago) choque contra el mismo límite que se
+está forzando a propósito.** Se reestructuró `generar-5xx-real.ps1` (raíz
+del repo) en dos fases separables: `-Fase Preparar` crea varias cuentas de
+prueba completas (usuario, login, dirección, método de pago, producto en
+carrito) **antes** de arrancar la carga, cuando el limiter está tranquilo;
+`-Fase Disparar` solo dispara el checkout con `X-Failure-Mode: omission`
+para cada cuenta ya preparada, y es la única parte que necesita solaparse
+en el tiempo con la prueba de carga.
+
+Con esas tres correcciones, se usó el mecanismo de inyección de fallos
+**ya existente y documentado en el propio código** del proyecto
 (`ExperimentFaultInjector`, en `ventas-service`, activado vía el header
 `X-Failure-Mode` y la variable `EXPERIMENT_FAULT_INJECTION_ENABLED`,
-desactivada por defecto en todos los servicios): con el modo `omission`, el
-checkout crea la orden normalmente pero, al facturarla contra
-`ventas-service` como parte del flujo real de coordinación 2PC, ese
-servicio duerme 9 segundos y lanza un error que se propaga como `5xx` real
-hacia el llamador. Es una ruta de código genuina del sistema, pensada
-exactamente para pruebas de resiliencia/observabilidad — no una
-simulación añadida para esta evidencia.
-
-Se escribió `generar-5xx-real.ps1` (raíz del repo) para automatizar el
-flujo completo contra el sistema real: habilita la bandera solo para
-`ventas-service`, registra una cuenta de prueba desde cero, crea una
-dirección y un método de pago reales, agrega un producto real al carrito,
-y hace el checkout con `X-Failure-Mode: omission`.
+desactivada por defecto en todos los servicios). Revisando el código fuente
+(`ExperimentFaultInjector.java`), el modo `omission` duerme 9 segundos y
+luego lanza `new ResponseStatusException(HttpStatus.GATEWAY_TIMEOUT, ...)`
+— es decir, un **504** a nivel de código fuente, no un 500 codificado a
+mano; corrige la afirmación de una versión anterior de este documento
+("checkout devolvió un 500 genuino"), que no había leído el código del
+inyector. Sea cual sea el código exacto que termina viendo cada llamador
+según cómo se propague por la cadena de coordinación del checkout, cae
+dentro del rango `5xx` (`status=~"5.."`) que mide el panel — es un fallo
+real del sistema, generado por una ruta de código genuina pensada para
+pruebas de resiliencia, no una simulación añadida para esta evidencia.
 
 **Hallazgo aparte, real, encontrado al ejecutar este flujo por primera vez
 contra un clúster migrado solo con Flyway (post punto 5):** ni el catálogo
@@ -151,14 +183,45 @@ seed existentes más el `INSERT` de inventario manualmente contra el
 clúster local para destrabar la prueba; no se automatizó como parte de
 este cierre (ver Pendiente).
 
-Con los catálogos poblados, `generar-5xx-real.ps1` completó el flujo
-real y el checkout devolvió un **`500` genuino**. Captura final
-(`docs/evidencias/punto17-observabilidad-gateway/dashboard-gateway-5xx-real.png`,
-`Last 30 minutes`): los cinco paneles muestran series con datos, incluido
-**"Tasa de errores HTTP 5xx"** con una serie real subiendo a ~0.03 para
-`tiendatech-gateway`, `tiendatech-pedidos` y `tiendatech-ventas` —
-exactamente el fallo real propagándose por los tres servicios que
-participan en el checkout.
+Con las tres correcciones aplicadas (`percentunit`, fase Preparar/Disparar,
+varias repeticiones dentro de la ventana de captura) se corrió
+`-Fase Preparar -Repeticiones 5` antes de arrancar la carga de 400
+usuarios, y luego, con la carga ya corriendo, `-Fase Disparar
+-OmitirReinicio`: de las 5 cuentas preparadas, 4 dispararon un `5xx` real
+del checkout con fallo inyectado y 1 chocó contra el rate limiter
+(`429`) — ambos son resultados válidos para este experimento, ninguno es
+un error del script.
+
+**Capturas finales, verificadas por inspección directa de la imagen (no
+solo por lo que dice este documento), rango `Last 15 minutes`, ventana
+~11:37–11:51:**
+
+- `dashboard-gateway-trafico-latencia.png`: `Solicitudes por segundo`
+  muestra el pico real de ~400 req/s en doble ráfaga; `Latencia
+  P50/P95/P99` muestra latencia elevada real hacia el final de la ventana
+  (consistente con el rate limiter encolando/reintentando bajo saturación
+  deliberada); `4xx` y `5xx` con series reales, no planas.
+- `dashboard-gateway-5xx-real.png`: `4xx`, `5xx` y `Conexiones activas`
+  juntos. **`5xx` muestra series reales subiendo a ~6–7% para
+  `tiendatech-pedidos` y `tiendatech-ventas`** — los dos servicios que
+  participan directamente en la coordinación del checkout con fallo
+  inyectado. `tiendatech-gateway` se mantiene cerca de 0% en este panel:
+  no porque no haya fallos pasando por él, sino porque su tráfico total
+  (dominado por las ~33,000 peticiones GET públicas de la carga de 400
+  usuarios) hace que los pocos `5xx` de checkout sean una fracción
+  minúscula del total — a diferencia de pedidos/ventas, donde el
+  denominador (solo tráfico de checkout) es mucho menor y el mismo puñado
+  de fallos reales sí se nota como fracción. Esto corrige la afirmación de
+  una versión anterior de este documento de que las tres series (gateway,
+  pedidos, ventas) subían juntas a "~0.03" — no es así: cada servicio tiene
+  una base de tráfico distinta y el gateway, al tener la mayor, diluye el
+  mismo fallo real a un valor visualmente cercano a cero, lo cual es
+  correcto y esperable, no un defecto. `Conexiones activas` muestra un
+  pico real de ~60 para `tiendatech-gateway` alrededor de las 11:44:30,
+  coincidiendo con la ventana de carga.
+
+Entre las dos capturas quedan documentados, con datos reales y
+simultáneos, los cinco paneles del dashboard.
 
 ## Conclusión
 
@@ -167,11 +230,14 @@ Java: expone sus propias métricas, Prometheus lo scrapea, y sus respuestas
 `429` del rate limiter —que antes eran invisibles para el dashboard— ahora
 se reflejan con datos reales. Esto completa el hallazgo dejado pendiente en
 `paso10-item5-grafana-carga.md` ("esto también explica por qué los paneles
-Tasa de errores HTTP 4xx/5xx de Grafana se mantuvieron en 0"): ya no es un
-comportamiento invisible, es visible y medible. Y, cumpliendo la
-observación literal del docente, los **cinco** paneles del dashboard
-—no solo los tres que ya funcionaban antes— muestran series con datos
-reales, verificables en `dashboard-gateway-5xx-real.png`.
+Tasa de errores HTTP 4xx/5xx de Grafana se mantuvieron en 0"): la causa real
+combinaba dos problemas —el `429` nunca llegaba a los microservicios
+scrapeados, y por separado, el eje del panel 4xx no tenía la unidad
+correcta para mostrar fracciones pequeñas— y ambos quedan corregidos y
+documentados aquí. Cumpliendo la observación literal del docente, los
+**cinco** paneles del dashboard muestran series con datos reales,
+verificables en `dashboard-gateway-trafico-latencia.png` y
+`dashboard-gateway-5xx-real.png`.
 
 ## Pendiente
 
@@ -180,9 +246,26 @@ reales, verificables en `dashboard-gateway-5xx-real.png`.
   punto 2 de sus pendientes) — no bloquea este cierre, sigue siendo
   relevante si el equipo escala el Gateway a más de una instancia.
 - No se investigó a fondo la causa exacta de la latencia máxima elevada
-  (hasta ~13s) observada en algunas peticiones durante el pico de 400
-  usuarios concurrentes — es consistente con la saturación deliberada del
-  rate limiter (peticiones encoladas/reintentadas), no con una regresión de
-  los microservicios, pero queda como posible hallazgo a revisar si el
-  equipo hace una prueba de carga por debajo del límite del rate limiter
-  (ver también `#14`, pruebas de carga, en curso por otro integrante).
+  observada en algunas peticiones durante el pico de 400 usuarios
+  concurrentes — es consistente con la saturación deliberada del rate
+  limiter (peticiones encoladas/reintentadas), no con una regresión de los
+  microservicios, pero queda como posible hallazgo a revisar si el equipo
+  hace una prueba de carga por debajo del límite del rate limiter (ver
+  también `#14`, pruebas de carga, en curso por otro integrante).
+- No se confirmó con una captura de red/log de bajo nivel qué código HTTP
+  exacto ve el llamador final del checkout con fallo inyectado (el código
+  fuente del inyector lanza `504`, pero la cadena de coordinación del
+  checkout podría re-envolver ese error antes de que llegue al cliente).
+  No cambia la validez de la evidencia del panel 5xx (que agrupa todo el
+  rango `5xx`), pero queda como afirmación exacta sin verificar si se
+  necesitara citar un código HTTP específico en el manuscrito.
+- Los archivos `tiendatech-50-users_stats.csv`, `_failures.csv` y
+  `_exceptions.csv` originales (evidencia de una corrida anterior del
+  panel 4xx, con nombre engañoso — el escenario real siempre fue de 400
+  usuarios) siguen físicamente junto a los nuevos `tiendatech-400-users_*`
+  en esta misma carpeta, porque este cierre no tuvo forma de mover ni
+  borrar archivos en la máquina de Jhinson al momento de escribir esto
+  (sin acceso a una terminal en su equipo desde esta sesión). Quedan como
+  tarea manual pendiente: mover esos tres archivos a una subcarpeta
+  `obsoletos-50-users/` o borrarlos, ya que la evidencia vigente de este
+  cierre es exclusivamente la de `tiendatech-400-users_*`.
