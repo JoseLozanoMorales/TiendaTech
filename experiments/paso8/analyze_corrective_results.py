@@ -55,8 +55,14 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
+    # lineterminator explicito: csv.DictWriter usa '\r\n' por defecto (RFC 4180),
+    # lo que en Windows se suma a newline="" (que ya deja pasar '\r\n' sin
+    # traducir) y produce CRLF real en disco -- git lo normaliza a LF recien al
+    # hacer `git add`, asi que hasta ese momento el archivo en disco no coincide
+    # con lo versionado. Forzar '\n' aqui hace que la salida sea LF desde que se
+    # escribe, sin depender del filtro de git.
     with path.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(fh, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -295,7 +301,10 @@ def write_boxplot_svg(
     parts.append(f'<rect x="{width-250}" y="18" width="14" height="14" fill="#4e79a7"/><text x="{width-230}" y="30" font-family="Arial" font-size="13">2PC</text>')
     parts.append(f'<rect x="{width-170}" y="18" width="14" height="14" fill="#f28e2b"/><text x="{width-150}" y="30" font-family="Arial" font-size="13">Saga</text>')
     parts.append('</svg>')
-    path.write_text("\n".join(parts) + "\n", encoding="utf-8")
+    # newline="\n" desactiva la traduccion universal-newlines: sin esto,
+    # Path.write_text en Windows convierte cada '\n' a os.linesep ('\r\n'),
+    # igual que el bug de write_csv de arriba.
+    path.write_text("\n".join(parts) + "\n", encoding="utf-8", newline="\n")
 
 
 def main() -> int:
