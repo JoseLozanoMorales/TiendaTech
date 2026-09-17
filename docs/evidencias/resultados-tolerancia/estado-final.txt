@@ -1,4 +1,4 @@
-﻿id	address	sql_address	build	started_at	updated_at	locality	is_available	is_live
+id	address	sql_address	build	started_at	updated_at	locality	is_available	is_live
 1	crdb-1:26257	crdb-1:26257	v23.2.4	2026-07-28 06:28:41.385819 +0000 UTC	2026-07-28 06:35:29.04741 +0000 UTC	region=local,zone=z1	true	true
 2	crdb-2:26257	crdb-2:26257	v23.2.4	2026-07-28 06:35:16.38186 +0000 UTC	2026-07-28 06:35:27.284855 +0000 UTC	region=local,zone=z2	true	true
 3	crdb-3:26257	crdb-3:26257	v23.2.4	2026-07-28 06:35:16.71299 +0000 UTC	2026-07-28 06:35:27.608435 +0000 UTC	region=local,zone=z3	true	true

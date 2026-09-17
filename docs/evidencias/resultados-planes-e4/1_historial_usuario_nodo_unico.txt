@@ -1,4 +1,4 @@
-﻿info
+info
 planning time: 973┬Ás
 execution time: 3ms
 distribution: local

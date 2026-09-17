@@ -1,4 +1,4 @@
-﻿info
+info
 planning time: 3ms
 execution time: 1.1s
 distribution: full

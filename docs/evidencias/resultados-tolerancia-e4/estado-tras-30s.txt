@@ -1,4 +1,4 @@
-﻿id	address	sql_address	build	started_at	updated_at	locality	is_available	is_live
+id	address	sql_address	build	started_at	updated_at	locality	is_available	is_live
 1	tiendatech-crdb-1:26257	tiendatech-crdb-1:26257	v23.2.4	2026-09-01 06:40:27.553685 +0000 UTC	2026-09-01 07:15:34.113542 +0000 UTC	region=aws,zone=z1	true	true
 2	tiendatech-crdb-2:26257	tiendatech-crdb-2:26257	v23.2.4	2026-09-01 06:40:27.519426 +0000 UTC	2026-09-01 07:15:05.17098 +0000 UTC	region=aws,zone=z2	false	false
 3	tiendatech-crdb-3:26257	tiendatech-crdb-3:26257	v23.2.4	2026-09-01 06:40:27.512794 +0000 UTC	2026-09-01 07:15:34.109518 +0000 UTC	region=aws,zone=z3	true	true
