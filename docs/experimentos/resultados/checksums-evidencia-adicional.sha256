@@ -12,6 +12,7 @@
 714289b9633611695306d3c33e2cd707cfcea3334794d252a498dde2d7e489b7  experiments/paso8/resultados/boxplot_latencia_p95.svg
 75ac90d525c1ac957ab3f7cab68663b55be135defd9e6f459559d9a8bb3b390a  docs/experimentos/resultados/iso25010/2026-09-04T08-44-12/trace/add-product-valid.headers
 87ed1e37366b43c4301f6d2ce7c6513e2e82af61b0c9b00afde70b9277c8bd0a  experiments/paso7/evidence/oracle-2pc.json
+8b27078a457cc158331a8171d2d3bd86c126a429b604ad5097d66a4ef416f9d1  docs/evidencias/punto17-observabilidad-gateway/disparos-5xx-real.json
 9848ba588a998bd7f0bba754441c4059e0010aea8a6a1432d43dbef83bb7018d  docs/evidencias/punto17-observabilidad-gateway/dashboard-gateway-5xx-real.png
 a01eb3619cf632443bc8575d82bacb2a436fb53cbd291b460a7a9f9f512249c4  docs/evidencias/punto17-observabilidad-gateway/dashboard-gateway-trafico-latencia.png
 abe7039b0df301d5bb9e693f8592d7aeb76827dbce2efebf33e82f2adba4ef55  docs/experimentos/resultados/iso25010/2026-09-04T08-44-12/trace/cart.json

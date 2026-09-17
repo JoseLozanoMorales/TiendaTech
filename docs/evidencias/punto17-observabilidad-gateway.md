@@ -217,6 +217,32 @@ del checkout con fallo inyectado y 1 chocó contra el rate limiter
 (`429`) — ambos son resultados válidos para este experimento, ninguno es
 un error del script.
 
+**Dato crudo del experimento (no solo el PNG).** La corrida citada arriba
+(4 reales de 5, 1 con `429`) solo quedó documentada con capturas de
+Grafana, sin registro por-intento — el gap exacto que señaló el docente
+("de la corrida 5xx no hay ningún dato crudo, solo el PNG"). Con
+`generar-5xx-real.ps1` ya corregido para grabar cada intento, se repitió
+el experimento (`-Fase Preparar -Repeticiones 5` seguido de `-Fase
+Disparar -OmitirReinicio`, esta vez sin la carga de 400 usuarios corriendo
+en paralelo) y quedó el registro crudo en
+[`disparos-5xx-real.json`](./punto17-observabilidad-gateway/disparos-5xx-real.json):
+5 de 5 intentos devolvieron `statusCode: 500` real, con `timestampUtc` y
+`duracionSegundos` (~11–12s, consistentes con el `sleep(9s)` del
+inyector más la latencia real de red y checkout; un intento con 3s
+corresponde a un fallo más temprano en la cadena, antes de completar el
+`sleep`). Es una repetición del mismo experimento y mecanismo de fallo
+(`ExperimentFaultInjector`, `X-Failure-Mode: omission`), no la misma
+corrida exacta que generó las capturas de Grafana citadas arriba (esas
+capturas siguen siendo la evidencia visual del panel de Grafana en la
+ventana ~11:37–11:51; este JSON es la evidencia cruda, por-intento, del
+mecanismo de fallo en sí). Esto también resuelve la pregunta que había
+quedado abierta sobre el código HTTP exacto observado por el cliente:
+el código fuente del inyector lanza `504` (`GATEWAY_TIMEOUT`), pero las 5
+respuestas reales observadas por el cliente (PowerShell
+`Invoke-RestMethod`) en esta corrida fueron `500` — confirma que la
+cadena de coordinación del checkout re-envuelve el `504` original en un
+`500` genérico antes de que llegue al llamador.
+
 **Capturas finales, verificadas por inspección directa de la imagen (no
 solo por lo que dice este documento), rango `Last 15 minutes`, ventana
 ~11:37–11:51:**
@@ -307,13 +333,6 @@ Corrida real en IntelliJ (JUnit 6), no simulada.
   microservicios, pero queda como posible hallazgo a revisar si el equipo
   hace una prueba de carga por debajo del límite del rate limiter (ver
   también `#14`, pruebas de carga, en curso por otro integrante).
-- No se confirmó con una captura de red/log de bajo nivel qué código HTTP
-  exacto ve el llamador final del checkout con fallo inyectado (el código
-  fuente del inyector lanza `504`, pero la cadena de coordinación del
-  checkout podría re-envolver ese error antes de que llegue al cliente).
-  No cambia la validez de la evidencia del panel 5xx (que agrupa todo el
-  rango `5xx`), pero queda como afirmación exacta sin verificar si se
-  necesitara citar un código HTTP específico en el manuscrito.
 - Los archivos `tiendatech-50-users_stats.csv`, `_failures.csv` y
   `_exceptions.csv` originales (evidencia de una corrida anterior del
   panel 4xx, con nombre engañoso — el escenario real siempre fue de 400
@@ -326,12 +345,3 @@ Corrida real en IntelliJ (JUnit 6), no simulada.
   todo el tráfico al Gateway, así que en un despliegue real quedarían
   expuestos) — pendiente de decidir si se protege o se justifica
   explícitamente, ambas alternativas aceptadas por la guía del docente.
-- La corrida 5xx documentada arriba (4 reales de 5, 1 con `429`) todavía
-  solo tiene como evidencia las capturas de Grafana — el docente señaló
-  que "de la corrida 5xx no hay ningún dato crudo, solo el PNG".
-  `generar-5xx-real.ps1` ya se corrigió para guardar un JSON con cada
-  intento (`usuarioId`, código de respuesta real, `resultado`,
-  duración) en `disparos-5xx-real.json`, pero ese archivo no existe
-  todavía para la corrida ya documentada — falta decidir si se repite la
-  corrida (ahora sí quedaría también con dato crudo) o si se acepta la
-  captura de pantalla como única evidencia de esta corrida en particular.

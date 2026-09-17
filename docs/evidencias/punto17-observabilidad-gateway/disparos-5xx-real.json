@@ -1,0 +1,42 @@
+﻿[
+    {
+        "usuarioId":  168,
+        "timestampUtc":  "2026-09-17T21:49:00.8416827Z",
+        "statusCode":  500,
+        "resultado":  "5xx-real",
+        "mensaje":  null,
+        "duracionSegundos":  11.3
+    },
+    {
+        "usuarioId":  169,
+        "timestampUtc":  "2026-09-17T21:49:15.2448009Z",
+        "statusCode":  500,
+        "resultado":  "5xx-real",
+        "mensaje":  null,
+        "duracionSegundos":  11.5
+    },
+    {
+        "usuarioId":  170,
+        "timestampUtc":  "2026-09-17T21:49:29.7282118Z",
+        "statusCode":  500,
+        "resultado":  "5xx-real",
+        "mensaje":  null,
+        "duracionSegundos":  12
+    },
+    {
+        "usuarioId":  171,
+        "timestampUtc":  "2026-09-17T21:49:44.7363495Z",
+        "statusCode":  500,
+        "resultado":  "5xx-real",
+        "mensaje":  null,
+        "duracionSegundos":  3
+    },
+    {
+        "usuarioId":  172,
+        "timestampUtc":  "2026-09-17T21:49:50.7234347Z",
+        "statusCode":  500,
+        "resultado":  "5xx-real",
+        "mensaje":  null,
+        "duracionSegundos":  12
+    }
+]
