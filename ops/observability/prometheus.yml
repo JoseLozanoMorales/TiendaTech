@@ -13,8 +13,20 @@ scrape_configs:
           - tiendatech-ordenes-proveedores:8084
           - tiendatech-usuarios:8085
           - tiendatech-ventas:8086
-          - tiendatech-gateway:8080
   - job_name: tiendatech-armado-ia
     metrics_path: /metrics
     static_configs:
       - targets: [tiendatech-armado-ia:8087]
+  # Punto 17 de la guia de cierre: /metrics del Gateway ahora exige el token
+  # de observabilidad (ver JwtGatewayFilter y OBSERVABILITY_TOKEN en
+  # docker-compose.yml), a diferencia de los 6 microservicios de arriba, que
+  # no estan expuestos por el Gateway y no lo requieren. Job separado para
+  # poder mandar el bearer_token solo a este target.
+  # Este archivo no soporta sustitucion de variables de entorno: si se
+  # cambia OBSERVABILITY_TOKEN en docker-compose.yml para un despliegue
+  # real, este valor debe actualizarse a mano para que coincida.
+  - job_name: tiendatech-gateway
+    metrics_path: /metrics
+    bearer_token: TiendaTechObservabilidadToken2026Seguro
+    static_configs:
+      - targets: [tiendatech-gateway:8080]

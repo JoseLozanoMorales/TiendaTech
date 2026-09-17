@@ -38,6 +38,14 @@ tiendatech:
         - /api/ciudades/**
       protected-paths:
         - /api/**
+    observability:
+      # Punto 17 de la guia de cierre: /metrics y /health quedaban expuestos
+      # sin autenticacion porque JwtGatewayFilter solo protege /api/**. Token
+      # estatico separado del JWT de usuario (el scraper de Prometheus y el
+      # healthcheck de Docker no tienen sesion de usuario), mismo patron que
+      # AUTH_JWT_SECRET: valor por defecto versionado, sobrescribible por
+      # variable de entorno en un despliegue real.
+      token: ${OBSERVABILITY_TOKEN:TiendaTechObservabilidadToken2026Seguro}
 
 management:
   endpoints:

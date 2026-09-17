@@ -83,8 +83,10 @@ salieron a la luz solo al intentar levantar y usar el sistema real—:
 - **Contenedor**: `tiendatech-gateway` pasa a `healthy` tras el fix del
   healthcheck (`docker ps` confirmado).
 - **Prometheus**: `Status > Target health` muestra `tiendatech-gateway:8080`
-  `UP` dentro del job `tiendatech-java-services` (7/7 up), junto a los 6
-  microservicios y `tiendatech-armado-ia`.
+  `UP` (en ese momento todavía dentro del job `tiendatech-java-services`,
+  junto a los 6 microservicios y `tiendatech-armado-ia`, 7/7 up en total;
+  más adelante, al proteger `/metrics` con un token — ver "Protección real
+  de /metrics y /health" — el Gateway se separó a su propio job).
 - **Prueba de carga real** contra el Gateway (`tests/load/run-load-test.ps1
   -HostUrl http://localhost:8180 -Users 400 -SpawnRate 50 -RunTime 90s`,
   deliberadamente muy por encima de los 300 req/60s del rate limiter del
@@ -320,6 +322,67 @@ response.getStatus();` → `int status = 200;`):
 
 Corrida real en IntelliJ (JUnit 6), no simulada.
 
+## Protección real de /metrics y /health
+
+El docente señaló que `/metrics` y `/health` del Gateway quedaban expuestos
+sin ninguna autenticación: `JwtGatewayFilter` solo protege `/api/**`
+(`protectedPaths`), y como ninguna de esas dos rutas coincide con
+`publicPaths` ni con `protectedPaths`, `doFilterInternal` las dejaba pasar
+de largo sin ningún chequeo (`isPublic(request) || !isProtected(request)`
+es verdadero para ambas). Con `deploy/Caddyfile` reenviando todo el
+tráfico al Gateway, en un despliegue real esas dos rutas —incluyendo el
+detalle completo de `/health` (`show-details: always`) y todas las
+métricas Prometheus del sistema— quedarían accesibles a cualquiera en
+internet.
+
+Se corrigió con un token de observabilidad estático, separado del JWT de
+usuario (el scraper de Prometheus y el healthcheck de Docker no tienen
+sesión de usuario, así que un JWT no es el mecanismo correcto):
+
+- **`JwtGatewayFilter.java`**: nuevo chequeo al inicio de
+  `doFilterInternal`, antes de la lógica existente de rutas
+  públicas/protegidas, que exige `Authorization: Bearer <token>` para
+  `/metrics` y `/health` (comparación con `MessageDigest.isEqual`, no con
+  `.equals()`, para evitar una fuga de tiempo). No toca ni reemplaza la
+  autenticación JWT de `/api/**`.
+- **`application.yml`**: nueva propiedad
+  `tiendatech.security.observability.token`, mismo patrón que
+  `AUTH_JWT_SECRET` (valor por defecto versionado, sobrescribible por
+  variable de entorno en un despliegue real).
+- **`JwtGatewayFilterTest.java`**: 4 pruebas nuevas — rechaza `/metrics`
+  sin token, rechaza `/health` con token incorrecto, acepta ambas rutas
+  con el token correcto, y confirma que el token de observabilidad no
+  sirve como credencial de usuario en `/api/**` (evita que alguien con el
+  token de scraping intente colarlo como si fuera un JWT). Las 6 pruebas
+  ya existentes de esta clase se mantienen intactas y en verde.
+- **`docker-compose.yml`**: nueva variable `OBSERVABILITY_TOKEN`, y el
+  healthcheck del Gateway pasó de `CMD` (array, sin shell) a `CMD-SHELL`
+  para poder expandir `$OBSERVABILITY_TOKEN` y mandar el header.
+- **`ops/observability/prometheus.yml`**: `tiendatech-gateway` se separó
+  del job `tiendatech-java-services` a su propio job `tiendatech-gateway`
+  con `bearer_token`, sin tocar el job de los otros 6 microservicios (que
+  no están expuestos por el Gateway y no requieren este token). Confirmado
+  contra `grafana-dashboard.json` que ningún panel filtra por el label
+  `job` de Prometheus (todos filtran por `service`, que viene del tag de
+  la métrica), así que separar el job no afecta el dashboard.
+
+**Verificación real, no solo revisión de código** (`docker compose build
+tiendatech-gateway` + `up -d --force-recreate` del Gateway y de
+Prometheus):
+
+- Suite completa del módulo `frontend` en IntelliJ (incluye una prueba de
+  integración con contexto real de Spring Boot): verde, exit code 0, sin
+  regresiones.
+- `tiendatech-gateway` y `tiendatech-prometheus` llegan a `healthy`/`Up`
+  (`docker ps`), confirmando que el propio healthcheck del contenedor ya
+  manda el token correctamente.
+- `curl`/`Invoke-WebRequest` reales contra `http://localhost:8180`:
+  `/metrics` sin token → `401`; `/metrics` con el token correcto → `200`;
+  `/health` sin token → `401`; `/health` con el token correcto → `200`.
+- Prometheus (`Status > Target health`): 8/8 targets `UP`, incluido
+  `tiendatech-gateway` en su propio job — el scraping real sigue
+  funcionando con el token.
+
 ## Pendiente
 
 - El rate limiter del Gateway sigue siendo de un solo proceso, sin estado
@@ -340,8 +403,11 @@ Corrida real en IntelliJ (JUnit 6), no simulada.
   `docs/evidencias/punto17-observabilidad-gateway/obsoletos-50-users/`
   como referencia histórica; la evidencia vigente de este cierre es
   exclusivamente la de `tiendatech-400-users_*`.
-- `/metrics` y `/health` del Gateway quedan sin protección JWT (el
-  `JwtGatewayFilter` solo protege `/api/**`, y `deploy/Caddyfile` reenvía
-  todo el tráfico al Gateway, así que en un despliegue real quedarían
-  expuestos) — pendiente de decidir si se protege o se justifica
-  explícitamente, ambas alternativas aceptadas por la guía del docente.
+- El token de observabilidad (ver sección anterior) es un valor por
+  defecto versionado en el repo, igual que `AUTH_JWT_SECRET` — suficiente
+  para este cierre y consistente con el manejo de secretos ya existente en
+  el proyecto, pero en un despliegue real de producción debería
+  sobrescribirse vía `OBSERVABILITY_TOKEN` y rotarse periódicamente; como
+  `ops/observability/prometheus.yml` no soporta sustitución de variables
+  de entorno, ese archivo tendría que actualizarse a mano si el token
+  cambia (documentado con un comentario en el propio archivo).

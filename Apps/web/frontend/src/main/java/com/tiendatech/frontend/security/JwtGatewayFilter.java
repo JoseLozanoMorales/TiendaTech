@@ -37,6 +37,8 @@ public class JwtGatewayFilter extends OncePerRequestFilter {
     private final List<String> publicPaths;
     private final List<String> publicReadPaths;
     private final List<String> protectedPaths;
+    private final List<String> observabilityPaths;
+    private final String observabilityToken;
 
     public JwtGatewayFilter(Environment environment) {
         String secret = environment.getRequiredProperty("tiendatech.security.jwt.secret");
@@ -73,6 +75,16 @@ public class JwtGatewayFilter extends OncePerRequestFilter {
                 environment,
                 "tiendatech.security.jwt.protected-paths",
                 List.of("/api/**"));
+        // Punto 17 de la guia de cierre: /metrics y /health no coinciden ni
+        // con publicPaths ni con protectedPaths, asi que doFilterInternal
+        // los dejaba pasar sin ningun chequeo. Requieren un token estatico
+        // propio (no un JWT de usuario: el scraper de Prometheus y el
+        // healthcheck de Docker no tienen sesion).
+        this.observabilityPaths = configuredOrDefault(
+                environment,
+                "tiendatech.security.observability.paths",
+                List.of("/metrics", "/metrics/**", "/health", "/health/**"));
+        this.observabilityToken = environment.getRequiredProperty("tiendatech.security.observability.token");
     }
 
     private List<String> configuredOrDefault(Environment environment, String key, List<String> fallback) {
@@ -86,6 +98,15 @@ public class JwtGatewayFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if (isObservability(request)) {
+            if (hasValidObservabilityToken(request)) {
+                filterChain.doFilter(request, response);
+            } else {
+                unauthorized(response, "Token de observabilidad requerido");
+            }
+            return;
+        }
+
         if (isPublic(request) || !isProtected(request)) {
             filterChain.doFilter(request, response);
             return;
@@ -131,6 +152,21 @@ public class JwtGatewayFilter extends OncePerRequestFilter {
     private boolean isProtected(HttpServletRequest request) {
         String path = request.getRequestURI();
         return protectedPaths.stream().anyMatch(pattern -> pathMatcher.match(pattern, path));
+    }
+
+    private boolean isObservability(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return observabilityPaths.stream().anyMatch(pattern -> pathMatcher.match(pattern, path));
+    }
+
+    private boolean hasValidObservabilityToken(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+        if (authorization == null || !authorization.startsWith(BEARER)) {
+            return false;
+        }
+        byte[] provided = authorization.substring(BEARER.length()).getBytes(StandardCharsets.UTF_8);
+        byte[] expected = observabilityToken.getBytes(StandardCharsets.UTF_8);
+        return java.security.MessageDigest.isEqual(provided, expected);
     }
 
     private String stringClaim(Claims claims, String name) {
