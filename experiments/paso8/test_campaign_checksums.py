@@ -81,6 +81,20 @@ class CampaignChecksumsTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify(self.root)
 
+    def test_md_covered_and_tampering_detected(self):
+        # informe_final.md contiene el veredicto narrativo de la campaña (ordenes
+        # persistidas, inconsistencias, resultado principal) -- debe quedar cubierto
+        # igual que validacion.json, no excluido por ser prosa en vez de JSON.
+        informe = self.root / 'analisis/informe_final.md'
+        informe.write_bytes(b'# Informe\n\nOrdenes persistidas: 43168\n')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+        write(self.root)
+        self.assertEqual(verify(self.root), 3)
+        informe.write_bytes(b'# Informe\n\nOrdenes persistidas: 999999\n')
+        with self.assertRaises(ValueError):
+            verify(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()
