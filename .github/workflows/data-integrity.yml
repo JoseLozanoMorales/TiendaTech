@@ -17,6 +17,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -36,3 +38,7 @@ jobs:
         run: python -m unittest discover -s scripts -p test_check_no_bom.py -v
       - name: Verificar ausencia de BOM UTF-8 en archivos versionados
         run: python scripts/check_no_bom.py
+      - name: Probar detección de reescrituras de checksum sin justificar
+        run: python -m unittest discover -s scripts -p test_check_checksum_rewrites.py -v
+      - name: Verificar que ninguna suma existente se reescribió sin justificación
+        run: python scripts/check_checksum_rewrites.py --base "${{ github.event.before || format('{0}^', github.sha) }}"
