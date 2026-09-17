@@ -1,9 +1,15 @@
 # Paquete Android instalable (E6)
 
-Desde el punto 37 (higiene del repositorio), los binarios ya no se versionan en
-esta carpeta: pesan demasiado para el árbol de git y se publican como adjuntos
-de la versión etiquetada `v4.0.0`. Solo quedan aquí los checksums, el
-certificado público y la documentación.
+Desde el punto 37 (higiene del repositorio), estos binarios dejaron de
+versionarse aquí: pesan demasiado para el árbol de git y se publican como
+adjuntos de la versión etiquetada `v4.0.0`. Excepción puntual desde el
+2026-09-17 (punto 42, S8.3 de la guía de evaluación: "todas las sumas deben
+pasar"): los dos `.apk` (73 MB en total) vuelven a versionarse en esta
+carpeta para que `sha256sum -c` verifique en un checkout limpio de git sin
+depender de descargar el adjunto de la release por separado. La publicación
+en la versión etiquetada sigue siendo el canal de distribución oficial; esta
+copia es solo para que el checksum sea verificable localmente. Ver
+`.gitignore` para el detalle de la excepción.
 
 El [APK release](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk)
 está firmado por José y tiene [checksum](tiendatech-release.apk.sha256)

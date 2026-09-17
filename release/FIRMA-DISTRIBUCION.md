@@ -2,7 +2,7 @@
 
 Estado actual: **clave de José creada y APK release firmado y verificado localmente**. Certificado `CN=Jose Alejandro Lozano Morales`, RSA de 3072 bits; firma APK v2 válida y certificado del APK idéntico al exportado de su almacén. El APK no es depurable. Fecha local: 12 de septiembre de 2026.
 
-- Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) (ya no se versiona en `release/`; ver punto 37).
+- Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) (tambien versionado en `release/` desde 2026-09-17, excepcion puntual del punto 42 SS8.3; ver punto 37 y `.gitignore`).
 - Checksum: [tiendatech-release.apk.sha256](tiendatech-release.apk.sha256).
 - Certificado público: [jose-lozano-certificado-publico.pem](jose-lozano-certificado-publico.pem).
 - Huella SHA-256 del certificado: `6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd`.
