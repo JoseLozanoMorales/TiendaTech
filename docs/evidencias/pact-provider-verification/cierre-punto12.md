@@ -182,16 +182,41 @@ El cambio se revirtió de inmediato; `LoginController.java` en el árbol de
 trabajo quedó verificado byte a byte contra su versión anterior a la
 mutación antes de continuar.
 
+## Verificación final (esta corrección)
+
+- Run: `https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35166009044`
+- Commit: `a266253` ("fijar el timestamp de ejemplo en los pacts para que la
+  compuerta git diff sea reproducible") — segundo commit de esta corrección;
+  el primero (arnés + pacts enganchados al envoltorio real + esta
+  documentación + la compuerta de deriva) se subió inmediatamente antes,
+  sobre el mismo `main`.
+- Job **"Pact consumer contracts"**: succeeded — incluye el paso nuevo
+  `git diff --exit-code -- pacts/` sin diferencias.
+- Job **"Pact provider verification (usuarios-service)"**: succeeded.
+- Job **"Pact provider verification (productos-service)"**: succeeded.
+- Los 12 jobs del flujo completo terminaron en verde.
+
+Nota sobre el commit intermedio: la primera subida de esta corrección hizo
+fallar el job `contract-tests` en CI (`git diff --exit-code` detectó que el
+`timestamp` de ejemplo cambiaba en cada regeneración porque el test usaba
+`new Date().toISOString()`). Se corrigió fijando ese valor de ejemplo a una
+constante (`2026-01-01T00:00:00.000Z`); el matcher `regex` que valida el
+formato ISO 8601 real durante la verificación no cambió, así que esto no
+relaja ninguna comprobación — ver la nota en
+`tests/contract/tests/*.pact.test.js` junto a `TIMESTAMP_EJEMPLO`. El run
+citado arriba (`35166009044`) es el que ya incluye esa corrección y quedó
+en verde de punta a punta.
+
 ## Conclusión
 
 Ya existe verificación de proveedor real sobre los dos servicios con
 contratos versionados, enganchada al flujo de CI, y se demostró
 explícitamente — dos veces, con el arnés original y de nuevo con el
 arnés corregido — que la verificación falla ante un cambio deliberado de
-forma en una respuesta. El enlace de evidencia del cierre original quedó
-roto y se documenta aquí en vez de repetirlo; **la próxima entrada de este
-archivo debe reemplazarlo por el run real** de `provider-verification-usuarios`
-y `provider-verification-productos` sobre el commit en el que se suban estos
-cambios. La compuerta de deriva (`git diff --exit-code`) añadida en esta
-corrección cierra además el hallazgo de que un cambio en el consumidor podía
-no propagarse nunca al `.json` versionado sin que CI lo notara.
+forma en una respuesta. El enlace de evidencia del cierre original (`.../runs/266`)
+quedó roto y se reemplaza aquí por el run real y vigente citado arriba. La
+compuerta de deriva (`git diff --exit-code`) añadida en esta corrección
+cierra además el hallazgo de que un cambio en el consumidor podía no
+propagarse nunca al `.json` versionado sin que CI lo notara, y su propia
+puesta en marcha demostró que funciona: detectó una fuente de no-determinismo
+real (el timestamp) en el primer intento.
