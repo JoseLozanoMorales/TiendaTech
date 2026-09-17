@@ -297,8 +297,16 @@ jobs:
             cockroach sql --insecure --host=localhost:26257 --file=/dev/stdin \
             < docs/db/seed-e2e.sql
       - name: Verificar que el gateway responde con datos reales
+        env:
+          # Punto 17 de la guia de cierre: /health ahora exige el token de
+          # observabilidad (ver JwtGatewayFilter). Este runner de CI no
+          # sobrescribe OBSERVABILITY_TOKEN, asi que el Gateway arranca con
+          # el valor por defecto de docker-compose.yml -- se usa el mismo
+          # aqui. /api/productos es una ruta de lectura publica y no lo
+          # necesita.
+          OBSERVABILITY_TOKEN: TiendaTechObservabilidadToken2026Seguro
         run: |
-          curl --fail --silent http://localhost:8080/health
+          curl --fail --silent -H "Authorization: Bearer $OBSERVABILITY_TOKEN" http://localhost:8080/health
           curl --fail --silent http://localhost:8080/api/productos | grep -q 'Procesador Ryzen 7'
 
       - name: Run browser journeys
