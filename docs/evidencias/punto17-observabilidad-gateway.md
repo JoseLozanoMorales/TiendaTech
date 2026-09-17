@@ -148,7 +148,23 @@ carrito) **antes** de arrancar la carga, cuando el limiter está tranquilo;
 para cada cuenta ya preparada, y es la única parte que necesita solaparse
 en el tiempo con la prueba de carga.
 
-Con esas tres correcciones, se usó el mecanismo de inyección de fallos
+**4) Los CSV de Locust venían dañados desde el origen, no por una
+reescritura posterior.** Revisión en detalle de los bytes del CSV
+detectó `\r\r\n` (doble retorno de carro) en vez de `\r\n` al final de
+cada línea — probable doble traducción: el escritor CSV propio de Locust
+ya emite `\r\n`, y el archivo se abre además en modo texto de Windows,
+que traduce `\n` a `\r\n` una segunda vez. `csv.reader` en modo universal
+interpreta ese `\r\r\n` como una fila vacía después de cada fila real, dando
+filas de longitud alternada (`[22,0,22,0,...]`). Confirmado que el archivo
+ya nacía así en `tests/load/results/` en la máquina de Jhinson, antes de
+cualquier copia o transferencia — no es un problema introducido al mover el
+archivo. Corregido en dos frentes: se normalizaron los 4 `.csv` ya
+generados (mismo contenido, solo el fin de línea) y se agregó a
+`run-load-test.ps1` un paso que normaliza la salida de Locust a LF puro sin
+BOM apenas termina la corrida, para que ninguna corrida futura vuelva a
+quedar así.
+
+Con esas cuatro correcciones, se usó el mecanismo de inyección de fallos
 **ya existente y documentado en el propio código** del proyecto
 (`ExperimentFaultInjector`, en `ventas-service`, activado vía el header
 `X-Failure-Mode` y la variable `EXPERIMENT_FAULT_INJECTION_ENABLED`,
@@ -239,6 +255,36 @@ documentados aquí. Cumpliendo la observación literal del docente, los
 verificables en `dashboard-gateway-trafico-latencia.png` y
 `dashboard-gateway-5xx-real.png`.
 
+## Prueba de mutación de las métricas del Gateway
+
+El docente señaló, aparte de los paneles, un hallazgo de mutation testing
+sobre la propia instrumentación: renombrar la métrica del Gateway y fijar
+el `status` a mano en `"200"` seguía dejando 24/24 pruebas en verde. La
+causa: ninguna de las pruebas existentes de `GatewayTrafficFilterTest.java`
+construye el filtro con un `MeterRegistry` real (todas usan el constructor
+de 2 argumentos `(Environment, Clock)`, que deja `registry=null`), así que
+el bloque que registra métricas en `doFilterInternal` nunca se ejercitaba.
+
+Se agregó `registraMetricasPrometheusConNombreYStatusReales`, que usa un
+`SimpleMeterRegistry` real y verifica tanto el nombre de la métrica
+(`request_count`) como que el tag `status` refleje el código de respuesta
+real (`401` en la prueba), no un valor fijo. Verificado con la misma
+mutación exacta que describió el docente, aplicada a mano sobre
+`GatewayTrafficFilter.java` línea 117 (`int status = failed ? 500 :
+response.getStatus();` → `int status = 200;`):
+
+- **Antes de la mutación**: `GatewayTrafficFilterTest` completo en verde
+  (7 pruebas, incluida la nueva).
+- **Con la mutación aplicada**: la nueva prueba falla exactamente donde
+  debe (`Debe existir un contador request_count con status=401 real ==>
+  expected: not <null>`), y además `registraSinQueryNiCredenciales` —una
+  prueba ya existente que no se escribió pensando en esto— también falla
+  como efecto colateral, porque el log usa la misma variable `status`
+  mutada.
+- **Tras revertir la mutación**: vuelve a verde.
+
+Corrida real en IntelliJ (JUnit 6), no simulada.
+
 ## Pendiente
 
 - El rate limiter del Gateway sigue siendo de un solo proceso, sin estado
@@ -262,10 +308,21 @@ verificables en `dashboard-gateway-trafico-latencia.png` y
 - Los archivos `tiendatech-50-users_stats.csv`, `_failures.csv` y
   `_exceptions.csv` originales (evidencia de una corrida anterior del
   panel 4xx, con nombre engañoso — el escenario real siempre fue de 400
-  usuarios) siguen físicamente junto a los nuevos `tiendatech-400-users_*`
-  en esta misma carpeta, porque este cierre no tuvo forma de mover ni
-  borrar archivos en la máquina de Jhinson al momento de escribir esto
-  (sin acceso a una terminal en su equipo desde esta sesión). Quedan como
-  tarea manual pendiente: mover esos tres archivos a una subcarpeta
-  `obsoletos-50-users/` o borrarlos, ya que la evidencia vigente de este
-  cierre es exclusivamente la de `tiendatech-400-users_*`.
+  usuarios) ya se movieron a
+  `docs/evidencias/punto17-observabilidad-gateway/obsoletos-50-users/`
+  como referencia histórica; la evidencia vigente de este cierre es
+  exclusivamente la de `tiendatech-400-users_*`.
+- `/metrics` y `/health` del Gateway quedan sin protección JWT (el
+  `JwtGatewayFilter` solo protege `/api/**`, y `deploy/Caddyfile` reenvía
+  todo el tráfico al Gateway, así que en un despliegue real quedarían
+  expuestos) — pendiente de decidir si se protege o se justifica
+  explícitamente, ambas alternativas aceptadas por la guía del docente.
+- La corrida 5xx documentada arriba (4 reales de 5, 1 con `429`) todavía
+  solo tiene como evidencia las capturas de Grafana — el docente señaló
+  que "de la corrida 5xx no hay ningún dato crudo, solo el PNG".
+  `generar-5xx-real.ps1` ya se corrigió para guardar un JSON con cada
+  intento (`usuarioId`, código de respuesta real, `resultado`,
+  duración) en `disparos-5xx-real.json`, pero ese archivo no existe
+  todavía para la corrida ya documentada — falta decidir si se repite la
+  corrida (ahora sí quedaría también con dato crudo) o si se acepta la
+  captura de pantalla como única evidencia de esta corrida en particular.

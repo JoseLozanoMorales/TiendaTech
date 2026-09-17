@@ -34,8 +34,14 @@ param(
     [switch]$OmitirReinicio,
     [ValidateSet("Completo", "Preparar", "Disparar")]
     [string]$Fase = "Completo",
-    [string]$ArchivoPreparados = (Join-Path $env:TEMP "generar-5xx-preparados.json")
+    [string]$ArchivoPreparados = (Join-Path $env:TEMP "generar-5xx-preparados.json"),
+    # Dato crudo del punto 17: antes solo quedaba la captura de Grafana como
+    # evidencia de la corrida 5xx, sin ningun registro de que checkout disparo
+    # que codigo de respuesta y cuando. Se acumula aqui uno por intento.
+    [string]$ArchivoRegistro = "docs/evidencias/punto17-observabilidad-gateway/disparos-5xx-real.json"
 )
+
+$script:RegistroDisparos = @()
 
 $ErrorActionPreference = "Stop"
 
@@ -120,17 +126,32 @@ function Disparar-Checkout($cuenta) {
     Write-Host "  Enviando checkout con X-Failure-Mode: omission (tarda ~9s, es el delay real del fallo)..." -ForegroundColor Cyan
     $checkoutHeaders = @{ Authorization = "Bearer $($cuenta.token)"; "X-Failure-Mode" = "omission" }
     $checkoutBody = @{ direccionId = $cuenta.direccionId; metodopagoId = $cuenta.metodopagoId } | ConvertTo-Json
+    $inicio = Get-Date
+    $registro = [ordered]@{
+        usuarioId    = $cuenta.usuarioId
+        timestampUtc = $inicio.ToUniversalTime().ToString("o")
+        statusCode   = $null
+        resultado    = $null
+        mensaje      = $null
+    }
     try {
         $resultado = Invoke-RestMethod -Uri "$HostUrl/api/ordenes/checkout" -Method Post -Headers $checkoutHeaders -Body $checkoutBody -ContentType "application/json"
         Write-Host "  El checkout respondio 2xx -- revisa si el fallo se propago igual en ventas-service:" -ForegroundColor Yellow
         Write-Host "  docker logs tiendatech-ventas --tail 50" -ForegroundColor Yellow
         $resultado | ConvertTo-Json -Depth 5
+        $registro.statusCode = 200
+        $registro.resultado = "2xx-inesperado"
     } catch {
         $statusCode = $null
         if ($_.Exception.Response) { $statusCode = $_.Exception.Response.StatusCode.value__ }
         Write-Host "  Respuesta con error (esperado): $statusCode" -ForegroundColor Green
         if ($_.ErrorDetails.Message) { Write-Host "  $($_.ErrorDetails.Message)" -ForegroundColor DarkGray }
+        $registro.statusCode = $statusCode
+        $registro.resultado = if ($statusCode -ge 500) { "5xx-real" } elseif ($statusCode -eq 429) { "429-rate-limiter" } else { "otro" }
+        $registro.mensaje = $_.ErrorDetails.Message
     }
+    $registro.duracionSegundos = [Math]::Round(((Get-Date) - $inicio).TotalSeconds, 1)
+    $script:RegistroDisparos += [pscustomobject]$registro
 }
 
 if ($Fase -eq "Disparar") {
@@ -170,6 +191,16 @@ else {
         if ($rep -lt $Repeticiones) { Start-Sleep -Seconds 3 }
     }
     Write-Host "`nListo ($Repeticiones repeticion(es)). Revisa el dashboard de Grafana (Last 15 minutes) -- el panel 'Tasa de errores HTTP 5xx' deberia mostrar una serie ahora." -ForegroundColor Cyan
+}
+
+if ($script:RegistroDisparos.Count -gt 0) {
+    $carpetaRegistro = Split-Path -Parent $ArchivoRegistro
+    if ($carpetaRegistro -and -not (Test-Path $carpetaRegistro)) {
+        New-Item -ItemType Directory -Force -Path $carpetaRegistro | Out-Null
+    }
+    $script:RegistroDisparos | ConvertTo-Json -Depth 5 | Set-Content -Path $ArchivoRegistro -Encoding utf8
+    $resumen = $script:RegistroDisparos | Group-Object resultado | ForEach-Object { "$($_.Name)=$($_.Count)" }
+    Write-Host "`nDato crudo de esta corrida guardado en $ArchivoRegistro ($($resumen -join ', '))." -ForegroundColor Cyan
 }
 
 Write-Host ""

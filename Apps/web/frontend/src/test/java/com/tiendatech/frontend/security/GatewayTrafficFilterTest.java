@@ -1,5 +1,8 @@
 package com.tiendatech.frontend.security;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Timer;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -92,6 +95,44 @@ class GatewayTrafficFilterTest {
             logger.detachAppender(appender);
             appender.stop();
         }
+    }
+
+    // Punto 17 (guia de cierre del docente): reproduce la mutacion exacta que senalo
+    // -renombrar la metrica y fijar el status en "200" a mano- y confirma que ahora
+    // SI la detecta un test, algo que antes no pasaba porque ningun test anterior de
+    // esta clase construye el filtro con un MeterRegistry real: todos usan el
+    // constructor de 2 argumentos (env, clock), que deja registry=null y nunca
+    // ejercita el bloque que registra metricas en doFilterInternal.
+    @Test void registraMetricasPrometheusConNombreYStatusReales() throws Exception {
+        SimpleMeterRegistry registry = new SimpleMeterRegistry();
+        GatewayTrafficFilter filter = new GatewayTrafficFilter(env, new MutableClock(), registry);
+        MockHttpServletRequest request = new MockHttpServletRequest("POST", "/api/ordenes");
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        filter.doFilter(request, response, (req, res) ->
+                ((jakarta.servlet.http.HttpServletResponse) res).setStatus(401));
+
+        // Nombre real de la metrica (Micrometer le agrega el sufijo _total al exportar
+        // a Prometheus, pero el nombre registrado en el codigo es "request_count") y
+        // status real de la respuesta (401), no un valor fijo.
+        Counter counter = registry.find("request_count")
+                .tag("service", "tiendatech-gateway")
+                .tag("method", "POST")
+                .tag("status", "401")
+                .counter();
+        assertNotNull(counter, "Debe existir un contador request_count con status=401 real");
+        assertEquals(1.0, counter.count());
+
+        // Si el status se hardcodeara a "200" (la mutacion senalada por el docente),
+        // esta busqueda encontraria igual un contador aunque la respuesta fue 401.
+        assertNull(registry.find("request_count").tag("status", "200").counter(),
+                "No debe existir ningun contador con status=200 hardcodeado para una respuesta 401");
+
+        Timer timer = registry.find("request_duration").tag("status", "401").timer();
+        assertNotNull(timer, "Debe existir un timer request_duration con status=401 real");
+        assertEquals(1, timer.count());
+
+        assertNotNull(registry.find("active_connections").gauge(),
+                "Debe existir el gauge active_connections");
     }
 
     private static class MutableClock extends Clock {

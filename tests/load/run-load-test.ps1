@@ -51,6 +51,23 @@ try {
 }
 
 $loadExitCode = $LASTEXITCODE
+
+# Bug real encontrado en revisión (guía de cierre, punto 17): Locust, en esta
+# maquina Windows, escribe los .csv con "\r\r\n" en vez de "\r\n" (probable
+# doble traduccion: su propio escritor csv ya emite "\r\n", y el archivo se
+# abre ademas en modo texto de Windows, que traduce "\n" -> "\r\n" otra vez).
+# Python csv.reader en modo universal ve ese "\r\r\n" como una fila vacia
+# despues de cada fila real (filas de longitud alternada [22,0,22,0,...]),
+# que es justo el patron que senalo el docente. Se normaliza aqui, a la
+# salida, a LF puro sin BOM -- no se puede corregir dentro de Locust mismo.
+Get-ChildItem (Join-Path $results "$OutputPrefix*.csv") -ErrorAction SilentlyContinue | ForEach-Object {
+    $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
+    $text = [System.Text.Encoding]::UTF8.GetString($bytes)
+    $normalized = $text -replace "`r+`n", "`n"
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($_.FullName, $normalized, $utf8NoBom)
+}
+
 # Sellar también resultados de una corrida fallida, conservando su código de salida.
 & $pythonCmd (Join-Path $PSScriptRoot "../../experiments/paso8/campaign_checksums.py") --directory $results --write
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
