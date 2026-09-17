@@ -5,6 +5,11 @@ import { MatchersV3, PactV4, SpecificationVersion } from '@pact-foundation/pact'
 
 const { integer, like, regex } = MatchersV3
 const ISO_8601 = '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z?$'
+// Valor de ejemplo fijo: el matcher regex ya valida el formato ISO 8601 real
+// en la verificacion; si aqui se usa new Date(), el .json regenerado nunca
+// es identico al commiteado y la compuerta "git diff --exit-code -- pacts/"
+// del job contract-tests siempre falla, aunque el contrato no haya cambiado.
+const TIMESTAMP_EJEMPLO = '2026-01-01T00:00:00.000Z'
 
 test('mobile inicia sesion con credenciales validas', async () => {
   const pact = new PactV4({
@@ -33,7 +38,7 @@ test('mobile inicia sesion con credenciales validas', async () => {
       builder.jsonBody({
         status: integer(200),
         message: like('OK'),
-        timestamp: regex(ISO_8601, new Date().toISOString()),
+        timestamp: regex(ISO_8601, TIMESTAMP_EJEMPLO),
         data: {
           user: {
             usuarioId: integer(20),

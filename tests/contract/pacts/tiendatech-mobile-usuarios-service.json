@@ -62,7 +62,7 @@
             },
             "message": "OK",
             "status": 200,
-            "timestamp": "2026-09-16T23:23:59.403Z"
+            "timestamp": "2026-01-01T00:00:00.000Z"
           },
           "contentType": "application/json",
           "encoded": false
