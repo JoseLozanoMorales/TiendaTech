@@ -2,6 +2,7 @@
 
 - [APK Android, SHA-256 e instrucciones de instalación (E6)](release/README.md).
 - [Cobertura medida sobre el árbol completo del frontend, 62 pruebas (E1/E3)](docs/evidencias/cobertura/web/README.md).
+- [Decisión sobre la rama huérfana `Matster_Repositories` e integración de ramas al cierre (punto #31)](docs/decisiones/decision-rama-matster-repositories.md).
 
 **Asignatura:** Aplicaciones Distribuidas (ISR-701)
 **Carrera:** Ingeniería de Software, séptimo semestre
