@@ -28,7 +28,7 @@ contenido es real, no un experimento vacío:
    crear/editar proveedores, listado y creación de órdenes de compra con
    detalle de líneas, y registro de recepción (total o parcial) de
    mercancía — implementada en
-   `frontend/.../js/admin/proveedores-compras.js` (1408 líneas).
+   `frontend/.../js/admin/proveedores-compras.js` (407 líneas).
 4. Cambios de backend reales en `ordenes-proveedores-service`:
    nuevos campos en `OrdenCompra` (`subtotalPedido`, `ivaPedido`,
    `totalPedido`, `detalle`) y un método `listarDetalle` en
@@ -67,17 +67,25 @@ en CI.
 ## Decisión
 
 **Se documenta el contenido de la rama en esta acta y se elimina la rama
-remota `origin/Matster_Repositories`.** No se pierde información: el
-commit queda accesible por su SHA (`e52933e0470eac0414190f6304db14d472eb6c6f`)
-en el historial de Git aunque la referencia de rama se borre, y este
-documento deja constancia de qué había ahí y por qué se decidió no
-incorporarlo en este cierre.
+remota `origin/Matster_Repositories`.**
+
+El commit **no** queda accesible por su SHA en un clon limpio de `main`
+una vez borrada la referencia de rama: `git cat-file -t
+e52933e0470eac0414190f6304db14d472eb6c6f` devuelve `bad object` porque
+ningún ref local lo alcanza. La única vía por la que sigue siendo
+recuperable es a través de GitHub, mediante la referencia de la Pull
+Request que en su momento se abrió contra esta rama —
+[PR #15](https://github.com/JoseLozanoMorales/TiendaTech/pull/15) (cerrada
+sin fusionar) — accesible como `refs/pull/15/head` mientras GitHub la
+conserve. Este documento deja constancia de qué había en el commit y por
+qué se decidió no incorporarlo en este cierre, precisamente porque el
+propio historial de Git ya no lo garantiza.
 
 Si en el futuro el equipo quiere retomar el módulo de "Proveedores y
 Compras" (gestión de proveedores, órdenes de compra con recepción parcial,
-y facturación imprimible), este documento y el hash del commit son el
-punto de partida para reimplementarlo sobre la estructura actual del
-proyecto, en vez de partir de cero.
+y facturación imprimible), este documento, la PR #15 y el hash del commit
+son el punto de partida para reimplementarlo sobre la estructura actual
+del proyecto, en vez de partir de cero.
 
 ## Cómo se eliminó
 
@@ -89,4 +97,7 @@ git push origin --delete Matster_Repositories
 
 *Decisión registrada el 15 de septiembre de 2026 por Jhinson Stalyn
 Aucatoma Celorio durante el cierre de los puntos pendientes de la Guía de
-Cierre PFC AGLS (periodo de supletorio).*
+Cierre PFC AGLS (periodo de supletorio). Corregida el 18 de septiembre de
+2026: se retiró una cifra incorrecta de líneas de código y una afirmación
+sobre la recuperabilidad del commit que un clon limpio no cumple; se
+agregó la referencia a la PR #15.*
