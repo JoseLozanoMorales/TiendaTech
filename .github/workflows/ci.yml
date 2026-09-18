@@ -76,6 +76,29 @@ jobs:
       - name: Validar referencias de evidencia citadas en el manuscrito
         run: python3 scripts/validate_evidence_refs.py
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Instalar dependencias de verificacion bibliografica
+        run: pip install -r scripts/requirements.txt
+
+      # Punto 26: sin esto, un DOI que deje de resolver a la obra correcta
+      # (o una entrada nueva mal transcrita) pasa a produccion sin que nadie
+      # lo note hasta que alguien la lea a mano en el PDF impreso.
+      - name: Verificar los 60 DOI de la bibliografia contra Crossref/DataCite
+        run: python3 scripts/verify_bibliography_dois.py
+
+      - name: Conservar la evidencia de verificacion de DOI
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verificacion-doi-bibliografia
+          path: docs/entrega4/cierre/verificacion-doi-bibliografia.json
+          if-no-files-found: ignore
+
       - name: Compilar PFC4.tex (imagen TeX Live completa; latexmk resuelve pdflatex/biber)
         uses: xu-cheng/latex-action@v4
         with:

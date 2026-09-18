@@ -1,0 +1,15 @@
+70 entradas en docs/entrega3/referenciasPFC.bib, 3 con DOI a verificar (filtrado a --only)
+[1/3] abdelhafiz2020distributed (10.1109/CSDE50874.2020.9411547) -> OK
+[2/3] hasan2024concurrency (10.1145/3723178.3723261) -> OK
+[3/3] oriol2024asyncsla (10.1145/3605098.3636074) -> OK
+
+{
+  "bib_file": "docs/entrega3/referenciasPFC.bib",
+  "total_entries_in_bib": 70,
+  "entries_with_doi": 3,
+  "verified_ok": 3,
+  "failed": 0,
+  "failed_bibkeys": []
+}
+Evidencia escrita en docs/entrega4/cierre/verificacion-doi-3-entradas-corregidas.json
+Las 60 entradas con DOI resuelven y coinciden en titulo, autores, anio y paginas.
