@@ -1,5 +1,5 @@
 {
-  "metrica": "cobertura de líneas en la capa de lógica de negocio instrumentada",
+  "metrica": "cobertura de líneas sobre el árbol completo de código de producción de los ocho servicios (sin restricción de alcance)",
   "umbral_porcentaje": 70.0,
   "servicios": [
     {

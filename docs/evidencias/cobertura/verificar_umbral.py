@@ -58,7 +58,7 @@ def main() -> int:
             }
         )
     informe = {
-        "metrica": "cobertura de líneas en la capa de lógica de negocio instrumentada",
+        "metrica": "cobertura de líneas sobre el árbol completo de código de producción de los ocho servicios (sin restricción de alcance)",
         "umbral_porcentaje": args.umbral,
         "servicios": resultados,
         "todos_cumplen": all(item["cumple"] for item in resultados),
