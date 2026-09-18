@@ -637,7 +637,34 @@ jobs:
       # una tabla en un lado y se olvida del otro, este diff falla.
       - name: Levantar CRDB con solo schema.sql (docker-compose.db.yml)
         run: |
+          # Los tres nodos y crdb-init se levantan JUNTOS: crdb-init es quien
+          # corre "cockroach init" para formar el cluster, y crdb-1/2/3 nunca
+          # se ponen "healthy" sin eso -- son circulares entre si. --wait aqui
+          # solo espera a los nodos (crdb-init no tiene healthcheck).
           docker compose -f docker-compose.db.yml up -d --wait --wait-timeout 180
+          
+          # tiendatech-crdb-init no tiene healthcheck (es un contenedor de un solo
+          # uso que aplica schema.sql y termina), asi que "docker compose up --wait"
+          # no lo espera -- solo espera a que crdb-1/2/3 esten healthy. Sin esto, el
+          # paso de verificacion siguiente corria mientras crdb-init todavia estaba
+          # aplicando schema.sql (o ni siquiera habia empezado), y fallaba con
+          # "database tiendatech does not exist". Se espera aqui explicitamente a
+          # que el contenedor termine (exited) antes de seguir.
+          echo "Esperando a que tiendatech-crdb-init aplique schema.sql..."
+          estado=""
+          for i in $(seq 1 60); do
+            estado=$(docker inspect -f '{{.State.Status}}' tiendatech-crdb-init)
+            if [ "$estado" = "exited" ]; then
+              break
+            fi
+            sleep 2
+          done
+          docker logs tiendatech-crdb-init
+          codigo=$(docker inspect -f '{{.State.ExitCode}}' tiendatech-crdb-init)
+          if [ "$estado" != "exited" ] || [ "$codigo" != "0" ]; then
+            echo "tiendatech-crdb-init no termino correctamente (estado=$estado, exit=$codigo)"
+            exit 1
+          fi
 
       - name: Verificar que schema.sql produce las mismas 35 tablas
         run: |
