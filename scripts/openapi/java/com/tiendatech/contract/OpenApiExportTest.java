@@ -15,8 +15,8 @@ import org.springframework.boot.context.annotation.ImportCandidates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springdoc.core.utils.SpringDocUtils;
 import io.swagger.v3.core.converter.ModelConverters;
@@ -44,7 +44,17 @@ class OpenApiExportTest {
         static BeanDefinitionRegistryPostProcessor controllers() {
             return registry -> {
                 var scanner = new ClassPathScanningCandidateComponentProvider(false);
-                scanner.addIncludeFilter(new AnnotationTypeFilter(Controller.class));
+                // Punto 4: antes escaneaba Controller.class, que tambien matchea
+                // @RestController (esta meta-anotada con @Controller). Eso era
+                // invisible mientras el unico modulo con controladores era cada
+                // microservicio (100% @RestController). Al integrar el gateway
+                // (Apps/web/frontend) hace falta distinguir: SystemObservabilityController
+                // es @RestController (API real, debe documentarse), pero WebappController
+                // es @Controller puro (~15 rutas de vista/redireccion del monolito legacy,
+                // no forman parte del contrato JSON). Angostar a RestController.class
+                // excluye WebappController sin afectar a los 6 servicios: ninguno
+                // declara @Controller puro (verificado por busqueda en todo el arbol).
+                scanner.addIncludeFilter(new AnnotationTypeFilter(RestController.class));
                 Set<Class<?>> dependencies = new HashSet<>();
                 for (var candidate : scanner.findCandidateComponents("com.tiendatech")) {
                     try {

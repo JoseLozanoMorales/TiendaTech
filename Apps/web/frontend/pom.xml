@@ -112,4 +112,32 @@
 		</plugins>
 	</build>
 
+    <!-- Punto 4: exportacion offline del contrato OpenAPI del gateway, mismo
+         patron que los 6 microservicios (perfil openapi + OpenApiExportTest
+         compartido via build-helper). No se levanta el gateway real: solo
+         SystemObservabilityController (el unico @RestController de este
+         modulo) queda registrado como bean, con mocks para sus dependencias.
+         webmvc-test se agrega solo en este perfil porque el modulo, al ser
+         un gateway y no un servicio REST propio, no lo trae de otro lado. -->
+    <profiles><profile>
+        <id>openapi</id>
+        <dependencies>
+            <dependency><groupId>org.springdoc</groupId><artifactId>springdoc-openapi-starter-webmvc-api</artifactId><version>3.0.3</version><scope>test</scope></dependency>
+            <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc-test</artifactId><scope>test</scope></dependency>
+        </dependencies>
+        <build><plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId>
+                <configuration><systemPropertyVariables><openapi.export>true</openapi.export></systemPropertyVariables></configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId><artifactId>build-helper-maven-plugin</artifactId><version>3.6.1</version>
+                <executions><execution><id>openapi-test-source</id><phase>generate-test-sources</phase><goals><goal>add-test-source</goal></goals>
+                    <configuration><sources><source>${project.basedir}/../../../scripts/openapi/java</source></sources></configuration>
+                </execution></executions>
+            </plugin>
+        </plugins></build>
+    </profile>
+    </profiles>
+
 </project>

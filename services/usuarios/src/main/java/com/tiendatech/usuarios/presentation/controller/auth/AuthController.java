@@ -1,5 +1,7 @@
 package com.tiendatech.usuarios.presentation.controller.auth;
 
+import com.tiendatech.usuarios.application.dto.auth.LogoutResponse;
+import com.tiendatech.usuarios.application.dto.auth.RefreshResponse;
 import jakarta.servlet.http.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,22 +47,26 @@ public class AuthController {
         res.addHeader(HttpHeaders.SET_COOKIE, cookie.build().toString());
     }
 
+    // Punto 4: antes devolvia ResponseEntity<?> con Map.of(...), que springdoc
+    // no puede tipar (el generador lo declaraba "Contenido dinamico"). El
+    // JSON que viaja por la red no cambia -- solo se declara con RefreshResponse
+    // en vez de un Map, para que el contrato quede descrito de verdad.
     @PostMapping("/auth/refresh")
-    public ResponseEntity<?> refresh(@CookieValue("refresh") String refresh, HttpServletResponse res){
+    public ResponseEntity<RefreshResponse> refresh(@CookieValue("refresh") String refresh, HttpServletResponse res){
         var r = svc.refresh(refresh);
         writeRefreshCookie(res, r.refreshJwt(), Instant.now().plusSeconds(3600*8)); // abs exp ya está dentro; maxAge lo recalcula
-        return ResponseEntity.ok(java.util.Map.of("access", r.access(), "meta", r.meta()));
+        return ResponseEntity.ok(new RefreshResponse(r.access(), r.meta()));
     }
 
     @PostMapping("/auth/keepalive")
-    public ResponseEntity<?> keepalive(@CookieValue("refresh") String refresh, HttpServletResponse res){
+    public ResponseEntity<RefreshResponse> keepalive(@CookieValue("refresh") String refresh, HttpServletResponse res){
         var r = svc.refresh(refresh); // misma lógica que refresh
         writeRefreshCookie(res, r.refreshJwt(), Instant.now().plusSeconds(3600*8));
-        return ResponseEntity.ok(java.util.Map.of("access", r.access(), "meta", r.meta()));
+        return ResponseEntity.ok(new RefreshResponse(r.access(), r.meta()));
     }
 
     @PostMapping("/auth/logout")
-    public ResponseEntity<?> logout(@CookieValue(value="refresh", required=false) String refresh,
+    public ResponseEntity<LogoutResponse> logout(@CookieValue(value="refresh", required=false) String refresh,
                                     HttpServletResponse res){
         if (refresh != null){
             svc.logoutFamily(tokenPort.parseRefresh(refresh).familyId());
@@ -72,6 +78,6 @@ public class AuthController {
             gone.domain(cookieDomain);
         }
         res.addHeader(HttpHeaders.SET_COOKIE, gone.build().toString());
-        return ResponseEntity.ok(java.util.Map.of("ok", true));
+        return ResponseEntity.ok(new LogoutResponse(true));
     }
 }
