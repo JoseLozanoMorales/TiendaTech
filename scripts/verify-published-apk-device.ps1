@@ -117,7 +117,11 @@ $evidence = [ordered]@{
     }
 }
 
-$evidence | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $outputPath -Encoding utf8
+$json = $evidence | ConvertTo-Json -Depth 6
+# Windows PowerShell 5.1 escribe BOM con `Set-Content -Encoding utf8`. El
+# repositorio exige UTF-8 sin BOM, por eso se usa explícitamente UTF8Encoding.
+$utf8WithoutBom = New-Object Text.UTF8Encoding($false)
+[IO.File]::WriteAllText((Join-Path (Get-Location) $outputPath), $json + "`n", $utf8WithoutBom)
 Write-Host "Evidencia creada: $outputPath"
 Write-Host "APK verificado: $actualSha256 ($($apk.Length) bytes)"
 Write-Host "Dispositivo: $manufacturer $model, Android $androidVersion (SDK $androidSdk)"
