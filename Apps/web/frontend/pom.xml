@@ -96,6 +96,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- Punto 15 de la guia de cierre: el Gateway (Apps/web/frontend) no
+			 tenia JaCoCo y no aparecia en ninguna tabla de cobertura pese a estar
+			 en la de complejidad. Mismo patron que los 6 microservicios Java:
+			 arbol completo (sin filtro de paquete), umbral 0.70 declarado con
+			 haltOnFailure=false mientras la suite crece. -->
+			<plugin>
+				<groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>0.8.12</version>
+				<executions>
+					<execution><goals><goal>prepare-agent</goal></goals></execution>
+					<execution><id>report</id><phase>test</phase><goals><goal>report</goal></goals></execution>
+					<execution><id>check</id><phase>test</phase><goals><goal>check</goal></goals><configuration><haltOnFailure>false</haltOnFailure><rules><rule><element>BUNDLE</element><limits><limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.70</minimum></limit></limits></rule></rules></configuration></execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

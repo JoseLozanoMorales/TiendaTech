@@ -7,21 +7,29 @@ coverage:
       default:
         target: 70%
 
+# Los paths de cada flag cubren el arbol fuente completo del servicio (dominio,
+# aplicacion, infraestructura y presentacion), igual que la medicion real de
+# JaCoCo/pytest-cov en docs/evidencias/cobertura/. Hasta el 17 de septiembre de
+# 2026 estaban restringidos a application/ (Java) o app.domain+app.explicacion
+# (armado-ia), lo que subestimaba artificialmente el numerador de Codecov
+# frente a los XML versionados.
 flags:
   inventario:
-    paths: [services/inventario-service/src/main/java/com/tiendatech/inventario/application/]
+    paths: [services/inventario-service/src/main/java/com/tiendatech/inventario/]
   productos:
-    paths: [services/productos-service/src/main/java/com/tiendatech/productos/application/]
+    paths: [services/productos-service/src/main/java/com/tiendatech/productos/]
   ordenes_proveedores:
-    paths: [services/ordenes-proveedores-service/src/main/java/com/tiendatech/ordenesproveedores/application/]
+    paths: [services/ordenes-proveedores-service/src/main/java/com/tiendatech/ordenesproveedores/]
   ventas:
-    paths: [services/ventas-service/src/main/java/com/tiendatech/ventas/application/]
+    paths: [services/ventas-service/src/main/java/com/tiendatech/ventas/]
   pedidos:
-    paths: [services/pedidos-service/src/main/java/com/tiendatech/pedidos/application/]
+    paths: [services/pedidos-service/src/main/java/com/tiendatech/pedidos/]
   usuarios:
-    paths: [services/usuarios/src/main/java/com/tiendatech/usuarios/application/service/]
+    paths: [services/usuarios/src/main/java/com/tiendatech/usuarios/]
   armado_ia:
-    paths: [services/armado-ia/app/domain/, services/armado-ia/app/explicacion/]
+    paths: [services/armado-ia/app/]
+  gateway:
+    paths: [Apps/web/frontend/src/main/java/com/tiendatech/frontend/]
 
 comment:
   layout: "reach, diff, flags, files"

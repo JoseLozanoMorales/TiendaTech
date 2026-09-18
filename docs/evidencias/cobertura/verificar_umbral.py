@@ -11,6 +11,7 @@ from pathlib import Path
 
 SERVICIOS = {
     "armado-ia": "armado-ia-coverage.xml",
+    "gateway": "gateway-jacoco.xml",
     "inventario-service": "inventario-service-jacoco.xml",
     "ordenes-proveedores-service": "ordenes-proveedores-service-jacoco.xml",
     "pedidos-service": "pedidos-service-jacoco.xml",

@@ -93,11 +93,20 @@ La disponibilidad se observó durante 3600.409 s, con 3588/3588 sondeos exitosos
 2112 solicitudes, cero fallos y P95 agregado de 610 ms. Por tanto, disponibilidad
 y fiabilidad cumplen, mientras rendimiento no cumple el umbral estricto de 500 ms.
 
-PMD 7.17.0 registra complejidad máxima 9. La cobertura consolidada de las clases
-instrumentadas es 935/1136 líneas (82.31 %), pero conserva filtros estrechos en
-varios módulos; se informa como cumplimiento acotado, no como cobertura integral
-del producto. Seguridad cubre las ocho familias protegidas y las ocho responden
-401 sin JWT. El CSV y la tabla LaTeX consolidados no contienen métricas pendientes.
+PMD 7.17.0 registra complejidad máxima 9. La cifra de cobertura consolidada
+de esta corrida oficial (935/1136 líneas, 82.31 %) quedó obsoleta el 17-18 de
+septiembre de 2026: medía cada microservicio Java solo sobre `application/**`
+y `armado-ia` solo sobre `app.domain`+`app.explicacion`. Al retirar esos
+filtros y agregar el Gateway (que no tenía JaCoCo configurado), la cobertura
+real de los ocho servicios medidos es 2370/7060 líneas (33.57 %,
+IC95 % Wilson descriptivo 32.4771–34.6796 %) — **NO CUMPLE** el umbral de
+70 %; solo el Gateway lo alcanza (78.26 %). El detalle por servicio está en
+`docs/experimentos/resultados/iso25010/cobertura-summary.csv`, regenerado en
+la misma fecha desde los XML versionados en `docs/evidencias/cobertura/`.
+Disponibilidad, fiabilidad, rendimiento, complejidad y seguridad no se
+recalcularon en este ajuste: conservan su corrida oficial del 2026-09-04 (o
+del 2026-09-11 para seguridad) sin cambios. Seguridad cubre las ocho familias
+protegidas y las ocho responden 401 sin JWT.
 
 No se calcula un intervalo para el P95 porque existe una sola corrida oficial;
 hacerlo requeriría muestras por solicitud o repeticiones independientes. Esta

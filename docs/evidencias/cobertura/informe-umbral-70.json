@@ -5,9 +5,18 @@
     {
       "servicio": "armado-ia",
       "reporte": "docs/evidencias/cobertura/armado-ia-coverage.xml",
-      "lineas_cubiertas": 405,
-      "lineas_totales": 540,
-      "cobertura_porcentaje": 75.0,
+      "lineas_cubiertas": 580,
+      "lineas_totales": 931,
+      "cobertura_porcentaje": 62.3,
+      "umbral_porcentaje": 70.0,
+      "cumple": false
+    },
+    {
+      "servicio": "gateway",
+      "reporte": "docs/evidencias/cobertura/gateway-jacoco.xml",
+      "lineas_cubiertas": 162,
+      "lineas_totales": 207,
+      "cobertura_porcentaje": 78.26,
       "umbral_porcentaje": 70.0,
       "cumple": true
     },
@@ -41,18 +50,18 @@
     {
       "servicio": "productos-service",
       "reporte": "docs/evidencias/cobertura/productos-service-jacoco.xml",
-      "lineas_cubiertas": 116,
+      "lineas_cubiertas": 138,
       "lineas_totales": 512,
-      "cobertura_porcentaje": 22.66,
+      "cobertura_porcentaje": 26.95,
       "umbral_porcentaje": 70.0,
       "cumple": false
     },
     {
       "servicio": "usuarios",
       "reporte": "docs/evidencias/cobertura/usuarios-jacoco.xml",
-      "lineas_cubiertas": 411,
-      "lineas_totales": 999,
-      "cobertura_porcentaje": 41.14,
+      "lineas_cubiertas": 511,
+      "lineas_totales": 1037,
+      "cobertura_porcentaje": 49.28,
       "umbral_porcentaje": 70.0,
       "cumple": false
     },
