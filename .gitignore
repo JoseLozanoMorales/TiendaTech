@@ -21,6 +21,7 @@ docs/entrega3/build/
 tmp/
 
 Apps/web/infra/crdb-certs/
+!Apps/web/infra/crdb-certs/.gitignore
 /crdb-certs/
 **/target/generated-sources/protobuf/
 experiments/generated/
@@ -51,6 +52,9 @@ experiments/paso8/resultados-reales/correctiva-20260905-final-v2/rampa-readiness
 !experiments/paso8/resultados-reales/oficial-v4-20260904/
 experiments/paso8/resultados-reales/oficial-v4-20260904/**
 !experiments/paso8/resultados-reales/oficial-v4-20260904/checksums.txt
+!experiments/paso8/resultados-reales/oficial-v4-20260904/experimento_real_crudo.csv
+!experiments/paso8/resultados-reales/oficial-v4-20260904/analisis/
+!experiments/paso8/resultados-reales/oficial-v4-20260904/analisis/**
 !tests/load/results/
 tests/load/results/*
 !tests/load/results/checksums.txt
@@ -79,3 +83,18 @@ experiments/paso8/resultados-rubrica-20260904/db/*.db
 experiments/paso8/resultados/db/*.db
 docs/entrega4/cierre/actualizacion-20260903/*.db
 experiments/paso7/evidence/*.db
+
+# Punto 37 (regla por tipo, 18 de septiembre de 2026): ademas de las rutas
+# concretas de arriba, se bloquea por extension cualquier instalable o base
+# de datos que se intente versionar en otra ruta, para que no vuelva a pasar
+# sin que nadie lo note. Los dos .apk versionados a proposito (excepcion del
+# 17/09, arriba) y los wrapper de Gradle quedan exceptuados explicitamente.
+*.apk
+*.mp4
+*.jar
+*.db
+*.db-journal
+*.class
+!**/gradle-wrapper.jar
+!release/tiendatech-debug.apk
+!release/tiendatech-release.apk

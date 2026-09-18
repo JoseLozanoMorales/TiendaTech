@@ -65,7 +65,11 @@ py experiments/paso8/run_paso8.py `
 - `resultados/compatibilidad_resumen.json`: aciertos e IC95% binomial.
 - `resultados/boxplot_latencia_p95.svg` y `resultados/boxplot_throughput.svg`.
 - `resultados/amenazas_validez.md`: cuatro categorias de amenazas.
-- `resultados/db/*.db`: base SQLite auditable por corrida.
+- `resultados/db/*.db`: base SQLite auditable por corrida. Estos archivos se
+  retiraron del árbol en el commit 55f35f1 (punto 37, higiene del
+  repositorio); no existen en un clon limpio. Están adjuntos, byte a byte
+  idénticos, dentro de `experimentos-bases-de-datos.zip` en la versión
+  etiquetada [v4.0.0](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0).
 
 ## Validación principal contra microservicios reales
 

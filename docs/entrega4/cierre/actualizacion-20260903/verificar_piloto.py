@@ -1,4 +1,13 @@
-"""Verifica copias y reproduce la tabla de stock, sin modificar las bases."""
+"""Verifica copias y reproduce la tabla de stock, sin modificar las bases.
+
+Los .db de esta carpeta (pilot-2pc.db, pilot-saga.db) se retiraron del arbol
+en el commit 55f35f1 (punto 37, higiene del repositorio): en un clon limpio
+no existen. Estan adjuntos, byte a byte identicos, dentro de
+experimentos-bases-de-datos.zip en la version etiquetada v4.0.0
+(https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0).
+Descarga ese zip y extrae aqui los dos archivos pilot-{2pc,saga}.db antes de
+correr este script.
+"""
 import csv
 import hashlib
 import json
@@ -8,6 +17,15 @@ from pathlib import Path
 
 def main():
     root = Path(__file__).resolve().parent
+    for coord in ('2pc', 'saga'):
+        db_path = root / f'pilot-{coord}.db'
+        if not db_path.exists():
+            raise FileNotFoundError(
+                f'Falta {db_path.name}: no viene en el arbol (punto 37). '
+                'Descarga experimentos-bases-de-datos.zip de la release v4.0.0 '
+                '(https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.0.0) '
+                f'y extrae {db_path.name} en esta carpeta.'
+            )
     provenance = json.loads((root / 'procedencia.json').read_text(encoding='utf-8'))
     for item in provenance['files']:
         actual = hashlib.sha256((root / item['copy']).read_bytes()).hexdigest()
