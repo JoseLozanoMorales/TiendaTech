@@ -728,7 +728,23 @@ La medición web analiza el código de producción de \texttt{src} (TypeScript y
 El análisis general de TypeScript y React Hooks se mantiene separado mediante \texttt{npm run lint:report}, con sus reportes \texttt{webapp-eslint.json} y \texttt{webapp-eslint-summary.csv}, y sigue fallando ante errores o advertencias. Sus recuentos de incidencias no se usan como sustituto de la complejidad ciclomática.
 
 
-La cobertura del cliente se publica por separado en el \href{https://github.com/JoseLozanoMorales/TiendaTech/blob/main/docs/evidencias/cobertura/web/coverage-summary.json}{resumen de cobertura web}, regenerado el 14 de septiembre de 2026 tras retirar de \texttt{vitest.config.ts} la lista de doce vistas seleccionadas a mano: 62 pruebas y 71,96\,\% de líneas sobre el árbol completo de \texttt{src} (antes 19 pruebas y 53,39\,\% sobre solo tres vistas). Se conservan además sentencias (56,26\,\%), ramas (45,10\,\%) y funciones (44,47\,\%), con servicios HTTP simulados. La ampliación de alcance deja visibles dos huecos que la medición anterior no cubría: \texttt{App.tsx}, el punto de entrada de la aplicación, y \texttt{src/services/cart.ts}, la lógica de carrito, están en 0\,\% de cobertura por no haber sido medidos antes. Estos resultados no se agregan a la cobertura del backend ni se someten automáticamente al umbral del 70\,\% de los siete XML anteriores.
+La cobertura del cliente se publica por separado en el \href{https://github.com/JoseLozanoMorales/TiendaTech/blob/main/docs/evidencias/cobertura/web/coverage-summary.json}{resumen de cobertura web}, regenerado el 14 de septiembre de 2026 tras retirar de \texttt{vitest.config.ts} la lista de doce vistas seleccionadas a mano: 62 pruebas y 71,96\,\% de líneas sobre el árbol completo de \texttt{src} (antes 19 pruebas y 53,39\,\% sobre solo tres vistas). Se conservan además sentencias (56,26\,\%), ramas (45,10\,\%) y funciones (44,47\,\%), con servicios HTTP simulados. La ampliación de alcance deja visibles dos huecos que la medición anterior no cubría: \texttt{App.tsx}, el punto de entrada de la aplicación, y \texttt{src/services/cart.ts}, la lógica de carrito, están en 0\,\% de cobertura por no haber sido medidos antes. Estos resultados no se agregan a la cobertura del backend ni se someten automáticamente al umbral del 70\,\% de los ocho XML anteriores.
+
+El 71,96\,\% de líneas es la cifra menos representativa de las cuatro y no
+debe leerse como el resumen de la cobertura web: Istanbul cuenta ``líneas''
+por línea física del archivo, y varios componentes de \texttt{src/views/}
+están escritos con muy pocas líneas físicas por mucho código (JSX y lógica
+condensados), lo que infla ese porcentaje respecto a sentencias y ramas. El
+propio \texttt{coverage-summary.json} lo muestra: \texttt{CheckoutView.tsx}
+reporta 1/1 línea (100\,\%) pero solo 24/32 sentencias (75\,\%) y 9/21 ramas
+(42,85\,\%); \texttt{AccountView.tsx} reporta 2/2 líneas (100\,\%) frente a
+35/40 sentencias (87,5\,\%) y 28/44 ramas (63,63\,\%); \texttt{RecoveryView.tsx}
+y \texttt{WorkerView.tsx} reportan 1/1 línea (100\,\%) con 15 y 11 sentencias
+reales respectivamente. Sentencias (56,26\,\%) y ramas (45,10\,\%) miden sobre
+unidades de código que no dependen del formato de línea del archivo, así que
+son las cifras que mejor reflejan cuánto del comportamiento real de la SPA
+está bajo prueba; el 71,96\,\% se conserva por ser la métrica que reporta
+Vitest por defecto, no porque sea la más honesta de las cuatro.
 
 
 \subsection{CI, carga y observabilidad}

@@ -23,6 +23,21 @@ el equipo (62 pruebas en 14 archivos) y frente al alcance real del producto
 Reportes versionados: [JSON](coverage-summary.json) y [LCOV](lcov.info).
 Las rutas del JSON se normalizaron respecto de la aplicación.
 
+**El 71,96 % de líneas es la cifra menos representativa de las cuatro.**
+Istanbul cuenta "líneas" por línea física del archivo, y varios componentes
+de `src/views/` están escritos con muy pocas líneas físicas para mucho
+código (JSX y lógica condensados en pocas líneas), lo que infla ese
+porcentaje frente a sentencias y ramas. Ejemplos directos del propio
+`coverage-summary.json`: `CheckoutView.tsx` reporta 1/1 línea (100 %) pero
+solo 24/32 sentencias (75 %) y 9/21 ramas (42,85 %); `AccountView.tsx`
+reporta 2/2 líneas (100 %) frente a 35/40 sentencias (87,5 %) y 28/44 ramas
+(63,63 %); `RecoveryView.tsx` y `WorkerView.tsx` reportan 1/1 línea (100 %)
+con 15 y 11 sentencias reales respectivamente. Sentencias (56,26 %) y ramas
+(45,10 %) no dependen del formato de línea del archivo y son las cifras que
+mejor reflejan cuánto comportamiento real está bajo prueba; el 71,96 % se
+conserva porque es la métrica que Vitest muestra primero, no porque sea la
+más honesta de las cuatro.
+
 ## Alcance del criterio E1/E3
 
 La cobertura ya no se restringe a un subconjunto de vistas elegido a mano:
