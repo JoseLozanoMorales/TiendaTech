@@ -190,21 +190,31 @@ citaba el evaluador):
 - [x] Las 3 entradas "verificadas" corregidas; una de las tres
       recontrastada por una segunda fuente independiente (Semantic
       Scholar) además de Crossref.
+- [x] PR #90 fusionada en `main` (`43d5475`) y corrida CI #334
+      (`35365714552`) completada en verde tras reintentar el único fallo
+      transitorio de descarga de Maven Central (HTTP 429).
+- [x] Artefacto `PFC4-compilado` de esa corrida descargado y adoptado como
+      `docs/entrega4/PFC4.pdf`; SHA-256
+      `5ea14009a9a6cc55632a3d6f6658fcb5817d91bd9bd7176c311817039a5600c5`.
+- [x] Bibliografía del PDF definitivo revisada: `[4]` imprime las comillas
+      correctamente y `[11]` imprime `núm. 6242`, sin `artno` visible.
 - [x] Este documento.
 
-## Qué queda para la confirmación definitiva
+## Confirmación definitiva
 
-Todo lo verificable sin la imagen exacta de CI (`xu-cheng/latex-action`,
-sin versión de TeX Live pineada) quedó verificado aquí con evidencia real:
-dos compilaciones completas del manuscrito (con y sin la simulación del
-defecto de `[11]`), un tercer intento de fix descartado por no compilar en
-absoluto, y una corrección de robustez (`\NewBibliographyString`) que hace
-el fix seguro en cualquier versión de TeX Live, no solo en la de CI.
-Cuando esto se integre a una Pull Request real, la corrida del job
-`manuscript-quality` en GitHub Actions (con la imagen real que usa CI)
-queda como la confirmación final, igual que se hizo con el hallazgo nuevo
-del punto 5 (`schema-sql-equivalencia`): el PDF que suba como artefacto de
-esa corrida debe mostrar `[4]` y `[11]` como se describe arriba.
+La confirmación pendiente ya se completó. La PR #90 integró la corrección
+en `main` mediante el merge `43d5475`. El job
+`Validar evidencia y compilar manuscrito (E4)` de la corrida CI #334
+compiló el documento con la imagen real de `xu-cheng/latex-action` y produjo
+el artefacto `PFC4-compilado`. La corrida completa quedó en estado
+`Success` después de reintentar un fallo externo HTTP 429 de Maven Central
+en el job de CockroachDB, sin cambios adicionales al manuscrito.
+
+El PDF de 61 páginas obtenido directamente de ese artefacto sustituye al
+PDF versionado anterior. En su página 60, `[4]` aparece como
+`How the “rules” have changed` y `[11]` como `núm. 6242`. Con ello quedan
+verificados en el artefacto entregable los mismos cambios ya comprobados en
+las fuentes, el script de DOI y la evidencia JSON 60/60.
 
 ## Archivos de esta corrección
 
@@ -218,6 +228,7 @@ scripts/verify_output_full_run.log                                   (nuevo, evi
 scripts/verify_output_3_entries.log                                  (nuevo, evidencia)
 docs/entrega4/cierre/verificacion-doi-bibliografia.json               (nuevo, evidencia)
 docs/entrega4/cierre/verificacion-doi-3-entradas-corregidas.json      (nuevo, evidencia)
+docs/entrega4/PFC4.pdf                                                (regenerado por CI #334 y verificado)
 docs/evidencias/cierre-punto26.md                                     (este archivo)
 ```
 
