@@ -221,10 +221,19 @@ verificado por diff que la única diferencia introducida fue ese job nuevo.
   en `main` verificado byte a byte contra lo entregado.
 
 **Contrato de autenticación, bug de codificación e integración del
-gateway — evidencia local, pendiente de PR real y CI en verde (se
-completará esta sección con el run y el commit una vez fusionado, siguiendo
-el mismo estándar de PR revisado que el resto de los puntos):**
+gateway — evidencia en CI, fusionado a `main` vía PR revisado (mismo
+estándar que el resto de los puntos):**
 
+- PR: `https://github.com/JoseLozanoMorales/TiendaTech/pull/88`
+  (`feat/punto4-contrato-auth-gateway` → `main`), aprobada por
+  JoseLozanoMorales, fusionada el 18 de septiembre de 2026. Commit de
+  merge en `main`: `fee3db9`.
+- Commit de la rama: `c208b76` ("punto 4: tipar contrato de autenticacion,
+  integrar gateway al pipeline OpenAPI y corregir bug de codificacion en
+  Windows").
+- Run: `https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35317851008`
+  (workflow **CI**, disparado por la propia PR #88): succeeded.
+- Job **"OpenAPI generation and route coverage"**: succeeded.
 - Los 6 servicios Java + `armado-ia` compilaron y exportaron los mismos
   conteos de operaciones que el recuento original del evaluador
   (productos 37, inventario 6, pedidos 19, ordenes-proveedores 14,
@@ -250,10 +259,10 @@ real preexistente en `armado-ia` (no simulada, corregida en el código) y
 reproduciendo la prueba del propio evaluador sobre el contrato de
 autenticación recién tipado.
 
-Quedan fuera de este cierre, deliberadamente: el resto de las 59+25 rutas
+Queda fuera de este cierre, deliberadamente: el resto de las 59+25 rutas
 sin esquema completo que señaló el evaluador (se priorizó el camino
 crítico de autenticación, que fue lo que él usó para demostrar el
-problema) y la integración final vía PR revisado + CI en verde del
-contrato de autenticación, el fix de codificación y el gateway (trabajo
-de código ya hecho y verificado localmente; falta el mismo ciclo de
-PR/revisión/CI que se usó para el punto 31).
+problema). El contrato de autenticación, el fix de codificación y el
+gateway ya pasaron por el mismo ciclo de PR revisado + CI en verde que el
+punto 31 (PR #88, fusionada a `main` el 18 de septiembre de 2026, run
+`https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35317851008`).

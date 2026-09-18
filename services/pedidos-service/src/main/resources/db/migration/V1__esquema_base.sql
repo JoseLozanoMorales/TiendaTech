@@ -113,3 +113,39 @@ CREATE TABLE IF NOT EXISTS pedidos.solicitud_idempotente (
     CONSTRAINT fk_solicitud_idempotente_orden
     FOREIGN KEY (orden_id) REFERENCES pedidos.orden (orden_id)
 );
+
+-- Fragmentacion horizontal fisica por limites trimestrales. SPLIT AT crea
+-- limites de rango reproducibles sin requerir una licencia Enterprise.
+-- Estas cinco sentencias existian en docs/db/schema.sql (lineas 468-489)
+-- pero no se trasladaron a esta migracion base cuando se extrajo: la V1
+-- solo copio las CREATE TABLE, dejando el sistema levantado desde cero
+-- solo con migraciones sin la fragmentacion declarada que sostiene la
+-- parte de "Datos y consistencia" (particionamiento trimestral de
+-- pedidos.orden / pedidos.detalle_orden). Se agregan aqui, en la misma
+-- migracion base, porque son parte del mismo corte original del monolito,
+-- no un cambio posterior.
+ALTER TABLE pedidos.orden SPLIT AT VALUES
+    ('2026-01-01'),
+    ('2026-04-01'),
+    ('2026-07-01'),
+    ('2026-10-01'),
+    ('2027-01-01');
+
+ALTER TABLE pedidos.detalle_orden SPLIT AT VALUES
+    ('2026-01-01'),
+    ('2026-04-01'),
+    ('2026-07-01'),
+    ('2026-10-01'),
+    ('2027-01-01');
+
+ALTER TABLE pedidos.orden SCATTER;
+ALTER TABLE pedidos.detalle_orden SCATTER;
+
+-- Replicacion de tres copias: con quorum mayoritario, el rango tolera la
+-- perdida de una replica. Es una configuracion a nivel de cluster (RANGE
+-- default), no del esquema `pedidos` en particular, pero se ejecuta desde
+-- aqui -- la unica migracion que corre en el mismo corte que la
+-- fragmentacion que la motiva -- en vez de duplicarla en los otros cinco
+-- servicios. Es idempotente: reaplicarla desde otra migracion no rompe
+-- nada, pero no hace falta.
+ALTER RANGE default CONFIGURE ZONE USING num_replicas = 3;
