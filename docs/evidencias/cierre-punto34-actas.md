@@ -12,14 +12,14 @@ participantes.
 
 | Fecha | Documento | Naturaleza | Estado de ratificación |
 |---|---|---|---|
-| 2026-09-01 | `docs/actas/acta-2026-09-01.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-03 | `docs/actas/acta-2026-09-03.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-04 | `docs/actas/acta-2026-09-04.md` | Contemporánea | Pendiente de ratificación formal en PR |
-| 2026-09-07 | `docs/actas/acta-2026-09-07.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-10 | `docs/actas/acta-2026-09-10.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-11 | `docs/actas/acta-2026-09-11.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-12 | `docs/actas/acta-2026-09-12.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
-| 2026-09-13 | `docs/actas/acta-2026-09-13.md` | Retrospectiva, redactada 2026-09-15 | Pendiente en PR |
+| 2026-09-01 | `docs/actas/acta-2026-09-01.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Andy en PR #93 |
+| 2026-09-03 | `docs/actas/acta-2026-09-03.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jhinson y Jeremy |
+| 2026-09-04 | `docs/actas/acta-2026-09-04.md` | Contemporánea | Ratificada por Jhinson |
+| 2026-09-07 | `docs/actas/acta-2026-09-07.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jhinson y Jeremy |
+| 2026-09-10 | `docs/actas/acta-2026-09-10.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jeremy |
+| 2026-09-11 | `docs/actas/acta-2026-09-11.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jhinson y Jeremy |
+| 2026-09-12 | `docs/actas/acta-2026-09-12.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jhinson |
+| 2026-09-13 | `docs/actas/acta-2026-09-13.md` | Retrospectiva, redactada 2026-09-15 | Ratificada por Jhinson y Jeremy |
 
 Las sesiones fueron presenciales en la universidad cuando coincidía la
 disponibilidad del equipo. Esta modalidad fue declarada retrospectivamente
@@ -76,12 +76,32 @@ Jeremy confirmó expresamente su participación presencial los días 3, 7, 10,
 11 y 13, las responsabilidades que se le atribuyen, el significado limitado
 de las ventanas Git y la ausencia de reuniones los días 14 y 15.
 
+La corrección de identidad y el registro de esa auditoría se integraron
+posteriormente mediante:
+
+- **Pull request correctivo:** [#93](https://github.com/JoseLozanoMorales/TiendaTech/pull/93).
+- **Commit de la rama:** `c8961579cf26e55dc14c51afda27d0496de2de41`.
+- **Merge commit:** `b7efceffab34e15dd8e845b7e540586adfb14aa3`.
+- **Responsable del merge:** Jeremy Gaibor (`JeremyGaibor`).
+- **Checks del commit de rama:** 30 completados correctamente.
+- **Checks posteriores al merge en `main`:** 30 completados correctamente.
+
+Andy Sánchez ratificó desde su cuenta la reunión del 1 de septiembre: confirmó
+su participación presencial, las decisiones y responsabilidades atribuidas y
+el significado limitado de la ventana Git. La evidencia permanente es su
+[comentario en el PR #93](https://github.com/JoseLozanoMorales/TiendaTech/pull/93#issuecomment-5734750054).
+
+Con las declaraciones de Jhinson, la revisión formal de Jeremy y el comentario
+de Andy, cada una de las ocho actas cuenta con al menos una ratificación de una
+persona declarada como participante. Las personas sin ratificación individual
+continúan identificadas como tales; no se presenta su silencio como aprobación.
+
 ## Condición de cierre
 
-Este punto no se declara ratificado únicamente con el commit del autor. Antes
-de fusionar, los integrantes mencionados deben revisar las actas que les
-correspondan y confirmar o corregir asistencia, modalidad, decisiones y
-responsabilidades mediante una aprobación o comentario explícito en el pull
-request. En especial, Jeremy Gaibor debe revisar las fechas en las que aparece
-mencionado y limitar su confirmación a aquellas en las que realmente estuvo
-presente.
+El punto queda cerrado documentalmente porque las correcciones históricas son
+verificables, cada acta contiene responsables y pendientes, las ocho actas
+tienen cobertura de ratificación de al menos un participante, los días 14 y 15
+se documentan honestamente como trabajo sin reunión y los dos ciclos de
+integración concluyeron en verde. Esta conclusión no convierte en ratificación
+el silencio de participantes adicionales ni transforma las ventanas Git en
+duraciones de reunión.

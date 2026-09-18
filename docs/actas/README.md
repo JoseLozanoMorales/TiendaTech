@@ -26,7 +26,7 @@ incluyen horas tomadas de Git se denominan **ventana de actividad comprobada**.
 
 | Fecha documentada | Tipo de registro | Redacción | Ratificación posterior |
 |---|---|---|---|
-| 2026-09-01 | Acta retrospectiva | 2026-09-15 | Andy y José pendientes |
+| 2026-09-01 | Acta retrospectiva | 2026-09-15 | Andy ratificado; José sin ratificación individual |
 | 2026-09-03 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados |
 | 2026-09-04 | Acta contemporánea | 2026-09-04 | Jhinson ratificado; Andy pendiente |
 | 2026-09-07 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados; Andy y José pendientes |
@@ -54,7 +54,10 @@ es:
 
 Una aprobación genérica del código no sustituye esta confirmación si no queda
 claro qué actas y atribuciones fueron revisadas. Las discrepancias deben
-corregirse antes de fusionar el pull request.
+corregirse antes de fusionar el pull request. Para el cierre documental se
+exige al menos una ratificación explícita de una persona declarada como
+participante en cada acta; las personas que no hayan confirmado se mantienen
+identificadas como no ratificadas y no se les atribuye una aprobación.
 
 ## Requisitos mínimos de cada acta retrospectiva
 
