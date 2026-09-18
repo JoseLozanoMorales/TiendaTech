@@ -26,16 +26,16 @@ incluyen horas tomadas de Git se denominan **ventana de actividad comprobada**.
 
 | Fecha documentada | Tipo de registro | Redacción | Ratificación posterior |
 |---|---|---|---|
-| 2026-09-01 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-03 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-04 | Acta contemporánea | 2026-09-04 | Pendiente de ratificación formal en PR |
-| 2026-09-07 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-10 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-11 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-12 | Acta retrospectiva | 2026-09-15 | Pendiente |
-| 2026-09-13 | Acta retrospectiva | 2026-09-15 | Pendiente |
+| 2026-09-01 | Acta retrospectiva | 2026-09-15 | Andy y José pendientes |
+| 2026-09-03 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados |
+| 2026-09-04 | Acta contemporánea | 2026-09-04 | Jhinson ratificado; Andy pendiente |
+| 2026-09-07 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados; Andy y José pendientes |
+| 2026-09-10 | Acta retrospectiva | 2026-09-15 | Jeremy ratificado; Andy pendiente |
+| 2026-09-11 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados; Andy y José pendientes |
+| 2026-09-12 | Acta retrospectiva | 2026-09-15 | Jhinson ratificado; Andy y José pendientes |
+| 2026-09-13 | Acta retrospectiva | 2026-09-15 | Jhinson y Jeremy ratificados; José pendiente |
 
-No hubo reuniones los días 14 y 15 de septiembre. José Lozano lo confirmó
+No hubo reuniones los días 14 y 15 de septiembre. Jhinson Aucatoma lo confirmó
 retrospectivamente el 18 de septiembre de 2026. Los commits de esas fechas
 corresponden a continuidad de trabajo individual o asincrónico y no justifican
 crear actas de reunión. Esta declaración queda disponible para ratificación o
