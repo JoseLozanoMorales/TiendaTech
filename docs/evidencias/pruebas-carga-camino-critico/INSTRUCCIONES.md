@@ -88,7 +88,7 @@ todo.
    No se tocó la lógica de niveles de concurrencia (`-Users`/`-SpawnRate`/
    `-RunTime`): ya existía y funcionaba.
 
-## Prerrequisito de datos: aplicar el seed de Ecuador
+## Prerrequisito de datos: aplicar los seeds de Ecuador, catálogo y stock
 
 El camino crítico necesita catálogo de referencia que **no viene poblado
 por defecto** en un stack recién levantado: ciudades/provincias (para crear
@@ -118,6 +118,56 @@ reales cargados, el critical-path los reutiliza sin problema — el script no
 depende de ningún `producto_id` fijo, los descubre por `GET /api/productos`
 y por categoría "Procesador" vía `GET /api/categorias` +
 `GET /api/productos/por-categoria`.
+
+**Paso obligatorio, no opcional: `docs/db/seed-inventario-stock.sql`.**
+El camino crítico incluye `POST /api/carrito/{carritoId}/agregar`, y
+`StockReservationService.reconcileOnce()` (inventario-service) hace, como
+primera sentencia de la transacción,
+`SELECT stock FROM inventario.inventario_producto WHERE producto_id = ? ...`
+— verificado línea por línea contra el código real
+(`application/reservation/StockReservationService.java:48-50`). No valida
+contra `productos.producto.stock`. Desde el punto 5 (migraciones puras,
+sin `schema.sql` aplicándose en el sistema real), un clúster nuevo nunca
+queda con filas en `inventario.inventario_producto` — ningún script ni
+`docker-compose.yml` la puebla.
+
+**Verificado de punta a punta contra el sistema real** (stack completo
+reconstruido desde cero, `docker compose down -v` + `up --build`, sin
+ningún seed de inventario aplicado): un usuario nuevo, con
+`seed-e2e.sql` aplicado (catálogo con un producto, sin stock de
+inventario), recibe `HTTP 409` ("Conflicto") al intentar
+`POST /api/carrito/{carritoId}/agregar` — confirma que la operación
+realmente no puede completarse sin este seed, no es una suposición del
+comentario del script. Tras aplicar `docs/db/seed-inventario-stock.sql`,
+la misma petición contra el mismo carrito devuelve `HTTP 200` con la
+reserva real (`{"accepted":true,"message":"Reserva reconciliada",
+"reservedQuantity":1,"availableStock":498,...}`), y una segunda petición
+decrementa el stock disponible correctamente (498 → 497) — confirma que
+el seed no solo evita el error, sino que deja la reserva de stock
+funcionando de extremo a extremo. Aplicarlo después de `seed-e2e.sql` o
+del catálogo real del equipo (requiere que `productos.producto` ya tenga
+filas):
+
+```
+docker compose exec -T tiendatech-crdb-1 \
+  cockroach sql --insecure --host=localhost:26257 -d tiendatech --file=/dev/stdin \
+  < docs/db/seed-inventario-stock.sql
+```
+
+Es idempotente (`ON CONFLICT DO NOTHING`) y siembra 500 unidades por
+producto — pensado para pruebas de carga, no para producción.
+
+**Nota honesta sobre la corrida real ya documentada en
+[`pruebas-carga-camino-critico.md`](../pruebas-carga-camino-critico.md):**
+esa corrida (209/209 `POST /api/carrito/.../agregar` exitosos, 0 fallos)
+**no** aplicó este seed y aun así no encontró el problema — su entorno no
+era un clúster recién migrado desde cero: ya traía filas en
+`inventario.inventario_producto` de pruebas manuales previas en la misma
+máquina. Eso no invalida el hallazgo: un clon nuevo del repo, o el entorno
+que usa `db-migrations-clean-start` en CI, sí arranca sin esas filas, y ahí
+sí falla el primer "agregar al carrito" sin este seed. Por eso queda como
+paso documentado y obligatorio aquí, no como algo ya cubierto por la
+corrida existente.
 
 ## Cómo correr los niveles de concurrencia
 

@@ -573,58 +573,24 @@ jobs:
             | tail -n +2 | tr -d '\r' > /tmp/tablas-reales.txt
 
           # 35, no 33: inventario.reserva_stock y inventario.operacion_reserva
-          # no vienen de ninguna migracion Flyway. InventarioSchemaInitializer
-          # (src/main/java/.../infrastructure/config/) las crea con
-          # CREATE TABLE IF NOT EXISTS en un @PostConstruct -- una reserva de
-          # stock con reloj Lamport que se agrego directo por codigo despues
-          # de escribirse docs/db/schema.sql. El esquema real de inventario
-          # ya tenia 35 tablas desde antes del punto 5; solo se hacia
-          # invisible porque antes schema.sql se aplicaba una vez y estas dos
-          # se sumaban por su cuenta sin que nadie lo notara.
-          cat > /tmp/tablas-esperadas.txt <<'EOF'
-          inventario.inventario_producto
-          inventario.kardex_inventario
-          inventario.movimiento_inventario
-          inventario.operacion_reserva
-          inventario.reserva_stock
-          inventario.solicitud_idempotente
-          inventario.tipo_movimiento
-          inventario.subtipo_movimiento
-          ordenes_proveedores.detalle_orden_compra
-          ordenes_proveedores.orden_compra
-          ordenes_proveedores.proveedor
-          pedidos.carrito_de_compra
-          pedidos.carrito_detalle
-          pedidos.detalle_orden
-          pedidos.metodopago
-          pedidos.orden
-          pedidos.retry_probe
-          pedidos.solicitud_idempotente
-          pedidos.tipo_metodopago
-          productos.categoria_producto
-          productos.galeria_productos_v2
-          productos.gama
-          productos.iva
-          productos.marca
-          productos.producto
-          usuarios.auth_refresh_tokens
-          usuarios.ciudad
-          usuarios.direccion
-          usuarios.provincia
-          usuarios.rol
-          usuarios.usuario
-          usuarios.usuario_auditoria
-          ventas.factura_cuerpo
-          ventas.factura_encabezado
-          ventas.factura_outbox
-          EOF
-          sed -i 's/^ *//' /tmp/tablas-esperadas.txt
-          sort /tmp/tablas-esperadas.txt -o /tmp/tablas-esperadas.txt
+          # (reserva de stock con reloj Lamport) se agregaron originalmente
+          # fuera de Flyway (InventarioSchemaInitializer, @PostConstruct) y
+          # el esquema real de inventario ya tenia 35 tablas desde antes del
+          # punto 5. Se corrigio ese bypass trasladando ambas tablas y el
+          # indice a inventario-service/.../db/migration/V3__reserva_stock_lamport.sql:
+          # ahora las 35 tablas, incluidas estas dos, salen solo de Flyway.
+          #
+          # docs/db/tablas-esperadas.txt es la unica fuente de esta lista:
+          # tambien la usa el job "schema-sql-equivalencia" de mas abajo, que
+          # compara el mismo archivo contra docs/db/schema.sql. Que ambos
+          # jobs lean el mismo archivo es lo que hace automatica la deteccion
+          # de que las migraciones y schema.sql dejen de coincidir.
+          sort docs/db/tablas-esperadas.txt -o /tmp/tablas-esperadas.txt
           sort /tmp/tablas-reales.txt -o /tmp/tablas-reales.txt
 
           echo "--- Tablas creadas por las migraciones ---"
           cat /tmp/tablas-reales.txt
-          echo "--- Diferencia contra las 33 esperadas (vacio = OK) ---"
+          echo "--- Diferencia contra docs/db/tablas-esperadas.txt (vacio = OK) ---"
           diff /tmp/tablas-esperadas.txt /tmp/tablas-reales.txt
 
           echo "--- flyway_schema_history por esquema (V1, o V1+V2) ---"
@@ -650,6 +616,78 @@ jobs:
       - name: Apagar el sistema
         if: always()
         run: docker compose -f docker-compose.yml down -v
+
+  schema-sql-equivalencia:
+    name: docs/db/schema.sql equivale a las migraciones (Punto 5)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Punto 5, hallazgo del evaluador: docs/db/schema.sql sigue siendo la
+      # fuente de docker-compose.db.yml (entorno solo-de-base-de-datos que
+      # usan las evidencias de planes de consulta de la Entrega 4), pero
+      # nada comprobaba automaticamente que ese archivo siga equivaliendo
+      # al esquema real que arman las migraciones de los seis servicios.
+      # Este job levanta docker-compose.db.yml (que solo aplica schema.sql,
+      # sin ningun microservicio Spring ni Flyway) y compara sus tablas
+      # contra el mismo docs/db/tablas-esperadas.txt que usa el job
+      # "db-migrations-clean-start" para las migraciones: si alguien agrega
+      # una tabla en un lado y se olvida del otro, este diff falla.
+      - name: Levantar CRDB con solo schema.sql (docker-compose.db.yml)
+        run: |
+          # Los tres nodos y crdb-init se levantan JUNTOS: crdb-init es quien
+          # corre "cockroach init" para formar el cluster, y crdb-1/2/3 nunca
+          # se ponen "healthy" sin eso -- son circulares entre si. --wait aqui
+          # solo espera a los nodos (crdb-init no tiene healthcheck).
+          docker compose -f docker-compose.db.yml up -d --wait --wait-timeout 180
+          
+          # tiendatech-crdb-init no tiene healthcheck (es un contenedor de un solo
+          # uso que aplica schema.sql y termina), asi que "docker compose up --wait"
+          # no lo espera -- solo espera a que crdb-1/2/3 esten healthy. Sin esto, el
+          # paso de verificacion siguiente corria mientras crdb-init todavia estaba
+          # aplicando schema.sql (o ni siquiera habia empezado), y fallaba con
+          # "database tiendatech does not exist". Se espera aqui explicitamente a
+          # que el contenedor termine (exited) antes de seguir.
+          echo "Esperando a que tiendatech-crdb-init aplique schema.sql..."
+          estado=""
+          for i in $(seq 1 60); do
+            estado=$(docker inspect -f '{{.State.Status}}' tiendatech-crdb-init)
+            if [ "$estado" = "exited" ]; then
+              break
+            fi
+            sleep 2
+          done
+          docker logs tiendatech-crdb-init
+          codigo=$(docker inspect -f '{{.State.ExitCode}}' tiendatech-crdb-init)
+          if [ "$estado" != "exited" ] || [ "$codigo" != "0" ]; then
+            echo "tiendatech-crdb-init no termino correctamente (estado=$estado, exit=$codigo)"
+            exit 1
+          fi
+
+      - name: Verificar que schema.sql produce las mismas 35 tablas
+        run: |
+          cat > /tmp/verificar-schema-sql.sql <<'SQL'
+          SELECT table_schema || '.' || table_name AS tabla
+          FROM information_schema.tables
+          WHERE table_schema IN ('usuarios','pedidos','productos','inventario','ordenes_proveedores','ventas')
+          ORDER BY 1;
+          SQL
+          docker compose -f docker-compose.db.yml exec -T tiendatech-crdb-1 \
+            cockroach sql --insecure --host=localhost:26257 --database=tiendatech \
+            --format=csv --file=/dev/stdin < /tmp/verificar-schema-sql.sql \
+            | tail -n +2 | tr -d '\r' | sort > /tmp/tablas-schema-sql.txt
+          sort docs/db/tablas-esperadas.txt -o /tmp/tablas-esperadas.txt
+
+          echo "--- Tablas creadas por docs/db/schema.sql ---"
+          cat /tmp/tablas-schema-sql.txt
+          echo "--- Diferencia contra docs/db/tablas-esperadas.txt (vacio = OK) ---"
+          diff /tmp/tablas-esperadas.txt /tmp/tablas-schema-sql.txt
+
+      - name: Apagar el sistema
+        if: always()
+        run: docker compose -f docker-compose.db.yml down -v
 
   armado-ia-tests:
     name: armado-ia quality

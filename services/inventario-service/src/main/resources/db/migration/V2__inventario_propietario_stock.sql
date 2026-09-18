@@ -15,7 +15,7 @@
 -- depender de que productos-service ya haya migrado). Fue una migracion
 -- de datos de un corte historico especifico -- no una migracion de
 -- esquema repetible -- y queda documentada como texto de referencia en
--- docs/db/migraciones-historicas/README.md en vez de ejecutarse aqui.
+-- docs/db/migraciones-historicas.md en vez de ejecutarse aqui.
 
 ALTER TABLE inventario.inventario_producto ADD COLUMN IF NOT EXISTS nombre STRING;
 ALTER TABLE inventario.inventario_producto ADD COLUMN IF NOT EXISTS costo DECIMAL(18,2) NOT NULL DEFAULT 0;
