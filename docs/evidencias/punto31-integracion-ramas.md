@@ -65,12 +65,39 @@ se aplicó fue **hacia adelante**: las correcciones de este mismo punto
 `main` y revisada y aprobada por un compañero distinto del autor, en vez
 de subirse con un push directo.
 
-- **Pull Request:** *(pendiente de completar tras la fusión — ver nota)*
-- **Revisor:** *(nombre y usuario de GitHub del compañero que aprobó)*
+- **Pull Request:** [#85](https://github.com/JoseLozanoMorales/TiendaTech/pull/85)
+  ("Punto 31: corregir documento de decision y documentar integracion en
+  supletorio"), rama `fix/punto31-integracion-ramas` → `main`.
+- **Revisor:** José Alejandro Lozano Morales (`JoseLozanoMorales`), distinto
+  del autor (Jhinson Stalyn Aucatoma Celorio).
+- **Merge commit:** `48b5652`.
 
-> Nota: esta sección se completa con el número y enlace reales de la PR
-> una vez aprobada y fusionada, para no citar una evidencia que todavía
-> no existe.
+Esta misma PR (#85) expuso, en su primera corrida de CI, un defecto real y
+preexistente ajeno al contenido del punto #31: el job "Validar evidencia y
+compilar manuscrito (E4)" falló porque `docs/entrega4/PFC4.tex` tenía un
+enlace de evidencia (`\href{.../blob/main/docs/evidencias/cobertura/web/coverage-summary.json}`)
+sin pinnear a un commit fijo, a diferencia de todos los demás enlaces del
+documento. Funcionaba por casualidad en los pushes directos a `main` de
+antes de este punto (donde la rama local `main` existe al hacer checkout),
+pero nunca se había expuesto porque, hasta esta PR, ninguna integración de
+este cierre había pasado realmente por el flujo de Pull Request de GitHub.
+Se corrigió fijando el enlace al commit `ef374a09d203fc56cd21d08d7b7922ce9f42016c`
+(el que efectivamente regeneró `coverage-summary.json` con las cifras que
+el texto describe), mediante una segunda Pull Request:
+
+- **Pull Request:** [#86](https://github.com/JoseLozanoMorales/TiendaTech/pull/86)
+  ("Fijar enlace de evidencia de cobertura web a un commit (PFC4.tex)"),
+  rama `fix/href-evidencia-cobertura-web` → `main`.
+- **Revisor:** Jeremy Ruperto Gaibor Rodríguez (`JeremyGaibor`), distinto
+  del autor.
+- **Merge commit:** `e2346cd`.
+- CI verificada en verde, incluido el propio job "Validar evidencia y
+  compilar manuscrito (E4)", antes de la fusión.
+
+Con estas dos Pull Requests reales, revisadas por dos compañeros distintos
+(José y Jeremy, ambos con la materia ya aprobada pero disponibles para
+revisar), la corrección hacia adelante de la regla 5.5 queda verificada
+con evidencia concreta, no solo declarada.
 
 ---
 
