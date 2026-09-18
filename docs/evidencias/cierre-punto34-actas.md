@@ -23,7 +23,7 @@ participantes.
 
 Las sesiones fueron presenciales en la universidad cuando coincidía la
 disponibilidad del equipo. Esta modalidad fue declarada retrospectivamente
-por José Lozano el 18 de septiembre de 2026 y queda sujeta a ratificación de
+por Jhinson Aucatoma el 18 de septiembre de 2026 y queda sujeta a ratificación de
 los demás participantes. No se conservó una duración fiable; por ello las
 horas de los commits se presentan únicamente como ventanas de actividad.
 
@@ -55,12 +55,26 @@ horas de los commits se presentan únicamente como ventanas de actividad.
 
 ## Alcance de los días 14 y 15
 
-No hubo reuniones los días 14 y 15 de septiembre. José Lozano lo confirmó
+No hubo reuniones los días 14 y 15 de septiembre. Jhinson Aucatoma lo confirmó
 retrospectivamente el 18 de septiembre de 2026. El historial registra
 actividad técnica esos días, principalmente de un solo autor, pero esos
 commits corresponden a continuidad de trabajo individual o asincrónico. Por
 ello no se fabrican actas para esas fechas. Los demás integrantes podrán
 ratificar o corregir esta declaración durante la revisión del pull request.
+
+## Integración y ratificación verificadas
+
+- **Pull request:** [#92](https://github.com/JoseLozanoMorales/TiendaTech/pull/92).
+- **Commit de la rama:** `98d8024636934df3be3e4b8c070dd7cd0b51e1f5`.
+- **Merge commit:** `604a9b67155326874e06d75f244a413cb17290d2`.
+- **Revisor y responsable del merge:** Jeremy Gaibor (`JeremyGaibor`).
+- **Ratificación:** [revisión formal APPROVED](https://github.com/JoseLozanoMorales/TiendaTech/pull/92#pullrequestreview-5250914408).
+- **Checks del commit de rama:** 30 completados correctamente.
+- **Checks posteriores al merge en `main`:** 30 completados correctamente.
+
+Jeremy confirmó expresamente su participación presencial los días 3, 7, 10,
+11 y 13, las responsabilidades que se le atribuyen, el significado limitado
+de las ventanas Git y la ausencia de reuniones los días 14 y 15.
 
 ## Condición de cierre
 
