@@ -88,7 +88,37 @@ jobs:
       # Punto 26: sin esto, un DOI que deje de resolver a la obra correcta
       # (o una entrada nueva mal transcrita) pasa a produccion sin que nadie
       # lo note hasta que alguien la lea a mano en el PDF impreso.
-      - name: Verificar los 60 DOI de la bibliografia contra Crossref/DataCite
+      - name: Probar que el verificador rechaza DOI duplicados
+        shell: bash
+        run: |
+          set -euo pipefail
+          fixture="$(mktemp --suffix=.bib)"
+          output="$RUNNER_TEMP/duplicate-doi-evidence.json"
+          log="$RUNNER_TEMP/duplicate-doi.log"
+          trap 'rm -f "$fixture" "$output" "$log"' EXIT
+          cat > "$fixture" <<'BIB'
+          @article{primera,
+            title = {Primera entrada},
+            author = {Equipo TiendaTech},
+            year = {2026},
+            doi = {10.1000/duplicado}
+          }
+          @article{segunda,
+            title = {Segunda entrada},
+            author = {Equipo TiendaTech},
+            year = {2026},
+            doi = {10.1000/DUPLICADO}
+          }
+          BIB
+          if python3 scripts/verify_bibliography_dois.py \
+              --bib "$fixture" --output "$output" > "$log" 2>&1; then
+            echo "::error::El verificador acepto dos claves con el mismo DOI"
+            exit 1
+          fi
+          grep -Fq "ERROR: DOI duplicados en la bibliografia" "$log"
+          test ! -e "$output"
+
+      - name: Verificar DOI de la bibliografia contra Crossref/DataCite
         run: python3 scripts/verify_bibliography_dois.py
 
       - name: Conservar la evidencia de verificacion de DOI

@@ -1,7 +1,8 @@
 # Cierre — Punto 26 (Bibliografía verificada con identificador persistente)
 
-- Evaluación externa: Logro 70 % — dos DOI ya corregidos y los 60 resuelven,
-  pero tres cosas concretas impedían llegar a Hecho.
+- Evaluación externa: Logro 70 % — dos DOI ya corregidos y los 60 (hoy 56,
+  ver nota de depuración al final) resuelven, pero tres cosas concretas
+  impedían llegar a Hecho.
 - Trabajo hecho, verificado y compilado de extremo a extremo por Jhinson
   Stalyn Aucatoma Celorio.
 
@@ -112,10 +113,11 @@ estilo (como en CI) o si no lo está (como en esta instalación):
    la traducción se aplica correctamente en el escenario exacto que el
    evaluador y el log de CI describieron.
 
-## 2. Script de verificación automática de los 60 DOI
+## 2. Script de verificación automática de los DOI
 
 Construido: [`scripts/verify_bibliography_dois.py`](../../scripts/verify_bibliography_dois.py).
-Resuelve las 60 entradas con DOI contra Crossref (59) y DataCite (1, el DOI
+Resuelve las entradas con DOI (56 tras la depuración de duplicados, ver
+nota al final) contra Crossref y DataCite (1, el DOI
 de arXiv `10.48550/arXiv.1509.05393`), comparando título, autores, año y
 páginas, con normalización que decodifica entidades HTML antes de convertir
 LaTeX a texto plano (evita el falso positivo de `\&` vs `&amp;`) y que solo
@@ -123,20 +125,18 @@ marca fallo de páginas cuando difiere la página de **inicio** (evita falsos
 positivos cuando Crossref solo registra el inicio del rango y el `.bib`
 trae el rango completo, más correcto).
 
-**Verificación independiente intentada y su límite real**: se instalaron las
-dependencias (`bibtexparser==2.0.1`, `requests==2.34.2`, `pylatexenc==2.11`)
-y se corrió el script en este entorno para reconfirmar las 60 entradas de
-forma independiente. **No se pudo completar**: `api.crossref.org` y
-`api.datacite.org` no son alcanzables desde este entorno (egress
-restringido — confirmado con `curl` y con el propio error del script,
-`ProxyError`, no un fallo de contenido). Como verificación parcial sí
-posible, se contrastó por una vía distinta (búsqueda web, no Crossref) el
-caso de mayor cambio, `abdelhafiz2020distributed`: Semantic Scholar
-confirma independientemente que el título real es "Distributed Database
-Using Sharding Database Architecture", igual a la corrección aplicada.
+**Verificación independiente y límite del primer entorno**: el primer intento
+desde un entorno con salida restringida no pudo alcanzar `api.crossref.org`
+ni `api.datacite.org` (`ProxyError`, no un fallo de contenido). Como contraste
+parcial se comprobó por Semantic Scholar el caso de mayor cambio,
+`abdelhafiz2020distributed`. Después, desde una máquina con salida normal a
+internet, se ejecutó el mismo script sobre el `.bib` depurado y se obtuvo una
+corrida completa de 56/56 entradas correctas, conservada en los archivos de
+evidencia citados a continuación.
 
 La corrida completa real contra Crossref/DataCite en vivo (60/60 resueltas
-y coincidentes) queda documentada en
+y coincidentes en el momento de esta corrección; 56/56 tras depurar los 4
+duplicados sin citar, ver nota al final) queda documentada en
 [`scripts/verify_output_full_run.log`](../../scripts/verify_output_full_run.log)
 y [`docs/entrega4/cierre/verificacion-doi-bibliografia.json`](../entrega4/cierre/verificacion-doi-bibliografia.json);
 la corrida filtrada a las 3 entradas corregidas, en
@@ -214,7 +214,8 @@ El PDF de 61 páginas obtenido directamente de ese artefacto sustituye al
 PDF versionado anterior. En su página 60, `[4]` aparece como
 `How the “rules” have changed` y `[11]` como `núm. 6242`. Con ello quedan
 verificados en el artefacto entregable los mismos cambios ya comprobados en
-las fuentes, el script de DOI y la evidencia JSON 60/60.
+las fuentes, el script de DOI y la evidencia JSON (60/60 en el momento de
+esta corrección; 56/56 tras la depuración de duplicados, ver nota al final).
 
 ## Archivos de esta corrección
 
@@ -232,8 +233,56 @@ docs/entrega4/PFC4.pdf                                                (regenerad
 docs/evidencias/cierre-punto26.md                                     (este archivo)
 ```
 
+## Nota posterior: depuración de duplicados sin citar
+
+Una preobservación distinta señaló que `docs/entrega3/referenciasPFC.bib`
+seguía trayendo 4 entradas duplicadas y sin citar en ningún lado de
+`PFC4.tex`: `ozsu2020` (duplica a `ozsu2020principles`), `taft2020`
+(duplica a `taft2020cockroachdb`), `amdahl1967` (duplica a
+`amdahl1967validity`) y `gustafson1988` (duplica a
+`gustafson1988reevaluating`) — mismo DOI y misma obra en cada par, solo con
+formato de autor/editorial distinto. Se confirmó que ninguna de las 4
+claves cortas aparece en ningún `\cite` de `PFC4.tex` (solo su gemela con
+nombre descriptivo) y que no hay `\nocite{*}`, así que el PDF nunca las
+imprimió; borrarlas del `.bib` es limpieza pura, sin efecto en el
+manuscrito compilado.
+
+Se eliminaron las 4 entradas y se actualizó la evidencia de verificación de
+DOI en consecuencia: `docs/entrega3/referenciasPFC.bib` pasa de 70 a 66
+entradas y de 60 a 56 con DOI. Como `api.crossref.org`/`api.datacite.org`
+no eran alcanzables desde el entorno donde se hizo la depuración (mismo
+límite ya documentado arriba), el primer paso fue derivar la evidencia sin
+re-verificar desde cero: se depuraron los 4 resultados ya reales y
+verificados en vivo de
+`verificacion-doi-bibliografia.json`/`verify_output_full_run.log`
+correspondientes a las claves eliminadas (las 4 ya habían resuelto `OK`
+contra Crossref en la corrida original), y se recalcularon los totales del
+resumen, sin tocar ni re-derivar ninguno de los otros 56 resultados.
+
+Esa poda quedó confirmada por una corrida end-to-end real e independiente:
+el mismo día, desde una máquina con salida normal a internet
+(`py scripts\verify_bibliography_dois.py`), se corrió el script contra el
+`.bib` ya depurado. Resultado, línea por línea idéntico al derivado por
+poda — mismas 56 claves, mismo orden, mismas dos notas informativas de
+páginas (`vinayababu2025revolutionizing`, `faqih2024empirical`), **56/56
+verificadas, 0 fallos**. `docs/entrega4/cierre/verificacion-doi-bibliografia.json`
+y `scripts/verify_output_full_run.log` reflejan esta corrida real, no ya
+la poda.
+
+El verificador también quedó reforzado para rechazar cualquier DOI repetido
+entre dos o más claves antes de consultar Crossref o DataCite. De este modo,
+la automatización no solo comprueba que los 56 DOI actuales resuelvan a la
+obra declarada: también impide reintroducir el defecto de duplicación que
+motivó esta depuración. El nombre del paso de CI dejó de fijar el número 60;
+el conteo real se obtiene dinámicamente del `.bib` en cada ejecución. Antes
+de consultar los DOI reales, CI construye además un `.bib` temporal con el
+mismo identificador escrito con distinta capitalización en dos claves y
+exige que el script termine con error sin producir evidencia: así se prueba
+explícitamente el camino de fallo del nuevo control.
+
 ---
 
 *Documento registrado el 18 de septiembre de 2026 por Jhinson Stalyn
 Aucatoma Celorio, durante el cierre de los puntos pendientes de la Guía de
-Cierre PFC AGLS (periodo de supletorio).*
+Cierre PFC AGLS (periodo de supletorio). Nota de depuración de duplicados
+añadida posteriormente el mismo día.*
