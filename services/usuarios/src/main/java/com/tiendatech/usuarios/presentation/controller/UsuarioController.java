@@ -2,7 +2,9 @@ package com.tiendatech.usuarios.presentation.controller;
 
 import com.tiendatech.usuarios.application.dto.ClienteUpdateRequest;
 import com.tiendatech.usuarios.application.dto.UsuarioDTO;
+import com.tiendatech.usuarios.application.dto.UsuarioMeResponse;
 import com.tiendatech.usuarios.application.dto.UsuarioMinDTO;
+import com.tiendatech.usuarios.application.dto.UsuarioPerfilResponse;
 import com.tiendatech.usuarios.domain.model.Usuario;
 import com.tiendatech.usuarios.application.service.UsuarioService;
 import com.tiendatech.usuarios.presentation.support.UserAccessGuard;
@@ -56,11 +58,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioPayload(usuario));
     }
 
+    // Punto 4: antes devolvia ResponseEntity<?> con Map.of("data", ...), que
+    // springdoc no puede tipar. El JSON no cambia -- se declara con
+    // UsuarioMeResponse/UsuarioPerfilResponse en vez de un Map, siguiendo
+    // exactamente la misma forma que ya arma usuarioPayload(usuario).
     @GetMapping("/me")
-    public ResponseEntity<?> me() {
+    public ResponseEntity<UsuarioMeResponse> me() {
         Integer userId = accessGuard.currentUserId();
         Usuario usuario = usuarioService.getById(userId);
-        return ResponseEntity.ok(Map.of("data", usuarioPayload(usuario)));
+        return ResponseEntity.ok(new UsuarioMeResponse(usuarioPerfilResponse(usuario)));
     }
 
     @PostMapping("/crear-usuarioAdmin")
@@ -121,5 +127,23 @@ public class UsuarioController {
         payload.put("avatar_path", usuario.getAvatarPath());
         payload.put("avatarPath", usuario.getAvatarPath());
         return payload;
+    }
+
+    // Misma forma que usuarioPayload(usuario), pero tipada para que
+    // GET /api/usuarios/me quede descrita en el contrato OpenAPI (punto 4).
+    // Los demas metodos de este controlador siguen usando el Map de arriba
+    // sin cambios, fuera del alcance de este punto.
+    private UsuarioPerfilResponse usuarioPerfilResponse(Usuario usuario) {
+        UsuarioPerfilResponse perfil = new UsuarioPerfilResponse();
+        perfil.setUsuarioId(usuario.getUsuarioId());
+        perfil.setUsuario(usuario.getUsuario());
+        perfil.setNombre(usuario.getNombre());
+        perfil.setCedula(usuario.getCedula());
+        perfil.setCorreo(usuario.getCorreo());
+        perfil.setTelefono(usuario.getTelefono());
+        perfil.setIdRol(usuario.getIdRol());
+        perfil.setAvatarPathSnake(usuario.getAvatarPath());
+        perfil.setAvatarPath(usuario.getAvatarPath());
+        return perfil;
     }
 }

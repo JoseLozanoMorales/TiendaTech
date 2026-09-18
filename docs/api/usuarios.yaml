@@ -97,6 +97,19 @@
         },
         "type": "object"
       },
+      "KeepalivePayload": {
+        "properties": {
+          "remainingAbsoluteSeconds": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "remainingIdleSeconds": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "LoginAuditoriaDTO": {
         "properties": {
           "fechaLogin": {
@@ -123,6 +136,74 @@
         },
         "type": "object"
       },
+      "LoginRequest": {
+        "properties": {
+          "contrasena": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LoginResponse": {
+        "properties": {
+          "access": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/LoginUserResponse"
+          }
+        },
+        "type": "object"
+      },
+      "LoginUserResponse": {
+        "properties": {
+          "cedula": {
+            "type": "string"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "idRol": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "id_rol": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "usuarioId": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "LogoutResponse": {
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "ProvinciaDTO": {
         "properties": {
           "accion": {
@@ -134,6 +215,17 @@
           "provinciaId": {
             "format": "int32",
             "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "RefreshResponse": {
+        "properties": {
+          "access": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/KeepalivePayload"
           }
         },
         "type": "object"
@@ -214,6 +306,14 @@
         },
         "type": "object"
       },
+      "UsuarioMeResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UsuarioPerfilResponse"
+          }
+        },
+        "type": "object"
+      },
       "UsuarioMinDTO": {
         "properties": {
           "cedula": {
@@ -231,6 +331,40 @@
           "rolId": {
             "format": "int32",
             "type": "integer"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "usuarioId": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "UsuarioPerfilResponse": {
+        "properties": {
+          "avatarPath": {
+            "type": "string"
+          },
+          "avatar_path": {
+            "type": "string"
+          },
+          "cedula": {
+            "type": "string"
+          },
+          "correo": {
+            "type": "string"
+          },
+          "id_rol": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
           },
           "telefono": {
             "type": "string"
@@ -869,10 +1003,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "type": "object"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           },
@@ -885,7 +1016,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "description": "Contenido dinámico devuelto por el controlador; admite cualquier valor JSON."
+                      "$ref": "#/components/schemas/LoginResponse"
                     },
                     "message": {
                       "type": "string"
@@ -2611,7 +2742,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "description": "Contenido dinámico devuelto por el controlador; admite cualquier valor JSON."
+                      "$ref": "#/components/schemas/UsuarioMeResponse"
                     },
                     "message": {
                       "type": "string"
@@ -3716,7 +3847,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "description": "Contenido dinámico devuelto por el controlador; admite cualquier valor JSON."
+                      "$ref": "#/components/schemas/RefreshResponse"
                     },
                     "message": {
                       "type": "string"
@@ -3838,7 +3969,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "description": "Contenido dinámico devuelto por el controlador; admite cualquier valor JSON."
+                      "$ref": "#/components/schemas/LogoutResponse"
                     },
                     "message": {
                       "type": "string"
@@ -3892,7 +4023,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "description": "Contenido dinámico devuelto por el controlador; admite cualquier valor JSON."
+                      "$ref": "#/components/schemas/RefreshResponse"
                     },
                     "message": {
                       "type": "string"

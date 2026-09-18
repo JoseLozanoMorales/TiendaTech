@@ -14,10 +14,20 @@ import yaml
 from openapi_spec_validator import validate
 
 ROOT = Path(__file__).resolve().parents[2]
+# Valores relativos a ROOT (antes se asumia "services/<valor>" en los dos
+# lugares que los usan; el gateway vive fuera de services/, asi que ahora
+# cada entrada trae su ruta completa).
 SERVICES = {
-    "productos": "productos-service", "inventario": "inventario-service",
-    "pedidos": "pedidos-service", "ordenes-proveedores": "ordenes-proveedores-service",
-    "ventas": "ventas-service", "usuarios": "usuarios", "armado-ia": "armado-ia",
+    "productos": "services/productos-service", "inventario": "services/inventario-service",
+    "pedidos": "services/pedidos-service", "ordenes-proveedores": "services/ordenes-proveedores-service",
+    "ventas": "services/ventas-service", "usuarios": "services/usuarios", "armado-ia": "services/armado-ia",
+    # Punto 4: el gateway (Apps/web/frontend) exponia /api/admin/system sin
+    # documentar porque nunca estuvo en este diccionario. Su unico
+    # @RestController (SystemObservabilityController) ahora se exporta con
+    # el mismo mecanismo que los demas servicios; WebappController (vistas
+    # legacy, @Controller puro) queda fuera por el filtro angostado en
+    # OpenApiExportTest.java, no por logica de este script.
+    "gateway": "Apps/web/frontend",
 }
 METHODS = {"get", "post", "put", "patch", "delete", "head", "options", "trace"}
 GATEWAY = ROOT / "Apps/web/frontend/src/main/resources/application.yml"
@@ -93,7 +103,7 @@ def public_operation(service, method, path):
 
 
 def gateway_patterns():
-    config = yaml.safe_load(GATEWAY.read_text())
+    config = yaml.safe_load(GATEWAY.read_text(encoding="utf-8"))
     routes = config["spring"]["cloud"]["gateway"]["server"]["webmvc"]["routes"]
     return [pattern for route in routes for predicate in route["predicates"]
             if predicate.startswith("Path=") for pattern in predicate[5:].split(",")]
@@ -210,12 +220,23 @@ def consolidate(documents):
 
 
 def write_json(path, data):
-    path.write_text(json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+    # JSON is defined to be UTF-8 (RFC 8259); pin the encoding explicitly
+    # instead of relying on the OS locale. On Windows, Path.write_text()
+    # without encoding= falls back to the locale codepage (e.g. cp1252),
+    # which mis-encodes accented characters like the "á" in the Spanish
+    # descriptions above. Those bytes round-trip fine within Python (same
+    # locale reads them back), but consolidate() below builds cross-file
+    # $ref entries between these *.yaml files, and openapi_spec_validator's
+    # $ref resolver re-reads the referenced file straight off disk via its
+    # file:// URI and decodes it as strict UTF-8 -- so a cp1252-only byte
+    # there breaks with "invalid trailing UTF-8 octet".
+    path.write_text(json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+                     encoding="utf-8")
 
 
 def generate(args):
     documents = {}
-    overrides = json.loads(POLICY.read_text())
+    overrides = json.loads(POLICY.read_text(encoding="utf-8"))
     patterns = gateway_patterns()
     for service, directory in SERVICES.items():
         if service == "armado-ia":
@@ -226,10 +247,10 @@ def generate(args):
                            "-Dtest=OpenApiExportTest", "-Djacoco.skip=true", "test"]
                 if args.maven_repo:
                     command.insert(1, f"-Dmaven.repo.local={args.maven_repo}")
-                subprocess.run(command, cwd=ROOT / "services" / directory, check=True)
-            folder = ROOT / "services" / directory / "target/openapi"
-            raw = json.loads((folder / "raw.json").read_text())
-            inventory = json.loads((folder / "routes.json").read_text())
+                subprocess.run(command, cwd=ROOT / directory, check=True)
+            folder = ROOT / directory / "target/openapi"
+            raw = json.loads((folder / "raw.json").read_text(encoding="utf-8"))
+            inventory = json.loads((folder / "routes.json").read_text(encoding="utf-8"))
         documents[service] = enrich(service, raw, inventory, patterns, overrides)
         print(f"{service}: {len(inventory)} operaciones verificadas", flush=True)
     with tempfile.TemporaryDirectory(prefix="tiendatech-openapi-") as tmp:
@@ -238,16 +259,16 @@ def generate(args):
             write_json(folder / f"{service}.yaml", document)
         write_json(folder / "openapi.yaml", consolidate(documents))
         for file in sorted(folder.glob("*.yaml")):
-            validate(json.loads(file.read_text()), base_uri=file.as_uri())
+            validate(json.loads(file.read_text(encoding="utf-8")), base_uri=file.as_uri())
         destination = ROOT / "docs/api"
         mismatches = []
         for file in sorted(folder.glob("*.yaml")):
             target = destination / file.name
             if args.check:
-                if not target.exists() or target.read_text() != file.read_text():
+                if not target.exists() or target.read_text(encoding="utf-8") != file.read_text(encoding="utf-8"):
                     mismatches.append(file.name)
             else:
-                target.write_text(file.read_text())
+                target.write_text(file.read_text(encoding="utf-8"), encoding="utf-8")
         if mismatches:
             raise ValueError("Contratos desactualizados: " + ", ".join(mismatches)
                              + ". Ejecuta python scripts/openapi/generate.py y revisa el diff.")
