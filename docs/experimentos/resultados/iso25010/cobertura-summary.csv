@@ -2,8 +2,8 @@ servicio,lineas_cubiertas,lineas_no_cubiertas,cobertura_porcentaje,estado,report
 inventario-service,311,1085,22.28,NO CUMPLE,docs/evidencias/cobertura/inventario-service-jacoco.xml
 ordenes-proveedores-service,64,482,11.72,NO CUMPLE,docs/evidencias/cobertura/ordenes-proveedores-service-jacoco.xml
 pedidos-service,443,1495,22.86,NO CUMPLE,docs/evidencias/cobertura/pedidos-service-jacoco.xml
-productos-service,138,374,26.95,NO CUMPLE,docs/evidencias/cobertura/productos-service-jacoco.xml
-usuarios,511,526,49.28,NO CUMPLE,docs/evidencias/cobertura/usuarios-jacoco.xml
+productos-service,116,396,22.66,NO CUMPLE,docs/evidencias/cobertura/productos-service-jacoco.xml
+usuarios,442,595,42.62,NO CUMPLE,docs/evidencias/cobertura/usuarios-jacoco.xml
 ventas-service,161,332,32.66,NO CUMPLE,docs/evidencias/cobertura/ventas-service-jacoco.xml
 gateway,162,45,78.26,CUMPLE,docs/evidencias/cobertura/gateway-jacoco.xml
 armado-ia,580,351,62.30,NO CUMPLE,docs/evidencias/cobertura/armado-ia-coverage.xml

@@ -50,18 +50,18 @@
     {
       "servicio": "productos-service",
       "reporte": "docs/evidencias/cobertura/productos-service-jacoco.xml",
-      "lineas_cubiertas": 138,
+      "lineas_cubiertas": 116,
       "lineas_totales": 512,
-      "cobertura_porcentaje": 26.95,
+      "cobertura_porcentaje": 22.66,
       "umbral_porcentaje": 70.0,
       "cumple": false
     },
     {
       "servicio": "usuarios",
       "reporte": "docs/evidencias/cobertura/usuarios-jacoco.xml",
-      "lineas_cubiertas": 511,
+      "lineas_cubiertas": 442,
       "lineas_totales": 1037,
-      "cobertura_porcentaje": 49.28,
+      "cobertura_porcentaje": 42.62,
       "umbral_porcentaje": 70.0,
       "cumple": false
     },

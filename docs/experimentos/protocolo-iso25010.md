@@ -98,11 +98,18 @@ de esta corrida oficial (935/1136 líneas, 82.31 %) quedó obsoleta el 17-18 de
 septiembre de 2026: medía cada microservicio Java solo sobre `application/**`
 y `armado-ia` solo sobre `app.domain`+`app.explicacion`. Al retirar esos
 filtros y agregar el Gateway (que no tenía JaCoCo configurado), la cobertura
-real de los ocho servicios medidos es 2370/7060 líneas (33.57 %,
-IC95 % Wilson descriptivo 32.4771–34.6796 %) — **NO CUMPLE** el umbral de
+real de los ocho servicios medidos es 2279/7060 líneas (32.28 %,
+IC95 % Wilson descriptivo 31.1997–33.3805 %) — **NO CUMPLE** el umbral de
 70 %; solo el Gateway lo alcanza (78.26 %). El detalle por servicio está en
-`docs/experimentos/resultados/iso25010/cobertura-summary.csv`, regenerado en
-la misma fecha desde los XML versionados en `docs/evidencias/cobertura/`.
+`docs/experimentos/resultados/iso25010/cobertura-summary.csv`, regenerado el
+18 de septiembre de 2026 desde los XML versionados en
+`docs/evidencias/cobertura/`. Una primera regeneración el 17 de septiembre
+había reportado 2370/7060 (33.57 %) porque `usuarios` y `productos-service`
+se midieron con el perfil Maven `pact` activo por error (agrega
+`src/test/pact-java/`, pensado solo para los jobs de verificación de
+contrato de CI, `-Ppact`); se corrigió contra la corrida en vivo del job
+`coverage-java` de CI (sin ese perfil) y se confirmó localmente con
+`mvn clean test`.
 Disponibilidad, fiabilidad, rendimiento, complejidad y seguridad no se
 recalcularon en este ajuste: conservan su corrida oficial del 2026-09-04 (o
 del 2026-09-11 para seguridad) sin cambios. Seguridad cubre las ocho familias

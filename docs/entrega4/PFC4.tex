@@ -675,14 +675,14 @@ Compatibilidad & Contratos HTTP/gRPC; Pact y ensayo completo entre consumidores 
 Capacidad de interacción & Interfaces web/Android; sin estudio formal de usuarios.\\
 Fiabilidad & Ventana oficial de 3600 s: 3588/3588 sondeos, 100\,\% (IC95\,\% Wilson 99{,}8931--100\,\%); en carga, 0/2112 respuestas 5xx (límite superior 0{,}1816\,\%).\\
 Seguridad & JWT, restricciones de exposición y pruebas negativas; no auditoría integral.\\
-Mantenibilidad & Cobertura agregada 33{,}57\,\% sobre el árbol completo de los ocho servicios medidos (seis Java, el Gateway y \texttt{armado-ia}; 11{,}72--78{,}26\,\% por módulo; solo el Gateway alcanza el 70\,\%) y PMD máximo 9; cifra regenerada el 17 de septiembre de 2026 tras ampliar \texttt{armado-ia} a su paquete \texttt{app} completo y agregar JaCoCo al Gateway, ver §\ref{sec:cobertura-complejidad}.\\
+Mantenibilidad & Cobertura agregada 32{,}28\,\% sobre el árbol completo de los ocho servicios medidos (seis Java, el Gateway y \texttt{armado-ia}; 11{,}72--78{,}26\,\% por módulo; solo el Gateway alcanza el 70\,\%) y PMD máximo 9; cifra regenerada el 18 de septiembre de 2026 en una corrida de CI que también agrega JaCoCo al Gateway y amplía \texttt{armado-ia} a su paquete \texttt{app} completo, ver §\ref{sec:cobertura-complejidad}.\\
 Flexibilidad & Contenedores y configuración; no ensayo multientorno exhaustivo.\\
 Seguridad operacional & Riesgos de stock/pago identificados; no análisis completo de daño operacional.\\\bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Cobertura y complejidad}\label{sec:cobertura-complejidad}
-La tabla \ref{tab:cobertura} procede del informe \path{informe-umbral-70.json}, regenerado el 17 de septiembre de 2026 sobre el árbol completo de cada servicio Java, el paquete \texttt{app} completo de \texttt{armado-ia} y el Gateway (\texttt{Apps/web/frontend}), que hasta entonces no tenía JaCoCo configurado. Las cifras resultantes son más bajas que las reportadas antes de ese ajuste, pero honestas: solo el Gateway alcanza el umbral del 70\,\%.
+La tabla \ref{tab:cobertura} procede del informe \path{informe-umbral-70.json}, regenerado el 18 de septiembre de 2026 sobre el árbol completo de cada servicio Java, el paquete \texttt{app} completo de \texttt{armado-ia} y el Gateway (\texttt{Apps/web/frontend}), que hasta entonces no tenía JaCoCo configurado. Las cifras resultantes son más bajas que las reportadas antes de ese ajuste, pero honestas: solo el Gateway alcanza el umbral del 70\,\%.
 
 \begin{table}[H]\centering\small
 \caption{Cobertura en el alcance de los informes disponibles.}\label{tab:cobertura}
@@ -691,16 +691,18 @@ La tabla \ref{tab:cobertura} procede del informe \path{informe-umbral-70.json}, 
 Inventario & 311 & 1396 & 22,28\\
 Órdenes a proveedores & 64 & 546 & 11,72\\
 Pedidos & 443 & 1938 & 22,86\\
-Productos & 138 & 512 & 26,95\\
-Usuarios & 511 & 1037 & 49,28\\
+Productos & 116 & 512 & 22,66\\
+Usuarios & 442 & 1037 & 42,62\\
 Ventas & 161 & 493 & 32,66\\
 Gateway & 162 & 207 & 78,26\\
 armado-ia & 580 & 931 & 62,30\\\midrule
-Agregado (ocho servicios) & 2370 & 7060 & 33,57\\\bottomrule
+Agregado (ocho servicios) & 2279 & 7060 & 32,28\\\bottomrule
 \end{tabular}
 \end{table}
 
-El umbral del 70\,\% se verifica directamente desde los ocho XML mediante \evidencia{docs/evidencias/cobertura/verificar_umbral.py}{\texttt{verificar\_umbral.py}}. El resultado versionado \path{informe-umbral-70.json}, regenerado el 17 de septiembre de 2026 sobre una corrida limpia de los ocho servicios, muestra que solo el Gateway alcanza el 70\,\% (78,26\,\%): los otros siete quedan entre 11,72\,\% (\texttt{ordenes-proveedores-service}) y 62,30\,\% (\texttt{armado-ia}), con un agregado ponderado de 33,57\,\% sobre 7060 líneas instrumentables. La comprobación no depende de una publicación externa en Codecov y mide el árbol completo de cada servicio Java, el paquete \texttt{app} completo de \texttt{armado-ia} (antes restringido a \texttt{app.domain} y \texttt{app.explicacion}) y, desde esta corrida, el Gateway. El umbral permanece declarado en el goal \texttt{check} de JaCoCo de cada \texttt{pom.xml}, con \texttt{haltOnFailure=false} para no bloquear la integración continua mientras se amplía la suite de pruebas hacia dominio, infraestructura y presentación.
+El umbral del 70\,\% se verifica directamente desde los ocho XML mediante \evidencia{docs/evidencias/cobertura/verificar_umbral.py}{\texttt{verificar\_umbral.py}}. El resultado versionado \path{informe-umbral-70.json}, regenerado el 18 de septiembre de 2026 sobre una corrida limpia de los ocho servicios, muestra que solo el Gateway alcanza el 70\,\% (78,26\,\%): los otros siete quedan entre 11,72\,\% (\texttt{ordenes-proveedores-service}) y 62,30\,\% (\texttt{armado-ia}), con un agregado ponderado de 32,28\,\% sobre 7060 líneas instrumentables. La comprobación no depende de una publicación externa en Codecov y mide el árbol completo de cada servicio Java, el paquete \texttt{app} completo de \texttt{armado-ia} (antes restringido a \texttt{app.domain} y \texttt{app.explicacion}) y, desde esta corrida, el Gateway. El umbral permanece declarado en el goal \texttt{check} de JaCoCo de cada \texttt{pom.xml}, con \texttt{haltOnFailure=false} para no bloquear la integración continua mientras se amplía la suite de pruebas hacia dominio, infraestructura y presentación.
+
+Las cifras de \texttt{Usuarios} y \texttt{Productos} se corrigieron el 18 de septiembre de 2026: una primera medición local había reportado 511/1037 (49,28\,\%) y 138/512 (26,95\,\%) porque la corrida en IntelliJ tenía activo el perfil Maven \texttt{pact}, que agrega \texttt{src/test/pact-java/} (pensado para correr solo con \texttt{-Ppact} en los jobs de verificación de contrato de CI) al \texttt{mvn test} plano. La primera corrida en vivo del job \texttt{coverage-java} en CI, sin ese perfil, ya midió los valores correctos, confirmados localmente con \texttt{mvn clean test} y el perfil \texttt{pact} desactivado.
 
 El resumen regenerado en \path{docs/experimentos/resultados/iso25010/complejidad/summary.csv}, que acompaña al código refactorizado, aplica el mismo criterio al servidor Java y al cliente TypeScript/React: máximo de complejidad ciclomática por método o función estrictamente inferior a diez. PMD 7.17.0 mide Java y la regla \texttt{complexity} de ESLint mide la web en su variante clásica; cada herramienta cuenta las decisiones propias de su lenguaje. La ejecución local posterior al refactor volvió a medir los siete módulos Java completos, sin excluir los métodos modificados. Los siete servicios Java y el cliente web cumplen el umbral. No se extiende esta medición al servicio Python. El \href{https://github.com/JoseLozanoMorales/TiendaTech/blob/f6de7608d79b746d11a4c14440c89086d765b279/docs/experimentos/resultados/iso25010/complejidad/summary.csv}{resumen inicial anterior al refactor} se conserva como referencia histórica y no contiene los valores de la tabla actual.
 
