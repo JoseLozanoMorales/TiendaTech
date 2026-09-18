@@ -1,6 +1,6 @@
 # Preparación de la firma de distribución (E6)
 
-Estado actual: **clave de José creada y APK release firmado y verificado localmente**. Certificado `CN=Jose Alejandro Lozano Morales`, RSA de 3072 bits; firma APK v2 válida y certificado del APK idéntico al exportado de su almacén. El APK no es depurable. Fecha local: 12 de septiembre de 2026.
+Estado actual: **clave de José creada; APK local histórico y APK publicado diferenciados**. El APK publicado en `v4.0.0` tiene firma v2 válida, certificado `CN=Jose Alejandro Lozano Morales`, RSA de 3072 bits, y no es depurable. La validación física del 12 de septiembre corresponde al APK local histórico, no al publicado.
 
 - Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) (tambien versionado en `release/` desde 2026-09-17, excepcion puntual del punto 42 SS8.3; ver punto 37 y `.gitignore`).
 - Checksum: [tiendatech-release.apk.sha256](tiendatech-release.apk.sha256).
@@ -10,12 +10,20 @@ Estado actual: **clave de José creada y APK release firmado y verificado localm
 
 Custodio: José Alejandro Lozano Morales. El almacén privado está fuera del repositorio, en el directorio personal `.tiendatech-signing`, archivo `jose-lozano-release.p12`, alias `jose-lozano`. La contraseña fue introducida por José en una consola local, no se guardó en los archivos del proyecto. Conservar un respaldo privado del almacén y la contraseña en el gestor personal antes de depender de esta clave para futuras actualizaciones.
 
-La primera generación se hizo localmente y queda conservada como evidencia histórica.
-José confirmó instalación e inicio correctos en dos dispositivos después de resolver
-el conflicto con la versión debug. Es validación reportada por el usuario; no se
-registraron modelos ni versiones de Android y no equivale a una prueba integral de
-compra. La compilación y publicación automáticas posteriores se verificaron en CI.
-El APK debug anterior se conserva como artefacto histórico.
+La primera generación se hizo localmente y queda conservada como evidencia
+histórica. José confirmó instalación e inicio correctos en dos dispositivos
+después de resolver el conflicto con la versión debug, pero esa comprobación
+corresponde al APK local de SHA-256 `9da16724b311ac53e2a670fedd08dfaabe7c3a28ce7589fe80199a2999a04e59`,
+no al APK publicado de SHA-256
+`b1e622a201e40cc662a1a768e3832ba53e5274b6aacd2d10f5150f4eccb1d304`.
+No se registraron modelos ni versiones de Android y no equivale a una prueba
+integral de compra. La compilación, firma y publicación automáticas posteriores
+se verificaron en CI. El 18 de septiembre se repitió la instalación del binario
+publicado exacto en un Xiaomi 23117RA68G con Android 15 y un Infinix X6837 con
+Android 13. En ambos casos el guion verificó primero el SHA-256 `b1e622a2...` y
+35.849.007 bytes, `adb install -r` devolvió `Success` y el inicio del paquete
+`com.tiendatech.mobile` quedó confirmado. El APK debug anterior se conserva
+como artefacto histórico.
 
 El responsable que custodie la clave deberá proporcionar al proceso Gradle estas variables de entorno, sin guardar sus valores en Git:
 
@@ -103,3 +111,10 @@ aparece marcada `Latest`, no `Pre-release`.
   identifica el mismo commit, tag y ejecución.
 
 Evidencia completa en `docs/evidencias/firma-release-jose/verificacion-final-v4.0.0.md`.
+
+El APK versionado desde el commit `3370e29` tiene 35.849.007 bytes y SHA-256
+`b1e622a2...`, exactamente iguales al activo publicado según la API de GitHub.
+Esto corrige el checksum versionado que antes correspondía al APK local, pero no
+convierte la instalación histórica de `9da16724...` en validación física del
+binario publicado. Esa validación se repitió separadamente sobre `b1e622a2...` y
+se conserva en `docs/evidencias/firma-release-jose/dispositivos-apk-publicado/`.

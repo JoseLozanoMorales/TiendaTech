@@ -13,8 +13,13 @@ copia es solo para que el checksum sea verificable localmente. Ver
 
 El [APK release](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk)
 está firmado por José y tiene [checksum](tiendatech-release.apk.sha256)
-verificado. La firma v2, el certificado público y la validación de instalación
-y publicación se documentan en [Firma de distribución](FIRMA-DISTRIBUCION.md).
+verificado. La firma v2, el certificado público y la publicación se documentan
+en [Firma de distribución](FIRMA-DISTRIBUCION.md). La instalación histórica en
+dos dispositivos corresponde a un APK local anterior (`9da16724...`) y se
+mantiene diferenciada. El binario distribuido exacto (`b1e622a2...`) fue
+instalado e iniciado posteriormente en otros dos dispositivos; la evidencia
+automatizada y visual está en
+`docs/evidencias/firma-release-jose/dispositivos-apk-publicado/`.
 
 ## Paquete debug histórico
 

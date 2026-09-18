@@ -1,0 +1,39 @@
+{
+  "checked_at_date": "2026-09-18",
+  "artifact": {
+    "path": "release/tiendatech-release.apk",
+    "release_url": "https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk",
+    "bytes": 35849007,
+    "sha256": "b1e622a201e40cc662a1a768e3832ba53e5274b6aacd2d10f5150f4eccb1d304"
+  },
+  "devices": [
+    {
+      "evidence": "device-7873e52cc9db.json",
+      "manufacturer": "Xiaomi",
+      "model": "23117RA68G",
+      "android_version": "15",
+      "sdk": 35,
+      "install_success": true,
+      "launch_confirmed": true,
+      "screenshots": {
+        "device-7873e52cc9db-inicio-cuenta.jpeg": "96fda5e45442344c7e310e2fef1719d21ae00956e427c46b758eb16e12cb2084",
+        "device-7873e52cc9db-inicio-login.jpeg": "3dde077e8cdfee6d4aed593ee0da1baa1cf3a6c1757d195828f2d85ec0117edb"
+      }
+    },
+    {
+      "evidence": "device-99c94a04a489.json",
+      "manufacturer": "INFINIX",
+      "model": "Infinix X6837",
+      "android_version": "13",
+      "sdk": 33,
+      "install_success": true,
+      "launch_confirmed": true,
+      "screenshots": {
+        "device-99c94a04a489-inicio-login.jpeg": "612bda8e928371689060358717bdb16db039b6e0fb0ccaf5428cfffbce647314",
+        "device-99c94a04a489-recuperar-contrasena.jpeg": "6c2c322d615808da7dae3e2a0ab9635f87b76626296f2d3b6ea84d71d82c4afd",
+        "device-99c94a04a489-crear-cuenta.jpeg": "83cccf2c53f221dc25d022e923db8077fc9ca6595239f7edf15098d97d1bc051"
+      }
+    }
+  ],
+  "scope": "instalación e inicio del APK publicado exacto en dos dispositivos físicos; no prueba autenticación, recuperación, registro ni compra"
+}

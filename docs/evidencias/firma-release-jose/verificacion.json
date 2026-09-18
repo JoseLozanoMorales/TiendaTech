@@ -2,8 +2,10 @@
   "checked_at_utc": "2026-09-13T00:37:47.292959+00:00",
   "base_commit": "c5d68ba5bfade20e924a858075c89aa614ae70f8",
   "source_state": "árbol local con configuración release aún sin commit",
-  "gradle_build_script_sha256": "29ec862d1ca3873a1dc9652ae98fb5ed4a8885d8d65f498a2636ff54c3653233",
-  "gradle_build_script_sha256_nota": "Corregido: el valor anterior (3f0da12782d5291a87347fd01cb7afc28020cb47332022c2081f1df7bd0cd1ef) se calculó sobre una copia local con finales de línea de Windows. Este es el SHA-256 real de Apps/mobile/app/build.gradle.kts tal como está versionado (LF), reproducible con: git show <commit>:Apps/mobile/app/build.gradle.kts | sha256sum",
+  "gradle_build_script_sha256": "3f0da12782d5291a87347fd01cb7afc28020cb47332022c2081f1df7bd0cd1ef",
+  "gradle_build_script_sha256_status": "valor histórico registrado durante la firma local; no reproducible desde ningún blob versionado identificado",
+  "gradle_build_script_sha256_nota": "Se restituye el dato original registrado el 2026-09-13. La explicación posterior que lo atribuía a finales de línea de Windows era incorrecta: el blob canónico LF de v4.0.0 produce 29ec862d1ca3873a1dc9652ae98fb5ed4a8885d8d65f498a2636ff54c3653233 y la copia CRLF comprobada produce d3b6d8eda5acef7c14f6f28f796993de3f8a9972f990248d76968b637bfccd96. Este registro histórico no demuestra qué guion exacto produjo el APK local.",
+  "published_release_gradle_build_script_sha256": "29ec862d1ca3873a1dc9652ae98fb5ed4a8885d8d65f498a2636ff54c3653233",
   "artifact": "release\\tiendatech-release.apk",
   "artifact_sha256": "9da16724b311ac53e2a670fedd08dfaabe7c3a28ce7589fe80199a2999a04e59",
   "bytes": 35849002,
@@ -19,13 +21,13 @@
   "version_code": 1,
   "min_sdk": 26,
   "target_sdk": 37,
-  "device_installation": "Instalación e inicio correctos en dos dispositivos, confirmados por José en esta conversación tras resolver el conflicto con la versión debug.",
+  "device_installation": "Instalación e inicio correctos en dos dispositivos, confirmados por José para este APK local histórico de SHA-256 9da16724b311ac53e2a670fedd08dfaabe7c3a28ce7589fe80199a2999a04e59; no valida el APK publicado de SHA-256 b1e622a201e40cc662a1a768e3832ba53e5274b6aacd2d10f5150f4eccb1d304.",
   "published": false,
   "device_validation_scope": {
     "source": "confirmación del usuario; no observación directa del asistente",
     "devices": 2,
     "models_and_android_versions": "no proporcionados",
-    "functional_scope": "instalación e inicio; no prueba integral de compra",
+    "functional_scope": "instalación e inicio del APK local 9da16724; no prueba integral de compra ni del APK publicado b1e622a2",
     "initial_issue": "mismo applicationId con certificados debug y release distintos",
     "resolution": "usuario confirmó que el conflicto de firmas era la causa y que el release inicia correctamente"
   }
