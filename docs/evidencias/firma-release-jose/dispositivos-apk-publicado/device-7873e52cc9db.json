@@ -1,0 +1,25 @@
+{
+    "checked_at_utc":  "2026-09-18T19:49:42.0692734+00:00",
+    "apk":  {
+                "source":  "release/tiendatech-release.apk",
+                "bytes":  35849007,
+                "sha256":  "b1e622a201e40cc662a1a768e3832ba53e5274b6aacd2d10f5150f4eccb1d304",
+                "release_url":  "https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk"
+            },
+    "device":  {
+                   "serial_sha256":  "7873e52cc9dbb76b6e77e7e183261d6a14874c0525d4fb41c48521de96746749",
+                   "manufacturer":  "Xiaomi",
+                   "model":  "23117RA68G",
+                   "android_version":  "15",
+                   "sdk":  "35"
+               },
+    "validation":  {
+                       "install_command":  "adb -s \u003cserial\u003e install -r release/tiendatech-release.apk",
+                       "install_exit_code":  0,
+                       "install_output":  "Performing Streamed Install\r\nSuccess",
+                       "installed_package_path":  "package:/data/app/~~70_AyDCds4WUe7PgOrtbnQ==/com.tiendatech.mobile-QibVF16o_ODWB_WiqqCkAA==/base.apk",
+                       "launch_package":  "com.tiendatech.mobile",
+                       "launch_exit_code":  0,
+                       "launch_confirmed":  true
+                   }
+}

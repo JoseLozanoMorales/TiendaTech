@@ -30,6 +30,33 @@ verificó de forma independiente, descargando los archivos publicados:
    resolviendo el defecto de reproducibilidad que cerraba el punto 44.
 4. `provenance.txt` identifica el mismo commit, el mismo tag (`v4.0.0`) y la
    misma ejecución (`34911055622`) que el resto de la evidencia.
+5. El APK versionado en `release/tiendatech-release.apk` desde `3370e29` tiene
+   35.849.007 bytes y el mismo SHA-256 `b1e622a2...` publicado por la API de
+   GitHub. El `.sha256` versionado ya corresponde al binario distribuido.
+
+## Distinción histórica y validación correctiva en dispositivos
+
+La instalación e inicio informados en dos dispositivos el 12 de septiembre
+corresponden al APK local histórico de SHA-256 `9da16724...`, no al APK de
+SHA-256 `b1e622a2...` publicado en `v4.0.0`. Por tanto, la firma, procedencia,
+checksum y publicación del APK distribuido están verificadas, pero su
+instalación física no se deduce de aquella prueba.
+
+La comprobación se repitió el 18 de septiembre sobre el binario publicado
+exacto. El guion `scripts/verify-published-apk-device.ps1` verificó antes de
+cada instalación 35.849.007 bytes y SHA-256 `b1e622a2...`, instaló mediante
+`adb install -r`, confirmó el paquete `com.tiendatech.mobile` e inició la
+actividad principal. Los resultados fueron:
+
+| Dispositivo | Sistema | Instalación | Inicio |
+|---|---|---|---|
+| Xiaomi 23117RA68G | Android 15, SDK 35 | `Success` | confirmado |
+| INFINIX Infinix X6837 | Android 13, SDK 33 | `Success` | confirmado |
+
+Los seriales se conservan únicamente como SHA-256. Los dos JSON y cinco
+capturas están en `dispositivos-apk-publicado/`. Las capturas demuestran que la
+aplicación abre y permite navegar entre pantallas de acceso; no demuestran que
+se hayan enviado formularios ni completado una compra.
 
 ## Declaración para el manuscrito
 

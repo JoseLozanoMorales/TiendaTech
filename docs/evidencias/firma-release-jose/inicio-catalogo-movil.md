@@ -6,7 +6,7 @@ Captura original aportada por José en esta conversación después de confirmar 
 
 Se observa TiendaTech abierta en la pantalla de catálogo, con productos, imágenes, precios y controles de búsqueda, carrito, cuenta y escaneo. Respalda visualmente el inicio y la presentación del catálogo en un dispositivo.
 
-La atribución al release firmado se basa en la confirmación de José; la imagen por sí sola no identifica la firma, el hash del APK ni la versión instalada. No demuestra por sí sola una compra completa, la conexión en vivo al backend ni la prueba de los dos dispositivos. La firma y el checksum se comprueban por separado en `verificacion.json` y `apksigner.txt`.
+La atribución al APK local firmado se basa en la confirmación de José; la imagen por sí sola no identifica la firma, el hash del APK ni la versión instalada. La prueba histórica corresponde al APK `9da16724...` y no valida el APK `b1e622a2...` publicado en `v4.0.0`. No demuestra por sí sola una compra completa, la conexión en vivo al backend ni la prueba de los dos dispositivos. La firma y el checksum se comprueban por separado en `verificacion.json` y `apksigner.txt`.
 
 Modelo, versión de Android y fecha exacta de captura no proporcionados. La hora visible no se utiliza para inferir una fecha.
 
