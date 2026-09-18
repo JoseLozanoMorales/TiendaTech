@@ -25,4 +25,18 @@ test('un administrador inicia sesion y gestiona productos', async ({ page }) => 
   await expect(page.getByText('Procesador Ryzen 7')).toBeVisible()
   await page.getByRole('button', { name: 'Crear producto' }).click()
   await expect(page.getByRole('heading', { name: 'Crear producto' })).toBeVisible()
+
+  // Hasta aqui la prueba solo abria el dialogo, sin escribir nada (hallazgo
+  // del punto 13: el nombre afirmaba "gestiona productos" sin ninguna
+  // gestion real). Categoria, marca, gama e IVA ya vienen precargados con el
+  // primer valor disponible (ver defaults() en AdminView.tsx); solo faltan
+  // nombre y precio, que son obligatorios.
+  const nombreProducto = 'Auriculares E2E administracion'
+  await page.getByLabel('Nombre').fill(nombreProducto)
+  await page.getByLabel('Precio').fill('199.99')
+  await page.getByRole('button', { name: 'Guardar producto' }).click()
+
+  await expect(page.getByText('Producto creado correctamente.')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Crear producto' })).toBeHidden()
+  await expect(page.getByText(nombreProducto)).toBeVisible()
 })

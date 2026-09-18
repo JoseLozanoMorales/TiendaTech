@@ -14,6 +14,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -47,16 +48,19 @@ public class LoginController {
 
         }
 
-        Map<String, Object> userPayload = Map.of(
-                "usuarioId", u.getUsuarioId(),
-                "usuario",   u.getUsuario(),
-                "nombre",    u.getNombre(),
-                "cedula",    u.getCedula(),
-                "correo",    u.getCorreo(),
-                "telefono",  u.getTelefono(),
-                "id_rol",    u.getIdRol(),
-                "idRol",     u.getIdRol()
-        );
+        // Map.of(...) lanza NullPointerException si cualquier valor es null.
+        // cedula y telefono son columnas opcionales (pueden ser null en un
+        // usuario real), asi que se usa un mapa mutable que si tolera null
+        // en vez de rechazar el login con un 500 (ver docs/evidencias/e2e/cierre-punto13.md).
+        Map<String, Object> userPayload = new LinkedHashMap<>();
+        userPayload.put("usuarioId", u.getUsuarioId());
+        userPayload.put("usuario",   u.getUsuario());
+        userPayload.put("nombre",    u.getNombre());
+        userPayload.put("cedula",    u.getCedula());
+        userPayload.put("correo",    u.getCorreo());
+        userPayload.put("telefono",  u.getTelefono());
+        userPayload.put("id_rol",    u.getIdRol());
+        userPayload.put("idRol",     u.getIdRol());
         var tokens = refreshTokenService.issueOnLogin(
                 u.getUsuarioId(),
                 u.getUsuario(),

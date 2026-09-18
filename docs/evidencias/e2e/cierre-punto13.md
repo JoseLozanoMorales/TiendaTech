@@ -24,9 +24,9 @@ suite pasaba con el sistema completo ausente.
 
 ## Bug real encontrado y corregido en el camino
 
-La primera corrida contra el sistema real (run
-`https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/CI-260`,
-commit `5362f27`) levantó el stack completo correctamente y el catálogo
+La primera corrida contra el sistema real (checks del commit
+`https://github.com/JoseLozanoMorales/TiendaTech/commit/5362f27/checks`)
+levantó el stack completo correctamente y el catálogo
 pasó (`/api/productos` ya respondía con "Procesador Ryzen 7" desde la base
 real), pero el login del administrador falló con un **500 real**, no con
 un problema de credenciales:
@@ -44,20 +44,42 @@ administrador sembrado no tenía `cedula` ni `telefono` (ambas columnas son
 opcionales en el esquema y en el formulario de registro), así que el mapa
 fallaba al construirse.
 
-**Esto es un defecto real y preexistente del backend**, no introducido por
+**Este era un defecto real y preexistente del backend**, no introducido por
 este cambio: cualquier usuario real registrado sin cédula o sin teléfono
-recibiría un 500 al iniciar sesión, nunca un login exitoso. La corrección
-de fondo (cambiar `Map.of(...)` por una construcción que tolere valores
-nulos) queda fuera del alcance de este punto y debería tratarse como una
-tarea aparte del equipo. Como solución para este punto, `seed-e2e.sql`
-siembra `cedula` y `telefono` con valores no nulos para el usuario admin
-de prueba, evitando así depender de un bug ajeno al punto 13.
+recibía un 500 al iniciar sesión, nunca un login exitoso. En el momento de
+esta corrida, la solución para este punto fue que `seed-e2e.sql` sembrara
+`cedula` y `telefono` con valores no nulos para el usuario admin de prueba,
+para no bloquear el punto 13 en la corrección de un bug ajeno a su alcance
+original.
 
-## Verificación final
+## Verificación final (corrida original, con el esquive documentado)
 
-- Run: `https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/CI-261`
+- Run: checks del commit
+  `https://github.com/JoseLozanoMorales/TiendaTech/commit/f9981a6/checks`
 - Commit: `f9981a6` ("corrección del seed E2E: cedula/telefono no nulos
   para evitar NPE en login")
 - Job "Playwright web E2E": **succeeded**, "Run browser journeys" en 10s
   (3 pruebas pasadas) contra el sistema completo real, sin ningún
   interceptor.
+
+## Corrección de fondo del NPE (18 de septiembre de 2026)
+
+El bug descrito arriba se esquivaba, no se corregía: `seed-e2e.sql` seguía
+sembrando `cedula`/`telefono` no nulos a propósito, y `LoginController.login()`
+seguía construyendo la respuesta con `Map.of(...)`, que lanza
+`NullPointerException` ante cualquier valor `null`. Cualquier usuario real
+sin cédula o sin teléfono seguía recibiendo un 500 al iniciar sesión.
+
+Se corrigió el origen: `LoginController.java` ahora arma `userPayload` con
+un `LinkedHashMap` mutable (`put` en vez de `Map.of(...)`), que sí tolera
+valores `null`. `seed-e2e.sql` conserva sus valores no nulos para el admin
+de prueba (documentado, no es el defecto), pero el login ya no depende de
+esa siembra: un usuario real sin cédula o teléfono ahora inicia sesión sin
+error 500.
+
+Además, la prueba "un administrador inicia sesion y gestiona productos"
+(`auth-admin.spec.js`) solo abría el diálogo "Crear producto" sin escribir
+nada — el nombre afirmaba una gestión que la prueba no realizaba. Ahora
+completa nombre y precio, envía el formulario y verifica el mensaje de
+éxito y que el producto nuevo aparece en la tabla: hace una escritura real
+contra el sistema, no solo una lectura.
