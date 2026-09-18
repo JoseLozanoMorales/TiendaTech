@@ -330,29 +330,62 @@ para tener esa misma evidencia también en GitHub Actions, no solo local.
    intentó antes de que el run terminara) — lo que sí queda confirmado es
    que la evidencia citada era real y no estaba inventada.
 
-   **Pero hay un problema más importante que la sola accesibilidad**: ese
-   run es del 15 de septiembre, y para hoy (18 de septiembre) el propio
-   punto 5 acumuló ocho correcciones más en esta misma ronda de cierre
-   (items 1-8 de esta sección) que ese run nunca vio — no existían
-   todavía. Seguir citando `35007492980` como "la prueba" del estado
-   actual del punto 5 sería engañoso, así el run sea genuino: ya no
-   representa el código real del repositorio. **Corrección**: no se puede
-   fabricar un run nuevo sin pushear los cambios (fuera del alcance de
-   este documento, que solo trabaja en local hasta que el usuario decida
-   pushear); queda como pendiente explícito para el cierre real del punto
-   5 correr un PR con todas las correcciones de items 1-8, esperar CI en
-   verde de ese PR, y citar **ese** run — no `35007492980` — como la
-   evidencia final. Ver "Pendiente" más abajo.
+   **Pero había un problema más importante que la sola accesibilidad**: ese
+   run era del 15 de septiembre, y para el 18 de septiembre el propio
+   punto 5 había acumulado ocho correcciones más en esta misma ronda de
+   cierre (items 1-8 de esta sección) que ese run nunca vio — no existían
+   todavía. Seguir citando `35007492980` como "la prueba" del estado del
+   punto 5 habría sido engañoso, así el run fuera genuino: ya no
+   representaba el código real del repositorio.
+
+   **Corrección real, no solo declarada**: se abrió la
+   [PR #89](https://github.com/JoseLozanoMorales/TiendaTech/pull/89)
+   ("Punto 5: corregir nueve hallazgos de la segunda revisión del
+   evaluador"), rama `fix/punto5-segunda-ronda-hallazgos` → `main`, con
+   todos los cambios de los items 1-8 (y el ajuste de `docs/api/cierre-punto4.md`,
+   sin relación, incluido en el mismo PR por decisión del autor). La
+   primera corrida de CI de esa PR expuso un problema real y nuevo, ajeno
+   al contenido de los hallazgos 1-8: el job nuevo `schema-sql-equivalencia`
+   (creado en el hallazgo 7) fallaba con
+   `ERROR: database "tiendatech" does not exist`, porque
+   `docker compose up -d --wait` no esperaba a que el contenedor
+   `tiendatech-crdb-init` (sin healthcheck propio) terminara de aplicar
+   `docs/db/schema.sql` antes de consultarlo. Corregido agregando, en el
+   propio job de `.github/workflows/ci.yml`, una espera explícita del
+   estado de salida de `tiendatech-crdb-init` tras `up --wait` (commit
+   `e720f2d`), verificado primero en local contra CockroachDB real
+   (los cuatro contenedores `healthy`, `crdb-init` con código de salida
+   `0`, conteo de tablas = 35) y después en el propio CI de la PR.
+
+   Con ese segundo commit, la PR #89 terminó en verde: los tres flujos
+   (**CI-CD quality gate**, **Integridad de datos** y **CI**, este último
+   incluyendo tanto *"Esquema desde cero solo con migraciones (Punto 5)"*
+   como *"docs/db/schema.sql equivale a las migraciones (Punto 5)"*)
+   pasaron, confirmado por captura directa de la pestaña **Checks** de la
+   PR (`https://github.com/JoseLozanoMorales/TiendaTech/pull/89/checks`).
+   Revisada y aprobada por Andy Paul Sánchez Pilaloa (`AndySanchez2004`),
+   distinto del autor, y fusionada por él mismo — **merge commit
+   `7998be4`** sobre `main` (`fee3db9` + `e720f2d`), cumpliendo la misma
+   regla 5.5 (revisión por un compañero distinto del autor) ya aplicada en
+   el punto 31.
+
+   `ci.yml` dispara los tres flujos tanto en `pull_request` como en `push`
+   a `main` (`on: push: branches: [main, ...]`), así que el propio merge
+   generó una corrida independiente de la de la PR, ya sobre `main`: **CI
+   #332** (6m 31s), **CI-CD quality gate #212** (3m 31s) e **Integridad de
+   datos #105** (21s), las tres en verde para el commit `7998be4`,
+   confirmado por captura directa de la pestaña Actions filtrada por rama
+   `main`. **Corrección**: la evidencia final del punto 5 deja de ser
+   `35007492980`/`0cbd193` y pasa a ser el commit `7998be4` ya en `main`
+   (PR #89, CI #332 / #212 / #105), verificada en verde tanto antes de
+   fusionar (PR) como después (push a `main`), no solo declarada.
 
 ### Lo que sigue sin resolver de la lista completa del evaluador
 
 Con esto, los nueve hallazgos de la segunda revisión del evaluador quedan
-corregidos y verificados. Lo único que falta para el cierre real y
-definitivo del punto 5 no es un hallazgo nuevo, sino el paso final
-pendiente en todo momento: abrir el PR con los cambios de items 1-8,
-obtener revisión y CI en verde, fusionar, y actualizar este documento con
-esa evidencia — reemplazando toda referencia a runs anteriores a esta
-ronda (`b2a6942`, `35007492980`) por el run real y actual del PR fusionado.
+corregidos, verificados y con la evidencia de CI ya actualizada. No queda
+ningún paso pendiente del punto 5: la PR #89 se fusionó en `main` (commit
+`7998be4`) con CI en verde y revisión de un compañero distinto del autor.
 
 ## Conclusión
 
@@ -383,7 +416,15 @@ había quedado desactualizado frente al propio código que debía probar. Los
 ocho quedaron corregidos y verificados con evidencia real (contra
 CockroachDB donde aplicaba, por lectura directa del código, contra el
 sistema real de punta a punta, y de los resultados de carga existentes
-donde no). No queda ningún hallazgo del evaluador sin abordar en esta
-ronda; lo único pendiente es el paso final de siempre — abrir el PR,
-obtener CI en verde y fusionar — para que la evidencia de CI del punto 5
-deje de depender de un run anterior a estas correcciones.
+donde no).
+
+El paso final —abrir el PR, obtener CI en verde y fusionar— ya se
+completó: la [PR #89](https://github.com/JoseLozanoMorales/TiendaTech/pull/89)
+integró los nueve hallazgos, expuso y corrigió en el camino un décimo
+problema real (el job `schema-sql-equivalencia` no esperaba a que
+`tiendatech-crdb-init` terminara de aplicar `schema.sql`, commit
+`e720f2d`), terminó con los tres flujos de CI en verde, fue revisada y
+aprobada por un compañero distinto del autor (Andy Paul Sánchez Pilaloa) y
+se fusionó a `main` en el **merge commit `7998be4`**. El punto 5 queda
+cerrado con evidencia de CI real y actual, no con un run de una fecha
+anterior a estas correcciones.

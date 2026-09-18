@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "bib_file": "docs/entrega3/referenciasPFC.bib",
+    "total_entries_in_bib": 70,
+    "entries_with_doi": 3,
+    "verified_ok": 3,
+    "failed": 0,
+    "failed_bibkeys": []
+  },
+  "results": [
+    {
+      "bibkey": "abdelhafiz2020distributed",
+      "doi": "10.1109/CSDE50874.2020.9411547",
+      "bib_title": "Distributed Database Using Sharding Database Architecture",
+      "bib_authors": "Abdelhafiz, Bahaa Mahmoud",
+      "bib_year": "2020",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Distributed Database Using Sharding Database Architecture",
+        "authors": [
+          "Abdelhafiz"
+        ],
+        "year": 2020,
+        "pages": "1-17"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "hasan2024concurrency",
+      "doi": "10.1145/3723178.3723261",
+      "bib_title": "Concurrency Control in Distributed Database System: Solution of the Anomalies \\& Challenges",
+      "bib_authors": "Hasan, Mehedi and Yasmin, Samia and Salam, Abdus",
+      "bib_year": "2024",
+      "bib_pages": "629--636",
+      "resolved": {
+        "source": "crossref",
+        "title": "Concurrency Control in Distributed Database System: Solution of the Anomalies &amp; Challenges",
+        "authors": [
+          "Hasan",
+          "Yasmin",
+          "Salam"
+        ],
+        "year": 2024,
+        "pages": "629-636"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "oriol2024asyncsla",
+      "doi": "10.1145/3605098.3636074",
+      "bib_title": "{AsyncSLA}: Towards a Service Level Agreement for Asynchronous Services",
+      "bib_authors": "Marc Oriol and Abel G{\\'o}mez and Jordi Cabot",
+      "bib_year": "2024",
+      "bib_pages": "1781--1788",
+      "resolved": {
+        "source": "crossref",
+        "title": "AsyncSLA: Towards a Service Level Agreement for Asynchronous Services",
+        "authors": [
+          "Oriol",
+          "Gómez",
+          "Cabot"
+        ],
+        "year": 2024,
+        "pages": "1781-1788"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    }
+  ]
+}

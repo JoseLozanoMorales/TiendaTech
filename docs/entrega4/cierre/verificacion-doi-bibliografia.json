@@ -1,0 +1,1611 @@
+{
+  "summary": {
+    "bib_file": "docs/entrega3/referenciasPFC.bib",
+    "total_entries_in_bib": 70,
+    "entries_with_doi": 60,
+    "verified_ok": 60,
+    "failed": 0,
+    "failed_bibkeys": []
+  },
+  "results": [
+    {
+      "bibkey": "khadka2025review",
+      "doi": "10.3390/informatics12040108",
+      "bib_title": "A Review on Scholarly Publication Recommender Systems: Features, Approaches, Evaluation, and Open Research Directions",
+      "bib_authors": "Khadka, Anita and Sthapit, Saurav",
+      "bib_year": "2025",
+      "bib_pages": "108",
+      "resolved": {
+        "source": "crossref",
+        "title": "A Review on Scholarly Publication Recommender Systems: Features, Approaches, Evaluation, and Open Research Directions",
+        "authors": [
+          "Khadka",
+          "Sthapit"
+        ],
+        "year": 2025,
+        "pages": "108"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "sabiri2025hybrid",
+      "doi": "10.3390/jimaging11010012",
+      "bib_title": "Hybrid Quality-Based Recommender Systems: A Systematic Literature Review",
+      "bib_authors": "Sabiri, Bihi and Khtira, Amal and El Asri, Bouchra and Rhanoui, Maryem",
+      "bib_year": "2025",
+      "bib_pages": "12",
+      "resolved": {
+        "source": "crossref",
+        "title": "Hybrid Quality-Based Recommender Systems: A Systematic Literature Review",
+        "authors": [
+          "Sabiri",
+          "Khtira",
+          "El Asri",
+          "Rhanoui"
+        ],
+        "year": 2025,
+        "pages": "12"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "vinayababu2025revolutionizing",
+      "doi": "10.11591/ijai.v14.i4.pp2579-2589",
+      "bib_title": "Revolutionizing recommendations a survey: a comprehensive exploration of modern recommender systems",
+      "bib_authors": "Vinayababu, Prithvi Ram and Raju, Pushpa Sothenahalli Krishna",
+      "bib_year": "2025",
+      "bib_pages": "2579--2589",
+      "resolved": {
+        "source": "crossref",
+        "title": "Revolutionizing recommendations a survey: a comprehensive exploration of modern recommender systems",
+        "authors": [
+          "Ram Vinayababu",
+          "Krishna Raju"
+        ],
+        "year": 2025,
+        "pages": "2579"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true,
+      "notes": [
+        "paginas: Crossref solo trae '2579', .bib trae el rango completo '2579--2589' (dato incompleto de Crossref, no error del .bib)"
+      ]
+    },
+    {
+      "bibkey": "chihab2025ai",
+      "doi": "10.14569/IJACSA.2025.0161140",
+      "bib_title": "AI-Driven Professional Profile Categorization and Recommendation System",
+      "bib_authors": "Chihab, Marouane and Boussatta, Hicham and Chiny, Mohamed and Mabrouk, Nabil and Chihab, Younes and Hadi, Moulay Youssef",
+      "bib_year": "2025",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "AI-Driven Professional Profile Categorization and Recommendation System",
+        "authors": [
+          "CHIHAB",
+          "BOUSSATTA",
+          "CHINY",
+          "Mabrouk",
+          "CHIHAB",
+          "HADI"
+        ],
+        "year": 2025,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "benncir2025new",
+      "doi": "10.14569/IJACSA.2025.0160983",
+      "bib_title": "New Explainable Overlapping Co-Clustering for Recommender Systems: Capturing Multifaceted Preferences with Enhanced Interpretability",
+      "bib_authors": "Ben Ncir, Chiheb Eddine and Alattas, Mohammed Ibrahim",
+      "bib_year": "2025",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "New Explainable Overlapping Co-Clustering for Recommender Systems: Capturing Multifaceted Preferences with Enhanced Interpretability",
+        "authors": [
+          "Ncir",
+          "Alattas"
+        ],
+        "year": 2025,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "tokala2025empirical",
+      "doi": "10.14569/IJACSA.2025.01601108",
+      "bib_title": "Empirical Analysis of Variations of Matrix Factorization in Recommender Systems",
+      "bib_authors": "Tokala, Srilatha and Enduri, Murali Krishna and Lakshmi, T. Jaya and Hajarathaiah, Koduru and Sharma, Hemlata",
+      "bib_year": "2025",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Empirical Analysis of Variations of Matrix Factorization in Recommender Systems",
+        "authors": [
+          "Tokala",
+          "Enduri",
+          "Lakshmi",
+          "Hajarathaiah",
+          "Sharma"
+        ],
+        "year": 2025,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "velten2025solutions",
+      "doi": "10.1007/s10601-025-09381-2",
+      "bib_title": "Solutions and minimal conflict search for product configuration: a case study",
+      "bib_authors": "Velten, Sebastian and Hamkins, Christopher",
+      "bib_year": "2025",
+      "bib_pages": "35--61",
+      "resolved": {
+        "source": "crossref",
+        "title": "Solutions and minimal conflict search for product configuration: a case study",
+        "authors": [
+          "Velten",
+          "Hamkins"
+        ],
+        "year": 2025,
+        "pages": "35-61"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "munson2025review",
+      "doi": "10.1007/s44163-025-00334-5",
+      "bib_title": "A review of large language models and the recommendation task",
+      "bib_authors": "Munson, Jacob and Cuezze, Thomas and Nesar, Siddat and Zosso, Dominique",
+      "bib_year": "2025",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "A review of large language models and the recommendation task",
+        "authors": [
+          "Munson",
+          "Cuezze",
+          "Nesar",
+          "Zosso"
+        ],
+        "year": 2025,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Buser2023Survey",
+      "doi": "10.1145/3572771",
+      "bib_title": "A Survey on Exotic Signatures for Post-quantum Blockchain: Challenges and Research Directions",
+      "bib_authors": "Maxime Buser and Rafael Dowsley and Muhammed Esgin and Clémentine Gritti and Shabnam Kasra Kermanshahi and Veronika Kuchta and Jason LeGrow and Joseph Liu and Raphaël Phan and Amin Sakzad and Ron Steinfeld and Jiangshan Yu",
+      "bib_year": "2023",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "A Survey on Exotic Signatures for Post-quantum Blockchain: Challenges and Research Directions",
+        "authors": [
+          "Buser",
+          "Dowsley",
+          "Esgin",
+          "Gritti",
+          "Kasra Kermanshahi",
+          "Kuchta",
+          "Legrow",
+          "Liu",
+          "Phan",
+          "Sakzad",
+          "Steinfeld",
+          "Yu"
+        ],
+        "year": 2023,
+        "pages": "1-32"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Kim2023ChatGPT",
+      "doi": "10.1016/j.jretconser.2023.103494",
+      "bib_title": "Decisions with ChatGPT: Reexamining choice overload in ChatGPT recommendations",
+      "bib_authors": "Jungkeun Kim and Jeong Hyun Kim and Changju Kim and Jooyoung Park",
+      "bib_year": "2023",
+      "bib_pages": "103494",
+      "resolved": {
+        "source": "crossref",
+        "title": "Decisions with ChatGPT: Reexamining choice overload in ChatGPT recommendations",
+        "authors": [
+          "Kim",
+          "Kim",
+          "Kim",
+          "Park"
+        ],
+        "year": 2023,
+        "pages": "103494"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Lopes2023Webcare",
+      "doi": "10.1016/j.tourman.2023.104739",
+      "bib_title": "Managerial response strategies to eWOM: A framework and research agenda for webcare",
+      "bib_authors": "Ana Isabel Lopes and Nathalie Dens and Patrick De Pelsmacker and Edward C. Malthouse",
+      "bib_year": "2023",
+      "bib_pages": "104739",
+      "resolved": {
+        "source": "crossref",
+        "title": "Managerial response strategies to eWOM: A framework and research agenda for webcare",
+        "authors": [
+          "Lopes",
+          "Dens",
+          "De Pelsmacker",
+          "Malthouse"
+        ],
+        "year": 2023,
+        "pages": "104739"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Parmar2023OpenWorld",
+      "doi": "10.1145/3561381",
+      "bib_title": "Open-world Machine Learning: Applications, Challenges, and Opportunities",
+      "bib_authors": "Jitendra Parmar and Satyendra Chouhan and Vaskar Raychoudhury and Santosh Rathore",
+      "bib_year": "2023",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Open-world Machine Learning: Applications, Challenges, and Opportunities",
+        "authors": [
+          "Parmar",
+          "Chouhan",
+          "Raychoudhury",
+          "Rathore"
+        ],
+        "year": 2023,
+        "pages": "1-37"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Wang2023DAGBlockchain",
+      "doi": "10.1145/3576899",
+      "bib_title": "SoK: DAG-based Blockchain Systems",
+      "bib_authors": "Qin Wang and Jiangshan Yu and Shiping Chen and Yang Xiang",
+      "bib_year": "2023",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "SoK: DAG-based Blockchain Systems",
+        "authors": [
+          "Wang",
+          "Yu",
+          "Chen",
+          "Xiang"
+        ],
+        "year": 2023,
+        "pages": "1-38"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "Langgeng2023Chatbot",
+      "doi": "10.47738/jads.v4i4.128",
+      "bib_title": "Long Short-Term Memory-Based Chatbot for Vocational Registration Information Services",
+      "bib_authors": "Yudo Sembodo Hastoro Langgeng and Esther Irawati Setiawan and Syaiful Imron and Joan Santoso",
+      "bib_year": "2023",
+      "bib_pages": "414-430",
+      "resolved": {
+        "source": "crossref",
+        "title": "Long short-term memory-based chatbot for vocational registration information services",
+        "authors": [
+          "Langgeng"
+        ],
+        "year": 2023,
+        "pages": "414-430"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "rigger2020querypartitioning",
+      "doi": "10.1145/3428279",
+      "bib_title": "Finding bugs in database systems via query partitioning",
+      "bib_authors": "Rigger, Manuel and Su, Zhendong",
+      "bib_year": "2020",
+      "bib_pages": "1--30",
+      "resolved": {
+        "source": "crossref",
+        "title": "Finding bugs in database systems via query partitioning",
+        "authors": [
+          "Rigger",
+          "Su"
+        ],
+        "year": 2020,
+        "pages": "1-30"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "kang2021jigsaw",
+      "doi": "10.1145/3448016.3457547",
+      "bib_title": "Jigsaw: A Data Storage and Query Processing Engine for Irregular Table Partitioning",
+      "bib_authors": "Kang, Donghe and Jiang, Ruochen and Blanas, Spyros",
+      "bib_year": "2021",
+      "bib_pages": "898--911",
+      "resolved": {
+        "source": "crossref",
+        "title": "Jigsaw: A Data Storage and Query Processing Engine for Irregular Table Partitioning",
+        "authors": [
+          "Kang",
+          "Jiang",
+          "Blanas"
+        ],
+        "year": 2021,
+        "pages": "898-911"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "zhou2023grep",
+      "doi": "10.1145/3588948",
+      "bib_title": "Grep: A Graph Learning Based Database Partitioning System",
+      "bib_authors": "Zhou, Xuanhe and Li, Guoliang and Feng, Jianhua and Liu, Luyang and Guo, Wei",
+      "bib_year": "2023",
+      "bib_pages": "94:1--94:24",
+      "resolved": {
+        "source": "crossref",
+        "title": "Grep: A Graph Learning Based Database Partitioning System",
+        "authors": [
+          "Zhou",
+          "Li",
+          "Feng",
+          "Liu",
+          "Guo"
+        ],
+        "year": 2023,
+        "pages": "1-24"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "ozsu2020",
+      "doi": "10.1007/978-3-030-26253-2",
+      "bib_title": "Principles of Distributed Database Systems",
+      "bib_authors": "M. T. {\\\"O}zsu and P. Valduriez",
+      "bib_year": "2020",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Principles of Distributed Database Systems",
+        "authors": [
+          "Özsu",
+          "Valduriez"
+        ],
+        "year": 2020,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "liu2024",
+      "doi": "10.1007/s11390-024-3538-1",
+      "bib_title": "Enhancing storage efficiency and performance: A survey of data partitioning techniques",
+      "bib_authors": "P. J. Liu and C. P. Li and H. Chen",
+      "bib_year": "2024",
+      "bib_pages": "346--368",
+      "resolved": {
+        "source": "crossref",
+        "title": "Enhancing Storage Efficiency and Performance: A Survey of Data Partitioning Techniques",
+        "authors": [
+          "Liu",
+          "Li",
+          "Chen"
+        ],
+        "year": 2024,
+        "pages": "346-368"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "abdalla2023",
+      "doi": "10.1186/s40537-023-00849-7",
+      "bib_title": "On hierarchical clustering-based approach for RDDBS design",
+      "bib_authors": "H. Abdalla and A. Amer and S. Ravana",
+      "bib_year": "2023",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "On hierarchical clustering-based approach for RDDBS design",
+        "authors": [
+          "Abdalla",
+          "Amer",
+          "Ravana"
+        ],
+        "year": 2023,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "taft2020",
+      "doi": "10.1145/3318464.3386134",
+      "bib_title": "CockroachDB: The resilient geo-distributed SQL database",
+      "bib_authors": "R. Taft and I. Sharif and A. Matei and N. VanBenschoten and\n                 J. Lewis and T. Grieger and K. Niemi and A. Woods and\n                 A. Birzin and R. Poss and P. Bardea and A. Ranade and\n                 B. Darnell and B. Gruneir and J. Jaffray and L. Zhang and\n                 P. Mattis",
+      "bib_year": "2020",
+      "bib_pages": "1493--1509",
+      "resolved": {
+        "source": "crossref",
+        "title": "CockroachDB: The Resilient Geo-Distributed SQL Database",
+        "authors": [
+          "Taft",
+          "Sharif",
+          "Matei",
+          "VanBenschoten",
+          "Lewis",
+          "Grieger",
+          "Niemi",
+          "Woods",
+          "Birzin",
+          "Poss",
+          "Bardea",
+          "Ranade",
+          "Darnell",
+          "Gruneir",
+          "Jaffray",
+          "Zhang",
+          "Mattis"
+        ],
+        "year": 2020,
+        "pages": "1493-1509"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "ahmed2020",
+      "doi": "10.1186/s40537-020-00388-5",
+      "bib_title": "A comprehensive performance analysis of Apache Hadoop and Apache\n               Spark for large scale data sets using HiBench",
+      "bib_authors": "N. Ahmed and A. L. C. Barczak and T. Susnjak and M. A. Rashid",
+      "bib_year": "2020",
+      "bib_pages": "1--18",
+      "resolved": {
+        "source": "crossref",
+        "title": "A comprehensive performance analysis of Apache Hadoop and Apache Spark for large scale data sets using HiBench",
+        "authors": [
+          "Ahmed",
+          "Barczak",
+          "Susnjak",
+          "Rashid"
+        ],
+        "year": 2020,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "ahmed2021",
+      "doi": "10.1186/s40537-021-00499-7",
+      "bib_title": "A parallelization model for performance characterization of\n               Spark Big Data jobs on Hadoop clusters",
+      "bib_authors": "N. Ahmed and A. L. C. Barczak and M. A. Rashid and T. Susnjak",
+      "bib_year": "2021",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "A parallelization model for performance characterization of Spark Big Data jobs on Hadoop clusters",
+        "authors": [
+          "Ahmed",
+          "Barczak",
+          "Rashid",
+          "Susnjak"
+        ],
+        "year": 2021,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "amdahl1967",
+      "doi": "10.1145/1465482.1465560",
+      "bib_title": "Validity of the single processor approach to achieving large\n                 scale computing capabilities",
+      "bib_authors": "G. M. Amdahl",
+      "bib_year": "1967",
+      "bib_pages": "483--485",
+      "resolved": {
+        "source": "crossref",
+        "title": "Validity of the single processor approach to achieving large scale computing capabilities",
+        "authors": [
+          "Amdahl"
+        ],
+        "year": 1967,
+        "pages": "483"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true,
+      "notes": [
+        "paginas: Crossref solo trae '483', .bib trae el rango completo '483--485' (dato incompleto de Crossref, no error del .bib)"
+      ]
+    },
+    {
+      "bibkey": "gustafson1988",
+      "doi": "10.1145/42411.42415",
+      "bib_title": "Reevaluating Amdahl's law",
+      "bib_authors": "J. L. Gustafson",
+      "bib_year": "1988",
+      "bib_pages": "532--533",
+      "resolved": {
+        "source": "crossref",
+        "title": "Reevaluating Amdahl's law",
+        "authors": [
+          "Gustafson"
+        ],
+        "year": 1988,
+        "pages": "532-533"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "zhou2008",
+      "doi": "10.1007/978-3-540-68880-8_32",
+      "bib_title": "Large-scale parallel collaborative filtering for the Netflix Prize",
+      "bib_authors": "Y. Zhou and D. Wilkinson and R. Schreiber and R. Pan",
+      "bib_year": "2008",
+      "bib_pages": "337--348",
+      "resolved": {
+        "source": "crossref",
+        "title": "Large-Scale Parallel Collaborative Filtering for the Netflix Prize",
+        "authors": [
+          "Zhou",
+          "Wilkinson",
+          "Schreiber",
+          "Pan"
+        ],
+        "year": null,
+        "pages": "337-348"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "ozsu2020principles",
+      "doi": "10.1007/978-3-030-26253-2",
+      "bib_title": "Principles of Distributed Database Systems",
+      "bib_authors": "Özsu, M. Tamer and Valduriez, Patrick",
+      "bib_year": "2020",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Principles of Distributed Database Systems",
+        "authors": [
+          "Özsu",
+          "Valduriez"
+        ],
+        "year": 2020,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "taft2020cockroachdb",
+      "doi": "10.1145/3318464.3386134",
+      "bib_title": "CockroachDB: The Resilient Geo-Distributed SQL Database",
+      "bib_authors": "Taft, Rebecca and Sharif, Irfan and Matei, Andrei and VanBenschoten, Nathan and Lewis, Jordan and Grieger, Tobias and Niemi, Kai and Woods, Andy and Birzin, Anne and Poss, Raphael and Bardea, Paul and Ranade, Amruta and Darnell, Ben and Gruneir, Bram and Jaffray, Justin and Zhang, Lucy and Mattis, Peter",
+      "bib_year": "2020",
+      "bib_pages": "1493--1509",
+      "resolved": {
+        "source": "crossref",
+        "title": "CockroachDB: The Resilient Geo-Distributed SQL Database",
+        "authors": [
+          "Taft",
+          "Sharif",
+          "Matei",
+          "VanBenschoten",
+          "Lewis",
+          "Grieger",
+          "Niemi",
+          "Woods",
+          "Birzin",
+          "Poss",
+          "Bardea",
+          "Ranade",
+          "Darnell",
+          "Gruneir",
+          "Jaffray",
+          "Zhang",
+          "Mattis"
+        ],
+        "year": 2020,
+        "pages": "1493-1509"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "brewer2012cap",
+      "doi": "10.1109/MC.2012.37",
+      "bib_title": "CAP twelve years later: How the {\\dq}rules{\\dq} have changed",
+      "bib_authors": "Brewer, Eric",
+      "bib_year": "2012",
+      "bib_pages": "23--29",
+      "resolved": {
+        "source": "crossref",
+        "title": "CAP twelve years later: How the \"rules\" have changed",
+        "authors": [
+          "Brewer"
+        ],
+        "year": 2012,
+        "pages": "23-29"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "abadi2012consistency",
+      "doi": "10.1109/MC.2012.33",
+      "bib_title": "Consistency Tradeoffs in Modern Distributed Database System Design: CAP is Only Part of the Story",
+      "bib_authors": "Abadi, Daniel",
+      "bib_year": "2012",
+      "bib_pages": "37--42",
+      "resolved": {
+        "source": "crossref",
+        "title": "Consistency Tradeoffs in Modern Distributed Database System Design: CAP is Only Part of the Story",
+        "authors": [
+          "Abadi"
+        ],
+        "year": 2012,
+        "pages": "37-42"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "amdahl1967validity",
+      "doi": "10.1145/1465482.1465560",
+      "bib_title": "Validity of the single processor approach to achieving large scale computing capabilities",
+      "bib_authors": "Amdahl, Gene M.",
+      "bib_year": "1967",
+      "bib_pages": "483",
+      "resolved": {
+        "source": "crossref",
+        "title": "Validity of the single processor approach to achieving large scale computing capabilities",
+        "authors": [
+          "Amdahl"
+        ],
+        "year": 1967,
+        "pages": "483"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "gustafson1988reevaluating",
+      "doi": "10.1145/42411.42415",
+      "bib_title": "Reevaluating Amdahl's law",
+      "bib_authors": "Gustafson, John L.",
+      "bib_year": "1988",
+      "bib_pages": "532--533",
+      "resolved": {
+        "source": "crossref",
+        "title": "Reevaluating Amdahl's law",
+        "authors": [
+          "Gustafson"
+        ],
+        "year": 1988,
+        "pages": "532-533"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "abdelhafiz2020distributed",
+      "doi": "10.1109/CSDE50874.2020.9411547",
+      "bib_title": "Distributed Database Using Sharding Database Architecture",
+      "bib_authors": "Abdelhafiz, Bahaa Mahmoud",
+      "bib_year": "2020",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Distributed Database Using Sharding Database Architecture",
+        "authors": [
+          "Abdelhafiz"
+        ],
+        "year": 2020,
+        "pages": "1-17"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "hasan2024concurrency",
+      "doi": "10.1145/3723178.3723261",
+      "bib_title": "Concurrency Control in Distributed Database System: Solution of the Anomalies \\& Challenges",
+      "bib_authors": "Hasan, Mehedi and Yasmin, Samia and Salam, Abdus",
+      "bib_year": "2024",
+      "bib_pages": "629--636",
+      "resolved": {
+        "source": "crossref",
+        "title": "Concurrency Control in Distributed Database System: Solution of the Anomalies &amp; Challenges",
+        "authors": [
+          "Hasan",
+          "Yasmin",
+          "Salam"
+        ],
+        "year": 2024,
+        "pages": "629-636"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "kleppmann2015critique",
+      "doi": "10.48550/arXiv.1509.05393",
+      "bib_title": "A Critique of the CAP Theorem",
+      "bib_authors": "Kleppmann, Martin",
+      "bib_year": "2015",
+      "bib_pages": null,
+      "resolved": {
+        "source": "datacite",
+        "title": "A Critique of the CAP Theorem",
+        "authors": [
+          "Kleppmann"
+        ],
+        "year": 2015,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "afifi2025consensus",
+      "doi": "10.14569/IJACSA.2025.01612101",
+      "bib_title": "From Consensus to Chaos: A Vulnerability Assessment of the RAFT Algorithm",
+      "bib_authors": "Afifi, Tamer and Hegazy, Abdelfatah and Abousaif, Ehab",
+      "bib_year": "2025",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "From Consensus to Chaos: A Vulnerability Assessment of the RAFT Algorithm",
+        "authors": [
+          "Afifi",
+          "Hegazy",
+          "Abousaif"
+        ],
+        "year": 2025,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "wu2024raft",
+      "doi": "10.1145/3701047.3701055",
+      "bib_title": "The Study of a Distributed Networking Method Based on an Improved Raft Protocol",
+      "bib_authors": "Wu, Rui",
+      "bib_year": "2024",
+      "bib_pages": "37--42",
+      "resolved": {
+        "source": "crossref",
+        "title": "The Study of a Distributed Networking Method Based on an Improved Raft Protocol",
+        "authors": [
+          "Wu"
+        ],
+        "year": 2024,
+        "pages": "37-42"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "fegaras2020translation",
+      "doi": "10.14778/3389133.3389141",
+      "bib_title": "Translation of array-based loops to distributed data-parallel programs",
+      "bib_authors": "Fegaras, Leonidas and Noor, Md Hasanuzzaman",
+      "bib_year": "2020",
+      "bib_pages": "1248--1260",
+      "resolved": {
+        "source": "crossref",
+        "title": "Translation of array-based loops to distributed data-parallel programs",
+        "authors": [
+          "Fegaras",
+          "Noor"
+        ],
+        "year": 2020,
+        "pages": "1248-1260"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "dai2025state",
+      "doi": "10.3390/electronics14040677",
+      "bib_title": "State of the Art in Parallel and Distributed Systems: Emerging Trends and Challenges",
+      "bib_authors": "Dai, Fei and Hossain, Md Akbar and Wang, Yi",
+      "bib_year": "2025",
+      "bib_pages": "677",
+      "resolved": {
+        "source": "crossref",
+        "title": "State of the Art in Parallel and Distributed Systems: Emerging Trends and Challenges",
+        "authors": [
+          "Dai",
+          "Hossain",
+          "Wang"
+        ],
+        "year": 2025,
+        "pages": "677"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "marquez2018review",
+      "doi": "10.1109/TLA.2018.8789551",
+      "bib_title": "Review of Architectural Patterns and Tactics for Microservices in Academic and Industrial Literature",
+      "bib_authors": "Marquez, Gaston and Osses, Felipe and Astudillo, Hernan",
+      "bib_year": "2018",
+      "bib_pages": "2321--2327",
+      "resolved": {
+        "source": "crossref",
+        "title": "Review of Architectural Patterns and Tactics for Microservices in Academic and Industrial Literature",
+        "authors": [
+          "Marquez",
+          "Osses",
+          "Astudillo"
+        ],
+        "year": 2018,
+        "pages": "2321-2327"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "zhong2024domaindriven",
+      "doi": "10.1109/TSE.2024.3385835",
+      "bib_title": "Domain-Driven Design for Microservices: An Evidence-Based Investigation",
+      "bib_authors": "Zhong, Chenxing and Li, Shanshan and Huang, Huang and Liu, Xiaodong and Chen, Zhikun and Zhang, Yi and Zhang, He",
+      "bib_year": "2024",
+      "bib_pages": "1425--1449",
+      "resolved": {
+        "source": "crossref",
+        "title": "Domain-Driven Design for Microservices: An Evidence-Based Investigation",
+        "authors": [
+          "Zhong",
+          "Li",
+          "Huang",
+          "Liu",
+          "Chen",
+          "Zhang",
+          "Zhang"
+        ],
+        "year": 2024,
+        "pages": "1425-1449"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "nawrocki2021comparison",
+      "doi": "10.1109/MC.2020.2983893",
+      "bib_title": "A Comparison of Native and Cross-Platform Frameworks for Mobile Applications",
+      "bib_authors": "Nawrocki, Piotr and Wrona, Krzysztof and Marczak, Mateusz and Sniezynski, Bartlomiej",
+      "bib_year": "2021",
+      "bib_pages": "18--27",
+      "resolved": {
+        "source": "crossref",
+        "title": "A Comparison of Native and Cross-Platform Frameworks for Mobile Applications",
+        "authors": [
+          "Nawrocki",
+          "Wrona",
+          "Marczak",
+          "Sniezynski"
+        ],
+        "year": 2021,
+        "pages": "18-27"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "shahin2017continuous",
+      "doi": "10.1109/ACCESS.2017.2685629",
+      "bib_title": "Continuous Integration, Delivery and Deployment: A Systematic Review on Approaches, Tools, Challenges and Practices",
+      "bib_authors": "Shahin, Mojtaba and Ali Babar, Muhammad and Zhu, Liming",
+      "bib_year": "2017",
+      "bib_pages": "3909--3943",
+      "resolved": {
+        "source": "crossref",
+        "title": "Continuous Integration, Delivery and Deployment: A Systematic Review on Approaches, Tools, Challenges and Practices",
+        "authors": [
+          "Shahin",
+          "Ali Babar",
+          "Zhu"
+        ],
+        "year": 2017,
+        "pages": "3909-3943"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "hui2025unveiling",
+      "doi": "10.1016/j.jss.2024.112232",
+      "bib_title": "Unveiling the microservices testing methods, challenges, solutions, and solutions gaps: A systematic mapping study",
+      "bib_authors": "Hui, Mingxuan and Wang, Lu and Li, Hao and Yang, Ren and Song, Yuxin and Zhuang, Huiying and Cui, Di and Li, Qingshan",
+      "bib_year": "2025",
+      "bib_pages": "112232",
+      "resolved": {
+        "source": "crossref",
+        "title": "Unveiling the microservices testing methods, challenges, solutions, and solutions gaps: A systematic mapping study",
+        "authors": [
+          "Hui",
+          "Wang",
+          "Li",
+          "Yang",
+          "Song",
+          "Zhuang",
+          "Cui",
+          "Li"
+        ],
+        "year": 2025,
+        "pages": "112232"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "decan2022github",
+      "doi": "10.1109/ICSME55016.2022.00029",
+      "bib_title": "On the Use of GitHub Actions in Software Development Repositories",
+      "bib_authors": "Alexandre Decan and Tom Mens and Pooya Rostami Mazrae and Mehdi Golzadeh",
+      "bib_year": "2022",
+      "bib_pages": "235--245",
+      "resolved": {
+        "source": "crossref",
+        "title": "On the Use of GitHub Actions in Software Development Repositories",
+        "authors": [
+          "Decan",
+          "Mens",
+          "Mazrae",
+          "Golzadeh"
+        ],
+        "year": 2022,
+        "pages": "235-245"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "rostami2023cicd",
+      "doi": "10.1007/s10664-022-10285-5",
+      "bib_title": "On the usage, co-usage and migration of CI/CD tools: A qualitative analysis",
+      "bib_authors": "Rostami Mazrae, Pooya and Mens, Tom and Golzadeh, Mehdi and Decan, Alexandre",
+      "bib_year": "2023",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "On the usage, co-usage and migration of CI/CD tools: A qualitative analysis",
+        "authors": [
+          "Rostami Mazrae",
+          "Mens",
+          "Golzadeh",
+          "Decan"
+        ],
+        "year": 2023,
+        "pages": null
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "saroar2023survey",
+      "doi": "10.1145/3593434.3593475",
+      "bib_title": "Developers' Perception of GitHub Actions: A Survey Analysis",
+      "bib_authors": "Sk Golam Saroar and Maleknaz Nayebi",
+      "bib_year": "2023",
+      "bib_pages": "121--130",
+      "resolved": {
+        "source": "crossref",
+        "title": "Developers’ Perception of GitHub Actions: A Survey Analysis",
+        "authors": [
+          "Saroar",
+          "Nayebi"
+        ],
+        "year": 2023,
+        "pages": "121-130"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "faqih2024empirical",
+      "doi": "10.33093/jiwe.2024.3.2.18",
+      "bib_title": "Empirical Analysis of CI/CD Tools Usage in GitHub Actions Workflows",
+      "bib_authors": "Ahmad R. Faqih and Achmad Taufiqurrahman and Jaja H. Husen and M. K. Sabariah",
+      "bib_year": "2024",
+      "bib_pages": "251--261",
+      "resolved": {
+        "source": "crossref",
+        "title": "Empirical Analysis of CI/CD Tools Usage in GitHub Actions Workflows",
+        "authors": [
+          "Faqih",
+          "Taufiqurrahman",
+          "Husen",
+          "Sabariah"
+        ],
+        "year": 2024,
+        "pages": "251"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true,
+      "notes": [
+        "paginas: Crossref solo trae '251', .bib trae el rango completo '251--261' (dato incompleto de Crossref, no error del .bib)"
+      ]
+    },
+    {
+      "bibkey": "hammad2025instrumentation",
+      "doi": "10.1016/j.jss.2025.112573",
+      "bib_title": "An Empirical Study on the Performance Overhead of Code Instrumentation in Containerised Microservices",
+      "bib_authors": "Yasmeen Hammad and Amro Al-Said Ahmad and Peter Andras",
+      "bib_year": "2025",
+      "bib_pages": "112573",
+      "resolved": {
+        "source": "crossref",
+        "title": "An empirical study on the performance overhead of code instrumentation in containerised microservices",
+        "authors": [
+          "Hammad",
+          "Al-Said Ahmad",
+          "Andras"
+        ],
+        "year": 2025,
+        "pages": "112573"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "gintoro2025maintainability",
+      "doi": "10.11591/eei.v14i6.10457",
+      "bib_title": "Evaluating Maintainability Metrics in Microservices-Based Student Registration Systems",
+      "bib_authors": "Gintoro and Eko Cahyo Nugroho",
+      "bib_year": "2025",
+      "bib_pages": "4701--4712",
+      "resolved": {
+        "source": "crossref",
+        "title": "Evaluating maintainability metrics in microservices-based student registration systems",
+        "authors": [
+          "Gintoro",
+          "Cahyo Nugroho"
+        ],
+        "year": 2025,
+        "pages": "4701-4712"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "oriol2024asyncsla",
+      "doi": "10.1145/3605098.3636074",
+      "bib_title": "{AsyncSLA}: Towards a Service Level Agreement for Asynchronous Services",
+      "bib_authors": "Marc Oriol and Abel G{\\'o}mez and Jordi Cabot",
+      "bib_year": "2024",
+      "bib_pages": "1781--1788",
+      "resolved": {
+        "source": "crossref",
+        "title": "AsyncSLA: Towards a Service Level Agreement for Asynchronous Services",
+        "authors": [
+          "Oriol",
+          "Gómez",
+          "Cabot"
+        ],
+        "year": 2024,
+        "pages": "1781-1788"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "gherghe2025performance",
+      "doi": "10.3390/app152312837",
+      "bib_title": "A Novel Framework for Evaluating Application Performance in Distributed Systems",
+      "bib_authors": "Alexandru-Lucian Gherghe and C{\\u a}t{\\u a}lin Tudose",
+      "bib_year": "2025",
+      "bib_pages": "12837",
+      "resolved": {
+        "source": "crossref",
+        "title": "A Novel Framework for Evaluating Application Performance in Distributed Systems",
+        "authors": [
+          "Gherghe",
+          "Tudose"
+        ],
+        "year": 2025,
+        "pages": "12837"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "striletchi2025logging",
+      "doi": "10.3390/info16030216",
+      "bib_title": "A Centralized Approach to the Logging Mechanisms of Distributed Complex {ERP} Applications",
+      "bib_authors": "Cosmin Strile{\\c t}chi and Petre G. Pop and Christian Gavril{\\u a}",
+      "bib_year": "2025",
+      "bib_pages": "216",
+      "resolved": {
+        "source": "crossref",
+        "title": "A Centralized Approach to the Logging Mechanisms of Distributed Complex ERP Applications",
+        "authors": [
+          "Strilețchi",
+          "Pop",
+          "Gavrilă"
+        ],
+        "year": 2025,
+        "pages": "216"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "garciamolina1987sagas",
+      "doi": "10.1145/38713.38742",
+      "bib_title": "Sagas",
+      "bib_authors": "Garcia-Molina, Hector and Salem, Kenneth",
+      "bib_year": "1987",
+      "bib_pages": "249--259",
+      "resolved": {
+        "source": "crossref",
+        "title": "Sagas",
+        "authors": [
+          "Garcia-Molina",
+          "Salem"
+        ],
+        "year": 1987,
+        "pages": "249-259"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "gray2006commit",
+      "doi": "10.1145/1132863.1132867",
+      "bib_title": "Consensus on Transaction Commit",
+      "bib_authors": "Gray, Jim and Lamport, Leslie",
+      "bib_year": "2006",
+      "bib_pages": "133--160",
+      "resolved": {
+        "source": "crossref",
+        "title": "Consensus on transaction commit",
+        "authors": [
+          "Gray",
+          "Lamport"
+        ],
+        "year": 2006,
+        "pages": "133-160"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "stefanko2019saga",
+      "doi": "10.5220/0007918704830490",
+      "bib_title": "The Saga Pattern in a Reactive Microservices Environment",
+      "bib_authors": "Štefanko, Martin and Chaloupka, Ondřej and Rossi, Bruno",
+      "bib_year": "2019",
+      "bib_pages": "483--490",
+      "resolved": {
+        "source": "crossref",
+        "title": "The Saga Pattern in a Reactive Microservices Environment",
+        "authors": [
+          "Štefanko",
+          "Chaloupka",
+          "Rossi"
+        ],
+        "year": 2019,
+        "pages": "483-490"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "durr2022saga",
+      "doi": "10.5220/0010999400003200",
+      "bib_title": "Saga Pattern Technologies: A Criteria-based Evaluation",
+      "bib_authors": "Dürr, Karolin and Lichtenthäler, Robin and Wirtz, Guido",
+      "bib_year": "2022",
+      "bib_pages": "141--148",
+      "resolved": {
+        "source": "crossref",
+        "title": "Saga Pattern Technologies: A Criteria-based Evaluation",
+        "authors": [
+          "Dürr",
+          "Lichtenthäler",
+          "Wirtz"
+        ],
+        "year": 2022,
+        "pages": "141-148"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "daraghmi2022saga",
+      "doi": "10.3390/app12126242",
+      "bib_title": "Enhancing Saga Pattern for Distributed Transactions within a Microservices Architecture",
+      "bib_authors": "Daraghmi, Eman and Zhang, Cheng-Pu and Yuan, Shyan-Ming",
+      "bib_year": "2022",
+      "bib_pages": null,
+      "resolved": {
+        "source": "crossref",
+        "title": "Enhancing Saga Pattern for Distributed Transactions within a Microservices Architecture",
+        "authors": [
+          "Daraghmi",
+          "Zhang",
+          "Yuan"
+        ],
+        "year": 2022,
+        "pages": "6242"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "lamport1978",
+      "doi": "10.1145/359545.359563",
+      "bib_title": "Time, clocks, and the ordering of events in a distributed system",
+      "bib_authors": "Lamport, Leslie",
+      "bib_year": "1978",
+      "bib_pages": "558--565",
+      "resolved": {
+        "source": "crossref",
+        "title": "Time, clocks, and the ordering of events in a distributed system",
+        "authors": [
+          "Lamport"
+        ],
+        "year": 1978,
+        "pages": "558-565"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    },
+    {
+      "bibkey": "gilbert2002",
+      "doi": "10.1145/564585.564601",
+      "bib_title": "Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services",
+      "bib_authors": "Gilbert, Seth and Lynch, Nancy",
+      "bib_year": "2002",
+      "bib_pages": "51--59",
+      "resolved": {
+        "source": "crossref",
+        "title": "Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services",
+        "authors": [
+          "Gilbert",
+          "Lynch"
+        ],
+        "year": 2002,
+        "pages": "51-59"
+      },
+      "error": null,
+      "title_match": true,
+      "author_match": true,
+      "year_match": true,
+      "pages_match": true,
+      "mismatches": [],
+      "ok": true
+    }
+  ]
+}

@@ -10,6 +10,20 @@
 \usepackage{csquotes}
 \usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
 \addbibresource{../entrega3/referenciasPFC.bib}
+% Punto 26: biblatex no trae traduccion al espanol de "artno" (numero de
+% articulo, usado por el campo eid de daraghmi2022saga) en la imagen de
+% TeX Live que usa CI -- sin esto imprime el nombre interno de la cadena tal
+% cual ("artno 6242") en vez de un texto legible. Ver PFC4.log de esa
+% corrida: "Bibliography string 'artno' untranslated".
+% \NewBibliographyString es idempotente (blx@newstring no hace nada si
+% la clave ya existe) -- con esto el fix funciona tanto si "artno" ya
+% esta declarada por el estilo ieee (como en la imagen de CI, que sí la usa
+% para el campo eid) como si no lo esta en otra instalacion de TeX Live,
+% en vez de fallar con "Package keyval Error: artno undefined".
+\NewBibliographyString{artno}
+\DefineBibliographyStrings{spanish}{
+  artno = {n\'{u}m\adddot},
+}
 \usepackage{microtype}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdftitle={TiendaTech: documento acumulativo de cierre},pdfauthor={Equipo AGLS}}

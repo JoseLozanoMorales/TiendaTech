@@ -1,0 +1,75 @@
+70 entradas en docs/entrega3/referenciasPFC.bib, 60 con DOI a verificar
+[1/60] khadka2025review (10.3390/informatics12040108) -> OK
+[2/60] sabiri2025hybrid (10.3390/jimaging11010012) -> OK
+[3/60] vinayababu2025revolutionizing (10.11591/ijai.v14.i4.pp2579-2589) -> OK
+    (info, no bloqueante) paginas: Crossref solo trae '2579', .bib trae el rango completo '2579--2589' (dato incompleto de Crossref, no error del .bib)
+[4/60] chihab2025ai (10.14569/IJACSA.2025.0161140) -> OK
+[5/60] benncir2025new (10.14569/IJACSA.2025.0160983) -> OK
+[6/60] tokala2025empirical (10.14569/IJACSA.2025.01601108) -> OK
+[7/60] velten2025solutions (10.1007/s10601-025-09381-2) -> OK
+[8/60] munson2025review (10.1007/s44163-025-00334-5) -> OK
+[9/60] Buser2023Survey (10.1145/3572771) -> OK
+[10/60] Kim2023ChatGPT (10.1016/j.jretconser.2023.103494) -> OK
+[11/60] Lopes2023Webcare (10.1016/j.tourman.2023.104739) -> OK
+[12/60] Parmar2023OpenWorld (10.1145/3561381) -> OK
+[13/60] Wang2023DAGBlockchain (10.1145/3576899) -> OK
+[14/60] Langgeng2023Chatbot (10.47738/jads.v4i4.128) -> OK
+[15/60] rigger2020querypartitioning (10.1145/3428279) -> OK
+[16/60] kang2021jigsaw (10.1145/3448016.3457547) -> OK
+[17/60] zhou2023grep (10.1145/3588948) -> OK
+[18/60] ozsu2020 (10.1007/978-3-030-26253-2) -> OK
+[19/60] liu2024 (10.1007/s11390-024-3538-1) -> OK
+[20/60] abdalla2023 (10.1186/s40537-023-00849-7) -> OK
+[21/60] taft2020 (10.1145/3318464.3386134) -> OK
+[22/60] ahmed2020 (10.1186/s40537-020-00388-5) -> OK
+[23/60] ahmed2021 (10.1186/s40537-021-00499-7) -> OK
+[24/60] amdahl1967 (10.1145/1465482.1465560) -> OK
+    (info, no bloqueante) paginas: Crossref solo trae '483', .bib trae el rango completo '483--485' (dato incompleto de Crossref, no error del .bib)
+[25/60] gustafson1988 (10.1145/42411.42415) -> OK
+[26/60] zhou2008 (10.1007/978-3-540-68880-8_32) -> OK
+[27/60] ozsu2020principles (10.1007/978-3-030-26253-2) -> OK
+[28/60] taft2020cockroachdb (10.1145/3318464.3386134) -> OK
+[29/60] brewer2012cap (10.1109/MC.2012.37) -> OK
+[30/60] abadi2012consistency (10.1109/MC.2012.33) -> OK
+[31/60] amdahl1967validity (10.1145/1465482.1465560) -> OK
+[32/60] gustafson1988reevaluating (10.1145/42411.42415) -> OK
+[33/60] abdelhafiz2020distributed (10.1109/CSDE50874.2020.9411547) -> OK
+[34/60] hasan2024concurrency (10.1145/3723178.3723261) -> OK
+[35/60] kleppmann2015critique (10.48550/arXiv.1509.05393) -> OK
+[36/60] afifi2025consensus (10.14569/IJACSA.2025.01612101) -> OK
+[37/60] wu2024raft (10.1145/3701047.3701055) -> OK
+[38/60] fegaras2020translation (10.14778/3389133.3389141) -> OK
+[39/60] dai2025state (10.3390/electronics14040677) -> OK
+[40/60] marquez2018review (10.1109/TLA.2018.8789551) -> OK
+[41/60] zhong2024domaindriven (10.1109/TSE.2024.3385835) -> OK
+[42/60] nawrocki2021comparison (10.1109/MC.2020.2983893) -> OK
+[43/60] shahin2017continuous (10.1109/ACCESS.2017.2685629) -> OK
+[44/60] hui2025unveiling (10.1016/j.jss.2024.112232) -> OK
+[45/60] decan2022github (10.1109/ICSME55016.2022.00029) -> OK
+[46/60] rostami2023cicd (10.1007/s10664-022-10285-5) -> OK
+[47/60] saroar2023survey (10.1145/3593434.3593475) -> OK
+[48/60] faqih2024empirical (10.33093/jiwe.2024.3.2.18) -> OK
+    (info, no bloqueante) paginas: Crossref solo trae '251', .bib trae el rango completo '251--261' (dato incompleto de Crossref, no error del .bib)
+[49/60] hammad2025instrumentation (10.1016/j.jss.2025.112573) -> OK
+[50/60] gintoro2025maintainability (10.11591/eei.v14i6.10457) -> OK
+[51/60] oriol2024asyncsla (10.1145/3605098.3636074) -> OK
+[52/60] gherghe2025performance (10.3390/app152312837) -> OK
+[53/60] striletchi2025logging (10.3390/info16030216) -> OK
+[54/60] garciamolina1987sagas (10.1145/38713.38742) -> OK
+[55/60] gray2006commit (10.1145/1132863.1132867) -> OK
+[56/60] stefanko2019saga (10.5220/0007918704830490) -> OK
+[57/60] durr2022saga (10.5220/0010999400003200) -> OK
+[58/60] daraghmi2022saga (10.3390/app12126242) -> OK
+[59/60] lamport1978 (10.1145/359545.359563) -> OK
+[60/60] gilbert2002 (10.1145/564585.564601) -> OK
+
+{
+  "bib_file": "docs/entrega3/referenciasPFC.bib",
+  "total_entries_in_bib": 70,
+  "entries_with_doi": 60,
+  "verified_ok": 60,
+  "failed": 0,
+  "failed_bibkeys": []
+}
+Evidencia escrita en docs/entrega4/cierre/verificacion-doi-bibliografia.json
+Las 60 entradas con DOI resuelven y coinciden en titulo, autores, anio y paginas.
