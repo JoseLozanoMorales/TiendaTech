@@ -47,10 +47,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main --no-tags
+          git fetch origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            --no-tags
           test "$(git cat-file -t "refs/tags/$GITHUB_REF_NAME")" = tag
           source_commit="$(git rev-list -n 1 "refs/tags/$GITHUB_REF_NAME")"
-          test "$source_commit" = "$(git rev-parse origin/main)"
+          main_commit="$(git rev-parse refs/remotes/origin/main)"
+          printf 'tag_commit=%s\nmain_commit=%s\n' "$source_commit" "$main_commit"
+          test "$source_commit" = "$main_commit"
           expected_version="${GITHUB_REF_NAME#v}"
           actual_version="$(sed -n 's/^version: "\([^"]*\)"/\1/p' CITATION.cff)"
           test "$actual_version" = "$expected_version"
