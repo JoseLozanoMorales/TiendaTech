@@ -61,3 +61,16 @@ El punto se cerrará después de verificar que el PR esté fusionado, la etiquet
 anotada apunte al tip correspondiente de `main`, la ejecución termine en verde,
 la release sea definitiva y `Latest`, y las sumas descargadas aprueben. Los
 identificadores finales se añadirán después de la publicación.
+
+## Primera ejecución y corrección del fetch
+
+La primera ejecución disparada por `v4.1.0`,
+[35416077873](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35416077873),
+se detuvo en la comprobación previa, antes de compilar o publicar. El comando
+`git fetch origin main --no-tags` actualizó `FETCH_HEAD`, pero no garantizó la
+actualización de `refs/remotes/origin/main` en el checkout de una etiqueta.
+
+La corrección usa el refspec explícito
+`+refs/heads/main:refs/remotes/origin/main` y muestra el commit pelado del tag y
+el commit remoto de `main` antes de compararlos. La ejecución fallida no creó
+una release ni activos parciales.
