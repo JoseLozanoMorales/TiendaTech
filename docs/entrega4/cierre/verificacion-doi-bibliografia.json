@@ -1,9 +1,9 @@
 {
   "summary": {
     "bib_file": "docs/entrega3/referenciasPFC.bib",
-    "total_entries_in_bib": 70,
-    "entries_with_doi": 60,
-    "verified_ok": 60,
+    "total_entries_in_bib": 66,
+    "entries_with_doi": 56,
+    "verified_ok": 56,
     "failed": 0,
     "failed_bibkeys": []
   },
@@ -469,31 +469,6 @@
       "ok": true
     },
     {
-      "bibkey": "ozsu2020",
-      "doi": "10.1007/978-3-030-26253-2",
-      "bib_title": "Principles of Distributed Database Systems",
-      "bib_authors": "M. T. {\\\"O}zsu and P. Valduriez",
-      "bib_year": "2020",
-      "bib_pages": null,
-      "resolved": {
-        "source": "crossref",
-        "title": "Principles of Distributed Database Systems",
-        "authors": [
-          "Özsu",
-          "Valduriez"
-        ],
-        "year": 2020,
-        "pages": null
-      },
-      "error": null,
-      "title_match": true,
-      "author_match": true,
-      "year_match": true,
-      "pages_match": true,
-      "mismatches": [],
-      "ok": true
-    },
-    {
       "bibkey": "liu2024",
       "doi": "10.1007/s11390-024-3538-1",
       "bib_title": "Enhancing storage efficiency and performance: A survey of data partitioning techniques",
@@ -536,46 +511,6 @@
         ],
         "year": 2023,
         "pages": null
-      },
-      "error": null,
-      "title_match": true,
-      "author_match": true,
-      "year_match": true,
-      "pages_match": true,
-      "mismatches": [],
-      "ok": true
-    },
-    {
-      "bibkey": "taft2020",
-      "doi": "10.1145/3318464.3386134",
-      "bib_title": "CockroachDB: The resilient geo-distributed SQL database",
-      "bib_authors": "R. Taft and I. Sharif and A. Matei and N. VanBenschoten and\n                 J. Lewis and T. Grieger and K. Niemi and A. Woods and\n                 A. Birzin and R. Poss and P. Bardea and A. Ranade and\n                 B. Darnell and B. Gruneir and J. Jaffray and L. Zhang and\n                 P. Mattis",
-      "bib_year": "2020",
-      "bib_pages": "1493--1509",
-      "resolved": {
-        "source": "crossref",
-        "title": "CockroachDB: The Resilient Geo-Distributed SQL Database",
-        "authors": [
-          "Taft",
-          "Sharif",
-          "Matei",
-          "VanBenschoten",
-          "Lewis",
-          "Grieger",
-          "Niemi",
-          "Woods",
-          "Birzin",
-          "Poss",
-          "Bardea",
-          "Ranade",
-          "Darnell",
-          "Gruneir",
-          "Jaffray",
-          "Zhang",
-          "Mattis"
-        ],
-        "year": 2020,
-        "pages": "1493-1509"
       },
       "error": null,
       "title_match": true,
@@ -630,57 +565,6 @@
         ],
         "year": 2021,
         "pages": null
-      },
-      "error": null,
-      "title_match": true,
-      "author_match": true,
-      "year_match": true,
-      "pages_match": true,
-      "mismatches": [],
-      "ok": true
-    },
-    {
-      "bibkey": "amdahl1967",
-      "doi": "10.1145/1465482.1465560",
-      "bib_title": "Validity of the single processor approach to achieving large\n                 scale computing capabilities",
-      "bib_authors": "G. M. Amdahl",
-      "bib_year": "1967",
-      "bib_pages": "483--485",
-      "resolved": {
-        "source": "crossref",
-        "title": "Validity of the single processor approach to achieving large scale computing capabilities",
-        "authors": [
-          "Amdahl"
-        ],
-        "year": 1967,
-        "pages": "483"
-      },
-      "error": null,
-      "title_match": true,
-      "author_match": true,
-      "year_match": true,
-      "pages_match": true,
-      "mismatches": [],
-      "ok": true,
-      "notes": [
-        "paginas: Crossref solo trae '483', .bib trae el rango completo '483--485' (dato incompleto de Crossref, no error del .bib)"
-      ]
-    },
-    {
-      "bibkey": "gustafson1988",
-      "doi": "10.1145/42411.42415",
-      "bib_title": "Reevaluating Amdahl's law",
-      "bib_authors": "J. L. Gustafson",
-      "bib_year": "1988",
-      "bib_pages": "532--533",
-      "resolved": {
-        "source": "crossref",
-        "title": "Reevaluating Amdahl's law",
-        "authors": [
-          "Gustafson"
-        ],
-        "year": 1988,
-        "pages": "532-533"
       },
       "error": null,
       "title_match": true,
@@ -785,7 +669,7 @@
     {
       "bibkey": "brewer2012cap",
       "doi": "10.1109/MC.2012.37",
-      "bib_title": "CAP twelve years later: How the {\\dq}rules{\\dq} have changed",
+      "bib_title": "CAP twelve years later: How the “rules” have changed",
       "bib_authors": "Brewer, Eric",
       "bib_year": "2012",
       "bib_pages": "23--29",

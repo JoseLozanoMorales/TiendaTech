@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Verifica los 60 DOI de docs/entrega3/referenciasPFC.bib contra el registro
-publico (Crossref para los 59 casos normales, DataCite para el unico DOI de
-arXiv: 10.48550/arXiv.1509.05393), comparando titulo, autores, anio y paginas
-contra lo que el .bib realmente declara (punto 26 de la Guia de Cierre PFC
-AGLS: "no hay evidencia versionada ni verificacion automatica de la
-resolucion de los 60 DOI, asi que nada impide que el defecto vuelva a
+"""Verifica todos los DOI de docs/entrega3/referenciasPFC.bib contra el
+registro publico (Crossref para los casos normales, DataCite para el unico
+DOI de arXiv: 10.48550/arXiv.1509.05393), comparando titulo, autores, anio y
+paginas contra lo que el .bib realmente declara (punto 26 de la Guia de
+Cierre PFC AGLS: "no hay evidencia versionada ni verificacion automatica de
+la resolucion de los DOI, asi que nada impide que el defecto vuelva a
 aparecer").
 
 Sale con codigo 1 si alguna entrada no resuelve o si algun campo comparado
@@ -240,7 +240,21 @@ def main() -> int:
     output_path = root / args.output
 
     library = bibtexparser.parse_file(str(bib_path))
-    entries = [e for e in library.entries if field_value(e, "doi")]
+    all_doi_entries = [e for e in library.entries if field_value(e, "doi")]
+    doi_to_keys: dict[str, list[str]] = {}
+    for entry in all_doi_entries:
+        normalized_doi = field_value(entry, "doi").strip().lower()
+        doi_to_keys.setdefault(normalized_doi, []).append(entry.key)
+    duplicate_dois = {
+        doi: keys for doi, keys in doi_to_keys.items() if len(keys) > 1
+    }
+    if duplicate_dois:
+        print("ERROR: DOI duplicados en la bibliografia:")
+        for doi, keys in sorted(duplicate_dois.items()):
+            print(f"  {doi}: {', '.join(keys)}")
+        return 1
+
+    entries = all_doi_entries
     if args.only:
         wanted = set(args.only)
         entries = [e for e in entries if e.key in wanted]
@@ -288,7 +302,7 @@ def main() -> int:
     if failed:
         print(f"FALLO: {len(failed)} entrada(s) con DOI no resuelto o con metadatos que no coinciden.")
         return 1
-    print("Las 60 entradas con DOI resuelven y coinciden en titulo, autores, anio y paginas.")
+    print(f"Las {summary['verified_ok']} entradas con DOI resuelven y coinciden en titulo, autores, anio y paginas.")
     return 0
 
 
