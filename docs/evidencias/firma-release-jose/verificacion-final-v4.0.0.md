@@ -30,9 +30,9 @@ verificó de forma independiente, descargando los archivos publicados:
    resolviendo el defecto de reproducibilidad que cerraba el punto 44.
 4. `provenance.txt` identifica el mismo commit, el mismo tag (`v4.0.0`) y la
    misma ejecución (`34911055622`) que el resto de la evidencia.
-5. El APK versionado en `release/tiendatech-release.apk` desde `3370e29` tiene
-   35.849.007 bytes y el mismo SHA-256 `b1e622a2...` publicado por la API de
-   GitHub. El `.sha256` versionado ya corresponde al binario distribuido.
+5. `release/release-assets-v4.0.0.json` fija 35.849.007 bytes y SHA-256
+   `b1e622a2...`; el verificador automático confirma esos metadatos en la API
+   de GitHub. El APK y su `.sha256` permanecen fuera del árbol.
 
 ## Distinción histórica y validación correctiva en dispositivos
 

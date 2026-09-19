@@ -17,8 +17,14 @@ Con Android Platform Tools instalado, depuración USB autorizada y el dispositiv
 visible en `adb devices`, ejecutar desde la raíz del repositorio:
 
 ```powershell
+# Descarga el asset y recalcula su SHA-256 antes de usarlo.
+python scripts/verify_release_assets.py `
+  --only tiendatech-release.apk `
+  --download-dir tmp/release-assets
+
 ./scripts/verify-published-apk-device.ps1 `
   -Serial "SERIAL_DE_ADB" `
+  -ApkPath "tmp/release-assets/tiendatech-release.apk" `
   -AdbPath "C:\ruta\a\platform-tools\adb.exe"
 ```
 

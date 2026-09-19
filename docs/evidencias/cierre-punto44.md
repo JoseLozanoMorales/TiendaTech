@@ -24,10 +24,9 @@ binario publicado.
 | Titular | `CN=Jose Alejandro Lozano Morales` |
 
 La API pública de GitHub informa el mismo tamaño y digest para el activo. El
-archivo `release/tiendatech-release.apk`, versionado nuevamente en `3370e29`,
-coincide en tamaño y SHA-256. Su archivo
-`release/tiendatech-release.apk.sha256` contiene el mismo resumen, por lo que el
-procedimiento documentado `sha256sum -c` ya verifica el binario entregado.
+manifiesto `release/release-assets-v4.0.0.json` fija esos valores y
+`scripts/verify_release_assets.py` los contrasta en CI sin reintroducir el APK
+al árbol. La suma publicada se descarga junto al binario para `sha256sum -c`.
 
 ## Procedencia y firma
 
@@ -97,8 +96,8 @@ hayan enviado formularios, autenticado usuarios o completado compras.
 
 ## Condición de cierre
 
-El punto queda técnicamente corregido cuando este conjunto se integra en
-`main` mediante un pull request con checks verdes: el checksum versionado
-corresponde al mismo APK publicado, el registro histórico dejó de atribuir un
+El punto quedó técnicamente corregido al integrarse mediante pull request con
+checks verdes: el checksum publicado corresponde al mismo APK distribuido, el
+registro histórico dejó de atribuir un
 valor no reproducible al guion canónico y la validación física cubre ahora el
 binario distribuido exacto en dos dispositivos distintos.

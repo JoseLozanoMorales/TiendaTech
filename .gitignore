@@ -87,8 +87,7 @@ experiments/paso7/evidence/*.db
 # Punto 37 (regla por tipo, 18 de septiembre de 2026): ademas de las rutas
 # concretas de arriba, se bloquea por extension cualquier instalable o base
 # de datos que se intente versionar en otra ruta, para que no vuelva a pasar
-# sin que nadie lo note. Los dos .apk versionados a proposito (excepcion del
-# 17/09, arriba) y los wrapper de Gradle quedan exceptuados explicitamente.
+# sin que nadie lo note. Solo los wrappers de Gradle quedan exceptuados.
 *.apk
 *.mp4
 *.jar
@@ -96,5 +95,3 @@ experiments/paso7/evidence/*.db
 *.db-journal
 *.class
 !**/gradle-wrapper.jar
-!release/tiendatech-debug.apk
-!release/tiendatech-release.apk

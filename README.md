@@ -224,13 +224,16 @@ los experimentos ya no se versionan (ver `.gitignore`); antes sumaban más de
 | Video de tolerancia a fallos (`docs/evidencias/tolerancia_fallos.mp4`) | 90,2 MB | [tolerancia_fallos.mp4](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tolerancia_fallos.mp4) |
 | APK debug histórico (`release/tiendatech-debug.apk`) | 39,1 MB | [tiendatech-debug.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-debug.apk) |
 | APK release firmado (`release/tiendatech-release.apk`) | 34,2 MB | [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) — publicado automáticamente por `mobile-release-final.yml` (ver punto 44) |
+| APK release local histórico validado el 12/09 (no canónico) | 34,2 MB | [APK 9da16724](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release-local-historico-9da16724.apk), [checksum](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release-local-historico-9da16724.apk.sha256) y [procedencia](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release-local-historico-9da16724.provenance.txt) |
 | Agente OpenTelemetry Java (`ops/observability/opentelemetry-javaagent.jar`) | 22,3 MB | [opentelemetry-javaagent.jar](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/opentelemetry-javaagent.jar) |
 | Bases de datos SQLite de los experimentos (360 archivos, piloto y campañas) | 156,5 MB | [experimentos-bases-de-datos.zip](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/experimentos-bases-de-datos.zip) |
 | Manuscrito final (`docs/entrega4/PFC4.pdf`), compilado por CI a partir de `PFC4.tex` | ~2 MB | [PFC4.pdf](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/PFC4.pdf) |
 
 Ver [release/README.md](release/README.md) y
 [Apps/mobile/README.md](Apps/mobile/README.md) para instrucciones de verificación
-e instalación de los paquetes Android.
+e instalación de los paquetes Android. El manifiesto
+[`release-assets-v4.0.0.json`](release/release-assets-v4.0.0.json) fija tamaño y
+SHA-256 de los artefactos pesados, y CI los contrasta con la API de GitHub.
 
 ---
 

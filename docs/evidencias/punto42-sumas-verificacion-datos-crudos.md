@@ -190,6 +190,22 @@ ambos coinciden con sus `.sha256` respectivos — 2/2, no 0/2.
   (`9134419`), no se duplica aquí — ver
   `docs/evidencias/punto46-fijacion-finales-linea.md`.
 
+## Reconciliación final con el punto 37 (18/09)
+
+La reintroducción de los dos APK en `3370e29` fue una corrección intermedia que
+hizo verificables los `.sha256` locales, pero contradecía la obligación del
+punto 37 de retirar ambos instalables. El estado definitivo elimina del árbol
+los dos APK y sus dos manifiestos locales. En su lugar,
+`release/release-assets-v4.0.0.json` fija los metadatos de los assets publicados
+y `scripts/verify_release_assets.py` verifica en CI su presencia, tamaño y
+digest directamente contra la API de GitHub. El modo `--download-dir` permite
+además recalcular el SHA-256 de los bytes descargados.
+
+Por ello ya no existen manifiestos locales que apunten a archivos ausentes: las
+sumas de datos conservados en el árbol siguen bajo los controles de este punto,
+y los binarios deliberadamente externos tienen un control remoto explícito y
+fallable.
+
 ## Conclusión
 
 Los tres bloqueos que citó el evaluador para el punto 42 están corregidos
@@ -197,9 +213,8 @@ con evidencia verificable: los oráculos de paso 7, las trazas ISO y los
 SVG (más los `informe_final.md`, por la misma razón aunque no estaban en
 la frase literal) tienen suma y mutation test propio; el control
 anti-reescritura que faltaba existe y se probó contra el incidente
-histórico real que lo motivó; y los dos manifiestos `.apk.sha256` pasan
-2/2 en un clon limpio porque los binarios volvieron a versionarse, no
-porque se documentó por qué no hace falta que pasen.
+histórico real que lo motivó; y los APK externos tienen un manifiesto de
+release comprobado automáticamente, sin contradecir la higiene del punto 37.
 
 ## Pendiente
 
