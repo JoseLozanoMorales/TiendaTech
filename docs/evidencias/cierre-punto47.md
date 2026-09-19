@@ -74,3 +74,15 @@ La corrección usa el refspec explícito
 `+refs/heads/main:refs/remotes/origin/main` y muestra el commit pelado del tag y
 el commit remoto de `main` antes de compararlos. La ejecución fallida no creó
 una release ni activos parciales.
+
+La segunda ejecución,
+[35417585893](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35417585893),
+confirmó que el ref remoto de `main` ya se obtenía correctamente, pero el
+checkout del evento seguía sin materializar necesariamente el objeto anotado en
+`refs/tags/v4.1.0`. También se detuvo antes de compilar o publicar.
+
+La corrección definitiva trae explícitamente los dos refs necesarios: la rama
+`main` a `refs/remotes/origin/main` y la etiqueta del evento a
+`refs/tags/$GITHUB_REF_NAME`. Cada condición emite ahora un error específico
+para distinguir tag ausente, tag liviano, commit distinto o versión CFF
+inconsistente.
