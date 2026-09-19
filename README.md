@@ -237,12 +237,13 @@ SHA-256 de los artefactos pesados, y CI los contrasta con la API de GitHub.
 
 ### Entrega final etiquetada
 
-El punto 47 prepara `v4.1.0` como entrega autoconsistente del estado final de
-`main`. Tras fusionar la preparación se creará una etiqueta anotada sobre el tip
-exacto de la rama. Una única ejecución compilará y firmará el APK desde ese
-árbol, reunirá el PDF y `CITATION.cff`, generará las sumas, el manifiesto y la
-procedencia, y publicará una release definitiva. Hasta que esa ejecución
-termine correctamente, `v4.0.0` continúa siendo la release histórica vigente.
+La entrega vigente es [`v4.1.1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.1.1),
+publicada desde una etiqueta anotada situada exactamente sobre el tip de
+`main`. Una única ejecución compila y firma el APK desde ese árbol, reúne el
+PDF y `CITATION.cff`, genera las sumas, el manifiesto y la procedencia, y
+publica la release definitiva. `v4.1.0` documenta la primera ejecución correcta
+del flujo y `v4.0.0` se conserva como release histórica de los artefactos
+pesados; ninguna de las dos se presenta como la entrega vigente.
 
 ---
 

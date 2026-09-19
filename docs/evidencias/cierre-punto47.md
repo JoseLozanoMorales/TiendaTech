@@ -7,11 +7,10 @@ La release histórica `v4.0.0` apunta al commit
 procedentes de estados distintos. Se conserva como evidencia histórica, pero no
 representa el estado final actual de `main` como un conjunto autoconsistente.
 
-## Entrega final preparada
+## Primera publicación autoconsistente
 
-La versión final será `v4.1.0`. La etiqueta se creará únicamente después de
-fusionar esta preparación y comprobar todos los checks del tip final de `main`.
-El workflow exige:
+La versión `v4.1.0` fue la primera publicación autoconsistente. La etiqueta se creó después de fusionar la
+preparación y comprobar los checks del tip final de `main`. El workflow exige:
 
 1. etiqueta anotada, no liviana;
 2. etiqueta situada exactamente sobre el tip vigente de `origin/main`;
@@ -40,7 +39,7 @@ El workflow exige:
 Los activos históricos pesados permanecen en `v4.0.0`; no se mezclan con la
 entrega final.
 
-## Publicación posterior a la fusión
+## Procedimiento de publicación ejecutado
 
 ```powershell
 git switch main
@@ -55,12 +54,12 @@ git push origin v4.1.0
 `git cat-file -t` debe imprimir `tag`. El push activa el workflow, que vuelve a
 comprobar el tipo y destino de la etiqueta antes de compilar o publicar.
 
-## Criterio de cierre
+## Criterio de cierre previsto
 
-El punto se cerrará después de verificar que el PR esté fusionado, la etiqueta
-anotada apunte al tip correspondiente de `main`, la ejecución termine en verde,
-la release sea definitiva y `Latest`, y las sumas descargadas aprueben. Los
-identificadores finales se añadirán después de la publicación.
+El punto debía cerrarse después de verificar que el PR estuviera fusionado, la
+etiqueta anotada apuntara al tip correspondiente de `main`, la ejecución
+terminara en verde, la release fuera definitiva y `Latest`, y las sumas
+descargadas aprobaran. Todas estas condiciones se verifican a continuación.
 
 ## Primera ejecución y corrección del fetch
 
@@ -86,3 +85,38 @@ La corrección definitiva trae explícitamente los dos refs necesarios: la rama
 `refs/tags/$GITHUB_REF_NAME`. Cada condición emite ahora un error específico
 para distinguir tag ausente, tag liviano, commit distinto o versión CFF
 inconsistente.
+
+## Publicación final verificada
+
+| Propiedad | Valor comprobado |
+|---|---|
+| Release | [`v4.1.0`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.1.0) |
+| Ejecución | [35418812586](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35418812586), `success` |
+| Commit etiquetado | `a16412d351aeb9076368aa491d5a9fea3834a4b5` |
+| Objeto de tag anotado | `85c9681cdb5b9f0521be86fd74a706bc52956723` |
+| Estado | definitiva, `draft=false`, `prerelease=false`, `Latest` |
+| Publicación | 19 de septiembre de 2026, 03:36:05 UTC |
+| Assets | 10, todos subidos por `github-actions[bot]` |
+| APK | 35.849.007 bytes; SHA-256 `9ebc8d61c4d1f8926e92ec523dbc626e85d1143abf67991a3a05678001773364` |
+| PDF | SHA-256 `5ea14009a9a6cc55632a3d6f6658fcb5817d91bd9bd7176c311817039a5600c5` |
+
+La API pública confirma que `target_commitish`, el commit pelado del tag, el
+commit del manifiesto y `source_commit` de `provenance.txt` son idénticos. El
+informe `apksigner.txt` registra la huella esperada
+`6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd`.
+
+Se descargaron independientemente los diez assets. Las nueve entradas de
+`SHA256SUMS.txt` se recalcularon sobre sus bytes: 9 correctas y 0 fallidas. El
+manifiesto contiene los ocho archivos existentes antes de generar el propio
+manifiesto y el archivo integral de sumas. Esta verificación demuestra que el
+flujo de publicación funciona y conserva la trazabilidad completa de `v4.1.0`.
+
+## Entrega vigente enlazada desde el repositorio
+
+La corrección documental posterior forma parte de
+[`v4.1.1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.1.1).
+Esa versión sustituye a `v4.1.0` como entrega vigente para que el README, la
+citación y la documentación de distribución pertenezcan al mismo commit que la
+etiqueta anotada y la release. El workflow vuelve a construir todos los
+artefactos desde el tip etiquetado de `main`; no reutiliza ni modifica los
+assets de `v4.1.0`.
