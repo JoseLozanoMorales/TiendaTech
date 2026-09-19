@@ -235,6 +235,15 @@ e instalación de los paquetes Android. El manifiesto
 [`release-assets-v4.0.0.json`](release/release-assets-v4.0.0.json) fija tamaño y
 SHA-256 de los artefactos pesados, y CI los contrasta con la API de GitHub.
 
+### Entrega final etiquetada
+
+El punto 47 prepara `v4.1.0` como entrega autoconsistente del estado final de
+`main`. Tras fusionar la preparación se creará una etiqueta anotada sobre el tip
+exacto de la rama. Una única ejecución compilará y firmará el APK desde ese
+árbol, reunirá el PDF y `CITATION.cff`, generará las sumas, el manifiesto y la
+procedencia, y publicará una release definitiva. Hasta que esa ejecución
+termine correctamente, `v4.0.0` continúa siendo la release histórica vigente.
+
 ---
 
 ## 10. Trazabilidad con la rúbrica

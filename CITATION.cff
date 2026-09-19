@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Si utiliza este software o sus artefactos experimentales, cite este repositorio."
 title: "TiendaTech: sistema distribuido de comercio electrónico"
 type: software
-version: "4.0.0"
-date-released: "2026-09-14"
+version: "4.1.0"
+date-released: "2026-09-18"
 authors:
   - family-names: "Aucatoma Celorio"
     given-names: "Jhinson Stalyn"
@@ -20,4 +20,3 @@ keywords:
   - microservicios
   - comercio electrónico
   - reproducibilidad
-
