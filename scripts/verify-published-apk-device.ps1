@@ -2,7 +2,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Serial,
 
-    [string]$ApkPath = "release/tiendatech-release.apk",
+    [Parameter(Mandatory = $true)]
+    [string]$ApkPath,
 
     [string]$OutputDirectory = "docs/evidencias/firma-release-jose/dispositivos-apk-publicado",
 
@@ -94,7 +95,7 @@ $outputPath = Join-Path $OutputDirectory "device-$safeDeviceId.json"
 $evidence = [ordered]@{
     checked_at_utc = $timestamp
     apk = [ordered]@{
-        source = "release/tiendatech-release.apk"
+        source = $ApkPath
         bytes = $apk.Length
         sha256 = $actualSha256
         release_url = "https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk"
@@ -107,7 +108,7 @@ $evidence = [ordered]@{
         sdk = $androidSdk
     }
     validation = [ordered]@{
-        install_command = "adb -s <serial> install -r release/tiendatech-release.apk"
+        install_command = "adb -s <serial> install -r <APK descargado y verificado>"
         install_exit_code = $installExitCode
         install_output = $installOutput
         installed_package_path = $packagePath

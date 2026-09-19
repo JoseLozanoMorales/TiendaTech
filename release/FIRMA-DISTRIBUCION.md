@@ -2,8 +2,8 @@
 
 Estado actual: **clave de José creada; APK local histórico y APK publicado diferenciados**. El APK publicado en `v4.0.0` tiene firma v2 válida, certificado `CN=Jose Alejandro Lozano Morales`, RSA de 3072 bits, y no es depurable. La validación física del 12 de septiembre corresponde al APK local histórico, no al publicado.
 
-- Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk) (tambien versionado en `release/` desde 2026-09-17, excepcion puntual del punto 42 SS8.3; ver punto 37 y `.gitignore`).
-- Checksum: [tiendatech-release.apk.sha256](tiendatech-release.apk.sha256).
+- Instalador: [tiendatech-release.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk), publicado fuera del árbol de Git.
+- Checksum: [tiendatech-release.apk.sha256](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk.sha256); tamaño y digest fijados en `release-assets-v4.0.0.json` y verificados en CI.
 - Certificado público: [jose-lozano-certificado-publico.pem](jose-lozano-certificado-publico.pem).
 - Huella SHA-256 del certificado: `6ad168c152fd8090144c25c75d630116cc912fbe60b25150a81d88f354bc8bbd`.
 - Evidencia: `docs/evidencias/firma-release-jose/verificacion.json` y `apksigner.txt`.
@@ -49,7 +49,7 @@ Antes de entregar:
 
 1. Ejecutar `apksigner verify --verbose --print-certs` sobre el APK y comprobar la huella del certificado contra la identidad del equipo. Una firma v2 por sí sola no distingue una clave debug de una de distribución.
 2. Verificar versión, URL del gateway e instalación real en un dispositivo/emulador. Una instalación debug existente con firma diferente no admite actualización directa con la nueva clave.
-3. Copiar el APK acordado a `release/`, generar su SHA-256 y conservar resultados de firma e instalación. No declarar E6 cerrado antes de disponer de esos archivos y comprobaciones.
+3. Publicar el APK acordado como asset de la release, generar su SHA-256 y conservar resultados de firma e instalación. No versionar el binario en Git.
 
 Referencia de configuración: https://developer.android.com/studio/publish/app-signing
 
@@ -112,9 +112,8 @@ aparece marcada `Latest`, no `Pre-release`.
 
 Evidencia completa en `docs/evidencias/firma-release-jose/verificacion-final-v4.0.0.md`.
 
-El APK versionado desde el commit `3370e29` tiene 35.849.007 bytes y SHA-256
-`b1e622a2...`, exactamente iguales al activo publicado según la API de GitHub.
-Esto corrige el checksum versionado que antes correspondía al APK local, pero no
+El asset canónico tiene 35.849.007 bytes y SHA-256 `b1e622a2...`, valores
+fijados en el manifiesto versionado y contrastados con la API de GitHub. Esto no
 convierte la instalación histórica de `9da16724...` en validación física del
 binario publicado. Esa validación se repitió separadamente sobre `b1e622a2...` y
 se conserva en `docs/evidencias/firma-release-jose/dispositivos-apk-publicado/`.

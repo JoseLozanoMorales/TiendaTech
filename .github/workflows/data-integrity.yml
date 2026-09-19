@@ -42,3 +42,13 @@ jobs:
         run: python -m unittest discover -s scripts -p test_check_checksum_rewrites.py -v
       - name: Verificar que ninguna suma existente se reescribió sin justificación
         run: python scripts/check_checksum_rewrites.py --base "${{ github.event.before || format('{0}^', github.sha) }}"
+      - name: Probar verificador de assets pesados de la release
+        run: python -m unittest discover -s scripts -p test_verify_release_assets.py -v
+      - name: Verificar assets pesados publicados fuera del árbol
+        run: python scripts/verify_release_assets.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Probar guardián de higiene del repositorio
+        run: python -m unittest discover -s scripts -p test_check_repository_hygiene.py -v
+      - name: Impedir artefactos pesados en el árbol
+        run: python scripts/check_repository_hygiene.py

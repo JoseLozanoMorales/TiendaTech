@@ -1,18 +1,12 @@
 # Paquete Android instalable (E6)
 
-Desde el punto 37 (higiene del repositorio), estos binarios dejaron de
-versionarse aquí: pesan demasiado para el árbol de git y se publican como
-adjuntos de la versión etiquetada `v4.0.0`. Excepción puntual desde el
-2026-09-17 (punto 42, S8.3 de la guía de evaluación: "todas las sumas deben
-pasar"): los dos `.apk` (73 MB en total) vuelven a versionarse en esta
-carpeta para que `sha256sum -c` verifique en un checkout limpio de git sin
-depender de descargar el adjunto de la release por separado. La publicación
-en la versión etiquetada sigue siendo el canal de distribución oficial; esta
-copia es solo para que el checksum sea verificable localmente. Ver
-`.gitignore` para el detalle de la excepción.
+Desde el punto 37 (higiene del repositorio), los binarios pesados no se
+versionan aquí: se publican como adjuntos de `v4.0.0`. Sus nombres, tamaños y
+SHA-256 están fijados en [release-assets-v4.0.0.json](release-assets-v4.0.0.json)
+y `scripts/verify_release_assets.py` los contrasta con la API de GitHub en CI.
 
 El [APK release](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk)
-está firmado por José y tiene [checksum](tiendatech-release.apk.sha256)
+está firmado por José y tiene [checksum publicado](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-release.apk.sha256)
 verificado. La firma v2, el certificado público y la publicación se documentan
 en [Firma de distribución](FIRMA-DISTRIBUCION.md). La instalación histórica en
 dos dispositivos corresponde a un APK local anterior (`9da16724...`) y se
@@ -24,7 +18,7 @@ automatizada y visual está en
 ## Paquete debug histórico
 
 Entregable: [tiendatech-debug.apk](https://github.com/JoseLozanoMorales/TiendaTech/releases/download/v4.0.0/tiendatech-debug.apk),
-con checksum en [tiendatech-debug.apk.sha256](tiendatech-debug.apk.sha256).
+inventariado por tamaño y SHA-256 en `release-assets-v4.0.0.json`.
 Versión 1.0, aplicación `com.tiendatech.mobile`, Android 8.0 (API 26) o posterior.
 
 Validación local del 11 de septiembre de 2026: `assembleDebug` aprobado,
@@ -76,10 +70,10 @@ cd ../..
 sha256sum Apps/mobile/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Comparar el resultado con `release/tiendatech-debug.apk.sha256`. El APK
-regenerado ya no se commitea (ver `.gitignore`); si cambia por una actualización
+Comparar el resultado con el SHA-256 del manifiesto remoto. El APK regenerado
+no se commitea (ver `.gitignore`); si cambia por una actualización
 legítima, subir el nuevo binario como adjunto de una nueva versión etiquetada y
-actualizar aquí el `.sha256` y el enlace de descarga.
+actualizar el manifiesto versionado y el enlace de descarga.
 
 ## Publicación automática y alcance de la rúbrica
 
