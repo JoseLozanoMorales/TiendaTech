@@ -49,15 +49,29 @@ jobs:
           set -euo pipefail
           git fetch origin \
             +refs/heads/main:refs/remotes/origin/main \
+            "+refs/tags/$GITHUB_REF_NAME:refs/tags/$GITHUB_REF_NAME" \
             --no-tags
-          test "$(git cat-file -t "refs/tags/$GITHUB_REF_NAME")" = tag
+          if ! tag_type="$(git cat-file -t "refs/tags/$GITHUB_REF_NAME")"; then
+            echo "::error::No se obtuvo el objeto refs/tags/$GITHUB_REF_NAME"
+            exit 1
+          fi
+          if [ "$tag_type" != tag ]; then
+            echo "::error::$GITHUB_REF_NAME no es una etiqueta anotada (tipo: $tag_type)"
+            exit 1
+          fi
           source_commit="$(git rev-list -n 1 "refs/tags/$GITHUB_REF_NAME")"
           main_commit="$(git rev-parse refs/remotes/origin/main)"
-          printf 'tag_commit=%s\nmain_commit=%s\n' "$source_commit" "$main_commit"
-          test "$source_commit" = "$main_commit"
+          printf 'tag_type=%s\ntag_commit=%s\nmain_commit=%s\n' "$tag_type" "$source_commit" "$main_commit"
+          if [ "$source_commit" != "$main_commit" ]; then
+            echo "::error::La etiqueta apunta a $source_commit, pero main apunta a $main_commit"
+            exit 1
+          fi
           expected_version="${GITHUB_REF_NAME#v}"
           actual_version="$(sed -n 's/^version: "\([^"]*\)"/\1/p' CITATION.cff)"
-          test "$actual_version" = "$expected_version"
+          if [ "$actual_version" != "$expected_version" ]; then
+            echo "::error::CITATION.cff declara $actual_version; se esperaba $expected_version"
+            exit 1
+          fi
           printf 'commit=%s\n' "$source_commit" >> "$GITHUB_OUTPUT"
 
       - name: Refuse an existing release
