@@ -93,8 +93,11 @@ prerelease en cada push (`android-release`, `publish-mobile`) fueron retirados
 de `ci.yml` al cerrar el punto 44: producían un artefacto distinto del
 versionado y solo se publicaban como versión preliminar.
 
-Para el cierre del punto 47, `v4.1.0` se publicará desde una etiqueta anotada
-situada exactamente sobre el tip de `main`. El APK no vuelve al árbol: el flujo
-lo compila y firma desde el código etiquetado, verifica su certificado y lo
-empaqueta junto con el PDF, `CITATION.cff`, sumas, manifiesto y procedencia. Los
-assets pesados históricos permanecen separados en `v4.0.0`.
+La entrega vigente del punto 47 es
+[`v4.1.1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.1.1),
+creada desde una etiqueta anotada situada exactamente sobre el tip de `main`.
+El APK no vuelve al árbol: el flujo lo compila y firma desde el código
+etiquetado, verifica su certificado y lo empaqueta junto con el PDF,
+`CITATION.cff`, sumas, manifiesto y procedencia. `v4.1.0` queda como antecedente
+verificado del flujo y los assets pesados históricos permanecen separados en
+`v4.0.0`.

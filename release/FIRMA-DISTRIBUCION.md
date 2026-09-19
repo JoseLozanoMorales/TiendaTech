@@ -118,12 +118,15 @@ convierte la instalación histórica de `9da16724...` en validación física del
 binario publicado. Esa validación se repitió separadamente sobre `b1e622a2...` y
 se conserva en `docs/evidencias/firma-release-jose/dispositivos-apk-publicado/`.
 
-## Preparación de la entrega final `v4.1.0`
+## Entrega final vigente `v4.1.1`
 
-El cierre del punto 47 conserva la compilación desde fuentes del flujo y añade
-una entrega autoconsistente. La publicación exige una etiqueta anotada sobre el
-tip vigente de `main`; compila y firma el APK desde ese árbol, verifica la misma
-huella de José y reúne el instalador con el manuscrito, certificado,
-`CITATION.cff`, sumas, manifiesto y procedencia. Ningún APK vuelve a versionarse
-en Git. La release histórica `v4.0.0` y sus assets manuales permanecen separados
-y no se presentan como parte de `v4.1.0`.
+El cierre del punto 47 conserva la compilación desde fuentes y publica una
+entrega autoconsistente en
+[`v4.1.1`](https://github.com/JoseLozanoMorales/TiendaTech/releases/tag/v4.1.1).
+Su etiqueta anotada se sitúa sobre el tip de `main`; el flujo compila y firma el
+APK desde ese árbol, verifica la huella de José y reúne el instalador con el
+manuscrito, certificado, `CITATION.cff`, sumas, manifiesto y procedencia. Ningún
+APK vuelve a versionarse en Git. La ejecución correcta `35418812586` de
+`v4.1.0` queda como antecedente verificable; la release histórica `v4.0.0` y
+sus assets manuales permanecen separados y no forman parte de la entrega
+vigente.
