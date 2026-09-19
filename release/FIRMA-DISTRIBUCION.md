@@ -117,3 +117,13 @@ fijados en el manifiesto versionado y contrastados con la API de GitHub. Esto no
 convierte la instalación histórica de `9da16724...` en validación física del
 binario publicado. Esa validación se repitió separadamente sobre `b1e622a2...` y
 se conserva en `docs/evidencias/firma-release-jose/dispositivos-apk-publicado/`.
+
+## Preparación de la entrega final `v4.1.0`
+
+El cierre del punto 47 conserva la compilación desde fuentes del flujo y añade
+una entrega autoconsistente. La publicación exige una etiqueta anotada sobre el
+tip vigente de `main`; compila y firma el APK desde ese árbol, verifica la misma
+huella de José y reúne el instalador con el manuscrito, certificado,
+`CITATION.cff`, sumas, manifiesto y procedencia. Ningún APK vuelve a versionarse
+en Git. La release histórica `v4.0.0` y sus assets manuales permanecen separados
+y no se presentan como parte de `v4.1.0`.
