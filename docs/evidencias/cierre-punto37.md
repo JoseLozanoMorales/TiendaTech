@@ -36,3 +36,21 @@ La release incluye el APK de 35.849.002 bytes y SHA-256
 `.sha256` y un archivo de procedencia que declara su carácter histórico. Así se
 conserva el entregable original sin mantenerlo en Git ni atribuirle la
 procedencia del APK canónico.
+
+## Integración verificada
+
+- Pull request: [#97](https://github.com/JoseLozanoMorales/TiendaTech/pull/97).
+- Commit original: `667c7e3b44fbe187e7b10e33d00baab4e235f200`.
+- Commit de fusión: `dc98fab83afb8e89e588b235646dee49b300ae44`.
+- Ejecución verificada:
+  [35410651107](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35410651107).
+- Resultado del commit fusionado: 50 checks exitosos, 0 fallidos y 0
+  pendientes.
+- Check que ejecutó los nuevos controles: `Integridad de todos los datos CSV y
+  TSV`, exitoso
+  ([job 105809472355](https://github.com/JoseLozanoMorales/TiendaTech/actions/runs/35410651107/job/105809472355)).
+- Fecha de fusión: 19 de septiembre de 2026, 00:49:25 UTC.
+
+Con la integración en `main` quedaron activos tanto el control de los ocho
+assets publicados como el guardián que impide reintroducir artefactos pesados.
+El punto 37 queda cerrado con evidencia reproducible y verificada en CI.
